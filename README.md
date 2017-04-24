@@ -22,6 +22,7 @@ To start your Phoenix app:
   * Start Phoenix endpoint with `mix phoenix.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
 Try [`localhost:4000/users`](http://localhost:4000/users) to play with a basic CRUD page.
 
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
