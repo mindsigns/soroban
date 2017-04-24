@@ -8,7 +8,7 @@ Set up the Postgres Database:
         - createdb soroban_dev
         - createdb soroban_prod
     * You need to do this on the local Postgres server and seperately on the
-        Docker Postgres server if you want to play around with the Docerized
+        Docker Postgres server if you want to play around with the Dockerized
         version.  The Postgres port is a straight mapping to the Docker container,
         so you'll need to shut down the local DB server first.
 
