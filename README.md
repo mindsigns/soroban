@@ -1,4 +1,4 @@
-# Soroban - TODO
+# Soroban
 
 Set up the Postgres Database:
 
