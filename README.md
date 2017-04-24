@@ -1,6 +1,7 @@
 # Soroban
 
-Set up the Postgres Database
+Set up the Postgres Database:
+
     * Install Postgresql server and client
     * Create the dev and production databases
         - sudo su - postgres
