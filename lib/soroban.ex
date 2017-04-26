@@ -7,6 +7,7 @@ defmodule Soroban do
     import Supervisor.Spec
 
     repo = Soroban.Repo
+    create_db(repo)
 
     # Define workers and child supervisors to be supervised
     children = [
@@ -26,6 +27,19 @@ defmodule Soroban do
     run_migrations(repo)
     sup_ret
 
+  end
+
+  def create_db(repo) do
+    case repo.__adapter__.storage_up(repo.config) do
+      :ok ->
+        IO.puts "The database for #{inspect repo} has been created."
+      {:error, :already_up} ->
+        IO.puts "The database for #{inspect repo} has already been created."
+      {:error, term} when is_binary(term) ->
+        IO.puts "The database for #{inspect repo} couldn't be created, reason given: #{term}."
+      {:error, term} ->
+        IO.puts "The database for #{inspect repo} couldn't be created, reason given: #{inspect term}."
+    end
   end
 
   def run_migrations(repo) do
