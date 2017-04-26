@@ -7,8 +7,13 @@ Set up the Postgres Database:
 
 To start your Phoenix app in Dev mode:
 
+  * run ./build.sh
+
+Or to do it by hand:
+
   * Install dependencies with `mix deps.get`
   * Install Node.js dependencies with `npm install`
+  * Create the priv/static directory `mkdir priv/static`
   * Run `mix phoenix.digest` to build assests
   * Start Phoenix endpoint with `mix phoenix.server`
 
