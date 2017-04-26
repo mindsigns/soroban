@@ -8,6 +8,11 @@
     <h4>Resources</h4>
     <ul>
       <li>
+        <a href="/users">Users</a> A basic CRUD example
+        </br>
+        </br>
+      </li>
+      <li>
         <a href="http://phoenixframework.org/docs/overview">Guides</a>
       </li>
       <li>
