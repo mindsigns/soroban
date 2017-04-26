@@ -3,25 +3,26 @@
 Set up the Postgres Database:
 
     * Install Postgresql server and client
-    * Create the dev and production databases
-        - sudo su - postgres
-        - createdb soroban_dev
-        - createdb soroban_prod
-    * You need to do this on the local Postgres server and seperately on the
-        Docker Postgres server if you want to play around with the Dockerized
-        version.  The Postgres port is a straight mapping to the Docker container,
-        so you'll need to shut down the local DB server first.
-
     * Edit config/dev.exs to set the postgres user password.
 
-To start your Phoenix app:
+To start your Phoenix app in Dev mode:
 
   * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
   * Install Node.js dependencies with `npm install`
   * Start Phoenix endpoint with `mix phoenix.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+Running Soroban in a docker container:
+    
+    * sudo mix compose release prod
+    * sudo mix compose up
+
+Now you can visit [`localhost:8888`](http://localhost:8888) from your browser.
+    
+    To shut it down:
+    * Hit Ctrl-C twice
+    * sudo mix compose down
 
 Try [`localhost:4000/users`](http://localhost:4000/users) to play with a basic CRUD page.
 
