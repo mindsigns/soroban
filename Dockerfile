@@ -8,14 +8,15 @@ RUN apt-get update && \
 
 RUN mkdir -p /app
 ARG VERSION=0.0.1
-COPY rel/soroban/releases/0.0.1/soroban.tar.gz /app/soroban.tar.gz
-COPY scripts/wait-for-postgres.sh /app/wait-for-postgres.sh
+#COPY rel/soroban/releases/0.0.1/soroban.tar.gz /app/soroban.tar.gz
+#COPY scripts/wait-for-postgres.sh /app/wait-for-postgres.sh
 
+ADD . /app
 WORKDIR /app
-RUN tar xvzf soroban.tar.gz
+#RUN tar xvzf soroban.tar.gz
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 ENV PORT 8888
-CMD ["/app/bin/soroban", "foreground"]
+CMD ["/app/rel/soroban/bin/soroban", "foreground"]

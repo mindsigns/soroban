@@ -1,16 +1,19 @@
 version: '2'
 services:
-      db:
-        build: ./postgres
-        image: postgres
-        volumes:
-            - ./data:/var/lib/postgresql/data
+  web:
+    build:
+      context: .
+      args:
+        VERSION: "${VERSION}"
+    ports:
+      - "8888:8888"
+    depends_on:
+     - postgres
+    entrypoint: ./wait-for-postgres.sh postgres /app/bin/soroban foreground
 
-    elixir:
-        build: ./elixirsrv
-        image: elixir
-        ports: 
-            - "8888:8888"
-        depends_on:
-            image: db
-        entrypoint: ./scripts/wait-for-postgres.sh /app/bin/soroban foreground
+  postgres:
+    image: postgres
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    volumes:
+      - .:/app
