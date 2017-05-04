@@ -3,8 +3,13 @@
 <ul>
 
   <li>
-    <strong>Name:</strong>
-    <%= @user.name %>
+    <strong>Viewer:</strong>
+    <%= @current_user.username %>
+  </li>
+
+  <li>
+    <strong>Username:</strong>
+    <%= @user.username %>
   </li>
 
   <li>
@@ -12,17 +17,6 @@
     <%= @user.email %>
   </li>
 
-  <li>
-    <strong>Bio:</strong>
-    <%= @user.bio %>
-  </li>
-
-  <li>
-    <strong>Number of pets:</strong>
-    <%= @user.number_of_pets %>
-  </li>
-
 </ul>
 
 <%= link "Edit", to: user_path(@conn, :edit, @user) %>
-<%= link "Back", to: user_path(@conn, :index) %>

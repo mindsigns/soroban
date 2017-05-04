@@ -1,11 +1,13 @@
 defmodule Soroban.User do
   use Soroban.Web, :model
 
+  alias Openmaize.Database, as: DB
+
   schema "users" do
-    field :name, :string
     field :email, :string
-    field :bio, :string
-    field :number_of_pets, :integer
+    field :username, :string
+    field :password, :string, virtual: true
+    field :password_hash, :string
 
     timestamps()
   end
@@ -15,7 +17,14 @@ defmodule Soroban.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email, :bio, :number_of_pets])
-    |> validate_required([:name, :email, :bio, :number_of_pets])
+    |> cast(params, [:email, :username])
+    |> validate_required([:email, :username])
+    |> unique_constraint(:email)
+  end
+
+  def auth_changeset(struct, params) do
+    struct
+    |> changeset(params)
+    |> DB.add_password_hash(params)
   end
 end
