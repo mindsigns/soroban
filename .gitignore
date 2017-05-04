@@ -26,3 +26,4 @@ typscript
 # secrets file as long as you replace its contents by environment
 # variables.
 #/config/prod.secret.exs
+/config/dev.exs
