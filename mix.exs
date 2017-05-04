@@ -19,7 +19,7 @@ defmodule Soroban.Mixfile do
   def application do
     [mod: {Soroban, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :bamboo, :bamboo_smtp]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,7 +39,9 @@ defmodule Soroban.Mixfile do
      {:gettext, "~> 0.11"},
      {:exrm, "~> 1.0.3"},
      {:openmaize, "~> 3.0"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:bamboo, "~> 0.8"},
+     {:bamboo_smtp, "~> 1.3.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

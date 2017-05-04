@@ -8,6 +8,11 @@ defmodule Soroban.User do
     field :username, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    field :confirmed_at, Ecto.DateTime
+    field :confirmation_token, :string
+    field :confirmation_sent_at, Ecto.DateTime
+    field :reset_token, :string
+    field :reset_sent_at, Ecto.DateTime
 
     timestamps()
   end
@@ -22,9 +27,17 @@ defmodule Soroban.User do
     |> unique_constraint(:email)
   end
 
-  def auth_changeset(struct, params) do
+  def auth_changeset(struct, params, key) do
     struct
     |> changeset(params)
     |> DB.add_password_hash(params)
+    |> DB.add_confirm_token(key)
+  end
+
+  def reset_changeset(struct, params, key) do
+    struct
+    |> cast(params, [:email])
+    |> validate_required([:email])
+    |> DB.add_reset_token(key)
   end
 end

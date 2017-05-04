@@ -11,8 +11,8 @@ defmodule Soroban.UserControllerTest do
     conn = conn |> bypass_through(Soroban.Router, :browser) |> get("/")
 
     if username = config[:login] do
-      user = add_user(username)
-      other = add_user("tony")
+      user = add_user_confirmed(username)
+      other = add_user_confirmed("tony")
 
       conn = conn |> put_session(:user_id, user.id) |> send_resp(:ok, "/")
       {:ok, %{conn: conn, user: user, other: other}}

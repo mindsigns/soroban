@@ -30,3 +30,6 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+config :soroban, Soroban.Mailer,
+  adapter: Bamboo.LocalAdapter

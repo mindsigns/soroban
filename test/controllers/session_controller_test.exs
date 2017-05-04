@@ -8,9 +8,10 @@ defmodule Soroban.SessionControllerTest do
 
   setup %{conn: conn} do
     conn = conn |> bypass_through(Soroban.Router, :browser) |> get("/")
-    user = add_user("robin")
+    add_user("arthur")
+    confirmed = add_user_confirmed("robin")
 
-    {:ok, %{conn: conn, user: user}}
+    {:ok, %{conn: conn, confirmed: confirmed}}
   end
 
   test "login succeeds", %{conn: conn} do
@@ -23,9 +24,33 @@ defmodule Soroban.SessionControllerTest do
     assert redirected_to(conn) == session_path(conn, :new)
   end
 
-  test "logout succeeds", %{conn: conn, user: user} do
-    conn = conn |> put_session(:user_id, user.id) |> send_resp(:ok, "/")
-    conn = delete conn, session_path(conn, :delete, user)
+  test "logout succeeds", %{conn: conn, confirmed: confirmed} do
+    conn = conn |> put_session(:user_id, confirmed.id) |> send_resp(:ok, "/")
+    conn = delete conn, session_path(conn, :delete, confirmed)
     assert redirected_to(conn) == page_path(conn, :index)
+  end
+
+  test "confirmation succeeds for correct key", %{conn: conn} do
+    email = "arthur@mail.com"
+    key = "pu9-VNdgE8V9qZo19rlcg3KUNjpxuixg"
+    conn = get(conn, session_path(conn, :confirm_email, email: email, key: key))
+    assert conn.private.phoenix_flash["info"] =~ "Account confirmed"
+    assert redirected_to(conn) == session_path(conn, :new)
+  end
+
+  test "confirmation fails for incorrect key", %{conn: conn} do
+    email = "arthur@mail.com"
+    key = "pu9-VNdgE8V9QzO19RLCG3KUNjpxuixg"
+    conn = get(conn, session_path(conn, :confirm_email, email: email, key: key))
+    assert conn.private.phoenix_flash["error"] =~ "Invalid credentials"
+    assert redirected_to(conn) == session_path(conn, :new)
+  end
+
+  test "confirmation fails for incorrect email", %{conn: conn} do
+    email = "gerald@mail.com"
+    key = "pu9-VNdgE8V9qZo19rlcg3KUNjpxuixg"
+    conn = get(conn, session_path(conn, :confirm_email, email: email, key: key))
+    assert conn.private.phoenix_flash["error"] =~ "Invalid credentials"
+    assert redirected_to(conn) == session_path(conn, :new)
   end
 end
