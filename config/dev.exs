@@ -37,7 +37,7 @@ config :phoenix, :stacktrace_depth, 20
 config :soroban, Soroban.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "r2d297",
+  password: "",
   database: "soroban_dev",
   hostname: "localhost",
   pool_size: 10
