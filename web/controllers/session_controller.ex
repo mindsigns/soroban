@@ -2,10 +2,10 @@ defmodule Soroban.SessionController do
   use Soroban.Web, :controller
 
   import Soroban.Authorize
-  alias Soroban.Mailer
+  alias Soroban.Email
 
   plug Openmaize.ConfirmEmail,
-    [mail_function: &Mailer.receipt_confirm/1] when action in [:confirm_email]
+    [mail_function: &Email.receipt_confirm/1] when action in [:confirm_email]
 
   plug Openmaize.Login when action in [:create]
 

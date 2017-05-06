@@ -2,7 +2,7 @@ defmodule Soroban.UserController do
   use Soroban.Web, :controller
 
   import Soroban.Authorize
-  alias Soroban.{Mailer, User}
+  alias Soroban.{Email, User}
   alias Openmaize.ConfirmEmail
 
   plug :user_check when action in [:index, :show]
@@ -24,7 +24,7 @@ defmodule Soroban.UserController do
 
     case Repo.insert(changeset) do
       {:ok, _user} ->
-        Mailer.ask_confirm(email, link)
+        Email.ask_confirm(email, link)
         auth_info conn, "User created successfully", user_path(conn, :index)
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
