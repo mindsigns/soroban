@@ -19,7 +19,7 @@ defmodule Soroban.Mixfile do
   def application do
     [mod: {Soroban, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :bamboo, :bamboo_smtp]]
+                    :phoenix_ecto, :postgrex, :bamboo]]
   end
 
   # Specifies which paths to compile per environment.
