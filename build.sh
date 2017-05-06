@@ -1,5 +1,9 @@
 mix deps.get
+
+if [ ! -d priv/static ]; then
+    mkdir priv/static
+fi
+
 npm install
-mkdir priv/static
 node node_modules/brunch/bin/brunch build
 mix phoenix.digest
