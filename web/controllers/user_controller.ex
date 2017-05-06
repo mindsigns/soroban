@@ -31,14 +31,25 @@ defmodule Soroban.UserController do
     end
   end
 
-  def show(%Plug.Conn{assigns: %{current_user: user}} = conn, _params) do
-    render(conn, "show.html", user: user)
+  def show(conn, %{"id" => id}) do
+    user = Repo.get(Soroban.User, id)
+    render conn, "show.html", user: user
   end
 
-  def edit(%Plug.Conn{assigns: %{current_user: user}} = conn, _params) do
+  #def show(%Plug.Conn{assigns: %{current_user: user}} = conn, _params) do
+  #  render(conn, "show.html", user: user)
+  #end
+
+  def edit(conn, %{"id" => id}) do
+    user = Repo.get(Soroban.User, id)
     changeset = User.changeset(user)
     render(conn, "edit.html", user: user, changeset: changeset)
   end
+
+  #def edit(%Plug.Conn{assigns: %{current_user: user}} = conn, _params) do
+  #  changeset = User.changeset(user)
+  #  render(conn, "edit.html", user: user, changeset: changeset)
+  #end
 
   def update(%Plug.Conn{assigns: %{current_user: user}} = conn, %{"user" => user_params}) do
     changeset = User.changeset(user, user_params)
