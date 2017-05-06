@@ -1,6 +1,5 @@
 defmodule Soroban.Router do
   use Soroban.Web, :router
-  use Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
