@@ -2,8 +2,8 @@
 
 Set up the Postgres Database:
 
-    * Install Postgresql server and client
-    * Edit config/dev.exs to set the postgres user password.
+    Install Postgresql server and client
+    Edit config/dev.exs to set the postgres user password.
 
 To start your Phoenix app in Dev mode:
 
@@ -11,26 +11,33 @@ To start your Phoenix app in Dev mode:
 
 Or to do it by hand:
 
-  * Install dependencies with `mix deps.get`
-  * Install Node.js dependencies with `npm install`
-  * Create the priv/static directory `mkdir priv/static`
-  * Run `mix phoenix.digest` to build assests
-  * Start Phoenix endpoint with `mix phoenix.server`
+     Install dependencies with `mix deps.get`
+     Install Node.js dependencies with `npm install`
+     Create the priv/static directory `mkdir priv/static`
+     Run `mix phoenix.digest` to build assests
+     Start Phoenix endpoint with `mix phoenix.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Running Soroban in a docker container:
     
-    * sudo mix compose release prod
-    * sudo mix compose up
+     sudo mix compose release prod
+     sudo mix compose up
 
 Now you can visit [`localhost:8888`](http://localhost:8888) from your browser.
-    
-    To shut it down:
+
+**Links to know :**
+
+http://localhost:4000/users to play with a basic CRUD page
+
+http://localhost:4000/sent_emails to see emails in dev mode.
+
+
+To shut it down:
+
     * Hit Ctrl-C twice
     * sudo mix compose down
 
-Try [`localhost:4000/users`](http://localhost:4000/users) to play with a basic CRUD page.
 
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
 
