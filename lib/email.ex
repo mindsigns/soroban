@@ -20,7 +20,7 @@ defmodule Soroban.Email do
     |> to(email)
     |> from("welcome@example.com")
     |> subject("Confirm your account - Welcome Soroban")
-    |> text_body("Confirm your Soroban email here http://www.example.com/sessions/confirm_email?#{link}")
+    |> text_body("Confirm your Soroban email here http://localhost:4000/sessions/confirm_email?#{link}")
     |> Mailer.deliver_now
   end
 
@@ -32,7 +32,7 @@ defmodule Soroban.Email do
     |> to(email)
     |> from("welcome@example.com")
     |> subject("Reset your password - Soroban")
-    |> text_body("Reset your password at http://www.example.com/password_resets/edit?#{link}")
+    |> text_body("Reset your password at http://localhost:4000/password_resets/edit?#{link}")
     |> Mailer.deliver_now
   end
 
