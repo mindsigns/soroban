@@ -1,4 +1,4 @@
-FROM elixir:onbuild
+FROM elixir
 RUN apt-get update && \
     apt-get install -y libssl1.0.0 postgresql-client locales inotify-tools && \
     apt-get autoclean
