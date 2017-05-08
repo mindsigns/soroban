@@ -1,17 +1,18 @@
 FROM elixir
 RUN apt-get update && \
-    apt-get install -y libssl1.0.0 postgresql-client locales inotify-tools rebar3 && \
+    apt-get install -y libssl1.0.0 postgresql-client locales inotify-tools && \
     apt-get autoclean
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
 apt-get install -y nodejs
 
 ADD . /app
+RUN mix local.rebar
 RUN mix local.hex --force
 WORKDIR /app
 
 ENV MIX_ENV prod
-RUN mix deps.get, compile
+RUN mix do deps.get, compile
 
 RUN npm install
 
