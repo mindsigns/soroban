@@ -11,10 +11,10 @@ RUN mix local.hex --force
 WORKDIR /app
 
 ENV MIX_ENV prod
-RUN mix do deps.get, compile
+RUN mix deps.get, compile
 
 RUN npm install
 
 EXPOSE 4000
 #CMD ["/bin/bash"]
-CMD ["mix", "do", "ecto.migrate,", "phoenix.server"]
+CMD ["mix", "ecto.migrate,", "phoenix.server"]
