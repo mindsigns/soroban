@@ -1,18 +1,11 @@
 defmodule Soroban.User do
   use Soroban.Web, :model
 
-  alias Openmaize.Database, as: DB
-
   schema "users" do
     field :email, :string
-    field :username, :string
-    field :password, :string, virtual: true
-    field :password_hash, :string
+    field :hashed_confirmation_token, :string
     field :confirmed_at, Ecto.DateTime
-    field :confirmation_token, :string
-    field :confirmation_sent_at, Ecto.DateTime
-    field :reset_token, :string
-    field :reset_sent_at, Ecto.DateTime
+    field :unconfirmed_email, :string
 
     timestamps()
   end
@@ -22,22 +15,22 @@ defmodule Soroban.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:email, :username])
-    |> validate_required([:email, :username])
+    |> cast(params, [:email, :hashed_confirmation_token, :confirmed_at, :unconfirmed_email])
+    |> validate_required([:email])
+    |> downcase_email
     |> unique_constraint(:email)
   end
 
-  def auth_changeset(struct, params, key) do
-    struct
-    |> changeset(params)
-    |> DB.add_password_hash(params)
-    |> DB.add_confirm_token(key)
+  def permissions(_user_id) do
+    Application.get_env(:sentinel, :permissions)
   end
 
-  def reset_changeset(struct, params, key) do
-    struct
-    |> cast(params, [:email])
-    |> validate_required([:email])
-    |> DB.add_reset_token(key)
+  defp downcase_email(changeset) do
+    email = get_change(changeset, :email)
+    if is_nil(email) do
+      changeset
+    else
+      put_change(changeset, :email, String.downcase(email))
+    end
   end
 end

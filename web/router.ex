@@ -1,5 +1,6 @@
 defmodule Soroban.Router do
   use Soroban.Web, :router
+  require Sentinel
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -7,20 +8,38 @@ defmodule Soroban.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Openmaize.Authenticate
+  end
+
+  pipeline :api do
+    plug :accepts, ["json"]
+  end
+
+  pipeline :sentinel_ueberauth do
+    plug :accepts, ["html", "json"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug :put_secure_browser_headers
+  end
+
+  scope "/" do
+    pipe_through :sentinel_ueberauth
+    Sentinel.mount_ueberauth
+  end
+
+  scope "/" do
+    pipe_through :browser
+    Sentinel.mount_html
+  end
+
+  scope "/api", as: :api do
+    pipe_through :api
+    Sentinel.mount_api
   end
 
   scope "/", Soroban do
-    pipe_through :browser
+    pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-
-    resources "/users", UserController
-    resources "/sessions", SessionController, only: [:new, :create, :delete]
-    get "/sessions/confirm_email", SessionController, :confirm_email
-    resources "/password_resets", PasswordResetController, only: [:new, :create]
-    get "/password_resets/edit", PasswordResetController, :edit
-    put "/password_resets/update", PasswordResetController, :update
   end
     forward "/sent_emails", Bamboo.EmailPreviewPlug
 end
