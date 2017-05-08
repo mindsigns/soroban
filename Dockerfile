@@ -1,22 +1,20 @@
-FROM elixir:1.4.2
-
-ENV MIX_ENV=prod
-
+FROM elixir:onbuild
 RUN apt-get update && \
-    apt-get install -y libssl1.0.0 postgresql-client locales && \
+    apt-get install -y libssl1.0.0 postgresql-client locales inotify-tools && \
     apt-get autoclean
 
-RUN mkdir -p /app
-ARG VERSION=0.0.1
-#COPY rel/soroban/releases/0.0.1/soroban.tar.gz /app/soroban.tar.gz
-#COPY scripts/wait-for-postgres.sh /app/wait-for-postgres.sh
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+apt-get install -y nodejs
 
 ADD . /app
+RUN mix local.hex --force
 WORKDIR /app
-#RUN tar xvzf soroban.tar.gz
-RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
-ENV LC_ALL en_US.UTF-8
-ENV PORT 8888
-CMD ["/app/rel/soroban/bin/soroban", "foreground"]
+
+ENV MIX_ENV prod
+RUN mix do deps.get, compile
+
+RUN npm install
+
+EXPOSE 4000
+#CMD ["/bin/bash"]
+CMD ["mix", "do", "ecto.migrate,", "phoenix.server"]

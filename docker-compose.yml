@@ -1,19 +1,19 @@
-version: '2'
-services:
-  web:
-    build:
-      context: .
-      args:
-        VERSION: "${VERSION}"
-    ports:
-      - "8888:8888"
-    depends_on:
-     - postgres
-    entrypoint: ./wait-for-postgres.sh postgres /app/bin/soroban foreground
+db:
+  image: kamui/postgresql
+  environment:
+  - POSTGRESQL_DB=phoenix
+  - POSTGRESQL_USER=postgress
+  - POSTGRESQL_PASS=postgress
 
-  postgres:
-    image: postgres
-    volumes:
-      - ./data:/var/lib/postgresql/data
-    volumes:
-      - .:/app
+web:
+  build: .
+  ports:
+    - "49235:4000"
+  links:
+    - db:dockerdb
+  volumes:
+  - .:/app
+  - /app/node_modules
+  environment:
+    - MIX_ENV=dev
+  command: elixir --erl "-smp disable" -S mix do ecto.migrate, phoenix.server
