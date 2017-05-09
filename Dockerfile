@@ -19,4 +19,4 @@ RUN npm install
 EXPOSE 4000
 #CMD ["mix", "phoenix.server"]
 #CMD ["/bin/bash"]
-CMD ["mix", "do", "ecto.migrate,", "phoenix.server"]
+CMD ["mix", "do", "ecto.migrate", "phoenix.server"]
