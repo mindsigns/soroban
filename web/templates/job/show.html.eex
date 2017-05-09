@@ -1,0 +1,53 @@
+<h2>Show job</h2>
+
+<ul>
+
+  <li>
+    <strong>Reference:</strong>
+    <%= @job.reference %>
+  </li>
+
+  <li>
+    <strong>Caller:</strong>
+    <%= @job.caller %>
+  </li>
+
+  <li>
+    <strong>Job type:</strong>
+    <%= @job.job_type %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @job.description %>
+  </li>
+
+  <li>
+    <strong>Zone:</strong>
+    <%= @job.zone %>
+  </li>
+
+  <li>
+    <strong>Service:</strong>
+    <%= @job.service %>
+  </li>
+
+  <li>
+    <strong>Charge details:</strong>
+    <%= @job.charge_details %>
+  </li>
+
+  <li>
+    <strong>Job total:</strong>
+    <%= @job.job_total %>
+  </li>
+
+  <li>
+    <strong>Invoice number:</strong>
+    <%= @job.invoice_number %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: job_path(@conn, :edit, @job) %>
+<%= link "Back", to: job_path(@conn, :index) %>

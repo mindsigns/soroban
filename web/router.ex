@@ -40,6 +40,7 @@ defmodule Soroban.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/jobs", JobController
   end
     forward "/sent_emails", Bamboo.EmailPreviewPlug
 end

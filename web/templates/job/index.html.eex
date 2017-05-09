@@ -1,0 +1,42 @@
+<h2>Listing jobs</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Invoice number</th>
+      <th>Reference</th>
+      <th>Caller</th>
+      <th>Job type</th>
+      <th>Description</th>
+      <th>Zone</th>
+      <th>Service</th>
+      <th>Charge details</th>
+      <th>Job total</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for job <- @jobs do %>
+    <tr>
+      <td><%= job.invoice_number %></td>
+      <td><%= job.reference %></td>
+      <td><%= job.caller %></td>
+      <td><%= job.job_type %></td>
+      <td><%= job.description %></td>
+      <td><%= job.zone %></td>
+      <td><%= job.service %></td>
+      <td><%= job.charge_details %></td>
+      <td><%= job.job_total %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: job_path(@conn, :show, job), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: job_path(@conn, :edit, job), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: job_path(@conn, :delete, job), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New job", to: job_path(@conn, :new) %>
