@@ -12,6 +12,7 @@ config :soroban,
 # Configures the endpoint
 config :soroban, Soroban.Endpoint,
   url: [host: "localhost"],
+  root: Path.dirname(__DIR__),
   secret_key_base: "aNFSebyymWf897GTjjzETL8OqpsYtPZ/EdsRRi+5Q+hIwIUGanIN/p/1bRC7kUQ+",
   render_errors: [view: Soroban.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Soroban.PubSub,
