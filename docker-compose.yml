@@ -1,7 +1,7 @@
 db:
   image: kamui/postgresql
   environment:
-  - POSTGRESQL_DB=phoenix
+  - POSTGRESQL_DB=soroban_dev
   - POSTGRESQL_USER=postgress
   - POSTGRESQL_PASS=postgress
 
@@ -16,4 +16,4 @@ web:
   - /app/node_modules
   environment:
     - MIX_ENV=dev
-  command: elixir --erl "-smp disable" -S mix do ecto.migrate, phoenix.server
+#  command: elixir --erl "-smp disable" -S mix do ecto.migrate, phoenix.server
