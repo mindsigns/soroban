@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Invoice number</th>
+      <th>Job Date</th>
       <th>Reference</th>
       <th>Caller</th>
       <th>Job type</th>
@@ -20,6 +21,7 @@
 <%= for job <- @jobs do %>
     <tr>
       <td><%= job.invoice_number %></td>
+      <td><%= job.job_date %></td>
       <td><%= job.reference %></td>
       <td><%= job.caller %></td>
       <td><%= job.job_type %></td>

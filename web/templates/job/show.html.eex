@@ -1,6 +1,15 @@
 <h2>Show job</h2>
 
 <ul>
+  <li>
+    <strong>Invoice number:</strong>
+    <%= @job.invoice_number %>
+  </li>
+
+  <li>
+    <strong>Job Date:</strong>
+    <%= @job.job_date %>
+  </li>
 
   <li>
     <strong>Reference:</strong>
@@ -40,11 +49,6 @@
   <li>
     <strong>Job total:</strong>
     <%= @job.job_total %>
-  </li>
-
-  <li>
-    <strong>Invoice number:</strong>
-    <%= @job.invoice_number %>
   </li>
 
 </ul>

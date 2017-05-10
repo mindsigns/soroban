@@ -6,6 +6,18 @@
   <% end %>
 
   <div class="form-group">
+    <%= label f, :invoice_number, class: "control-label" %>
+    <%= text_input f, :invoice_number, class: "form-control" %>
+    <%= error_tag f, :invoice_number %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :job_date, class: "control-label" %>
+    <%= text_input f, :job_date, class: "form-control" %>
+    <%= error_tag f, :job_date %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :reference, class: "control-label" %>
     <%= text_input f, :reference, class: "form-control" %>
     <%= error_tag f, :reference %>
@@ -51,12 +63,6 @@
     <%= label f, :job_total, class: "control-label" %>
     <%= number_input f, :job_total, class: "form-control" %>
     <%= error_tag f, :job_total %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :invoice_number, class: "control-label" %>
-    <%= text_input f, :invoice_number, class: "form-control" %>
-    <%= error_tag f, :invoice_number %>
   </div>
 
   <div class="form-group">
