@@ -52,7 +52,7 @@ config :sentinel,
   endpoint: Soroban.Endpoint, # your endpoint
   invitable: true,
   invitation_registration_url: "http://localhost:4000", # for api usage only
-  confirmable: :optional,
+  confirmable: :required,
   confirmable_redirect_url: "http://localhost:4000", # for api usage only
   password_reset_url: "http://localhost:4000", # for api usage only
   send_emails: true
