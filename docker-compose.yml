@@ -1,19 +1,22 @@
-db:
-  image: kamui/postgresql
-  environment:
-  - POSTGRESQL_DB=soroban_dev
-  - POSTGRESQL_USER=postgress
-  - POSTGRESQL_PASS=postgress
-
-web:
-  build: .
-  ports:
-    - "49235:4000"
-  links:
-    - db:dockerdb
-  volumes:
-  - .:/app
-  - /app/node_modules
-  environment:
-    - MIX_ENV=dev
-#  command: elixir --erl "-smp disable" -S mix do ecto.migrate, phoenix.server
+version: '2'
+services:
+  web:
+    build:
+      context: .
+      args:
+        VERSION: "${VERSION}"
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    tty: true
+    links:
+     - postgres
+    depends_on:
+     - postgres
+    entrypoint: ./scripts/wait-for-postgres.sh postgres ./scripts/start-server.sh
+  postgres:
+    image: postgres
+    volumes:
+      - ./data:/var/lib/postgresql/data
