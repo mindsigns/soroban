@@ -2,7 +2,8 @@ FROM elixir:1.4.2
 ENV MIX_ENV=prod
 RUN apt-get update && \
     apt-get install -y libssl1.0.0 postgresql-client locales && \
-    apt-get autoclean
+    apt-get autoclean \
+    inotify-tools
 RUN mkdir -p /app
 ARG VERSION=0.0.1
 WORKDIR /app
