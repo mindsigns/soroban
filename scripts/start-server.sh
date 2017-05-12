@@ -1,3 +1,3 @@
 mix ecto.create
 mix ecto.migrate
-iex -S mix phoenix.server
+MIX_ENV=dev iex -S mix phoenix.server
