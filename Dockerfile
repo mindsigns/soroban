@@ -15,6 +15,10 @@ WORKDIR /app
 
 RUN mix local.hex --force
 RUN mix local.rebar --force
+RUN mix deps.get
+RUN mix ecto.create
+RUN mix ecto.migrate
+
 RUN npm install
 RUN ./node_modules/brunch/bin/brunch build
 
