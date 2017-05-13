@@ -22,7 +22,8 @@ config :soroban, Soroban.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{web/views/.*(ex)$},
-      ~r{web/templates/.*(eex)$}
+      ~r{web/templates/.*(eex)$},
+      ~r{deps/bamboo/lib/bamboo/plug/.*(eex)$}
     ]
   ]
 
