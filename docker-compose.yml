@@ -3,8 +3,8 @@ services:
   web:
     build:
       context: .
-      args:
-        VERSION: "${VERSION}"
+      #args:
+      #  VERSION: "${VERSION}"
     ports:
       - "4000:4000"
     volumes:
