@@ -3,6 +3,7 @@ defmodule Soroban.JobController do
 
   alias Soroban.Job
   alias Soroban.Service
+  alias Soroban.Jobtype
 
   plug :load_services when action in [:new, :create, :edit, :update]
 
@@ -14,7 +15,8 @@ defmodule Soroban.JobController do
   def new(conn, _params) do
     changeset = Job.changeset(%Job{})
     services = Repo.all from c in Soroban.Service, select: c.type
-    render(conn, "new.html", changeset: changeset, services: services)
+    jobtypes = Repo.all from c in Soroban.Jobtype, select: c.type
+    render(conn, "new.html", changeset: changeset, services: services, jobtypes: jobtypes)
   end
 
   def create(conn, %{"job" => job_params}) do
@@ -72,5 +74,11 @@ defmodule Soroban.JobController do
     services = Repo.all from c in Soroban.Service, select: c.type
     assign(conn, :services, services)
   end
+
+  defp load_jobtypes(conn, _) do
+    jobtypes = Repo.all from c in Soroban.Jobtype, select: c.type
+    assign(conn, :jobtypes, jobtypes)
+  end
+
 
 end

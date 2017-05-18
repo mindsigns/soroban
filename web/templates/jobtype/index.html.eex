@@ -1,0 +1,26 @@
+<h2>Listing jobtypes</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Type</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for jobtype <- @jobtypes do %>
+    <tr>
+      <td><%= jobtype.type %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: jobtype_path(@conn, :show, jobtype), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: jobtype_path(@conn, :edit, jobtype), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: jobtype_path(@conn, :delete, jobtype), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New jobtype", to: jobtype_path(@conn, :new) %>

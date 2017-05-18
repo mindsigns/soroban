@@ -47,6 +47,7 @@ defmodule Soroban.Router do
     get "/", PageController, :index
     resources "/jobs", JobController
     resources "/service", ServiceController
+    resources "/jobtypes", JobtypeController
   end
 
     forward "/sent_emails", Bamboo.EmailPreviewPlug

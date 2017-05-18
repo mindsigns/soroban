@@ -1,0 +1,6 @@
+<h2>New jobtype</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: jobtype_path(@conn, :create) %>
+
+<%= link "Back", to: jobtype_path(@conn, :index) %>

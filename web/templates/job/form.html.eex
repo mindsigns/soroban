@@ -31,7 +31,7 @@
 
   <div class="form-group">
     <%= label f, :job_type, class: "control-label" %>
-    <%= text_input f, :job_type, class: "form-control" %>
+    <%= select f, :job_type, @jobtypes, class: "form-control" %>
     <%= error_tag f, :job_type %>
   </div>
 

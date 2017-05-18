@@ -1,0 +1,13 @@
+<h2>Show jobtype</h2>
+
+<ul>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @jobtype.type %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: jobtype_path(@conn, :edit, @jobtype) %>
+<%= link "Back", to: jobtype_path(@conn, :index) %>
