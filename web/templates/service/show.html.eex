@@ -1,0 +1,13 @@
+<h2>Show service</h2>
+
+<ul>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @service.type %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: service_path(@conn, :edit, @service) %>
+<%= link "Back", to: service_path(@conn, :index) %>

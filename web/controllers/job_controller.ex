@@ -2,6 +2,9 @@ defmodule Soroban.JobController do
   use Soroban.Web, :controller
 
   alias Soroban.Job
+  alias Soroban.Service
+
+  plug :load_services when action in [:new, :create, :edit, :update]
 
   def index(conn, _params) do
     jobs = Repo.all(Job)
@@ -10,7 +13,8 @@ defmodule Soroban.JobController do
 
   def new(conn, _params) do
     changeset = Job.changeset(%Job{})
-    render(conn, "new.html", changeset: changeset)
+    services = Repo.all from c in Soroban.Service, select: c.type
+    render(conn, "new.html", changeset: changeset, services: services)
   end
 
   def create(conn, %{"job" => job_params}) do
@@ -34,7 +38,8 @@ defmodule Soroban.JobController do
   def edit(conn, %{"id" => id}) do
     job = Repo.get!(Job, id)
     changeset = Job.changeset(job)
-    render(conn, "edit.html", job: job, changeset: changeset)
+    services = Repo.all from c in Soroban.Service, select: c.type
+    render(conn, "edit.html", job: job, changeset: changeset, services: services)
   end
 
   def update(conn, %{"id" => id, "job" => job_params}) do
@@ -62,4 +67,10 @@ defmodule Soroban.JobController do
     |> put_flash(:info, "Job deleted successfully.")
     |> redirect(to: job_path(conn, :index))
   end
+
+  defp load_services(conn, _) do
+    services = Repo.all from c in Soroban.Service, select: c.type
+    assign(conn, :services, services)
+  end
+
 end

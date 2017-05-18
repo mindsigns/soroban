@@ -46,6 +46,7 @@ defmodule Soroban.Router do
     pipe_through :sentinel_ueberauth
     get "/", PageController, :index
     resources "/jobs", JobController
+    resources "/service", ServiceController
   end
 
     forward "/sent_emails", Bamboo.EmailPreviewPlug

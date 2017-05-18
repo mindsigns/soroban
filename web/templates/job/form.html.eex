@@ -48,8 +48,8 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :service, class: "control-label" %>
-    <%= text_input f, :service, class: "form-control" %>
+    <%= label f, :service, "Service", class: "control-label" %>
+    <%= select f, :service, @services, class: "form-control" %>
     <%= error_tag f, :service %>
   </div>
 
