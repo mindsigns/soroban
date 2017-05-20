@@ -7,6 +7,6 @@ defmodule Soroban.Repo.Migrations.CreateService do
 
       timestamps()
     end
-
+    create unique_index(:services, [:type])
   end
 end

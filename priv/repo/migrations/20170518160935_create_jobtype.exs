@@ -7,6 +7,6 @@ defmodule Soroban.Repo.Migrations.CreateJobtype do
 
       timestamps()
     end
-
+    create unique_index(:jobtypes, [:type])
   end
 end
