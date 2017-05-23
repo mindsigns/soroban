@@ -23,62 +23,9 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :guardian, Guardian,
-  allowed_algos: ["HS512"], # optional
-  verify_module: Guardian.JWT,  # optional
-  issuer: "Soroban",
-  ttl: { 30, :days },
-  verify_issuer: true, # optional
-  secret_key: "guardian_sekret",
-  serializer: Sentinel.GuardianSerializer,
-  hooks: GuardianDb # optional if using guardiandb
-
-config :guardian_db, GuardianDb,
-  repo: Soroban.Repo
-
-config :sentinel,
-  app_name: "Soroban",
-  user_model: Soroban.User, # should be your generated model
-  send_address: "soroban@example.com",
-  crypto_provider: Comeonin.Bcrypt,
-  repo: Soroban.Repo,
-  ecto_repos: [Sentinel.Repo],
-  auth_handler: Sentinel.AuthHandler,
-  layout_view: Soroban.LayoutView, # your layout
-  layout: :app,
-  user_view: Sentinel.UserView,
-  error_view: Sentinel.ErrorView,
-  router: Soroban.Router, # your router
-  endpoint: Soroban.Endpoint, # your endpoint
-  invitable: true,
-  invitation_registration_url: "http://localhost:4000", # for api usage only
-  confirmable: :required,
-  confirmable_redirect_url: "http://localhost:4000", # for api usage only
-  password_reset_url: "http://localhost:4000", # for api usage only
-  send_emails: true
-
-config :ueberauth, Ueberauth,
-  providers: [
-    identity: {
-      Ueberauth.Strategy.Identity,
-      [
-        param_nesting: "user",
-        callback_methods: ["POST"]
-      ]
-    },
-    #github: { Ueberauth.Strategy.Github, [] },
-  ]
-
-  #config :ueberauth, Ueberauth.Strategy.Github.OAuth,
-  #client_id: System.get_env("GITHUB_CLIENT_ID"),
-  #client_secret: System.get_env("GITHUB_CLIENT_SECRET")
-
 config :phoenix, :generators,
   migration: true,
   binary_id: false
-
-config :sentinel, Sentinel.Mailer,
-  adapter: Bamboo.LocalAdapter
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
