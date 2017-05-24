@@ -1,12 +1,10 @@
 <div class="page-header">
     <h1>Soroban  <small>Admin</small></h1>
+    <p><a class="btn btn-primary btn-md" href="/jobs" role="button">Start invoicing</a></p>
 </div>
 
 <div class="row marketing">
     <ul>
-      <li>
-        <b><a href="/jobs">Start Invoicing</a></b>
-      </li>
       <li>
         <a href="/sent_emails">View sent emails (for Testing)</a>
       </li>
