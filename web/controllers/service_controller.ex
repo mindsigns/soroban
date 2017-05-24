@@ -1,7 +1,13 @@
 defmodule Soroban.ServiceController do
   use Soroban.Web, :controller
+  
+  import Soroban.Authorize
 
   alias Soroban.Service
+
+
+  plug :user_check when action in [:index, :show]
+  plug :id_check when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
     services = Repo.all(Service)
