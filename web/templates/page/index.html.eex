@@ -18,7 +18,10 @@
       <li>
         <a href="/service">Service Types</a>
       </li>
-
+      <li>
+        <a href="/users">Users</a>
+      </li>
+      <ul>
 </div>
 
 <div class="row marketing">
