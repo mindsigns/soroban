@@ -1,0 +1,28 @@
+<div class="page-header">
+    <h1>Soroban  <small>Admin</small></h1>
+</div>
+
+<div class="row marketing">
+    <ul>
+      <li>
+        <b><a href="/jobs">Start Invoicing</a></b>
+      </li>
+      <li>
+        <a href="/sent_emails">View sent emails (for Testing)</a>
+      </li>
+      <li>
+        <a href="/jobtypes">Manage Job Types</a>
+      </li>
+      <li>
+        <a href="/service">Manage Service Types</a>
+      </li>
+      <li>
+        <a href="/users">Manage Users</a>
+      </li>
+      <ul>
+</div>
+
+<div class="row marketing">
+  <div class="col-lg-6">
+  </div>
+</div>

@@ -14,6 +14,7 @@ defmodule Soroban.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/admin", AdminController, :index
 
     resources "/jobs", JobController
     resources "/service", ServiceController

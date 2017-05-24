@@ -1,28 +1,11 @@
 <div class="jumbotron">
   <h2>Welcome to Soroban</h2>
   <p class="lead">Courier Invoicing</p>
-  <p><a class="btn btn-primary btn-lg" href="/jobs" role="button">Get Started</a></p>
+  <p><a class="btn btn-primary btn-lg" href="/admin" role="button">Get Started</a></p>
 </div>
 
 
 <div class="row marketing">
-    <ul>
-      <li>
-        <b><a href="/jobs">Start Invoicing</a></b>
-      </li>
-      <li>
-        <a href="/sent_emails">View sent emails (for Testing)</a>
-      </li>
-      <li>
-        <a href="/jobtypes">Job Types</a>
-      </li>
-      <li>
-        <a href="/service">Service Types</a>
-      </li>
-      <li>
-        <a href="/users">Users</a>
-      </li>
-      <ul>
 </div>
 
 <div class="row marketing">
