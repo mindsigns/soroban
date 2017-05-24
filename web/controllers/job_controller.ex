@@ -1,11 +1,16 @@
 defmodule Soroban.JobController do
   use Soroban.Web, :controller
 
+  import Soroban.Authorize
+
   alias Soroban.Job
   alias Soroban.Service
   alias Soroban.Jobtype
 
   plug :load_services when action in [:new, :create, :edit, :update]
+
+  plug :user_check when action in [:index, :show]
+  plug :id_check when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
     jobs = Repo.all(Job)
