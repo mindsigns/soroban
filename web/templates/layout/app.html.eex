@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello SentinelExample!</title>
+    <title>Welcome to Soroban</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -16,7 +16,15 @@
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+            <li><a href="<%= page_path @conn, :index %>">Home</a></li>
+              <%= if @current_user do %>
+              <li><a href="<%= user_path @conn, :index %>">Users</a></li>
+              <li><a href="<%= user_path(@conn, :show, @current_user.id) %>"><%= @current_user.username %></a></li>
+              <li><%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete %></li>
+              <% else %>
+              <li><a href="<%= user_path @conn, :new %>">New user</a></li>
+              <li><a href="<%= session_path @conn, :new %>">Login</a></li>
+              <% end %>
           </ul>
         </nav>
         <span class="logo"></span>
@@ -26,7 +34,7 @@
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <main role="main">
-        <%= render @view_module, @view_template, assigns %>
+      <%= render @view_module, @view_template, assigns %>
       </main>
 
     </div> <!-- /container -->

@@ -3,11 +3,8 @@
   <p class="lead">Courier Invoicing</p>
 </div>
 
-<a href="/login">Login</a> <br/>
-<a href="/logout">Logout</a> <br/>
 <a href="/sent_emails">View sent emails (for Testing)</a>
 
-<br/>
 <br/>
 
 <a href="/jobs">Start Invoicing</a> <br/>
@@ -16,47 +13,6 @@
 Current Registered Users : 
 
 <div class="row marketing">
-  method	path	description<br/>
-  ----------------------------<br/>
-  GET	/login	Login page<br/>
-  GET	/logout	Request logout<br/>
-  GET	/auth/session/new	Login page<br/>
-  POST	/auth/session	Request authentication<br/>
-  DELETE	/auth/session	Request logout<br/>
-  GET	/auth/:provider	Request specific Ueberauth provider login page<br/>
-  GET	/auth/:provider/callback	Callback URL for Ueberauth provider<br/>
-  POST	/auth/:provider/callback	Callback URL for Ueberauth provider<br/>
-  Sentinel.mount_html<br/>
-  <br/>
-  method	path	description<br/>
-  --------------------------------------<br/>
-  GET	/user/new	New user page<br/>
-  POST	/user	Create new user<br/>
-  GET	/user/:id/invited	Invited user registration form<br/>
-  PUT	/user/:id/invited	Complete user invitation flow<br/>
-  GET	/user/confirmation_instructions	Request resending confirmation instructions page<br/>
-  POST	/user/confirmation_instructions	Request confirmation instructions email<br/>
-  GET	/user/confirmation	Confirm user email address from email<br/>
-  GET	/password/new	Forgot password page<br/>
-  POST	/password/new	Request password reset email<br/>
-  GET	/password/edit	Password reset page<br/>
-  PUT	/password	Reset password<br/>
-  GET	/account	Basic user edit page<br/>
-  PUT	/account	Update user information<br/>
-  Sentinel.mount_api<br/><br/>
-
-  method	path	description</br>
-  --------------------------------------<br/>
-  GET	/user/:id/invited	Redirect user from email link to invited user registration form</br>
-  PUT	/user/:id/invited	Complete user invitation flow</br>
-  GET	/user/confirmation_instructions	Request resending confirmation instructions</br>
-  GET	/user/confirmation	Confirm user email address from email</br>
-  GET	/password/new	Request password reset email</br>
-  GET	/password/edit	Request password reset page from email</br>
-  PUT	/password	Reset password</br>
-  GET	/account	Requests user account</br>
-  PUT	/account	Update user information</br>
-  PUT	/account/password	Update user password separately</br>
 </div>
 
 <div class="row marketing">
