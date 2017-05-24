@@ -14,7 +14,6 @@
       <td><%= service.type %></td>
 
       <td class="text-right">
-        <%= link "Show", to: service_path(@conn, :show, service), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: service_path(@conn, :edit, service), class: "btn btn-default btn-xs" %>
         <%= link "Delete", to: service_path(@conn, :delete, service), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
