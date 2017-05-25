@@ -7,6 +7,8 @@ defmodule Soroban.JobController do
   alias Soroban.Service
   alias Soroban.Jobtype
 
+  plug :scrub_params, "job" when action in [:create, :update]
+
   plug :load_services when action in [:new, :create, :edit, :update]
   plug :load_jobtypes when action in [:new, :create, :edit, :update]
 
