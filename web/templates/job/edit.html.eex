@@ -2,6 +2,7 @@
 
 <%= render "form.html", changeset: @changeset,
                         services: @services,
+                        jobtypes: @jobtypes,
                         action: job_path(@conn, :update, @job) %>
 
 <%= link "Back", to: job_path(@conn, :index) %>

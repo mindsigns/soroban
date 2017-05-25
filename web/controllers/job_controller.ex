@@ -8,9 +8,10 @@ defmodule Soroban.JobController do
   alias Soroban.Jobtype
 
   plug :load_services when action in [:new, :create, :edit, :update]
+  plug :load_jobtypes when action in [:new, :create, :edit, :update]
 
-  plug :user_check when action in [:index, :show]
-  plug :id_check when action in [:edit, :update, :delete]
+  plug :user_check when action in [:index, :update, :delete, :show]
+  #  plug :id_check when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
     jobs = Repo.all(Job)
