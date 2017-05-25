@@ -3,7 +3,7 @@ defmodule Soroban.Job do
 
   schema "jobs" do
     field :reference, :string
-    field :job_date, :string
+    field :job_date, :date
     field :caller, :string
     field :job_type, :string
     field :description, :string
