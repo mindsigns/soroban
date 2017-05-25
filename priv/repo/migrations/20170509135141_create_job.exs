@@ -4,7 +4,7 @@ defmodule Soroban.Repo.Migrations.CreateJob do
   def change do
     create table(:jobs) do
       add :reference, :string
-      add :job_date, :string
+      add :job_date, :date
       add :caller, :string
       add :job_type, :string
       add :description, :text
