@@ -9,6 +9,9 @@
         <a href="/sent_emails">View sent emails (for Testing)</a>
       </li>
       <li>
+        <a href="/clients">Manage Clients</a>
+      </li>
+      <li>
         <a href="/jobtypes">Manage Job Types</a>
       </li>
       <li>
