@@ -1,4 +1,0 @@
-build:
-  script:
-    -  docker-compose down
-    -  docker-compose up
