@@ -2,16 +2,16 @@ defmodule Soroban.Job do
   use Soroban.Web, :model
 
   schema "jobs" do
+    field :date, Ecto.Date
     field :reference, :string
-    field :job_date, :date
     field :caller, :string
-    field :job_type, :string
+    field :type, :string
     field :description, :string
     field :zone, :string
     field :service, :string
-    field :charge_details, :string
-    field :job_total, :float
-    field :invoice_number, :string
+    field :details, :string
+    field :total, :float
+    belongs_to :client, Soroban.Client
 
     timestamps()
   end
@@ -21,7 +21,7 @@ defmodule Soroban.Job do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:reference, :job_date, :caller, :job_type, :description, :zone, :service, :charge_details, :job_total, :invoice_number])
-    |> validate_required([:reference, :job_date, :caller, :job_type, :description, :zone, :service, :job_total, :invoice_number])
+    |> cast(params, [:date, :reference, :caller, :type, :description, :zone, :service, :details, :total])
+    |> validate_required([:date, :reference, :caller, :type, :description, :zone, :service, :details, :total])
   end
 end

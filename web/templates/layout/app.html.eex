@@ -9,6 +9,7 @@
 
     <title>Welcome to Soroban</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/awesomplete.css") %>">
   </head>
 
   <body>
@@ -39,5 +40,6 @@
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script src="<%= static_path(@conn, "/js/awesomplete.js") %>"></script>
   </body>
 </html>

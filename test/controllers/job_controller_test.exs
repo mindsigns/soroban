@@ -2,7 +2,7 @@ defmodule Soroban.JobControllerTest do
   use Soroban.ConnCase
 
   alias Soroban.Job
-  @valid_attrs %{caller: "some content", charge_details: "some content", description: "some content", invoice_number: "some content", job_total: 42, job_type: "some content", reference: "some content", service: "some content", zone: "some content"}
+  @valid_attrs %{caller: "some content", date: %{day: 17, month: 4, year: 2010}, description: "some content", details: "some content", reference: "some content", service: "some content", total: "120.5", type: "some content", zone: "some content"}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do

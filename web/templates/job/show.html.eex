@@ -1,14 +1,15 @@
 <h2>Show job</h2>
 
 <ul>
+
   <li>
-    <strong>Invoice number:</strong>
-    <%= @job.invoice_number %>
+    <strong>Client:</strong>
+    <%= @job.client_id %>
   </li>
 
   <li>
-    <strong>Job Date:</strong>
-    <%= @job.job_date %>
+    <strong>Date:</strong>
+    <%= @job.date %>
   </li>
 
   <li>
@@ -22,8 +23,8 @@
   </li>
 
   <li>
-    <strong>Job type:</strong>
-    <%= @job.job_type %>
+    <strong>Type:</strong>
+    <%= @job.type %>
   </li>
 
   <li>
@@ -42,13 +43,13 @@
   </li>
 
   <li>
-    <strong>Charge details:</strong>
-    <%= @job.charge_details %>
+    <strong>Details:</strong>
+    <%= @job.details %>
   </li>
 
   <li>
-    <strong>Job total:</strong>
-    <%= @job.job_total %>
+    <strong>Total:</strong>
+    <%= @job.total %>
   </li>
 
 </ul>

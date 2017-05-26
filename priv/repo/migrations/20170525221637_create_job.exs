@@ -3,19 +3,20 @@ defmodule Soroban.Repo.Migrations.CreateJob do
 
   def change do
     create table(:jobs) do
+      add :date, :date
       add :reference, :string
-      add :job_date, :date
       add :caller, :string
-      add :job_type, :string
+      add :type, :string
       add :description, :text
       add :zone, :string
       add :service, :string
-      add :charge_details, :string
-      add :job_total, :float
-      add :invoice_number, :string
+      add :details, :text
+      add :total, :float
+      add :client_id, references(:clients, on_delete: :nothing)
 
       timestamps()
     end
+    create index(:jobs, [:client_id])
 
   end
 end

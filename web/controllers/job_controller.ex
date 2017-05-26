@@ -1,19 +1,15 @@
 defmodule Soroban.JobController do
   use Soroban.Web, :controller
 
-  import Soroban.Authorize
-
   alias Soroban.Job
-  alias Soroban.Service
-  alias Soroban.Jobtype
 
-  plug :scrub_params, "job" when action in [:create, :update]
+  import Soroban.Authorize
 
   plug :load_services when action in [:new, :create, :edit, :update]
   plug :load_jobtypes when action in [:new, :create, :edit, :update]
+  plug :load_clients when action in [:new, :create, :edit, :update]
 
   plug :user_check when action in [:index, :update, :delete, :show]
-  #  plug :id_check when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
     jobs = Repo.all(Job)
@@ -24,7 +20,8 @@ defmodule Soroban.JobController do
     changeset = Job.changeset(%Job{})
     services = Repo.all from c in Soroban.Service, select: c.type
     jobtypes = Repo.all from c in Soroban.Jobtype, select: c.type
-    render(conn, "new.html", changeset: changeset, services: services, jobtypes: jobtypes)
+    clients = Repo.all from c in Soroban.Client, select: c.name
+    render(conn, "new.html", changeset: changeset, services: services, jobtypes: jobtypes, clients: clients)
   end
 
   def create(conn, %{"job" => job_params}) do
@@ -49,7 +46,9 @@ defmodule Soroban.JobController do
     job = Repo.get!(Job, id)
     changeset = Job.changeset(job)
     services = Repo.all from c in Soroban.Service, select: c.type
-    render(conn, "edit.html", job: job, changeset: changeset, services: services)
+    jobtypes = Repo.all from c in Soroban.Jobtype, select: c.type
+    clients = Repo.all from c in Soroban.Client, select: c.name
+    render(conn, "edit.html", job: job, changeset: changeset, services: services, jobtypes: jobtypes, clients: clients)
   end
 
   def update(conn, %{"id" => id, "job" => job_params}) do
@@ -78,15 +77,19 @@ defmodule Soroban.JobController do
     |> redirect(to: job_path(conn, :index))
   end
 
-  defp load_services(conn, _) do
-    services = Repo.all from c in Soroban.Service, select: c.type
-    assign(conn, :services, services)
-  end
+   defp load_services(conn, _) do
+      services = Repo.all from c in Soroban.Service, select: c.type
+      assign(conn, :services, services)
+   end
 
-  defp load_jobtypes(conn, _) do
-    jobtypes = Repo.all from c in Soroban.Jobtype, select: c.type
-    assign(conn, :jobtypes, jobtypes)
-  end
+   defp load_jobtypes(conn, _) do
+      jobtypes = Repo.all from c in Soroban.Jobtype, select: c.type
+      assign(conn, :jobtypes, jobtypes)
+   end
 
+   defp load_clients(conn, _) do
+      clients = Repo.all from c in Soroban.Client, select: c.name
+      assign(conn, :clients, clients)
+   end
 
 end
