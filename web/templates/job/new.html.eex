@@ -4,9 +4,6 @@
                         services: @services,
                         jobtypes: @jobtypes,
                         clients: @clients,
-                        year: @year,
-                        month: @month,
-                        day: @day,
                         action: job_path(@conn, :create) %>
 
 <%= link "Back", to: job_path(@conn, :index) %>

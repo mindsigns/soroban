@@ -11,8 +11,6 @@ defmodule Soroban.JobController do
 
   plug :user_check when action in [:index, :update, :delete, :show]
 
-  #plug :today when action in [:index, :create, :update, :delete, :show]
-
   def index(conn, _params) do
     jobs = Repo.all(Job)
     render(conn, "index.html", jobs: jobs)
@@ -23,9 +21,8 @@ defmodule Soroban.JobController do
     services = Repo.all from c in Soroban.Service, select: c.type
     jobtypes = Repo.all from c in Soroban.Jobtype, select: c.type
     clients = Repo.all from c in Soroban.Client, select: c.name
-    {year, month, day} = Date.to_erl(Date.utc_today())
     render(conn, "new.html", changeset: changeset, services: services, jobtypes: jobtypes,
-                             clients: clients, year: year, month: month, day: day)
+                             clients: clients)
   end
 
   def create(conn, %{"job" => job_params}) do
@@ -95,11 +92,5 @@ defmodule Soroban.JobController do
       clients = Repo.all from c in Soroban.Client, select: c.name
       assign(conn, :clients, clients)
    end
-
-   defp today(conn, _) do
-    today = DateTime.to_date(DateTime.utc_today())
-    assign(conn, :today, today)
-   end
-
 
 end
