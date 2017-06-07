@@ -4,7 +4,8 @@ defmodule Soroban.ClientController do
   alias Soroban.Client
 
   def index(conn, _params) do
-    clients = Repo.all(Client)
+    #clients = Repo.all(Client)
+    clients = Client |> Repo.all |> Repo.preload([:jobs])
     render(conn, "index.html", clients: clients)
   end
 
