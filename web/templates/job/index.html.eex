@@ -20,7 +20,7 @@
   <tbody>
 <%= for job <- @jobs do %>
     <tr>
-      <td><%= job.client_id %></td>
+      <td><%= job.client.name %></td>
       <td><%= job.date %></td>
       <td><%= job.reference %></td>
       <td><%= job.caller %></td>

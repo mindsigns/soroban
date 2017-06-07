@@ -16,7 +16,7 @@ defmodule Soroban.JobController do
   plug :user_check when action in [:index, :update, :delete, :show]
 
   def index(conn, _params) do
-    jobs = Repo.all(Job)
+    jobs = Repo.all(Job) |> Repo.preload(:client)
     render(conn, "index.html", jobs: jobs)
   end
 
@@ -28,7 +28,6 @@ defmodule Soroban.JobController do
   def create(conn, %{"job" => job_params}) do
     changeset = Job.changeset(%Job{}, job_params)
     Logger.debug "create/2"
-    #Logger.debug "client_id"
     case Repo.insert(changeset) do
       {:ok, _job} ->
         conn
@@ -40,12 +39,12 @@ defmodule Soroban.JobController do
   end
 
   def show(conn, %{"id" => id}) do
-    job = Repo.get!(Job, id)
+    job = Repo.get!(Job, id) |> Repo.preload(:client)
     render(conn, "show.html", job: job)
   end
 
   def edit(conn, %{"id" => id}) do
-    job = Repo.get!(Job, id)
+    job = Repo.get!(Job, id) |> Repo.preload(:client)
     changeset = Job.changeset(job)
     render(conn, "edit.html", job: job, changeset: changeset)
   end
