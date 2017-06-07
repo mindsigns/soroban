@@ -2,12 +2,16 @@ defmodule Soroban.JobController do
   use Soroban.Web, :controller
 
   alias Soroban.Job
+  alias Soroban.Client
 
   import Soroban.Authorize
+  import Ecto.Query
 
-  #plug :load_services when action in [:new, :create, :edit, :update]
-  #plug :load_jobtypes when action in [:new, :create, :edit, :update]
-  #plug :load_clients when action in [:new, :create, :edit, :update]
+  require Logger
+
+  plug :load_services when action in [:index, :new, :create, :edit, :update]
+  plug :load_jobtypes when action in [:index, :new, :create, :edit, :update]
+  plug :load_clients when action in [:index, :new, :create, :edit, :update]
 
   plug :user_check when action in [:index, :update, :delete, :show]
 
@@ -18,16 +22,13 @@ defmodule Soroban.JobController do
 
   def new(conn, _params) do
     changeset = Job.changeset(%Job{})
-    services = Repo.all from c in Soroban.Service, select: c.type
-    jobtypes = Repo.all from c in Soroban.Jobtype, select: c.type
-    clients = Repo.all from c in Soroban.Client, select: c.name
-    render(conn, "new.html", changeset: changeset, services: services, jobtypes: jobtypes,
-                             clients: clients)
+    render(conn, "new.html", changeset: changeset) 
   end
 
   def create(conn, %{"job" => job_params}) do
     changeset = Job.changeset(%Job{}, job_params)
-
+    Logger.debug "create/2"
+    #Logger.debug "client_id"
     case Repo.insert(changeset) do
       {:ok, _job} ->
         conn
@@ -46,10 +47,7 @@ defmodule Soroban.JobController do
   def edit(conn, %{"id" => id}) do
     job = Repo.get!(Job, id)
     changeset = Job.changeset(job)
-    services = Repo.all from c in Soroban.Service, select: c.type
-    jobtypes = Repo.all from c in Soroban.Jobtype, select: c.type
-    clients = Repo.all from c in Soroban.Client, select: c.name
-    render(conn, "edit.html", job: job, changeset: changeset, services: services, jobtypes: jobtypes, clients: clients)
+    render(conn, "edit.html", job: job, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "job" => job_params}) do
@@ -89,7 +87,7 @@ defmodule Soroban.JobController do
    end
 
    defp load_clients(conn, _) do
-      clients = Repo.all from c in Soroban.Client, select: c.name
+      clients = Repo.all from c in Client, select: {c.name, c.id}
       assign(conn, :clients, clients)
    end
 
