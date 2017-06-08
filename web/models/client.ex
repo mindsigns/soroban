@@ -19,7 +19,8 @@ defmodule Soroban.Client do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:name, :contact, :address, :email])
-    |> validate_required([:name, :contact, :address, :email])
+    |> cast_assoc(:jobs)
+    |> validate_required([:name, :contact, :address])
   end
 
   #def list(query) do
