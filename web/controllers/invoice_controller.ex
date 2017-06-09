@@ -1,10 +1,14 @@
 defmodule Soroban.InvoiceController do
   use Soroban.Web, :controller
 
+  import Soroban.Authorize
+
   alias Soroban.Invoice
   alias Soroban.Job
   alias Soroban.Client
 
+
+  plug :user_check when action in [:index, :update, :delete, :show]
   plug :load_clients when action in [:index, :new, :create, :edit, :show, :update, :generate] 
 
   def index(conn, _params) do
