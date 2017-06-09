@@ -1,11 +1,10 @@
 defmodule Soroban.ClientController do
   use Soroban.Web, :controller
-
+  import Ecto.Query
   alias Soroban.Client
 
   def index(conn, _params) do
-    #clients = Repo.all(Client)
-    clients = Client |> Repo.all |> Repo.preload([:jobs])
+    clients = Repo.all from c in Client, order_by: c.name
     render(conn, "index.html", clients: clients)
   end
 
