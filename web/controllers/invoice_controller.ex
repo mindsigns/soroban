@@ -33,15 +33,10 @@ defmodule Soroban.InvoiceController do
 
     total = Enum.sum(List.flatten(ttotal))
     
+    changeset = Ecto.Changeset.change(invoice, %{total: total})
+    Repo.update!(changeset)
     render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total)
-    #    case Repo.update(changeset) do
-    #  {:ok, invoice} ->
-    #    conn
-    #    |> put_flash(:info, "Invoice updated successfully.")
-    #    |> redirect(to: invoice_path(conn, :show, invoice))
-    #  {:error, changeset} ->
-    #    render(conn, "edit.html", invoice: invoice, changeset: changeset)
-    #end
+
   end
 
   def new(conn, _params) do
@@ -68,7 +63,8 @@ defmodule Soroban.InvoiceController do
   end
 
   def edit(conn, %{"id" => id}) do
-    invoice = Repo.get!(Invoice, id)
+    #invoice = Repo.get!(Invoice, id)
+    invoice = Repo.get!(Invoice, id)|> Repo.preload(:client)
     changeset = Invoice.changeset(invoice)
     render(conn, "edit.html", invoice: invoice, changeset: changeset)
   end
