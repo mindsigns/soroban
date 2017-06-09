@@ -86,7 +86,7 @@ defmodule Soroban.JobController do
    end
 
    defp load_clients(conn, _) do
-      clients = Repo.all from c in Client, select: {c.name, c.id}
+      clients = Repo.all from c in Client, order_by: c.name, select: {c.name, c.id}
       assign(conn, :clients, clients)
    end
 
