@@ -43,4 +43,4 @@
 
 <h2>Total : $ <%= @total %></h2>
 
-<%= link "New job", to: job_path(@conn, :new) %>
+<%= link "Invoices", to: invoice_path(@conn, :index) %>
