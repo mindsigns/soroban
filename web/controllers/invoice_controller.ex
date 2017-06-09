@@ -19,6 +19,7 @@ defmodule Soroban.InvoiceController do
               where: j.date >= ^invoice.start,
               where: j.date <= ^invoice.end,
               where: j.client_id == ^invoice.client_id,
+              order_by: j.date,
               select: j)
 
     totalquery = (from j in Job,
