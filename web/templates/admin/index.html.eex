@@ -1,6 +1,7 @@
 <div class="page-header">
     <h1>Soroban  <small>Admin</small></h1>
-    <p><a class="btn btn-primary btn-md" href="/jobs" role="button">Start invoicing</a></p>
+    <p><a class="btn btn-primary btn-md" href="/jobs" role="button">Start invoicing</a>
+    <a class="btn btn-primary btn-md" href="/invoices" role="button">View Invoices</a></p>
 </div>
 
 <div class="row marketing">

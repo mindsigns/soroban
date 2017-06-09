@@ -11,7 +11,7 @@ defmodule Soroban.Job do
     field :service, :string
     field :details, :string
     field :total, :float
-    #field :client_id, :integer
+
     belongs_to :client, Soroban.Client
 
     timestamps()

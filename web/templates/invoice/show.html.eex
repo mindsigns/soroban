@@ -1,0 +1,38 @@
+<h2>Show invoice</h2>
+
+<ul>
+
+  <li>
+    <strong>Number:</strong>
+    <%= @invoice.number %>
+  </li>
+
+  <li>
+    <strong>Client:</strong>
+    <%= @invoice.client.name %>
+  </li>
+
+  <li>
+    <strong>Date:</strong>
+    <%= @invoice.date %>
+  </li>
+
+  <li>
+    <strong>Start:</strong>
+    <%= @invoice.start %>
+  </li>
+
+  <li>
+    <strong>End:</strong>
+    <%= @invoice.end %>
+  </li>
+
+  <li>
+    <strong>Total:</strong>
+    <%= @invoice.total %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: invoice_path(@conn, :edit, @invoice) %>
+<%= link "Back", to: invoice_path(@conn, :index) %>
