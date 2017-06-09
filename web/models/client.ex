@@ -9,6 +9,7 @@ defmodule Soroban.Client do
     field :email, :string
 
     has_many :jobs, Soroban.Job
+    has_many :invoices, Soroban.Invoice
 
     timestamps()
   end
@@ -20,6 +21,7 @@ defmodule Soroban.Client do
     struct
     |> cast(params, [:name, :contact, :address, :email])
     |> cast_assoc(:jobs)
+    |> cast_assoc(:invoices)
     |> validate_required([:name, :contact, :address])
   end
 

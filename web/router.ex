@@ -20,6 +20,9 @@ defmodule Soroban.Router do
     resources "/service", ServiceController
     resources "/jobtypes", JobtypeController
     resources "/clients", ClientController
+    resources "/invoices", InvoiceController do
+      get "/generate", InvoiceController, :generate
+    end
 
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:new, :create, :delete]
