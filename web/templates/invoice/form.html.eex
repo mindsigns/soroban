@@ -6,7 +6,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :number, class: "control-label" %>
+    <%= label f, :name, "Invoice Number", class: "control-label" %>
     <%= text_input f, :number, class: "form-control" %>
     <%= error_tag f, :number %>
   </div>
@@ -18,20 +18,23 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :date, class: "control-label" %>
-    <%= date_select f, :date, class: "form-control" %>
+    <%= label f, :name, "Invoice Date", class: "control-label" %>
+    </br>
+    <%= date_select f, :date, default: {today.year, today.month, today.day}, class: "form-control" %>
     <%= error_tag f, :date %>
   </div>
 
   <div class="form-group">
-    <%= label f, :start, class: "control-label" %>
-    <%= date_select f, :start, class: "form-control" %>
+    <%= label f, :name, "Invoice Start Date", class: "control-label" %>
+    </br>
+    <%= date_select f, :start, default: {today.year, today.month, today.day}, class: "form-control" %>
     <%= error_tag f, :start %>
   </div>
 
   <div class="form-group">
-    <%= label f, :end, class: "control-label" %>
-    <%= date_select f, :end, class: "form-control" %>
+    <%= label f, :name, "Invoice End Date", class: "control-label" %>
+    </br>
+    <%= date_select f, :end, default: {today.year, today.month, today.day}, class: "form-control" %>
     <%= error_tag f, :end %>
   </div>
 
