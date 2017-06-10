@@ -1,5 +1,7 @@
 <h2>Invoice : <%= @invoice.number %></h2>
 <%= @invoice.client.name %> :: <%= @invoice.date %>
+</br>
+Invoicing from :: <%= @invoice.start %> to <%= @invoice.end %>
 
 <table class="table">
   <thead>
