@@ -1,4 +1,5 @@
-<h2>Listing jobs</h2>
+<h2>Invoice : <%= @invoice.number %></h2>
+<%= @invoice.client.name %> :: <%= @invoice.date %>
 
 <table class="table">
   <thead>
