@@ -7,8 +7,6 @@ defmodule Soroban.JobController do
   import Soroban.Authorize
   import Ecto.Query
 
-  require Logger
-
   plug :load_services when action in [:index, :new, :create, :edit, :update]
   plug :load_jobtypes when action in [:index, :new, :create, :edit, :update]
   plug :load_clients when action in [:index, :new, :create, :edit, :update]
@@ -27,7 +25,6 @@ defmodule Soroban.JobController do
 
   def create(conn, %{"job" => job_params}) do
     changeset = Job.changeset(%Job{}, job_params)
-    Logger.debug "create/2"
     case Repo.insert(changeset) do
       {:ok, _job} ->
         conn
