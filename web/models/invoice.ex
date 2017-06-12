@@ -1,12 +1,13 @@
 defmodule Soroban.Invoice do
   use Soroban.Web, :model
+  alias Money
 
   schema "invoices" do
     field :number, :string
     field :date, Ecto.Date
     field :start, Ecto.Date
     field :end, Ecto.Date
-    field :total, :float
+    field :total, Money.Ecto.Type
     belongs_to :client, Soroban.Client
 
     timestamps()

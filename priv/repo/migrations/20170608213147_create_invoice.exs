@@ -7,7 +7,7 @@ defmodule Soroban.Repo.Migrations.CreateInvoice do
       add :date, :date
       add :start, :date
       add :end, :date
-      add :total, :float
+      add :total, :integer
       add :client_id, references(:clients, on_delete: :nothing)
 
       timestamps()

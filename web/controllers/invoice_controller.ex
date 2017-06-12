@@ -2,6 +2,7 @@ defmodule Soroban.InvoiceController do
   use Soroban.Web, :controller
 
   import Soroban.Authorize
+  import Money
 
   alias Soroban.Invoice
   alias Soroban.Job
@@ -34,10 +35,11 @@ defmodule Soroban.InvoiceController do
 
 
     jobs = Repo.all(query) |> Repo.preload(:client)
-    ttotal = Repo.all(totalquery)
+    jobtotals = Repo.all(totalquery)
 
-    total = Enum.sum(List.flatten(ttotal))
-    
+  ltotal = for n <- jobtotals, do: Map.get(n, :amount)
+  total = Money.new(Enum.sum(ltotal))
+
     changeset = Ecto.Changeset.change(invoice, %{total: total})
     Repo.update!(changeset)
     render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total)

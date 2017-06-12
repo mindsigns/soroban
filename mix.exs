@@ -41,6 +41,7 @@ defmodule Soroban.Mixfile do
      {:openmaize, "~> 3.0"},
      {:bamboo, "~> 0.8"},
      {:bamboo_smtp, "~> 1.3.0"},
+     {:money, "~> 1.2.1"},
      {:cowboy, "~> 1.0"}]
      
   end

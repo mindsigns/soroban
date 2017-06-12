@@ -11,7 +11,7 @@ defmodule Soroban.Repo.Migrations.CreateJob do
       add :zone, :string
       add :service, :string
       add :details, :text
-      add :total, :float
+      add :total, :integer
       add :client_id, references(:clients, on_delete: :nothing)
 
       timestamps()

@@ -1,5 +1,6 @@
 defmodule Soroban.Job do
   use Soroban.Web, :model
+  alias Money
 
   schema "jobs" do
     field :date, Ecto.Date
@@ -10,7 +11,7 @@ defmodule Soroban.Job do
     field :zone, :string
     field :service, :string
     field :details, :string
-    field :total, :float
+    field :total, Money.Ecto.Type
 
     belongs_to :client, Soroban.Client
 

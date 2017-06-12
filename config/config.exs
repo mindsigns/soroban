@@ -34,3 +34,5 @@ import_config "#{Mix.env}.exs"
 config :soroban, Soroban.Mailer,
   adapter: Bamboo.LocalAdapter
 
+config :money,
+  default_currency: :USD
