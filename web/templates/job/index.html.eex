@@ -2,8 +2,7 @@
 
 <%= search_form(@conn, @rummage, [fields:
 [
-  job: %{label: "Search Clients", search_type: "ilike"},
-    reference: %{label: "Reference", search_type: "eq"},
+  name: %{label: "Search Clients", search_type: "ilike", assoc: ["client"]}
     ], button_class: "btn",
 ]) %>
 
@@ -12,7 +11,7 @@
   <thead>
     <tr>
       <th><%= sort_link @conn, @rummage, [field: :client] %></th>
-      <th><%= sort_link @conn, @rummage, [field: :date] %></th>
+      <th>Date</th>
       <th>Reference</th>
       <th>Caller</th>
       <th>Type</th>

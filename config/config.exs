@@ -37,7 +37,3 @@ config :soroban, Soroban.Mailer,
 config :money,
   default_currency: :USD
 
-config :rummage_phoenix,
-  Rummage.Phoenix,
-  default_per_page: 5
-

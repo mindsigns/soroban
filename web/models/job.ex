@@ -1,6 +1,7 @@
 defmodule Soroban.Job do
   use Soroban.Web, :model
   use Rummage.Ecto
+
   alias Money
 
   schema "jobs" do

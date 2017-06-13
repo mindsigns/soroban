@@ -15,10 +15,14 @@ defmodule Soroban.JobController do
   plug :user_check when action in [:index, :update, :delete, :show]
 
   def index(conn, params) do
+
     {query, rummage} = Job
       |> Job.rummage(params["rummage"])
 
-    jobs = Repo.all(Job) |> Repo.preload(:client)
+    jobs = query
+           |> Repo.all
+           |> Repo.preload(:client)
+
     render(conn, "index.html", jobs: jobs, rummage: rummage)
   end
 
