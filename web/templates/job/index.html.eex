@@ -1,11 +1,18 @@
 <h2>Listing jobs</h2>
 
+<%= search_form(@conn, @rummage, [fields:
+[
+  job: %{label: "Search Clients", search_type: "ilike"},
+    reference: %{label: "Reference", search_type: "eq"},
+    ], button_class: "btn",
+]) %>
+
 <%= link "New job", to: job_path(@conn, :new) %>
 <table class="table">
   <thead>
     <tr>
-      <th>Client</th>
-      <th>Date</th>
+      <th><%= sort_link @conn, @rummage, [field: :client] %></th>
+      <th><%= sort_link @conn, @rummage, [field: :date] %></th>
       <th>Reference</th>
       <th>Caller</th>
       <th>Type</th>
@@ -43,3 +50,5 @@
 </table>
 
 <%= link "New job", to: job_path(@conn, :new) %>
+
+<%= pagination_link(@conn, @rummage) %>

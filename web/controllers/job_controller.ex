@@ -1,5 +1,6 @@
 defmodule Soroban.JobController do
   use Soroban.Web, :controller
+  use Rummage.Phoenix.Controller
 
   alias Soroban.Job
   alias Soroban.Client
@@ -13,9 +14,12 @@ defmodule Soroban.JobController do
 
   plug :user_check when action in [:index, :update, :delete, :show]
 
-  def index(conn, _params) do
+  def index(conn, params) do
+    {query, rummage} = Job
+      |> Job.rummage(params["rummage"])
+
     jobs = Repo.all(Job) |> Repo.preload(:client)
-    render(conn, "index.html", jobs: jobs)
+    render(conn, "index.html", jobs: jobs, rummage: rummage)
   end
 
   def new(conn, _params) do

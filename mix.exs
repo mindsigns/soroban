@@ -42,6 +42,7 @@ defmodule Soroban.Mixfile do
      {:bamboo, "~> 0.8"},
      {:bamboo_smtp, "~> 1.3.0"},
      {:money, "~> 1.2.1"},
+     {:rummage_phoenix, "~> 1.0.0"},
      {:cowboy, "~> 1.0"}]
      
   end
