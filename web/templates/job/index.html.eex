@@ -1,25 +1,19 @@
 <h2>Listing jobs</h2>
 
-<%= search_form(@conn, @rummage, [fields:
-[
-  name: %{label: "Search Clients", search_type: "ilike", assoc: ["client"]}
-    ], button_class: "btn",
-]) %>
-
 <%= link "New job", to: job_path(@conn, :new) %>
 <table class="table">
   <thead>
     <tr>
-      <th><%= sort_link @conn, @rummage, [field: :client] %></th>
-      <th>Date</th>
-      <th>Reference</th>
-      <th>Caller</th>
+      <th><%= sort_link @conn, @rummage, [field: :name, name: "Client", assoc: ["client"]] %></th>
+      <th><%= sort_link @conn, @rummage, [field: :date] %></th>
+      <th><%= sort_link @conn, @rummage, [field: :reference] %></th>
+      <th><%= sort_link @conn, @rummage, [field: :caller] %></th>
       <th>Type</th>
       <th>Description</th>
       <th>Zone</th>
-      <th>Service</th>
+      <th><%= sort_link @conn, @rummage, [field: :service] %></th>
       <th>Details</th>
-      <th>Total</th>
+      <th><%= sort_link @conn, @rummage, [field: :total] %></th>
 
       <th></th>
     </tr>

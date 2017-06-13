@@ -19,9 +19,7 @@ defmodule Soroban.JobController do
     {query, rummage} = Job
       |> Job.rummage(params["rummage"])
 
-    jobs = query
-           |> Repo.all
-           |> Repo.preload(:client)
+      jobs = Repo.all(query) |> Repo.preload(:client)
 
     render(conn, "index.html", jobs: jobs, rummage: rummage)
   end
