@@ -42,6 +42,9 @@ defmodule Soroban.InvoiceController do
 
     changeset = Ecto.Changeset.change(invoice, %{total: total})
     Repo.update!(changeset)
+
+  Soroban.Email.invoice_html_email("test@test.com", invoice, jobs, total) |> Soroban.Mailer.deliver_now
+
     render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total)
 
   end

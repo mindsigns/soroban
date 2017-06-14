@@ -47,4 +47,14 @@ defmodule Soroban.Email do
     |> text_body("Your account has been confirmed!")
     |> Mailer.deliver_now
   end
+
+  def invoice_html_email(email_address, invoice, jobs, total) do
+    new_email()
+    |> to(email_address)
+    |> from("us@example.com")
+    |> subject("Welcome!")
+    |> put_html_layout({Soroban.LayoutView, "email.html"})
+    |> render("invoice.html", email_address: email_address, invoice: invoice, jobs: jobs, total: total)
+  end
+
 end
