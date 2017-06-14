@@ -24,4 +24,7 @@
   </div>
 <% end %>
 
+<a href="/sent_emails">View sent emails (for Testing)</a>
+<br/>        
+<br/>        
 <%= link "Back", to: page_path(@conn, :index) %>
