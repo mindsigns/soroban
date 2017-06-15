@@ -2,7 +2,6 @@ defmodule Soroban.InvoiceController do
   use Soroban.Web, :controller
 
   import Soroban.Authorize
-  import Money
 
   alias Soroban.Invoice
   alias Soroban.Job
