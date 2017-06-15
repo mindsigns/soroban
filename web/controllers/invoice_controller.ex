@@ -37,13 +37,14 @@ defmodule Soroban.InvoiceController do
     jobs = Repo.all(query) |> Repo.preload(:client)
     jobtotals = Repo.all(totalquery)
 
-  ltotal = for n <- jobtotals, do: Map.get(n, :amount)
-  total = Money.new(Enum.sum(ltotal))
+    ltotal = for n <- jobtotals, do: Map.get(n, :amount)
+    total = Money.new(Enum.sum(ltotal))
 
     changeset = Ecto.Changeset.change(invoice, %{total: total})
     Repo.update!(changeset)
 
-  Soroban.Email.invoice_html_email("jontrembley@yahoo.com", invoice, jobs, total) |> Soroban.Mailer.deliver_later
+  Soroban.Email.invoice_html_email("jontrembley@yahoo.com", invoice, jobs, total)
+    |> Soroban.Mailer.deliver_later
 
     render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total)
 

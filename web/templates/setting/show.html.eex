@@ -1,0 +1,23 @@
+<h2>Show setting</h2>
+
+<ul>
+
+  <li>
+    <strong>Company name:</strong>
+    <%= @setting.company_name %>
+  </li>
+
+  <li>
+    <strong>Company address:</strong>
+    <%= @setting.company_address %>
+  </li>
+
+  <li>
+    <strong>Company email:</strong>
+    <%= @setting.company_email %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: setting_path(@conn, :edit, @setting) %>
+<%= link "Back", to: setting_path(@conn, :index) %>

@@ -19,6 +19,9 @@
       <li>
         <a href="/users">Manage Users</a>
       </li>
+       <li>
+        <a href="/settings">Manage Settings</a>
+      </li>
       <li>
         <a href="/sent_emails">View sent emails (for Testing)</a>
        </li>

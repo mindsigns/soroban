@@ -25,6 +25,7 @@ defmodule Soroban.Router do
       get "/generate", InvoiceController, :generate
     end
 
+    resources "/settings", SettingController
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:new, :create, :delete]
     get "/sessions/confirm_email", SessionController, :confirm_email

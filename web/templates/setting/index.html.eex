@@ -1,0 +1,30 @@
+<h2>Listing settings</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Company name</th>
+      <th>Company address</th>
+      <th>Company email</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for setting <- @settings do %>
+    <tr>
+      <td><%= setting.company_name %></td>
+      <td><%= setting.company_address %></td>
+      <td><%= setting.company_email %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: setting_path(@conn, :show, setting), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: setting_path(@conn, :edit, setting), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: setting_path(@conn, :delete, setting), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New setting", to: setting_path(@conn, :new) %>
