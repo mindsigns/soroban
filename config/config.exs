@@ -37,3 +37,6 @@ config :soroban, Soroban.Mailer,
 config :money,
   default_currency: :USD
 
+config :pdf_generator,
+  wkhtml_path:    "/usr/bin/wkhtmltopdf",
+  shell_parpams: "--disable-external-links"
