@@ -48,13 +48,15 @@ defmodule Soroban.Email do
     |> Mailer.deliver_now
   end
 
-  def invoice_html_email(email_address, invoice, jobs, total) do
+  def invoice_html_email(email_address, invoice, jobs, total, company) do
     new_email()
     |> to(email_address)
-    |> from("us@example.com")
+    |> from("io@deathray.tv")
     |> subject("Welcome!")
     |> put_html_layout({Soroban.LayoutView, "email.html"})
-    |> render("invoice.html", email_address: email_address, invoice: invoice, jobs: jobs, total: total)
+    |> render("invoice.html", email_address: email_address, 
+              invoice: invoice, jobs: jobs, 
+              total: total, company: company)
   end
 
 end
