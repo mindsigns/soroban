@@ -1,7 +1,7 @@
 <h2>Invoice : <%= @invoice.number %></h2>
 <%= @invoice.client.name %> :: <%= @invoice.date %>
 </br>
-Invoicing from :: <%= @invoice.start %> to <%= @invoice.end %>
+Billing Period :: <%= @invoice.start %> to <%= @invoice.end %>
 
 <table class="table">
   <thead>
@@ -44,4 +44,4 @@ Invoicing from :: <%= @invoice.start %> to <%= @invoice.end %>
 
 <h2>Total : <%= @total %></h2>
 
-<%= link "Invoices", to: invoice_path(@conn, :index) %>
+<%= link "Back to Invoices", to: invoice_path(@conn, :index) %>
