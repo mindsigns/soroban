@@ -1,8 +1,20 @@
-<h2>Invoice : <%= @invoice.number %></h2>
-<%= @invoice.client.name %> :: <%= @invoice.date %>
-</br>
-Invoicing from :: <%= @invoice.start %> to <%= @invoice.end %>
+<%= @company.company_name %>
+<%= text_to_html(@company.company_address, [wrapper_tag: :div, attributes: [class: "p"]]) %>
 
+<hr><center>Client Invoice</center><hr>
+
+<u>Bill to:</u><br/>
+<%= @invoice.client.name %> <br>
+Attn: <%= @invoice.client.contact%>
+<%= text_to_html(@invoice.client.address, [wrapper_tag: :div, attributes: [class: "p"]]) %> <br>
+
+<br><br>
+Invoice #: <%= @invoice.number %> <br>
+Invoice Date : <%= @invoice.date %> <br>
+Billing Period : <%= @invoice.start %> to <%= @invoice.end %> <br>
+Invoice Total : <b><%= @total %></b> <br>
+<br/> 
+<hr>
 <table class="table">
   <thead>
     <tr>
@@ -36,5 +48,6 @@ Invoicing from :: <%= @invoice.start %> to <%= @invoice.end %>
   </tbody>
 </table>
 
-<h2>Total : $ <%= @total %></h2>
+<hr>
+<h2>Total : <%= @total %></h2>
 
