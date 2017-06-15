@@ -6,7 +6,6 @@ Invoicing from :: <%= @invoice.start %> to <%= @invoice.end %>
 <table class="table">
   <thead>
     <tr>
-      <th>Client</th>
       <th>Date</th>
       <th>Reference</th>
       <th>Caller</th>
@@ -14,7 +13,7 @@ Invoicing from :: <%= @invoice.start %> to <%= @invoice.end %>
       <th>Description</th>
       <th>Zone</th>
       <th>Service</th>
-      <th>Details</th>
+      <th>Charge Details</th>
       <th>Total</th>
 
       <th></th>
@@ -23,7 +22,6 @@ Invoicing from :: <%= @invoice.start %> to <%= @invoice.end %>
   <tbody>
 <%= for job <- @jobs do %>
     <tr>
-      <td><%= job.client.name %></td>
       <td><%= job.date %></td>
       <td><%= job.reference %></td>
       <td><%= job.caller %></td>
@@ -44,6 +42,6 @@ Invoicing from :: <%= @invoice.start %> to <%= @invoice.end %>
   </tbody>
 </table>
 
-<h2>Total : $ <%= @total %></h2>
+<h2>Total : <%= @total %></h2>
 
 <%= link "Invoices", to: invoice_path(@conn, :index) %>
