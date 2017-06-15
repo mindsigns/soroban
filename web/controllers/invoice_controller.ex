@@ -6,6 +6,7 @@ defmodule Soroban.InvoiceController do
   alias Soroban.Invoice
   alias Soroban.Job
   alias Soroban.Client
+  alias Soroban.Setting
 
 
   plug :user_check when action in [:index, :update, :delete, :show]
@@ -18,6 +19,8 @@ defmodule Soroban.InvoiceController do
 
   def generate(conn, %{"invoice_id" => id}) do
     invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
+
+    company = Repo.one(from s in Setting, limit: 1)
 
     query = (from j in Job,
               where: j.date >= ^invoice.start,
@@ -42,7 +45,7 @@ defmodule Soroban.InvoiceController do
     changeset = Ecto.Changeset.change(invoice, %{total: total})
     Repo.update!(changeset)
 
-  Soroban.Email.invoice_html_email("jontrembley@yahoo.com", invoice, jobs, total)
+  Soroban.Email.invoice_html_email("jon@deathray.tv", invoice, jobs, total, company)
     |> Soroban.Mailer.deliver_later
 
     render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total)
