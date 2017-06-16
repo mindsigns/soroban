@@ -2,7 +2,7 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: "js/app.js"
+      joinTo: "js/app.js",
 
       // To use a separate vendor.js bundle, specify two files path
       // http://brunch.io/docs/config#-files-
@@ -18,10 +18,27 @@ exports.config = {
       //     "web/static/vendor/js/bootstrap.min.js"
       //   ]
       // }
+        order: {
+        before: [
+          "dist/js/bootstrap.min.js",
+          "dist/js/holder.min.js",
+          "dist/js/jquery.min.js"
+        ]
+        }
     },
     stylesheets: {
       joinTo: "css/app.css",
       order: {
+        before: [
+            "dist/css/bootstrap.min.css",
+            "dist/css/dashboard.css",
+            "dist/fonts/glyphicons-halflings-regular.svg",
+            "dist/fonts/glyphicons-halflings-regular.eot",
+            "dist/fonts/glyphicons-halflings-regular.woff",
+            "dist/fonts/glyphicons-halflings-regular.eot?",
+            "dist/fonts/glyphicons-halflings-regular.ttf",
+            "dist/fonts/glyphicons-halflings-regular.woff2"
+        ],
         after: ["web/static/css/app.css"] // concat app.css last
       }
     },
