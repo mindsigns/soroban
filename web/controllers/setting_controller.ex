@@ -1,7 +1,11 @@
 defmodule Soroban.SettingController do
   use Soroban.Web, :controller
 
+  import Soroban.Authorize
+
   alias Soroban.Setting
+
+  plug :user_check when action in [:index, :update, :delete, :show]
 
   def index(conn, _params) do
     settings = Repo.all(Setting)

@@ -5,10 +5,10 @@ defmodule Soroban.GenerateController do
 
   alias Soroban.Client
 
-    plug :user_check when action in [:index]
-    plug :id_check when action in [:edit, :update, :delete]
+  plug :user_check when action in [:index]
+  plug :id_check when action in [:edit, :update, :delete]
 
-    plug :load_clients when action in [:index] 
+  plug :load_clients when action in [:index] 
 
   def index(conn, _params) do
     render conn, "index.html"

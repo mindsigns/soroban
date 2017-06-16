@@ -2,6 +2,7 @@ defmodule Soroban.SessionController do
   use Soroban.Web, :controller
 
   import Soroban.Authorize
+
   alias Soroban.Email
 
   plug Openmaize.ConfirmEmail,

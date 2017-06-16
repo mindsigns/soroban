@@ -2,6 +2,7 @@ defmodule Soroban.UserController do
   use Soroban.Web, :controller
 
   import Soroban.Authorize
+
   alias Soroban.{Email, User}
   alias Openmaize.ConfirmEmail
 

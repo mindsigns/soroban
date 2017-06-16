@@ -2,11 +2,11 @@ defmodule Soroban.JobController do
   use Soroban.Web, :controller
   use Rummage.Phoenix.Controller
 
-  alias Soroban.Job
-  alias Soroban.Client
-
   import Soroban.Authorize
   import Ecto.Query
+
+  alias Soroban.Job
+  alias Soroban.Client
 
   plug :load_services when action in [:index, :new, :create, :edit, :update]
   plug :load_jobtypes when action in [:index, :new, :create, :edit, :update]
