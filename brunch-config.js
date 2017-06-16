@@ -30,7 +30,6 @@ exports.config = {
       joinTo: "css/app.css",
       order: {
         before: [
-            //"dist/css/bootstrap.min.css",
             "dist/css/dashboard.css",
             "dist/fonts/glyphicons-halflings-regular.svg",
             "dist/fonts/glyphicons-halflings-regular.eot",
