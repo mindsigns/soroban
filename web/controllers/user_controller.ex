@@ -6,8 +6,7 @@ defmodule Soroban.UserController do
   alias Soroban.{Email, User}
   alias Openmaize.ConfirmEmail
 
-  plug :user_check when action in [:index, :show]
-  plug :id_check when action in [:edit, :update, :delete]
+  plug :user_check
 
   def index(conn, _params) do
     users = Repo.all(User)
@@ -37,20 +36,11 @@ defmodule Soroban.UserController do
     render conn, "show.html", user: user
   end
 
-  #def show(%Plug.Conn{assigns: %{current_user: user}} = conn, _params) do
-  #  render(conn, "show.html", user: user)
-  #end
-
   def edit(conn, %{"id" => id}) do
     user = Repo.get(Soroban.User, id)
     changeset = User.changeset(user)
     render(conn, "edit.html", user: user, changeset: changeset)
   end
-
-  #def edit(%Plug.Conn{assigns: %{current_user: user}} = conn, _params) do
-  #  changeset = User.changeset(user)
-  #  render(conn, "edit.html", user: user, changeset: changeset)
-  #end
 
   def update(%Plug.Conn{assigns: %{current_user: user}} = conn, %{"user" => user_params}) do
     changeset = User.changeset(user, user_params)

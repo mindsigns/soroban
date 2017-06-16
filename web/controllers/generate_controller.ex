@@ -5,8 +5,7 @@ defmodule Soroban.GenerateController do
 
   alias Soroban.Client
 
-  plug :user_check when action in [:index]
-  plug :id_check when action in [:edit, :update, :delete]
+  plug :user_check
 
   plug :load_clients when action in [:index] 
 

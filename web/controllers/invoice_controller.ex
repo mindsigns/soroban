@@ -9,7 +9,8 @@ defmodule Soroban.InvoiceController do
   alias Soroban.Setting
 
 
-  plug :user_check when action in [:index, :update, :delete, :show]
+  plug :user_check 
+
   plug :load_clients when action in [:index, :new, :create, :edit, :show, :update, :generate] 
 
   def index(conn, _params) do

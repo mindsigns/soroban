@@ -6,7 +6,7 @@ defmodule Soroban.ClientController do
 
   alias Soroban.Client
 
-  plug :user_check when action in [:index, :update, :delete, :show]
+  plug :user_check
 
   def index(conn, _params) do
     clients = Repo.all from c in Client, order_by: c.name

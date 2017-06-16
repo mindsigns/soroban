@@ -5,7 +5,7 @@ defmodule Soroban.SettingController do
 
   alias Soroban.Setting
 
-  plug :user_check when action in [:index, :update, :delete, :show]
+  plug :user_check
 
   def index(conn, _params) do
     settings = Repo.all(Setting)

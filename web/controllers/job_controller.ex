@@ -8,11 +8,12 @@ defmodule Soroban.JobController do
   alias Soroban.Job
   alias Soroban.Client
 
+  plug :user_check
+
   plug :load_services when action in [:index, :new, :create, :edit, :update]
   plug :load_jobtypes when action in [:index, :new, :create, :edit, :update]
   plug :load_clients when action in [:index, :new, :create, :edit, :update]
 
-  plug :user_check when action in [:index, :update, :delete, :show]
 
   def index(conn, params) do
 

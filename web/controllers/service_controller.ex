@@ -6,8 +6,7 @@ defmodule Soroban.ServiceController do
   alias Soroban.Service
 
 
-  plug :user_check when action in [:index, :show]
-  plug :id_check when action in [:edit, :update, :delete]
+  plug :user_check
 
   def index(conn, _params) do
     services = Repo.all(Service)

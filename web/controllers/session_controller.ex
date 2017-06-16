@@ -9,6 +9,7 @@ defmodule Soroban.SessionController do
     [mail_function: &Email.receipt_confirm/1] when action in [:confirm_email]
 
   plug Openmaize.Login when action in [:create]
+  #plug :user_check
 
   def new(conn, _params) do
     render conn, "new.html", layout: {Soroban.LayoutView, "login.html"}
