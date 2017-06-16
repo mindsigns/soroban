@@ -2,6 +2,12 @@ alias Soroban.Repo
 alias Soroban.Service
 alias Soroban.Jobtype
 alias Soroban.Client
+alias Soroban.User
+
+# Default admin user
+Repo.insert!(%User{email: "admin@admin.com", username: "admin",
+                   password_hash: Comeonin.Bcrypt.hashpwsalt("admin123"),
+                   confirmed_at: Ecto.DateTime.utc })
 
 for service <- ~w(Zoom Rush Regular) do
   Repo.get_by(Service, type: service) ||
