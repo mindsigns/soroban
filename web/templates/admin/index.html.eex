@@ -1,34 +1,5 @@
 <div class="page-header">
     <h1>Soroban  <small>Admin</small></h1>
-    <p><a class="btn btn-primary btn-md" href="/jobs" role="button">Enter Jobs</a>
-    <a class="btn btn-primary btn-md" href="/invoices" role="button">View Invoices</a></p>
 </div>
+<p>Dashboard stuff goes here</p>
 
-<div class="row marketing">
-    <ul>
-       <li>
-        <a href="/clients">Manage Clients</a>
-      </li>
-     </li>
-      <li>
-        <a href="/jobtypes">Manage Job Types</a>
-      </li>
-      <li>
-        <a href="/service">Manage Service Types</a>
-      </li>
-      <li>
-        <a href="/users">Manage Users</a>
-      </li>
-       <li>
-        <a href="/settings">Manage Settings</a>
-      </li>
-      <li>
-        <a href="/sent_emails">View sent emails (for Testing)</a>
-       </li>
-      <ul>
-</div>
-
-<div class="row marketing">
-  <div class="col-lg-6">
-  </div>
-</div>
