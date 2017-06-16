@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Welcome to Soroban</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <span class="logo"></span>
+      </header>
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <main role="main">
+
+<div class="jumbotron">
+  <h2>Welcome to Soroban</h2>
+  <p class="lead">Courier Invoicing</p>
+  <p><a class="btn btn-primary btn-lg" href="/admin" role="button">Get Started</a></p>
+</div>
+
+<div class="row marketing">
+</div>
+
+<div class="row marketing">
+  <div class="col-lg-6">
+  </div>
+</div>
+ </main>
+    </div> <!-- /container -->
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

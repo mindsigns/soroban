@@ -11,7 +11,7 @@ defmodule Soroban.SessionController do
   plug Openmaize.Login when action in [:create]
 
   def new(conn, _params) do
-    render conn, "new.html"
+    render conn, "new.html", layout: {Soroban.LayoutView, "login.html"}
   end
 
   def create(%Plug.Conn{private: %{openmaize_error: message}} = conn, _params) do
