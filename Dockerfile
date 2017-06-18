@@ -1,4 +1,4 @@
-FROM elixir:1.4.2
+FROM elixir:1.4.4
 ENV MIX_ENV=dev
 RUN apt-get update && \
     apt-get install -y libssl1.0.0 postgresql-client locales inotify-tools
