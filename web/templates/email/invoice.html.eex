@@ -50,4 +50,5 @@ Invoice Total : <b><%= @total %></b> <br>
 
 <hr>
 <h2>Total : <%= @total %></h2>
-
+<br>
+<center><h2><%= @company.note %></h2></center>

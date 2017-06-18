@@ -6,6 +6,7 @@
       <th>Company name</th>
       <th>Company address</th>
       <th>Company email</th>
+      <th>Invoice Note</th>
 
       <th></th>
     </tr>
@@ -16,6 +17,7 @@
       <td><%= setting.company_name %></td>
       <td><%= setting.company_address %></td>
       <td><%= setting.company_email %></td>
+      <td><%= setting.note%></td>
 
       <td class="text-right">
         <%= link "Show", to: setting_path(@conn, :show, setting), class: "btn btn-default btn-xs" %>

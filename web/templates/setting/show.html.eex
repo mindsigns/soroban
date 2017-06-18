@@ -17,6 +17,11 @@
     <%= @setting.company_email %>
   </li>
 
+  <li>
+    <strong>Invoice Note:</strong>
+    <%= @setting.note%>
+  </li>
+
 </ul>
 
 <%= link "Edit", to: setting_path(@conn, :edit, @setting) %>
