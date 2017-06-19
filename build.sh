@@ -2,6 +2,8 @@ mix deps.get
 
 if [ ! -d priv/static ]; then
     mkdir priv/static
+else
+    rm -rf priv/static/*
 fi
 
 npm install

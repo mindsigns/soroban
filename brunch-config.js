@@ -20,9 +20,8 @@ exports.config = {
       // }
         order: {
         before: [
-          "dist/js/bootstrap.min.js",
-          "dist/js/holder.min.js",
-          "dist/js/jquery.min.js"
+            "web/static/vendor/js/jquery.min.js",
+            "web/static/vendor/js/bootstrap.min.js"
         ]
         }
     },
@@ -30,13 +29,13 @@ exports.config = {
       joinTo: "css/app.css",
       order: {
         before: [
-            "dist/css/dashboard.css",
+/*            "dist/css/dashboard.css",
             "dist/fonts/glyphicons-halflings-regular.svg",
             "dist/fonts/glyphicons-halflings-regular.eot",
             "dist/fonts/glyphicons-halflings-regular.woff",
             "dist/fonts/glyphicons-halflings-regular.eot?",
             "dist/fonts/glyphicons-halflings-regular.ttf",
-            "dist/fonts/glyphicons-halflings-regular.woff2"
+            "dist/fonts/glyphicons-halflings-regular.woff2" */
         ],
         after: ["web/static/css/app.css"] // concat app.css last
       }
