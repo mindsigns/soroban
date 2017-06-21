@@ -1,5 +1,25 @@
 <h2>Listing jobs</h2>
 
+<!-- Modal -->
+<div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Search
+                </h4>
+            </div>
+
+<!-- Modal Body -->
+<div class="modal-body">
+
 <%= search_form(@conn, @rummage, [fields:
 [
   name: %{label: "Client Search", search_type: "ilike", assoc: ["client"]}
@@ -13,7 +33,15 @@
   type: %{label: "Search by type", search_type: "ilike"},
 ], button_class: "btn",
 ]) %>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
+    Job Search
+</button>
 
+<br>
 <%= link "New job", to: job_path(@conn, :new) %>
 <table class="table">
   <thead>
