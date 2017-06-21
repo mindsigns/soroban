@@ -21,6 +21,7 @@ exports.config = {
         order: {
         before: [
             "web/static/vendor/js/jquery.min.js",
+            "web/static/vendor/js/sb-admin-2.min.js",
             "web/static/vendor/js/bootstrap.min.js"
         ]
         }
