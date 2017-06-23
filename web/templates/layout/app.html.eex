@@ -73,13 +73,13 @@
                         <li><a href="/invoices">Invoices</a></li>
                         <li class="dropdown">
                         <a href="#"  class="dropdown-toggle" data-toggle="dropdown">Manage<span class="caret"</span></a>
-                        <ul class="nav dropdown" role="menu">
-                        <li><a href="/clients"> Clients</a></li>
-                        <li><a href="/jobtypes"> Job Types</a></li>
-                        <li><a href="/service"> Service Types</a></li>
-                        <li><a href="/users"> Users</a></li>
-                        <li><a href="/settings"> Settings</a></li>
-                    </ul>
+                          <ul class="nav indent" role="menu">
+                            <li><a href="/clients"> Clients</a></li>
+                            <li><a href="/jobtypes"> Job Types</a></li>
+                            <li><a href="/service"> Service Types</a></li>
+                            <li><a href="/users"> Users</a></li>
+                            <li><a href="/settings"> Settings</a></li>
+                          </ul>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
