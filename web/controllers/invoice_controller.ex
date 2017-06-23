@@ -30,18 +30,11 @@ defmodule Soroban.InvoiceController do
               order_by: j.date,
               select: j)
 
-    totalquery = (from j in Job,
-              where: j.date >= ^invoice.start,
-              where: j.date <= ^invoice.end,
-              where: j.client_id == ^invoice.client_id,
-              select: j.total)
-
-
     jobs = Repo.all(query) |> Repo.preload(:client)
-    jobtotals = Repo.all(totalquery)
 
-    ltotal = for n <- jobtotals, do: Map.get(n, :amount)
-    total = Money.new(Enum.sum(ltotal))
+    jtotal = for n <- jobs, do: Map.get(n, :total)
+    ftotal = for n <- jtotal, do: Map.get(n, :amount)
+    total = Money.new(Enum.sum(ftotal))                  
 
     changeset = Ecto.Changeset.change(invoice, %{total: total})
     Repo.update!(changeset)
