@@ -26,8 +26,4 @@ defmodule Soroban.Client do
     |> validate_required([:name, :contact, :address])
   end
 
-  #def list(query) do
-  #  from p in query,
-  #  order_by: :name
-  #end
 end
