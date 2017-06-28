@@ -29,4 +29,6 @@
   </tbody>
 </table>
 
+<%= if Enum.empty?(@settings) do %>
 <%= link "New setting", to: setting_path(@conn, :new) %>
+<%= end %>
