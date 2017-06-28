@@ -31,13 +31,6 @@ exports.config = {
       order: {
         before: [
             "web/static/css/phoenix.css"
-/*            "dist/css/dashboard.css",
-            "dist/fonts/glyphicons-halflings-regular.svg",
-            "dist/fonts/glyphicons-halflings-regular.eot",
-            "dist/fonts/glyphicons-halflings-regular.woff",
-            "dist/fonts/glyphicons-halflings-regular.eot?",
-            "dist/fonts/glyphicons-halflings-regular.ttf",
-            "dist/fonts/glyphicons-halflings-regular.woff2" */
         ],
         after: ["web/static/css/app.css"] // concat app.css last
       }
