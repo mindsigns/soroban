@@ -1,26 +1,17 @@
 defmodule Soroban do
   use Application
 
-  # See http://elixir-lang.org/docs/stable/elixir/Application.html
-  # for more information on OTP Applications
   def start(_type, _args) do
     import Supervisor.Spec
 
     repo = Soroban.Repo
     create_db(repo)
 
-    # Define workers and child supervisors to be supervised
     children = [
-      # Start the Ecto repository
       supervisor(Soroban.Repo, []),
-      # Start the endpoint when the application starts
       supervisor(Soroban.Endpoint, []),
-      # Start your own worker by calling: Soroban.Worker.start_link(arg1, arg2, arg3)
-      # worker(Soroban.Worker, [arg1, arg2, arg3]),
     ]
 
-    # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Soroban.Supervisor]
     sup_ret = Supervisor.start_link(children, opts)
 
