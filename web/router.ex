@@ -24,6 +24,8 @@ defmodule Soroban.Router do
     resources "/invoices", InvoiceController do
       get "/generate", InvoiceController, :generate
     end
+    get "/invoice/batch", InvoiceController, :batch
+    get "/invoice/generate_all", InvoiceController, :generate_all
 
     resources "/settings", SettingController
     resources "/users", UserController
