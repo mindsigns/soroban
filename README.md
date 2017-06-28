@@ -7,7 +7,8 @@ Set up the Postgres Database:
 
 To start your Phoenix app in Dev mode:
 
-  * run ./build.sh
+  * ./build.sh
+  * mix phoenix.server
 
 Or to do it by hand:
 
@@ -28,8 +29,6 @@ Now you can visit [`localhost:8888`](http://localhost:8888) from your browser.
 
 **Links to know :**
 
-http://localhost:4000/users to play with a basic CRUD page
-
 http://localhost:4000/sent_emails to see emails in dev mode.
 
 
@@ -38,10 +37,6 @@ To shut it down:
     * Hit Ctrl-C twice
     * sudo mix compose down
 
-
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
-
-BURP
 
 ## Learn more
 
