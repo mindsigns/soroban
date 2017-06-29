@@ -3,6 +3,7 @@ alias Soroban.Service
 alias Soroban.Jobtype
 alias Soroban.Client
 alias Soroban.User
+alias Soroban.Setting
 
 # Default admin user
 Repo.insert!(%User{email: "admin@admin.com", username: "admin",
@@ -25,15 +26,7 @@ Repo.insert!(%Jobtype{type: "Opposing Counsel Serve"})
 Repo.insert!(%Jobtype{type: "Research/Doc. Retrieval"})
 Repo.insert!(%Jobtype{type: "Research Addt'l Stop"})
 
-Repo.insert!(%Client{name: "Dentons LLP", contact: "Accounts Payable",
-                     address: "1 Market St., 24th Fl.\nSF, CA, 94104", 
-                     email: "billing@denton.com"})
-
-Repo.insert!(%Client{name: "Autumn Express", contact: "Accounts Payable",
-                     address: "2121 Mission Street\nSF, CA, 94104", 
-                     email: "billing@autumn.com"})
-
-Repo.insert!(%Client{name: "VanVoorhis Law", contact: "Accounts Payable",
-                     address: "601 Montgomery St, Suite 525\nSF, CA, 94104", 
-                     email: "billing@vvs.com"})
-
+Repo.insert!(%Setting{company_name: "Kickass Couriers", 
+                      company_address: "123 My Street\nSF, CA 94111",
+                      company_email: "gofast@test.com",
+                      note: "Thanks For Using Kickass Couriers!"})
