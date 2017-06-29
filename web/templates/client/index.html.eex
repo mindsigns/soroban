@@ -3,7 +3,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Name</th>
+      <th><%= sort_link @conn, @rummage, [field: :name] %></th>
       <th>Contact</th>
       <th>Address</th>
       <th>Email</th>
@@ -28,5 +28,6 @@
 <% end %>
   </tbody>
 </table>
+
 
 <%= link "New client", to: client_path(@conn, :new) %>
