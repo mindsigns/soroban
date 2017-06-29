@@ -1,5 +1,6 @@
 defmodule Soroban.ClientController do
   use Soroban.Web, :controller
+  use Rummage.Phoenix.Controller
 
   import Ecto.Query
   import Soroban.Authorize
@@ -8,9 +9,13 @@ defmodule Soroban.ClientController do
 
   plug :user_check
 
-  def index(conn, _params) do
+  def index(conn, params) do
+
+    {query, rummage} = Client
+      |> Client.rummage(params["rummage"])
+
     clients = Repo.all from c in Client, order_by: c.name
-    render(conn, "index.html", clients: clients)
+    render(conn, "index.html", clients: clients, rummage: rummage)
   end
 
   def new(conn, _params) do
