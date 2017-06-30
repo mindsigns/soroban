@@ -11,10 +11,16 @@ defmodule Soroban.ClientController do
 
   def index(conn, params) do
 
+    clients = Client
+              |> Repo.all
+
     {query, rummage} = Client
       |> Client.rummage(params["rummage"])
 
-    clients = Repo.all from c in Client, order_by: c.name
+    clients = query
+      |> Repo.all
+      
+      #clients = Repo.all from c in Client, order_by: c.name
     render(conn, "index.html", clients: clients, rummage: rummage)
   end
 
