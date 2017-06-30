@@ -3,8 +3,8 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Number</th>
-      <th>Client</th>
+      <th><%= sort_link @conn, @rummage, [field: :number] %></th>
+      <th><%= sort_link @conn, @rummage, [field: :client, assoc: ["client"]] %></th>
       <th>Date</th>
       <th>Start</th>
       <th>End</th>
