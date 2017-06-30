@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th><%= sort_link @conn, @rummage, [field: :number] %></th>
-      <th><%= sort_link @conn, @rummage, [field: :client, assoc: ["client"]] %></th>
+      <th><%= sort_link @conn, @rummage, [field: :name, name: "Client", assoc: ["client"]] %></th>
       <th>Date</th>
       <th>Start</th>
       <th>End</th>
