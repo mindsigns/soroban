@@ -57,31 +57,17 @@ defmodule Soroban.InvoiceController do
     render(conn, "batch.html")
   end
 
-  def generate_all(conn, _params) do
-    invoice = Repo.get!(Invoice, 4) |> Repo.preload(:client)
+  def generate_all(conn, params) do
+    %{"invoice" => %{"date" => date, "end" => end_date, "start" => start_date}} =  params
+    clients = Repo.all from c in Client, select: c.id
 
-    company = Repo.one(from s in Setting, limit: 1)
+    # Create Invoices
+    for c <- clients, do: new_invoice(c, date, end_date, start_date)
 
-    query = (from j in Job,
-              where: j.date >= ^invoice.start,
-              where: j.date <= ^invoice.end,
-              where: j.client_id == ^invoice.client_id,
-              order_by: j.date,
-              select: j)
+    # Generate Invoices
+    for c <- clients, do: generate(conn, %{"invoice_id" => c})
 
-    jobs = Repo.all(query) |> Repo.preload(:client)
-
-    jtotal = for n <- jobs, do: Map.get(n, :total)
-    ftotal = for n <- jtotal, do: Map.get(n, :amount)
-    total = Money.new(Enum.sum(ftotal))                  
-
-    changeset = Ecto.Changeset.change(invoice, %{total: total})
-    Repo.update!(changeset)
-
-  Soroban.Email.invoice_html_email("jon@deathray.tv", invoice, jobs, total, company)
-    |> Soroban.Mailer.deliver_later
-
-    render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total)
+    render(conn, "batch.html")
   end
 
   def new(conn, _params) do
@@ -145,7 +131,13 @@ defmodule Soroban.InvoiceController do
     assign(conn, :clients, clients)
   end
 
-  defp gen_invoice(id) do
+  defp new_invoice(id, date, end_date, start_date) do
+    changeset = Invoice.changeset(%Invoice{}, %{"client_id" => id,
+                                                "number" => "1717",
+                                                "date" => date,
+                                                "end" => end_date,
+                                                "start" => start_date})
+    Repo.insert(changeset)
   end
 
 end
