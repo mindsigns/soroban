@@ -1,8 +1,9 @@
 <h2>Invoice : <%= @invoice.number %></h2>
 <%= @invoice.client.name %> :: <%= @invoice.date %>
-</br>
+<br>
 Billing Period :: <%= @invoice.start %> to <%= @invoice.end %>
-
+<br> <br>
+Job Count :: <%= @job_count %>
 <table class="table">
   <thead>
     <tr>
