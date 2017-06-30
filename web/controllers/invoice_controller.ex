@@ -36,13 +36,15 @@ defmodule Soroban.InvoiceController do
     ftotal = for n <- jtotal, do: Map.get(n, :amount)
     total = Money.new(Enum.sum(ftotal))                  
 
+    job_count = Enum.count(jobs)
+
     changeset = Ecto.Changeset.change(invoice, %{total: total})
     Repo.update!(changeset)
 
   Soroban.Email.invoice_html_email("jon@deathray.tv", invoice, jobs, total, company)
     |> Soroban.Mailer.deliver_later
 
-    render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total)
+    render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total, job_count: job_count)
 
   end
 
