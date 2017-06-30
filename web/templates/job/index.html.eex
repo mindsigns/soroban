@@ -1,5 +1,6 @@
 <h2>Job Listing</h2>
 
+<%= link "New job", class: "btn btn-primary btn-md", to: job_path(@conn, :new) %>
 <!-- Modal -->
 <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
@@ -41,8 +42,6 @@
     Job Search
 </button>
 
-<br>
-<%= link "New job", to: job_path(@conn, :new) %>
 <table class="table">
   <thead>
     <tr>
