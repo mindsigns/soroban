@@ -1,4 +1,5 @@
 <h2>Listing invoices</h2>
+<%= link "Generate All Invoices", class: "btn btn-primary btn-md", to: invoice_path(@conn, :batch) %>
 
 <table class="table">
   <thead>
