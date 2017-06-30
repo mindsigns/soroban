@@ -8,7 +8,7 @@ Set up the Postgres Database:
 To start your Phoenix app in Dev mode:
 
   * ./build.sh
-  * mix phoenix.server
+  * iex -S mix phoenix.server
 
 Or to do it by hand:
 
@@ -16,7 +16,13 @@ Or to do it by hand:
      Install Node.js dependencies with `npm install`
      Create the priv/static directory `mkdir priv/static`
      Run `mix phoenix.digest` to build assests
-     Start Phoenix endpoint with `mix phoenix.server`
+     Start Phoenix endpoint with `iex -S mix phoenix.server`
+
+Populate the database with schwifty data.
+    After starting soroban via 'iex -S mix phoenix.server', type
+    Forge.gen_all(num_of_clients, num_of_jobs)
+    An good starting point is :
+    Forge.gen_all(15, 500) , which gives you 15 clients and 500 jobs.
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
@@ -24,6 +30,10 @@ Running Soroban in a docker container:
     
      sudo mix compose release prod
      sudo mix compose up
+
+    OR
+    
+    sudo docker-compose up
 
 Now you can visit [`localhost:8888`](http://localhost:8888) from your browser.
 
