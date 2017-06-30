@@ -18,7 +18,8 @@ Or to do it by hand:
      Run `mix phoenix.digest` to build assests
      Start Phoenix endpoint with `iex -S mix phoenix.server`
 
-Populate the database with schwifty data.
+Populate the database with schwifty data:
+
     After starting soroban via 'iex -S mix phoenix.server', type
     Forge.gen_all(num_of_clients, num_of_jobs)
     An good starting point is :
