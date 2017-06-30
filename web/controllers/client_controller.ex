@@ -20,7 +20,6 @@ defmodule Soroban.ClientController do
     clients = query
       |> Repo.all
       
-      #clients = Repo.all from c in Client, order_by: c.name
     render(conn, "index.html", clients: clients, rummage: rummage)
   end
 
