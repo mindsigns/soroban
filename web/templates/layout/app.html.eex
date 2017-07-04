@@ -41,7 +41,6 @@
 
             <ul class="nav navbar-top-links navbar-right">
            <%= if @current_user do %>
-              <li><a href="<%= user_path @conn, :index %>">Users</a></li>
               <li><a href="<%= user_path(@conn, :show, @current_user.id) %>"><%= @current_user.username %></a></li>
               <li><%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete %></li>
               <% else %>
