@@ -18,8 +18,11 @@ defmodule Soroban.InvoiceController do
     {query, rummage} = Invoice
       |> Invoice.rummage(params["rummage"])
 
-    invoices = Repo.all(query)|> Repo.preload(:client)
+    invoices = query
+               |> distinct(:number)
+               |> Repo.all
 
+    IO.inspect query
     render(conn, "index.html", invoices: invoices, rummage: rummage)
   end
 
@@ -67,8 +70,7 @@ defmodule Soroban.InvoiceController do
     # Generate Invoices
     for c <- clients, do: generate(conn, %{"invoice_id" => c})
 
-    IO.inspect params
-    render(conn, "batch.html")
+    render(conn, "index.html")
   end
 
   def new(conn, _params) do
@@ -95,7 +97,6 @@ defmodule Soroban.InvoiceController do
   end
 
   def edit(conn, %{"id" => id}) do
-    #invoice = Repo.get!(Invoice, id)
     invoice = Repo.get!(Invoice, id)|> Repo.preload(:client)
     changeset = Invoice.changeset(invoice)
     render(conn, "edit.html", invoice: invoice, changeset: changeset)

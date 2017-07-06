@@ -5,30 +5,21 @@
   <thead>
     <tr>
       <th><%= sort_link @conn, @rummage, [field: :number] %></th>
-      <th><%= sort_link @conn, @rummage, [field: :name, name: "Client", assoc: ["client"]] %></th>
-      <th>Date</th>
-      <th>Start</th>
-      <th>End</th>
-      <th>Total</th>
-
-      <th></th>
+      <th>Invoice Date</th>
+      <th>From</th>
+      <th>To</th>
     </tr>
   </thead>
   <tbody>
 <%= for invoice <- @invoices do %>
     <tr>
-      <td><%= invoice.number %></td>
-      <td><%= invoice.client.name %></td>
+      <td><%= link invoice.number, to: invoice_path(@conn, :show, invoice) %></td>
       <td><%= invoice.date %></td>
       <td><%= invoice.start %></td>
       <td><%= invoice.end %></td>
-      <td><%= invoice.total %></td>
 
       <td class="text-right">
-        <%= link "Generate", to: invoice_invoice_path(@conn, :generate, invoice), class: "btn btn-primary btn-xs" %>
-        <%= link "Show", to: invoice_path(@conn, :show, invoice), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: invoice_path(@conn, :edit, invoice), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: invoice_path(@conn, :delete, invoice), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Re-generate", to: invoice_invoice_path(@conn, :generate, invoice), class: "btn btn-primary btn-xs" %>
       </td>
     </tr>
 <% end %>
