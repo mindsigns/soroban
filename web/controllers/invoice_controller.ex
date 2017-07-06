@@ -22,7 +22,6 @@ defmodule Soroban.InvoiceController do
                |> distinct(:number)
                |> Repo.all
 
-    IO.inspect query
     render(conn, "index.html", invoices: invoices, rummage: rummage)
   end
 
@@ -93,6 +92,15 @@ defmodule Soroban.InvoiceController do
 
   def show(conn, %{"id" => id}) do
     invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
+    render(conn, "show.html", invoice: invoice)
+  end
+
+  def show_invoice(conn, %{"invoice_id" => id}) do
+
+    query = (from i in Job,
+              where: i.number == ^id)
+
+    invoice = Repo.all(query) |> Repo.preload(:client)
     render(conn, "show.html", invoice: invoice)
   end
 

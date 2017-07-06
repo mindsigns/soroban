@@ -23,6 +23,7 @@ defmodule Soroban.Router do
     resources "/clients", ClientController
     resources "/invoices", InvoiceController do
       get "/generate", InvoiceController, :generate
+      get "/show", InvoiceController, :show_invoice
     end
     get "/invoice/batch", InvoiceController, :batch
     post "/invoice/generate_all", InvoiceController, :generate_all

@@ -13,7 +13,7 @@
   <tbody>
 <%= for invoice <- @invoices do %>
     <tr>
-      <td><%= link invoice.number, to: invoice_path(@conn, :show, invoice) %></td>
+      <td><%= link invoice.number, to: invoice_invoice_path(@conn, :show_invoice, invoice.number) %></td>
       <td><%= invoice.date %></td>
       <td><%= invoice.start %></td>
       <td><%= invoice.end %></td>
