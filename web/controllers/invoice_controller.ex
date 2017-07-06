@@ -58,15 +58,16 @@ defmodule Soroban.InvoiceController do
   end
 
   def generate_all(conn, params) do
-    %{"invoice" => %{"date" => date, "end" => end_date, "start" => start_date}} =  params
+    %{"invoice" => %{"date" => date, "end" => end_date, "start" => start_date, "number" => number}} =  params
     clients = Repo.all from c in Client, select: c.id
 
     # Create Invoices
-    for c <- clients, do: new_invoice(c, date, end_date, start_date)
+    for c <- clients, do: new_invoice(c, date, end_date, start_date, number)
 
     # Generate Invoices
     for c <- clients, do: generate(conn, %{"invoice_id" => c})
 
+    IO.inspect params
     render(conn, "batch.html")
   end
 
@@ -131,9 +132,9 @@ defmodule Soroban.InvoiceController do
     assign(conn, :clients, clients)
   end
 
-  defp new_invoice(id, date, end_date, start_date) do
+  defp new_invoice(id, date, end_date, start_date, number ) do
     changeset = Invoice.changeset(%Invoice{}, %{"client_id" => id,
-                                                "number" => "1717",
+                                                "number" => number,
                                                 "date" => date,
                                                 "end" => end_date,
                                                 "start" => start_date})
