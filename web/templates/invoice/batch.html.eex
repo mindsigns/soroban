@@ -3,6 +3,12 @@
 <%= form_for @conn, invoice_path(@conn, :generate_all), [as: :invoice], fn f -> %>
 
   <div class="form-group">
+    <%= label f, :name, "Invoice Number", class: "control-label" %>
+    <%= text_input f, :number, class: "form-control" %>
+    <%= error_tag f, :number %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :name, "Invoice Date", class: "control-label" %>
     </br>
     <%= date_select f, :date, default: {today.year, today.month, today.day}, class: "form-control" %>
