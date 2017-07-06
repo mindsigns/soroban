@@ -97,11 +97,13 @@ defmodule Soroban.InvoiceController do
 
   def show_invoice(conn, %{"invoice_id" => id}) do
 
-    query = (from i in Job,
+    query = (from i in Invoice,
               where: i.number == ^id)
+    invoices = Repo.all(query) |> Repo.preload(:client)
 
-    invoice = Repo.all(query) |> Repo.preload(:client)
-    render(conn, "show.html", invoice: invoice)
+    invoice_count = Enum.count(invoices)
+
+    render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count)
   end
 
   def edit(conn, %{"id" => id}) do
