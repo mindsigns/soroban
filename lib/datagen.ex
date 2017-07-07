@@ -39,11 +39,11 @@ defmodule Forge do
 
   # Job Forge
   register :job, %Job{
-    date:  Ecto.Date.cast!(Faker.Date.between(~D[2017-06-01], ~D[2017-06-30])),
+    date:  Ecto.Date.cast!(Faker.Date.between(~D[2017-05-01], ~D[2017-07-30])),
     reference: Faker.Lorem.word,
     caller: Faker.Name.En.name,
     type: Enum.random(Soroban.Repo.all from c in Soroban.Jobtype, select: c.type),
-    description: Enum.join([Faker.Company.name, Faker.Address.street_address], " "),
+    description: Enum.join([Faker.Company.name, "\n", Faker.Address.street_address, "\nSF, CA 94444"], " "),
     zone: Integer.to_string(Enum.random(1..5)),
     service: Enum.random(["Regular", "Rush", "Zoom"]),
     details: "",
