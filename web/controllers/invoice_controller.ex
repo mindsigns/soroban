@@ -92,7 +92,23 @@ defmodule Soroban.InvoiceController do
 
   def show(conn, %{"id" => id}) do
     invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
-    render(conn, "show.html", invoice: invoice)
+
+    query = (from j in Job,
+              where: j.date >= ^invoice.start,
+              where: j.date <= ^invoice.end,
+              where: j.client_id == ^invoice.client_id,
+              order_by: j.date,
+              select: j)
+
+    jobs = Repo.all(query) |> Repo.preload(:client)
+
+    jtotal = for n <- jobs, do: Map.get(n, :total)
+    ftotal = for n <- jtotal, do: Map.get(n, :amount)
+    total = Money.new(Enum.sum(ftotal))                  
+
+    job_count = Enum.count(jobs)
+
+    render(conn, "show.html", invoice: invoice, jobs: jobs)
   end
 
   def show_invoice(conn, %{"invoice_id" => id}) do
@@ -101,9 +117,13 @@ defmodule Soroban.InvoiceController do
               where: i.number == ^id)
     invoices = Repo.all(query) |> Repo.preload(:client)
 
-    invoice_count = Enum.count(invoices)
+    itotal = for n <- invoices, do: Map.get(n, :total)
+    ftotal = for n <- itotal, do: Map.get(n, :amount)
+    total = Money.new(Enum.sum(ftotal))                  
+    #total = Money.new(1233)
 
-    render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count)
+    invoice_count = Enum.count(invoices)
+    render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count, total: total)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -137,6 +157,24 @@ defmodule Soroban.InvoiceController do
     |> put_flash(:info, "Invoice deleted successfully.")
     |> redirect(to: invoice_path(conn, :index))
   end
+
+  def total(id) do
+    invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
+    query = (from j in Job,
+              where: j.date >= ^invoice.start,
+              where: j.date <= ^invoice.end,
+              where: j.client_id == ^invoice.client_id,
+              order_by: j.date,
+              select: j)
+
+    jobs = Repo.all(query) |> Repo.preload(:client)
+
+    jtotal = for n <- jobs, do: Map.get(n, :total)
+    ftotal = for n <- jtotal, do: Map.get(n, :amount)
+    total = Money.new(Enum.sum(ftotal))                  
+    changeset = Ecto.Changeset.change(invoice, %{total: total})
+    Repo.update!(changeset)
+end
 
   defp load_clients(conn, _) do
     clients = Repo.all from c in Client, select: {c.name, c.id}
