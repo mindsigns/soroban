@@ -1,13 +1,13 @@
 <h2><%= @invoice_count %> invoices for <%= @invoice_id %></h2>
+<h2>Total for all Invoices : <%= @total%></h2>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Number</th>
       <th>Client</th>
-      <th>Date</th>
-      <th>Start</th>
-      <th>End</th>
+      <th>Invoice Date</th>
+      <th>Start Date</th>
+      <th>End Date</th>
       <th>Total</th>
 
       <th></th>
@@ -16,7 +16,6 @@
   <tbody>
 <%= for invoice <- @invoices do %>
     <tr>
-      <td><%= invoice.number %></td>
       <td><%= invoice.client.name %></td>
       <td><%= invoice.date %></td>
       <td><%= invoice.start %></td>
