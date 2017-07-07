@@ -1,30 +1,20 @@
-<h2>Show invoice</h2>
+<b><%= @invoice.client.name %></b>
 
 <ul>
 
   <li>
-    <strong>Number:</strong>
+    <strong>Invoice Number:</strong>
     <%= @invoice.number %>
   </li>
 
   <li>
-    <strong>Client:</strong>
-    <%= @invoice.client.name %>
-  </li>
-
-  <li>
-    <strong>Date:</strong>
+    <strong>Invoice Date:</strong>
     <%= @invoice.date %>
   </li>
 
   <li>
-    <strong>Start:</strong>
-    <%= @invoice.start %>
-  </li>
-
-  <li>
-    <strong>End:</strong>
-    <%= @invoice.end %>
+    <strong>Billing Period:</strong>
+    <%= @invoice.start %> to <%= @invoice.end %>
   </li>
 
   <li>
@@ -33,6 +23,47 @@
   </li>
 
 </ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Client</th>
+      <th>Date</th>
+      <th>Ref</th>
+      <th>Caller</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Zone</th>
+      <th>Service</th>
+      <th>Details</th>
+      <th>Total</th>
 
-<%= link "Edit", to: invoice_path(@conn, :edit, @invoice) %>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for job <- @jobs do %>
+    <tr>
+      <td><%= job.client.name %></td>
+      <td><%= job.date %></td>
+      <td><%= job.reference %></td>
+      <td><%= job.caller %></td>
+      <td><%= job.type %></td>
+      <td><%= job.description %></td>
+      <td><%= job.zone %></td>
+      <td><%= job.service %></td>
+      <td><%= job.details %></td>
+      <td><%= job.total %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: job_path(@conn, :show, job), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: job_path(@conn, :edit, job), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: job_path(@conn, :delete, job), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+
+<%= link "Edit", to: invoice_path(@conn, :edit, @invoice) %> &nbsp;
 <%= link "Back", to: invoice_path(@conn, :index) %>
