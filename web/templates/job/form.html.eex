@@ -62,7 +62,7 @@
 
   <div class="form-group">
     <%= label f, "", class: "control-label" %>
-    <%= number_input f, :total, step: "any", class: "form-control", placeholder: "Job Total" %>
+    <%= text_input f, :total,  class: "form-control", placeholder: "Job Total" %>
     <%= error_tag f, :total %>
   </div>
 
