@@ -55,23 +55,6 @@ defmodule Soroban.InvoiceController do
 
   end
 
-  def batch(conn, _params) do
-    render(conn, "batch.html")
-  end
-
-  def generate_all(conn, params) do
-    %{"invoice" => %{"date" => date, "end" => end_date, "start" => start_date, "number" => number}} =  params
-    clients = Repo.all from c in Client, select: c.id
-
-    # Create Invoices
-    for c <- clients, do: new_invoice(c, date, end_date, start_date, number)
-
-    # Generate Invoices
-    for c <- clients, do: generate(conn, %{"invoice_id" => c})
-
-    render(conn, "index.html")
-  end
-
   def new(conn, _params) do
     changeset = Invoice.changeset(%Invoice{})
     render(conn, "new.html", changeset: changeset)
@@ -120,7 +103,6 @@ defmodule Soroban.InvoiceController do
     itotal = for n <- invoices, do: Map.get(n, :total)
     ftotal = for n <- itotal, do: Map.get(n, :amount)
     total = Money.new(Enum.sum(ftotal))                  
-    #total = Money.new(1233)
 
     invoice_count = Enum.count(invoices)
     render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count, total: total)
