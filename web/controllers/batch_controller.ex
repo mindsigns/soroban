@@ -92,46 +92,6 @@ defmodule Soroban.BatchController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
-
-    query = (from j in Job,
-              where: j.date >= ^invoice.start,
-              where: j.date <= ^invoice.end,
-              where: j.client_id == ^invoice.client_id,
-              order_by: j.date,
-              select: j)
-
-    jobs = Repo.all(query) |> Repo.preload(:client)
-
-    jtotal = for n <- jobs, do: Map.get(n, :total)
-    ftotal = for n <- jtotal, do: Map.get(n, :amount)
-    total = Money.new(Enum.sum(ftotal))                  
-
-    job_count = Enum.count(jobs)
-
-    render(conn, "show.html", invoice: invoice, jobs: jobs)
-  end
-
-  def show_invoice(conn, %{"invoice_id" => id}) do
-
-    query = (from i in Invoice,
-              where: i.number == ^id)
-    invoices = Repo.all(query) |> Repo.preload(:client)
-
-    itotal = for n <- invoices, do: Map.get(n, :total)
-    ftotal = for n <- itotal, do: Map.get(n, :amount)
-    total = Money.new(Enum.sum(ftotal))                  
-
-    invoice_count = Enum.count(invoices)
-    render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count, total: total)
-  end
-
-  def edit(conn, %{"id" => id}) do
-    invoice = Repo.get!(Invoice, id)|> Repo.preload(:client)
-    changeset = Invoice.changeset(invoice)
-    render(conn, "edit.html", invoice: invoice, changeset: changeset)
-  end
 
   def update(conn, %{"id" => id, "invoice" => invoice_params}) do
     invoice = Repo.get!(Invoice, id)
