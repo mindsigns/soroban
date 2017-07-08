@@ -63,8 +63,6 @@ defmodule Soroban.BatchController do
 
     clients = Repo.all from c in Client, select: c.id
 
-    # Create Invoices
-    #for c <- clients, do: new_invoice(c, date, end_date, start_date, number)
     for c <- clients do
       case Enum.count(Repo.all from c in Soroban.Client, join: j in Soroban.Job, where: j.client_id == ^c) do
         0 ->  "No Jobs"
@@ -72,9 +70,6 @@ defmodule Soroban.BatchController do
               generate(conn, %{"invoice_id" => invoice_id})
       end
     end
-
-      ## Generate Invoices
-      #for c <- clients, do: generate(conn, %{"invoice_id" => c})
 
     render(conn, "batch.html")
   end
