@@ -1,5 +1,5 @@
 <h2>Listing invoices</h2>
-<%= link "Generate All Invoices", class: "btn btn-primary btn-md", to: invoice_path(@conn, :batch) %>
+<%= link "Generate All Invoices", class: "btn btn-primary btn-md", to: gravy_path(@conn, :batch) %>
 
 <table class="table">
   <thead>
@@ -20,6 +20,7 @@
 
       <td class="text-right">
         <%= link "Re-generate", to: invoice_invoice_path(@conn, :generate, invoice), class: "btn btn-primary btn-xs" %>
+        <%= link "Delete", to: gravy_path(@conn, :delete, invoice.number), class: "btn btn-warning btn-xs" %>
       </td>
     </tr>
 <% end %>
