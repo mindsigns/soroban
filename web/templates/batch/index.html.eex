@@ -20,7 +20,6 @@
 
       <td class="text-right">
         <%= link "Re-generate", to: invoice_invoice_path(@conn, :generate, invoice), class: "btn btn-primary btn-xs" %>
-        <%= link "Delete", to: batch_path(@conn, :delete, invoice.number), class: "btn btn-warning btn-xs" %>
       </td>
     </tr>
 <% end %>
