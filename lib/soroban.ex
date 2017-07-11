@@ -18,6 +18,7 @@ defmodule Soroban do
     run_migrations(repo)
     sup_ret
 
+    Slingbag.start_link
   end
 
   def create_db(repo) do
