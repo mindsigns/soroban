@@ -51,8 +51,24 @@ defmodule Soroban.BatchController do
     Soroban.Email.invoice_html_email("jon@deathray.tv", invoice, jobs, total, company)
       |> Soroban.Mailer.deliver_later
 
+      #task = Task.async(Soroban.Pdf, :invoice_html_pdf, [invoice, jobs, total, company])
+      #result = Task.await(task)
+      #html = Map.get(result, :html_body)
+      #pdftask = Task.async(Soroban.Pdf, :invoice_batch_zip, [html])
+      #Task.await(pdftask)
+    
+    html = Map.get(Soroban.Pdf.invoice_html_pdf(invoice, jobs, total, company), :html_body)
+    Soroban.Pdf.invoice_batch_zip(html, invoice.number, invoice.client.name)
+    #Soroban.Pdf.invoice_send_pdf(conn, html, invoice.client.name, invoice.number)
+
     render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total, job_count: job_count)
   end
+
+def send_zip(conn, _params) do
+  Soroban.Pdf.invoice_send_zip(conn, "Invoice-1717")
+  Slingbag.empty
+  render(conn, "batch.html")
+end
 
   def batch(conn, _params) do
     render(conn, "batch.html")
