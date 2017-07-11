@@ -2,6 +2,7 @@ mix deps.get
 
 if [ ! -d priv/static ]; then
     mkdir priv/static
+    mkdir priv/static/pdf
 else
     rm -rf priv/static/*
 fi
