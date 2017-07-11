@@ -48,8 +48,11 @@ defmodule Soroban.InvoiceController do
     changeset = Ecto.Changeset.change(invoice, %{total: total})
     Repo.update!(changeset)
 
-  Soroban.Email.invoice_html_email("jon@deathray.tv", invoice, jobs, total, company)
-    |> Soroban.Mailer.deliver_later
+    Soroban.Email.invoice_html_email("jon@deathray.tv", invoice, jobs, total, company)
+      |> Soroban.Mailer.deliver_later
+
+    html = Map.get(Soroban.Pdf.invoice_html_pdf(invoice, jobs, total, company), :html_body)
+    Soroban.Pdf.invoice_send_pdf(conn, html, invoice.client.name, invoice.number)
 
     render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total, job_count: job_count)
 
