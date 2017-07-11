@@ -38,5 +38,4 @@ config :money,
   default_currency: :USD
 
 config :pdf_generator,
-  wkhtml_path:    "/usr/bin/wkhtmltopdf",
-  shell_parpams: "--disable-external-links"
+  wkhtml_path:    "/usr/bin/wkhtmltopdf"
