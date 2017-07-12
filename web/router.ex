@@ -22,7 +22,8 @@ defmodule Soroban.Router do
     resources "/jobtypes", JobtypeController
     resources "/clients", ClientController
     resources "/invoices", InvoiceController do
-      get "/generate", InvoiceController, :generate
+      get "/generate_pdf", InvoiceController, :generate_pdf
+      get "/send_email", InvoiceController, :generate_email
       get "/show", InvoiceController, :show_invoice
     end
     get "/invoice/batch", BatchController, :batch
