@@ -5,8 +5,7 @@ defmodule Soroban.JobController do
   import Soroban.Authorize
   import Ecto.Query
 
-  alias Soroban.Job
-  alias Soroban.Client
+  alias Soroban.{Job, Client}
 
   plug :user_check
 
