@@ -61,7 +61,11 @@ defmodule Soroban.BatchController do
     Soroban.Pdf.invoice_batch_zip(html, invoice.number, invoice.client.name)
     #Soroban.Pdf.invoice_send_pdf(conn, html, invoice.client.name, invoice.number)
 
-    render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total, job_count: job_count)
+    #render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total, job_count: job_count)
+
+    conn
+    |> put_flash(:info, "Invoice generated successfully.")
+    |> redirect(to: invoice_path(conn, :index))
   end
 
 def send_zip(conn, _params) do
