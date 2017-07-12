@@ -46,8 +46,6 @@ defmodule Soroban.InvoiceController do
 
     html = Map.get(Soroban.Pdf.invoice_html_pdf(invoice, jobs, total, company), :html_body)
     Soroban.Pdf.invoice_send_pdf(conn, html, invoice.client.name, invoice.number)
-
-    render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total, job_count: job_count)
   end
 
   def generate_email(conn, %{"invoice_id" => id}) do
