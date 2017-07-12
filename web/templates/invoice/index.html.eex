@@ -26,4 +26,4 @@
   </tbody>
 </table>
 
-<%= link "New invoice", to: invoice_path(@conn, :new) %>
+<%= link "Create a single invoice", to: invoice_path(@conn, :new) %>
