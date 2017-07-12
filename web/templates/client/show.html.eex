@@ -24,5 +24,39 @@
 
 </ul>
 
+
 <%= link "Edit", to: client_path(@conn, :edit, @client) %>
+&nbsp;
 <%= link "Back", to: client_path(@conn, :index) %>
+
+
+<hr/>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Invoice Name</th>
+      <th>Invoice Date</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Total</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for invoice <- @client.invoices do %>
+    <tr>
+      <td><%= invoice.number %></td>
+      <td><%= invoice.date %></td>
+      <td><%= invoice.start %></td>
+      <td><%= invoice.end %></td>
+      <td><%= invoice.total %></td>
+
+      <td class="text-right">
+        <%= link "View", to: invoice_path(@conn, :show, invoice), class: "btn btn-success btn-xs" %>
+        <%= link "Edit", to: invoice_path(@conn, :edit, invoice), class: "btn btn-warning btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
