@@ -3,11 +3,7 @@ defmodule Soroban.BatchController do
 
   import Soroban.Authorize
 
-  alias Soroban.Invoice
-  alias Soroban.Job
-  alias Soroban.Client
-  alias Soroban.Setting
-
+  alias Soroban.{Invoice, Job, Client, Setting}
 
   plug :user_check 
 
