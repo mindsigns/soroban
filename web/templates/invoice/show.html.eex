@@ -1,5 +1,5 @@
 <div class="navbar ">
-<%= link "Generate", to: invoice_invoice_path(@conn, :generate_pdf, @invoice), class: "btn btn-primary"%>
+<%= link "Download PDF", to: invoice_invoice_path(@conn, :generate_pdf, @invoice), class: "btn btn-primary"%>
 &nbsp;
 <%= link "Email to Client", to: invoice_invoice_path(@conn, :generate_email, @invoice), class: "btn btn-primary"%>
 &nbsp;
