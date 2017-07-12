@@ -42,7 +42,7 @@ defmodule Soroban.ClientController do
   end
 
   def show(conn, %{"id" => id}) do
-    client = Repo.get!(Client, id)
+    client = Repo.get!(Client, id) |> Repo.preload(:invoices)
     render(conn, "show.html", client: client)
   end
 
