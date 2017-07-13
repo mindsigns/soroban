@@ -1,4 +1,3 @@
-<script>require('web/static/js/sort')()</script>
 <h2><%= @invoice_count %> invoices for <%= @invoice_id %></h2>
 <h2>Total for the billing period : <%= @total%></h2>
 
