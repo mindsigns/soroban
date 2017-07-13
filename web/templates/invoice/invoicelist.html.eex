@@ -1,5 +1,6 @@
+<script>require('web/static/js/sort')()</script>
 <h2><%= @invoice_count %> invoices for <%= @invoice_id %></h2>
-<h2>Total for all Invoices : <%= @total%></h2>
+<h2>Total for the billing period : <%= @total%></h2>
 
 <table class="table">
   <thead>
@@ -23,7 +24,7 @@
       <td><%= invoice.total %></td>
 
       <td class="text-right">
-        <%= link "Generate", to: invoice_invoice_path(@conn, :generate_pdf, invoice), class: "btn btn-primary btn-xs" %>
+        <%= link "PDF", to: invoice_invoice_path(@conn, :generate_pdf, invoice), class: "btn btn-primary btn-xs" %>
         <%= link "View", to: invoice_path(@conn, :show, invoice), class: "btn btn-success btn-xs" %>
         <%= link "Edit", to: invoice_path(@conn, :edit, invoice), class: "btn btn-warning btn-xs" %>
       </td>
