@@ -18,4 +18,9 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
+import { Sort } from "./sort"
+
+export const App = {
+  sortTable: Sort.makeSortable
+}
 // import socket from "./socket"

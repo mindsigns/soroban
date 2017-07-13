@@ -1,9 +1,9 @@
 <h2>Client List</h2>
 
-<table class="table">
+<table id="sortable" class="table">
   <thead>
     <tr>
-      <th><%= sort_link @conn, @rummage, [field: :name] %></th>
+      <th>Client</th>
       <th>Contact</th>
       <th>Address</th>
       <th>Email</th>
