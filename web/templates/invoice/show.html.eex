@@ -3,6 +3,8 @@
 &nbsp;
 <%= link "Email to Client", to: invoice_invoice_path(@conn, :generate_email, @invoice), class: "btn btn-primary"%>
 &nbsp;
+<%= link "Edit Invoice", to: invoice_path(@conn, :edit, @invoice), class: "btn btn-primary"%>
+&nbsp;
 <button type="button" class="btn btn-danger navbar-btn">Delete</button>
 </div>
 
