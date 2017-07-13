@@ -24,11 +24,10 @@ defmodule Soroban.Pdf do
   end
 
   def invoice_send_zip(conn, invoicenum) do
-    files = Slingbag.filenames
+    #files = Slingbag.filenames
     zipfilename = Enum.join([invoicenum, ".zip"])
     {:ok, filename} = :zip.create(zipfilename, Slingbag.filenames, [cwd: '/home/jon/src/Elixir/soroban/priv/static/pdf'])
     send_a_file(conn, filename, filename)
-    conn
   end
 
   #
@@ -51,7 +50,7 @@ defmodule Soroban.Pdf do
     conn
       |> put_resp_content_type("application/pdf")
       |> put_resp_header("content-disposition", "attachment; filename=#{savefile}")
-      |> send_file(200, filename)
+      |> send_resp(200, filename)
       |> clean_up(filename)
   end
 
