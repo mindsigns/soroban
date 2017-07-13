@@ -1,7 +1,6 @@
 defmodule Soroban.Client do
   use Soroban.Web, :model
   import Ecto.Query
-  use Rummage.Ecto
 
   schema "clients" do
     field :name, :string
