@@ -22,30 +22,13 @@ defmodule Soroban.InvoiceController do
   end
 
   def generate_pdf(conn, %{"invoice_id" => id}) do
-    invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
 
-    company = Repo.one(from s in Setting, limit: 1)
-
-    query = (from j in Job,
-              where: j.date >= ^invoice.start,
-              where: j.date <= ^invoice.end,
-              where: j.client_id == ^invoice.client_id,
-              order_by: j.date,
-              select: j)
-
-    jobs = Repo.all(query) |> Repo.preload(:client)
-
-    jtotal = for n <- jobs, do: Map.get(n, :total)
-    ftotal = for n <- jtotal, do: Map.get(n, :amount)
-    total = Money.new(Enum.sum(ftotal))                  
-
-    job_count = Enum.count(jobs)
-
-    changeset = Ecto.Changeset.change(invoice, %{total: total})
-    Repo.update!(changeset)
+    {invoice, jobs, total, company} = InvoiceUtils.generate(id)
 
     html = Map.get(Soroban.Pdf.invoice_html_pdf(invoice, jobs, total, company), :html_body)
     Soroban.Pdf.invoice_send_pdf(conn, html, invoice.client.name, invoice.number)
+    #render(conn, "show.html", invoice: invoice, jobs: jobs)
+    #render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total, job_count: job_count)
   end
 
   def generate_email(conn, %{"invoice_id" => id}) do
