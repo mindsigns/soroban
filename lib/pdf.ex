@@ -6,12 +6,14 @@ defmodule Soroban.Pdf do
   use Bamboo.Phoenix, view: Soroban.EmailView
   import Plug.Conn
 
+  # Generate HTML from the Email HTML template
   def to_html(invoice, jobs, total, company) do
     new_email()
     |> put_html_layout({Soroban.LayoutView, "email.html"})
     |> render("invoice.html", invoice: invoice, jobs: jobs, total: total, company: company)
   end
 
+  # Generate PDF from HTML and send the PDF to browser
   def send_pdf(conn, html, client, invoicenum) do
     {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
 
@@ -22,6 +24,7 @@ defmodule Soroban.Pdf do
     send_a_file(conn, newfile, savefile)
   end
 
+  # Generate and zip PDF files
   def batch_zip(html, invoicenum, client) do
     {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
     savefile = create_file_name(client, invoicenum)   
@@ -29,6 +32,7 @@ defmodule Soroban.Pdf do
     Slingbag.add_filename(String.to_char_list(savefile))
   end
 
+  # Sends the zipped PDFs to browser
   def send_zip(conn, invoicenum) do
     zipfilename = Enum.join([invoicenum, ".zip"])
     pdf_path = String.to_char_list(pdf_path())
@@ -36,14 +40,18 @@ defmodule Soroban.Pdf do
     send_a_file(conn, filename, filename)
   end
 
-  #
-  # Private functions
-  #
+#
+# Private functions
+#
+
+  # Creates a filename from Invoice ID and Client name
   defp create_file_name(client, invoicenum) do
     clientname = String.replace(client, ~r/[," "&']/, "")
     Enum.join([invoicenum, "_", clientname, ".pdf"])
   end
 
+  # Cleans up after sending a file.  Need to work on this more, we want to cache 
+  # large files instead of regenerating them 
   defp clean_up(_conn, filename) do
     case File.exists?(filename) do
       true -> File.rm(filename)
@@ -51,6 +59,7 @@ defmodule Soroban.Pdf do
     end
   end
 
+  # Sends a file to the browser
   defp send_a_file(conn, filename, savefile) do
     conn
       |> put_resp_content_type("application/pdf")
@@ -59,7 +68,7 @@ defmodule Soroban.Pdf do
       |> clean_up(filename)
   end
 
-  # Return PDF path from config/config.exs
+  # Returns PDF path from config/config.exs
   defp pdf_path do
     Application.get_env(:soroban, :pdf_dir)
   end
