@@ -3,7 +3,7 @@ defmodule Soroban.InvoiceController do
 
   import Soroban.Authorize
 
-  alias Soroban.{Invoice, Job, Client, Ecto, Email, Mailer, }
+  alias Soroban.{Invoice, Job, Client, Ecto, Email, Mailer, Pdf}
 
   plug :user_check 
 
@@ -25,8 +25,8 @@ defmodule Soroban.InvoiceController do
 
     {invoice, jobs, total, company} = InvoiceUtils.generate(id)
 
-    html = Map.get(Soroban.Pdf.to_html(invoice, jobs, total, company), :html_body)
-    Soroban.Pdf.invoice_send_pdf(conn, html, invoice.client.name, invoice.number)
+    html = Map.get(Pdf.to_html(invoice, jobs, total, company), :html_body)
+    Pdf.send_pdf(conn, html, invoice.client.name, invoice.number)
     render(conn, "show.html", invoice: invoice, jobs: jobs)
   end
 

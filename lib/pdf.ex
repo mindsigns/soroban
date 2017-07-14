@@ -12,7 +12,7 @@ defmodule Soroban.Pdf do
     |> render("invoice.html", invoice: invoice, jobs: jobs, total: total, company: company)
   end
 
-  def invoice_send_pdf(conn, html, client, invoicenum) do
+  def send_pdf(conn, html, client, invoicenum) do
     {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
 
     savefile = create_file_name(client, invoicenum)   
