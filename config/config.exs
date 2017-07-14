@@ -7,7 +7,8 @@ use Mix.Config
 
 # General application configuration
 config :soroban,
-  ecto_repos: [Soroban.Repo]
+  ecto_repos: [Soroban.Repo],
+  pdf_dir: "/home/jon/src/Elixir/soroban/priv/static/pdf/"
 
 # Configures the endpoint
 config :soroban, Soroban.Endpoint,
@@ -17,6 +18,7 @@ config :soroban, Soroban.Endpoint,
   render_errors: [view: Soroban.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Soroban.PubSub,
   adapter: Phoenix.PubSub.PG2]
+
 
 # Configures Elixir's Logger
 config :logger, :console,
