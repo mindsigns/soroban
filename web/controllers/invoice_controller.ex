@@ -3,7 +3,7 @@ defmodule Soroban.InvoiceController do
 
   import Soroban.Authorize
 
-  alias Soroban.{Invoice, Job, Client, Setting}
+  alias Soroban.{Invoice, Job, Client}
 
   plug :user_check 
 
@@ -78,8 +78,6 @@ defmodule Soroban.InvoiceController do
     ftotal = for n <- jtotal, do: Map.get(n, :amount)
     total = Money.new(Enum.sum(ftotal))                  
 
-    job_count = Enum.count(jobs)
-
     render(conn, "show.html", invoice: invoice, jobs: jobs)
   end
 
@@ -150,15 +148,6 @@ end
   defp load_clients(conn, _) do
     clients = Repo.all from c in Client, select: {c.name, c.id}
     assign(conn, :clients, clients)
-  end
-
-  defp new_invoice(id, date, end_date, start_date, number) do
-    changeset = Invoice.changeset(%Invoice{}, %{"client_id" => id,
-                                                "number" => number,
-                                                "date" => date,
-                                                "end" => end_date,
-                                                "start" => start_date})
-    Repo.insert(changeset)
   end
 
 end
