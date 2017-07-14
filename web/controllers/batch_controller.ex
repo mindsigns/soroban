@@ -3,7 +3,7 @@ defmodule Soroban.BatchController do
 
   import Soroban.Authorize
 
-  alias Soroban.{Invoice, Job, Client, Setting}
+  alias Soroban.{Invoice, Job, Client}
 
   plug :user_check 
 
@@ -22,72 +22,27 @@ defmodule Soroban.BatchController do
   end
 
   def generate(conn, %{"invoice_id" => id}) do
-    invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
 
-    company = Repo.one(from s in Setting, limit: 1)
-
-    query = (from j in Job,
-              where: j.date >= ^invoice.start,
-              where: j.date <= ^invoice.end,
-              where: j.client_id == ^invoice.client_id,
-              order_by: j.date,
-              select: j)
-
-    jobs = Repo.all(query) |> Repo.preload(:client)
-
-    jtotal = for n <- jobs, do: Map.get(n, :total)
-    ftotal = for n <- jtotal, do: Map.get(n, :amount)
-    total = Money.new(Enum.sum(ftotal))                  
-
-    job_count = Enum.count(jobs)
-
-    changeset = Ecto.Changeset.change(invoice, %{total: total})
-    Repo.update!(changeset)
-
-    Soroban.Email.invoice_html_email("jon@deathray.tv", invoice, jobs, total, company)
-      |> Soroban.Mailer.deliver_later
-
-      #task = Task.async(Soroban.Pdf, :invoice_html_pdf, [invoice, jobs, total, company])
-      #result = Task.await(task)
-      #html = Map.get(result, :html_body)
-      #pdftask = Task.async(Soroban.Pdf, :invoice_batch_zip, [html])
-      #Task.await(pdftask)
-    
-    html = Map.get(Soroban.Pdf.invoice_html_pdf(invoice, jobs, total, company), :html_body)
-    Soroban.Pdf.invoice_batch_zip(html, invoice.number, invoice.client.name)
-    #Soroban.Pdf.invoice_send_pdf(conn, html, invoice.client.name, invoice.number)
-
-    #render(conn, "generate.html", invoice: invoice, jobs: jobs, total: total, job_count: job_count)
+    #{invoice, jobs, total, company} = InvoiceUtils.generate(id)
+    InvoiceUtils.generate(id)
 
     conn
     |> put_flash(:info, "Invoice generated successfully.")
     |> redirect(to: invoice_path(conn, :index))
   end
 
-def send_zip(conn, _params) do
-  Soroban.Pdf.invoice_send_zip(conn, "Invoice-1717")
-  Slingbag.empty
-  render(conn, "batch.html")
-end
-
   def batch(conn, _params) do
     render(conn, "batch.html")
   end
 
   def generate_all(conn, params) do
-    %{"invoice" => %{"date" => date, "end" => end_date, "start" => start_date, "number" => number}} =  params
-
     clients = Repo.all from c in Client, select: c.id
 
-    for c <- clients do
-      case Enum.count(Repo.all from c in Soroban.Client, join: j in Soroban.Job, where: j.client_id == ^c) do
-        0 ->  "No Jobs"
-        _ ->  invoice_id = new_invoice(c, date, end_date, start_date, number)
-              generate(conn, %{"invoice_id" => invoice_id})
-      end
-    end
+    Task.async(InvoiceUtils, :batch_job, [conn, clients, params])
 
-    render(conn, "batch.html")
+    conn
+      |> put_flash(:info, "Generating all invoices, this will take a bit.")
+      |> redirect(to: invoice_path(conn, :index))
   end
 
   def new(conn, _params) do
@@ -162,7 +117,7 @@ end
     assign(conn, :clients, clients)
   end
 
-  defp new_invoice(id, date, end_date, start_date, number ) do
+  defp new_invoice(id, date, end_date, start_date, number) do
     changeset = Invoice.changeset(%Invoice{}, %{"client_id" => id,
                                                 "number" => number,
                                                 "date" => date,
