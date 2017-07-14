@@ -38,4 +38,5 @@ config :money,
   default_currency: :USD
 
 config :pdf_generator,
-  wkhtml_path:    "/usr/bin/wkhtmltopdf"
+  wkhtml_path:    "/usr/bin/wkhtmltopdf",
+  command_prefix: "/usr/bin/xvfb-run"
