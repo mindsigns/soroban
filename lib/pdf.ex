@@ -1,4 +1,8 @@
 defmodule Soroban.Pdf do
+  @moduledoc """
+  PDF helper functions
+  """
+
   use Bamboo.Phoenix, view: Soroban.EmailView
   import Plug.Conn
 
@@ -12,22 +16,23 @@ defmodule Soroban.Pdf do
     {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
 
     savefile = create_file_name(client, invoicenum)   
-    File.rename(filename, Enum.join(["/home/jon/src/Elixir/soroban/priv/static/pdf/", savefile]))
-    Slingbag.add_filename(String.to_char_list(savefile))
+    newfile = Enum.join([pdf_path(), savefile])
+    File.rename(filename, newfile)
   
-    send_a_file(conn, filename, savefile)
+    send_a_file(conn, newfile, savefile)
   end
 
   def invoice_batch_zip(html, invoicenum, client) do
     {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
     savefile = create_file_name(client, invoicenum)   
-    File.rename(filename, Enum.join(["/home/jon/src/Elixir/soroban/priv/static/pdf/", savefile]))
+    File.rename(filename, Enum.join([pdf_path(), savefile]))
     Slingbag.add_filename(String.to_char_list(savefile))
   end
 
   def invoice_send_zip(conn, invoicenum) do
     zipfilename = Enum.join([invoicenum, ".zip"])
-    {:ok, filename} = :zip.create(zipfilename, Slingbag.filenames, [cwd: '/home/jon/src/Elixir/soroban/priv/static/pdf'])
+    pdf_path = String.to_char_list(pdf_path())
+    {:ok, filename} = :zip.create(zipfilename, Slingbag.filenames, [cwd: pdf_path])
     send_a_file(conn, filename, filename)
   end
 
@@ -40,9 +45,8 @@ defmodule Soroban.Pdf do
   end
 
   defp clean_up(_conn, filename) do
-    file_to_del = Enum.join(["/home/jon/src/Elixir/soroban/priv/static/pdf/", filename])
-    case File.exists?(file_to_del) do
-      true -> File.rm(file_to_del)
+    case File.exists?(filename) do
+      true -> File.rm(filename)
       _ -> "no file to remove"
     end
   end
@@ -51,8 +55,13 @@ defmodule Soroban.Pdf do
     conn
       |> put_resp_content_type("application/pdf")
       |> put_resp_header("content-disposition", "attachment; filename=#{savefile}")
-      |> send_resp(200, filename)
+      |> send_file(200, filename)
       |> clean_up(filename)
+  end
+
+  # Return PDF path from config/config.exs
+  defp pdf_path do
+    Application.get_env(:soroban, :pdf_dir)
   end
 
 end
