@@ -22,14 +22,14 @@ defmodule Soroban.Pdf do
     send_a_file(conn, newfile, savefile)
   end
 
-  def invoice_batch_zip(html, invoicenum, client) do
+  def batch_zip(html, invoicenum, client) do
     {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
     savefile = create_file_name(client, invoicenum)   
     File.rename(filename, Enum.join([pdf_path(), savefile]))
     Slingbag.add_filename(String.to_char_list(savefile))
   end
 
-  def invoice_send_zip(conn, invoicenum) do
+  def send_zip(conn, invoicenum) do
     zipfilename = Enum.join([invoicenum, ".zip"])
     pdf_path = String.to_char_list(pdf_path())
     {:ok, filename} = :zip.create(zipfilename, Slingbag.filenames, [cwd: pdf_path])
