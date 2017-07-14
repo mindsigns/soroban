@@ -3,7 +3,7 @@ defmodule Soroban.InvoiceController do
 
   import Soroban.Authorize
 
-  alias Soroban.{Invoice, Job, Client, Ecto, Email, Mailer, Pdf}
+  alias Soroban.{Invoice, Job, Client, Email, Mailer, Pdf}
 
   plug :user_check 
 
@@ -52,12 +52,19 @@ defmodule Soroban.InvoiceController do
   def create(conn, %{"invoice" => invoice_params}) do
     changeset = Invoice.changeset(%Invoice{}, invoice_params)
 
-    case Repo.insert(changeset) do
+    invtotal = total(Ecto.Changeset.get_field(changeset, :client_id),
+                     Ecto.Changeset.get_field(changeset, :start),
+                     Ecto.Changeset.get_field(changeset, :end))
+
+    newchangeset = Ecto.Changeset.put_change(changeset, :total, invtotal)
+
+    IO.inspect newchangeset
+    case Repo.insert(newchangeset) do
       {:ok, _invoice} ->
         conn
         |> put_flash(:info, "Invoice created successfully.")
         |> redirect(to: invoice_path(conn, :index))
-      {:error, changeset} ->
+      {:error, newchangeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
@@ -74,9 +81,10 @@ defmodule Soroban.InvoiceController do
 
     jobs = Repo.all(query) |> Repo.preload(:client)
 
-    jtotal = for n <- jobs, do: Map.get(n, :total)
-    ftotal = for n <- jtotal, do: Map.get(n, :amount)
-    total = Money.new(Enum.sum(ftotal))                  
+    #jtotal = for n <- jobs, do: Map.get(n, :total)
+    #ftotal = for n <- jtotal, do: Map.get(n, :amount)
+    #total = Money.new(Enum.sum(ftotal))                  
+    #total = Money.new(12333)                  
 
     render(conn, "show.html", invoice: invoice, jobs: jobs)
   end
@@ -90,6 +98,7 @@ defmodule Soroban.InvoiceController do
     itotal = for n <- invoices, do: Map.get(n, :total)
     ftotal = for n <- itotal, do: Map.get(n, :amount)
     total = Money.new(Enum.sum(ftotal))                  
+    #total = Money.new(12333)                  
 
     invoice_count = Enum.count(invoices)
     render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count, total: total)
@@ -127,12 +136,11 @@ defmodule Soroban.InvoiceController do
     |> redirect(to: invoice_path(conn, :index))
   end
 
-  def total(id) do
-    invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
+  defp total(client, startdate, enddate) do
     query = (from j in Job,
-              where: j.date >= ^invoice.start,
-              where: j.date <= ^invoice.end,
-              where: j.client_id == ^invoice.client_id,
+              where: j.date >= ^startdate,
+              where: j.date <= ^enddate,
+              where: j.client_id == ^client,
               order_by: j.date,
               select: j)
 
@@ -141,8 +149,9 @@ defmodule Soroban.InvoiceController do
     jtotal = for n <- jobs, do: Map.get(n, :total)
     ftotal = for n <- jtotal, do: Map.get(n, :amount)
     total = Money.new(Enum.sum(ftotal))                  
-    changeset = Changeset.change(invoice, %{total: total})
-    Repo.update!(changeset)
+    #changeset = Changeset.change(invoice, %{total: total})
+    #Repo.update!(changeset)
+    total
 end
 
   defp load_clients(conn, _) do
