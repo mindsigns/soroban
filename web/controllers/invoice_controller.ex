@@ -34,7 +34,7 @@ defmodule Soroban.InvoiceController do
 
     {invoice, jobs, total, company} = InvoiceUtils.generate(id)
 
-    job_count = Enum.count(jobs)
+    #job_count = Enum.count(jobs)
 
     Soroban.Email.invoice_html_email("jon@deathray.tv", invoice, jobs, total, company)
       |> Soroban.Mailer.deliver_later
@@ -98,7 +98,7 @@ defmodule Soroban.InvoiceController do
   end
 
   def edit(conn, %{"id" => id}) do
-    invoice = Repo.get!(Invoice, id)|> Repo.preload(:client)
+    invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
     changeset = Invoice.changeset(invoice)
     render(conn, "edit.html", invoice: invoice, changeset: changeset)
   end
@@ -152,7 +152,7 @@ end
     assign(conn, :clients, clients)
   end
 
-  defp new_invoice(id, date, end_date, start_date, number ) do
+  defp new_invoice(id, date, end_date, start_date, number) do
     changeset = Invoice.changeset(%Invoice{}, %{"client_id" => id,
                                                 "number" => number,
                                                 "date" => date,
