@@ -1,4 +1,7 @@
 defmodule Soroban.Authorize do
+  @moduledoc """
+  Authorize module
+  """
 
   import Plug.Conn
   import Phoenix.Controller

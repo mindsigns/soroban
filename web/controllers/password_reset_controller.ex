@@ -3,6 +3,7 @@ defmodule Soroban.PasswordResetController do
 
   import Soroban.Authorize
   alias Soroban.{Mailer, User}
+  alias Openmaize
 
   plug Openmaize.ResetPassword,
     [mail_function: &Mailer.receipt_confirm/1] when action in [:update]
@@ -12,7 +13,7 @@ defmodule Soroban.PasswordResetController do
   end
 
   def create(conn, %{"password_reset" => %{"email" => email} = user_params}) do
-    {key, link} = Openmaize.ConfirmEmail.gen_token_link(email)
+    {key, link} = ConfirmEmail.gen_token_link(email)
     send_token(conn, Repo.get_by(User, email: email), user_params, {key, email, link})
   end
 

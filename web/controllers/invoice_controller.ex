@@ -3,7 +3,7 @@ defmodule Soroban.InvoiceController do
 
   import Soroban.Authorize
 
-  alias Soroban.{Invoice, Job, Client}
+  alias Soroban.{Invoice, Job, Client, Ecto, Email, Mailer, }
 
   plug :user_check 
 
@@ -36,8 +36,8 @@ defmodule Soroban.InvoiceController do
 
     #job_count = Enum.count(jobs)
 
-    Soroban.Email.invoice_html_email("jon@deathray.tv", invoice, jobs, total, company)
-      |> Soroban.Mailer.deliver_later
+    Email.invoice_html_email("jon@deathray.tv", invoice, jobs, total, company)
+      |> Mailer.deliver_later
   
     conn
       |> put_flash(:info, "Invoice emailed.")
@@ -141,7 +141,7 @@ defmodule Soroban.InvoiceController do
     jtotal = for n <- jobs, do: Map.get(n, :total)
     ftotal = for n <- jtotal, do: Map.get(n, :amount)
     total = Money.new(Enum.sum(ftotal))                  
-    changeset = Ecto.Changeset.change(invoice, %{total: total})
+    changeset = Changeset.change(invoice, %{total: total})
     Repo.update!(changeset)
 end
 
