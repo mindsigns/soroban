@@ -1,4 +1,8 @@
 defmodule InvoiceUtils do
+  @moduledoc """
+  Invoice helper functions
+  """
+
   import Ecto.Query
 
   alias Soroban.{Job, Invoice, Setting, Repo}
