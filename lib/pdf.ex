@@ -6,7 +6,7 @@ defmodule Soroban.Pdf do
   use Bamboo.Phoenix, view: Soroban.EmailView
   import Plug.Conn
 
-  def invoice_html_pdf(invoice, jobs, total, company) do
+  def to_html(invoice, jobs, total, company) do
     new_email()
     |> put_html_layout({Soroban.LayoutView, "email.html"})
     |> render("invoice.html", invoice: invoice, jobs: jobs, total: total, company: company)
