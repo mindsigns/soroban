@@ -12,6 +12,8 @@ defmodule Soroban.Pdf do
     {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
 
     savefile = create_file_name(client, invoicenum)   
+    File.rename(filename, Enum.join(["/home/jon/src/Elixir/soroban/priv/static/pdf/", savefile]))
+    Slingbag.add_filename(String.to_char_list(savefile))
   
     send_a_file(conn, filename, savefile)
   end
@@ -24,7 +26,6 @@ defmodule Soroban.Pdf do
   end
 
   def invoice_send_zip(conn, invoicenum) do
-    #files = Slingbag.filenames
     zipfilename = Enum.join([invoicenum, ".zip"])
     {:ok, filename} = :zip.create(zipfilename, Slingbag.filenames, [cwd: '/home/jon/src/Elixir/soroban/priv/static/pdf'])
     send_a_file(conn, filename, filename)
