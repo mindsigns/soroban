@@ -1,7 +1,6 @@
 defmodule Soroban.ClientController do
   use Soroban.Web, :controller
 
-  import Ecto.Query
   import Soroban.Authorize
 
   alias Soroban.Client
