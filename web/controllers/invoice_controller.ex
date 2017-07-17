@@ -4,6 +4,7 @@ defmodule Soroban.InvoiceController do
   import Soroban.Authorize
 
   alias Soroban.{Invoice, Job, Client, Email, Mailer, Pdf}
+  alias Soroban.InvoiceUtils
 
   plug :user_check 
 
