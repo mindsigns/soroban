@@ -1,4 +1,4 @@
-defmodule InvoiceUtils do
+defmodule Soroban.InvoiceUtils do
   @moduledoc """
   Invoice helper functions
   """
@@ -6,6 +6,7 @@ defmodule InvoiceUtils do
   import Ecto.Query
 
   alias Soroban.{Job, Invoice, Setting, Repo}
+  alias Soroban.Pdf
 
   def generate(invoice_id) do
     invoice = Repo.get!(Invoice, invoice_id) |> Repo.preload(:client)
@@ -26,6 +27,10 @@ defmodule InvoiceUtils do
     changeset = Ecto.Changeset.change(invoice, %{total: total})
     Repo.update!(changeset)
 
+    # make PDf
+    html = Map.get(Pdf.to_html(invoice, jobs, total, company), :html_body)
+    Pdf.to_pdf(html, invoice.client.name, invoice.number)
+    # end PDf
   {invoice, jobs, total, company}
   end
 
@@ -43,7 +48,6 @@ defmodule InvoiceUtils do
       case Enum.count(Repo.all from c in Soroban.Client, join: j in Soroban.Job, where: j.client_id == ^c) do
         0 ->  "No Jobs"
         _ ->  invoice_id = new_invoice(c, date, end_date, start_date, number)
-              #Soroban.BatchController.generate(conn, %{"invoice_id" => invoice_id})
               generate(invoice_id)
       end
     end
