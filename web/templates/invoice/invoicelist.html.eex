@@ -32,4 +32,6 @@
   </tbody>
 </table>
 
+<%= link "Back", to: invoice_path(@conn, :index) %>
+<br>
 <%= link "New invoice", to: invoice_path(@conn, :new) %>

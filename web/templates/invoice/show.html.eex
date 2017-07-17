@@ -76,4 +76,4 @@
 
 
 <%= link "Edit", to: invoice_path(@conn, :edit, @invoice) %> &nbsp;
-<%= link "Back", to: invoice_path(@conn, :index) %>
+<%= link "Back", to: invoice_invoice_path(@conn, :show_invoice, @invoice.number) %>
