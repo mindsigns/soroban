@@ -6,14 +6,20 @@ defmodule Soroban.Pdf do
   use Bamboo.Phoenix, view: Soroban.EmailView
   import Plug.Conn
 
-  # Generate HTML from the Email HTML template
+  @doc """
+  Generates HTML from the Email HTML template
+
+  Returns 
+  """
   def to_html(invoice, jobs, total, company) do
     new_email()
     |> put_html_layout({Soroban.LayoutView, "email.html"})
     |> render("invoice.html", invoice: invoice, jobs: jobs, total: total, company: company)
   end
 
-  # Generate PDF from HTML and save to filesystem
+  @doc """
+  Generates PDF from HTML and saves to the filesystem
+  """
   def to_pdf(html, client, invoicenum) do
     {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
 
@@ -22,7 +28,9 @@ defmodule Soroban.Pdf do
     File.rename(filename, newfile)
   end
 
-  # Generate PDF from HTML and send the PDF to browser
+  @doc """
+  Generate PDF from HTML and send the PDF to browser
+  """
   def send_pdf(conn, html, client, invoicenum) do
     {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
 
@@ -33,7 +41,9 @@ defmodule Soroban.Pdf do
     send_a_file(conn, newfile, savefile)
   end
 
-  # Generate and zip PDF files
+  @doc """
+  Generate and zip PDF files
+  """
   def batch_zip(html, invoicenum, client) do
     {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
     savefile = create_file_name(client, invoicenum)   
@@ -41,7 +51,9 @@ defmodule Soroban.Pdf do
     Slingbag.add_filename(String.to_char_list(savefile))
   end
 
-  # Sends the zipped PDFs to browser
+  @doc """
+  Sends the zipped PDFs to browser
+  """
   def send_zip(conn, invoicenum) do
     zipfilename = Enum.join([invoicenum, ".zip"])
     pdf_path = String.to_char_list(pdf_path())
@@ -53,7 +65,7 @@ defmodule Soroban.Pdf do
 # Private functions
 #
 
-  # Creates a filename from Invoice ID and Client name
+#Creates a filename from Invoice ID and Client name
   defp create_file_name(client, invoicenum) do
     clientname = String.replace(client, ~r/[," "&']/, "")
     Enum.join([invoicenum, "_", clientname, ".pdf"])
