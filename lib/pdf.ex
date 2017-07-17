@@ -13,6 +13,15 @@ defmodule Soroban.Pdf do
     |> render("invoice.html", invoice: invoice, jobs: jobs, total: total, company: company)
   end
 
+  # Generate PDF from HTML and save to filesystem
+  def to_pdf(html, client, invoicenum) do
+    {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
+
+    savefile = create_file_name(client, invoicenum)   
+    newfile = Enum.join([pdf_path(), savefile])
+    File.rename(filename, newfile)
+  end
+
   # Generate PDF from HTML and send the PDF to browser
   def send_pdf(conn, html, client, invoicenum) do
     {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
