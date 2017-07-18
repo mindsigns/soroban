@@ -1,7 +1,7 @@
 defmodule Soroban.Setting do
-    @moduledoc """
-+   Soroban.Setting model
-+   """
+@moduledoc """
+Soroban.Setting model
+"""
 
   use Soroban.Web, :model
 

@@ -1,7 +1,7 @@
 defmodule Soroban.Service do
-    @moduledoc """
-+   Soroban.Service model
-+   """
+@moduledoc """
+Soroban.Service model
+"""
 
   use Soroban.Web, :model
 

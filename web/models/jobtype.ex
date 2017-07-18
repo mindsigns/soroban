@@ -1,7 +1,7 @@
 defmodule Soroban.Jobtype do
-    @moduledoc """
-+   Soroban.Jobtype model
-+   """
+@moduledoc """
+Soroban.Jobtype model
+"""
 
   use Soroban.Web, :model
 

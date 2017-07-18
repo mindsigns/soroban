@@ -1,7 +1,7 @@
 defmodule Soroban.Invoice do
-    @moduledoc """
-+   Soroban.Invoice model
-+   """
+@moduledoc """
+Soroban.Invoice model
+"""
 
   use Soroban.Web, :model
   use Rummage.Ecto
