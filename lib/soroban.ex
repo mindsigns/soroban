@@ -1,4 +1,8 @@
 defmodule Soroban do
+    @moduledoc """
++   Soroban module
++   """
+
   use Application
 
   def start(_type, _args) do
@@ -21,6 +25,9 @@ defmodule Soroban do
     Slingbag.start_link
   end
 
+  @doc """
+  Create the database if it does not already exist on start
+  """
   def create_db(repo) do
     case repo.__adapter__.storage_up(repo.config) do
       :ok ->
@@ -34,6 +41,9 @@ defmodule Soroban do
     end
   end
 
+  @doc """
+  Run migrations on start
+  """
   def run_migrations(repo) do
     migrations_path = repo.config()
                 |> Keyword.fetch!(:otp_app)
@@ -45,8 +55,10 @@ defmodule Soroban do
     Ecto.Migrator.run(repo, migrations_path, :up, [all: true])
   end
 
-  # Tell Phoenix to update the endpoint configuration
-  # whenever the application is updated.
+  @doc """
+  Tell Phoenix to update the endpoint configuration
+  whenever the application is updated.
+  """
   def config_change(changed, _new, removed) do
     Soroban.Endpoint.config_change(changed, removed)
     :ok
