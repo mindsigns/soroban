@@ -24,18 +24,14 @@ defmodule Soroban.InvoiceController do
 
   def generate_pdf(conn, %{"invoice_id" => id}) do
 
-    {invoice, jobs, total, company} = InvoiceUtils.generate(id)
+    {invoice, jobs, _, _} = InvoiceUtils.generate(id)
 
-    html = Map.get(Pdf.to_html(invoice, jobs, total, company), :html_body)
-    Pdf.send_pdf(conn, html, invoice.client.name, invoice.number)
     render(conn, "show.html", invoice: invoice, jobs: jobs)
   end
 
   def generate_email(conn, %{"invoice_id" => id}) do
 
     {invoice, jobs, total, company} = InvoiceUtils.generate(id)
-
-    #job_count = Enum.count(jobs)
 
     Email.invoice_html_email("jon@deathray.tv", invoice, jobs, total, company)
       |> Mailer.deliver_later
@@ -82,11 +78,6 @@ defmodule Soroban.InvoiceController do
 
     jobs = Repo.all(query) |> Repo.preload(:client)
 
-    #jtotal = for n <- jobs, do: Map.get(n, :total)
-    #ftotal = for n <- jtotal, do: Map.get(n, :amount)
-    #total = Money.new(Enum.sum(ftotal))                  
-    #total = Money.new(12333)                  
-
     render(conn, "show.html", invoice: invoice, jobs: jobs)
   end
 
@@ -99,7 +90,6 @@ defmodule Soroban.InvoiceController do
     itotal = for n <- invoices, do: Map.get(n, :total)
     ftotal = for n <- itotal, do: Map.get(n, :amount)
     total = Money.new(Enum.sum(ftotal))                  
-    #total = Money.new(12333)                  
 
     invoice_count = Enum.count(invoices)
     render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count, total: total)
@@ -150,8 +140,6 @@ defmodule Soroban.InvoiceController do
     jtotal = for n <- jobs, do: Map.get(n, :total)
     ftotal = for n <- jtotal, do: Map.get(n, :amount)
     total = Money.new(Enum.sum(ftotal))                  
-    #changeset = Changeset.change(invoice, %{total: total})
-    #Repo.update!(changeset)
     total
 end
 
