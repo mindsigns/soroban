@@ -13,6 +13,7 @@
   </div>
 
   <div class="form-group">
+    <a href="/clients/new" class="glyphicon glyphicon-plus-sign" alt="Add client"></a>
     <%= label f, "", class: "control-label" %>
     <%= select f, :client_id, @clients, class: "form-control", prompt: "Select a client" %>
     <%= error_tag f, :client_id %>
