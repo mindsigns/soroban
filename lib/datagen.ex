@@ -1,12 +1,7 @@
 defmodule Blacksmith.Config do
-
-  #  def save(model) do
-  #  Soroban.Repo |> Blacksmith.Config.save(model)
-  #end
-
-  #def save_all(list_of_models) do
-  #  Soroban.Repo |> Blacksmith.Config.save_all(list_of_models)
-  #end
+@moduledoc """
+Blacksmith and Forge Config used for dev/testing
+"""
 
   def save(map) do
     Soroban.Repo.insert(map)
@@ -29,7 +24,9 @@ defmodule Forge do
   @save_one_function &Blacksmith.Config.save/1
   @save_all_function &Blacksmith.Config.save_all/1
 
-  # Client Forge
+  @doc """
+  Client Forge
+  """
   register :client, %Client{
     name: Faker.Company.name,
     contact: Faker.Name.name,
@@ -37,7 +34,9 @@ defmodule Forge do
     email: Sequence.next(:email, &"jh#{&1}@example.com")
   }
 
-  # Job Forge
+  @doc """
+  Job Forge
+  """
   register :job, %Job{
     date:  Ecto.Date.cast!(Faker.Date.between(~D[2017-05-01], ~D[2017-07-30])),
     reference: Faker.Lorem.word,
@@ -51,22 +50,28 @@ defmodule Forge do
     client_id: Enum.random(Soroban.Repo.all from c in Client, select: c.id)
   }
 
-  # Forge.gen_clients(num)
-  # Auto generate clients for testing
+  @doc """
+  Forge.gen_clients(num)
+  Auto generate clients for testing
+  """
   def gen_clients(num) do
     clients  = Forge.client_list num
     Blacksmith.Config.save_all(clients)
   end
 
-  # Forge.gen_jobs(num)
-  # Auto generate jobs for testing
+  @doc """
+  Forge.gen_jobs(num)
+  Auto generate jobs for testing
+  """
   def gen_jobs(num) do
     jobs = Forge.job_list num
     Blacksmith.Config.save_all(jobs)
   end
 
-  # Forge.gen_all(clients, jobs)
-  # Auto generate clients and jobs
+  @doc """
+  Forge.gen_all(clients, jobs)
+  Auto generate clients and jobs
+  """
   def gen_all(clients, jobs) do
     gen_clients(clients)
     gen_jobs(jobs)

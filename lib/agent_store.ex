@@ -1,4 +1,8 @@
 defmodule Slingbag do
+@moduledoc """
+Soroban.Slingbag module
+Global temporary value storage
+"""
 
   def start_link do
     Agent.start_link(fn -> [] end, name: __MODULE__)

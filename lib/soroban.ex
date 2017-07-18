@@ -1,7 +1,7 @@
 defmodule Soroban do
-    @moduledoc """
-+   Soroban module
-+   """
+@moduledoc """
+Soroban module
+"""
 
   use Application
 
