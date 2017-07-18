@@ -1,4 +1,7 @@
 defmodule Soroban.User do
+  @moduledoc """
+  Soroban.User model
+  """
   use Soroban.Web, :model
 
   alias Openmaize.Database, as: DB

@@ -1,4 +1,8 @@
 defmodule Soroban.Service do
+    @moduledoc """
++   Soroban.Service model
++   """
+
   use Soroban.Web, :model
 
   schema "services" do

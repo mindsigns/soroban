@@ -1,4 +1,8 @@
 defmodule Soroban.Client do
+  @moduledoc """
+  Soroban.Client model
+  """
+
   use Soroban.Web, :model
   import Ecto.Query
 

@@ -1,4 +1,8 @@
 defmodule Soroban.Job do
+    @moduledoc """
++   Soroban.Job model
++   """
+
   use Soroban.Web, :model
   use Rummage.Ecto
 

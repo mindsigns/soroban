@@ -1,4 +1,8 @@
 defmodule Soroban.Jobtype do
+    @moduledoc """
++   Soroban.Jobtype model
++   """
+
   use Soroban.Web, :model
 
   schema "jobtypes" do
