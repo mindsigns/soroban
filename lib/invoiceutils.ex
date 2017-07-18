@@ -27,10 +27,8 @@ defmodule Soroban.InvoiceUtils do
     changeset = Ecto.Changeset.change(invoice, %{total: total})
     Repo.update!(changeset)
 
-    # make PDf
-    html = Map.get(Pdf.to_html(invoice, jobs, total, company), :html_body)
-    Pdf.to_pdf(html, invoice.client.name, invoice.number)
-    # end PDf
+    Pdf.to_pdf(invoice, jobs, total, company)
+
   {invoice, jobs, total, company}
   end
 
