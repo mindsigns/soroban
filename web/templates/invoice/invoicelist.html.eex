@@ -23,7 +23,7 @@
       <td><%= invoice.total %></td>
 
       <td class="text-right">
-        <%= link "PDF", to: invoice_invoice_path(@conn, :generate_pdf, invoice), class: "btn btn-primary btn-xs" %>
+        <%= link "PDF", to: invoice_path(@conn, :send_pdf, invoice), class: "btn btn-primary btn-xs" %>
         <%= link "View", to: invoice_path(@conn, :show, invoice), class: "btn btn-success btn-xs" %>
       </td>
     </tr>
