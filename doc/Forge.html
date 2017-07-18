@@ -1,0 +1,546 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.16.2">
+    <title>Forge – soroban v0.0.1</title>
+    <link rel="stylesheet" href="dist/app-268c9dc719.css" />
+    
+    <script src="dist/sidebar_items-ac014ed843.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        soroban
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.0.1
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <span class="icon-search" aria-hidden="true"></span>
+    <input type="text" class="sidebar-searchInput" placeholder="search" aria-label="Search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+
+    
+      <li><a id="tasks-list" href="#full-list">Mix Tasks</a></li>
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">soroban v0.0.1</small>
+        Forge
+        
+      </h1>
+
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#client/2">client(overrides \\ %{}, havings \\ %{})</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#client_attributes/0">client_attributes()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Client Forge</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#client_list/3">client_list(number_of_records, overrides \\ %{}, havings \\ %{})</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#client_opts/0">client_opts()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#gen_all/2">gen_all(clients, jobs)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Forge.gen_all(clients, jobs)
+Auto generate clients and jobs</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#gen_clients/1">gen_clients(num)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Forge.gen_clients(num)
+Auto generate clients for testing</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#gen_jobs/1">gen_jobs(num)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Forge.gen_jobs(num)
+Auto generate jobs for testing</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#having/2">having(opts, block)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#job/2">job(overrides \\ %{}, havings \\ %{})</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#job_attributes/0">job_attributes()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Job Forge</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#job_list/3">job_list(number_of_records, overrides \\ %{}, havings \\ %{})</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#job_opts/0">job_opts()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#saved_client/2">saved_client(overrides \\ %{}, havings \\ %{})</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#saved_client_list/3">saved_client_list(number_of_records, overrides \\ %{}, havings \\ %{})</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#saved_job/2">saved_job(overrides \\ %{}, havings \\ %{})</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#saved_job_list/3">saved_job_list(number_of_records, overrides \\ %{}, havings \\ %{})</a>
+  </div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="client/2">
+  
+    <span id="client/0"></span>
+  
+    <span id="client/1"></span>
+  
+  <div class="detail-header">
+    <a href="#client/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">client(overrides \\ %{}, havings \\ %{})</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="client_attributes/0">
+  
+  <div class="detail-header">
+    <a href="#client_attributes/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">client_attributes()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Client Forge</p>
+
+  </section>
+</div>
+<div class="detail" id="client_list/3">
+  
+    <span id="client_list/1"></span>
+  
+    <span id="client_list/2"></span>
+  
+  <div class="detail-header">
+    <a href="#client_list/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">client_list(number_of_records, overrides \\ %{}, havings \\ %{})</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="client_opts/0">
+  
+  <div class="detail-header">
+    <a href="#client_opts/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">client_opts()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="gen_all/2">
+  
+  <div class="detail-header">
+    <a href="#gen_all/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">gen_all(clients, jobs)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Forge.gen_all(clients, jobs)
+Auto generate clients and jobs</p>
+
+  </section>
+</div>
+<div class="detail" id="gen_clients/1">
+  
+  <div class="detail-header">
+    <a href="#gen_clients/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">gen_clients(num)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Forge.gen_clients(num)
+Auto generate clients for testing</p>
+
+  </section>
+</div>
+<div class="detail" id="gen_jobs/1">
+  
+  <div class="detail-header">
+    <a href="#gen_jobs/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">gen_jobs(num)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Forge.gen_jobs(num)
+Auto generate jobs for testing</p>
+
+  </section>
+</div>
+<div class="detail" id="having/2">
+  
+  <div class="detail-header">
+    <a href="#having/2" class="detail-link" title="Link to this macro">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <span class="signature">having(opts, block)</span>
+    
+    
+      <span class="note">(macro)</span>
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="job/2">
+  
+    <span id="job/0"></span>
+  
+    <span id="job/1"></span>
+  
+  <div class="detail-header">
+    <a href="#job/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">job(overrides \\ %{}, havings \\ %{})</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="job_attributes/0">
+  
+  <div class="detail-header">
+    <a href="#job_attributes/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">job_attributes()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Job Forge</p>
+
+  </section>
+</div>
+<div class="detail" id="job_list/3">
+  
+    <span id="job_list/1"></span>
+  
+    <span id="job_list/2"></span>
+  
+  <div class="detail-header">
+    <a href="#job_list/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">job_list(number_of_records, overrides \\ %{}, havings \\ %{})</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="job_opts/0">
+  
+  <div class="detail-header">
+    <a href="#job_opts/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">job_opts()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="saved_client/2">
+  
+    <span id="saved_client/0"></span>
+  
+    <span id="saved_client/1"></span>
+  
+  <div class="detail-header">
+    <a href="#saved_client/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">saved_client(overrides \\ %{}, havings \\ %{})</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="saved_client_list/3">
+  
+    <span id="saved_client_list/1"></span>
+  
+    <span id="saved_client_list/2"></span>
+  
+  <div class="detail-header">
+    <a href="#saved_client_list/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">saved_client_list(number_of_records, overrides \\ %{}, havings \\ %{})</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="saved_job/2">
+  
+    <span id="saved_job/0"></span>
+  
+    <span id="saved_job/1"></span>
+  
+  <div class="detail-header">
+    <a href="#saved_job/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">saved_job(overrides \\ %{}, havings \\ %{})</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="saved_job_list/3">
+  
+    <span id="saved_job_list/1"></span>
+  
+    <span id="saved_job_list/2"></span>
+  
+  <div class="detail-header">
+    <a href="#saved_job_list/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">saved_job_list(number_of_records, overrides \\ %{}, havings \\ %{})</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.16.2),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4988ddd06b.js"></script>
+  </body>
+</html>
+

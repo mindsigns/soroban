@@ -1,0 +1,303 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.16.2">
+    <title>Soroban.Pdf – soroban v0.0.1</title>
+    <link rel="stylesheet" href="dist/app-268c9dc719.css" />
+    
+    <script src="dist/sidebar_items-ac014ed843.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        soroban
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.0.1
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <span class="icon-search" aria-hidden="true"></span>
+    <input type="text" class="sidebar-searchInput" placeholder="search" aria-label="Search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+
+    
+      <li><a id="tasks-list" href="#full-list">Mix Tasks</a></li>
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">soroban v0.0.1</small>
+        Soroban.Pdf
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>PDF helper functions</p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#batch_zip/3">batch_zip(html, invoicenum, client)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Generate and zip PDF files</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#render/3">render(email, template, assigns \\ [])</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Render an Phoenix template and set the body on the email</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#send_pdf/2">send_pdf(conn, id)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Build the filename from Invoice info and send the PDF to the client</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#send_zip/2">send_zip(conn, invoicenum)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Sends the zipped PDFs to browser</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#to_html/4">to_html(invoice, jobs, total, company)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Generates HTML from the Email HTML template</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#to_pdf/4">to_pdf(invoice, jobs, total, company)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Generates PDF from HTML and saves to the filesystem if PDF file does not
+already exist in cache</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="batch_zip/3">
+  
+  <div class="detail-header">
+    <a href="#batch_zip/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">batch_zip(html, invoicenum, client)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Generate and zip PDF files</p>
+
+  </section>
+</div>
+<div class="detail" id="render/3">
+  
+    <span id="render/2"></span>
+  
+  <div class="detail-header">
+    <a href="#render/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">render(email, template, assigns \\ [])</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Render an Phoenix template and set the body on the email</p>
+<p>Pass an atom as the template name (:welcome_email) to render HTML <em>and</em> plain
+text emails. Use a string if you only want to render one type, e.g.
+“welcome_email.text” or “welcome_email.html”. Scroll to the top for more examples.</p>
+
+  </section>
+</div>
+<div class="detail" id="send_pdf/2">
+  
+  <div class="detail-header">
+    <a href="#send_pdf/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">send_pdf(conn, id)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Build the filename from Invoice info and send the PDF to the client</p>
+
+  </section>
+</div>
+<div class="detail" id="send_zip/2">
+  
+  <div class="detail-header">
+    <a href="#send_zip/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">send_zip(conn, invoicenum)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Sends the zipped PDFs to browser</p>
+
+  </section>
+</div>
+<div class="detail" id="to_html/4">
+  
+  <div class="detail-header">
+    <a href="#to_html/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">to_html(invoice, jobs, total, company)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Generates HTML from the Email HTML template</p>
+<p>Returns </p>
+
+  </section>
+</div>
+<div class="detail" id="to_pdf/4">
+  
+  <div class="detail-header">
+    <a href="#to_pdf/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">to_pdf(invoice, jobs, total, company)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Generates PDF from HTML and saves to the filesystem if PDF file does not
+already exist in cache.</p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.16.2),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4988ddd06b.js"></script>
+  </body>
+</html>
+
