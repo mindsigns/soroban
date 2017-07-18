@@ -29,6 +29,10 @@ defmodule Soroban.InvoiceController do
     render(conn, "show.html", invoice: invoice, jobs: jobs)
   end
 
+  def send_pdf(conn, %{"id" => id}) do
+    Pdf.send_pdf(conn, id)
+  end
+
   def generate_email(conn, %{"invoice_id" => id}) do
 
     {invoice, jobs, total, company} = InvoiceUtils.generate(id)
