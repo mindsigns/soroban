@@ -18,14 +18,20 @@ defmodule Soroban.Pdf do
   end
 
   @doc """
-  Generates PDF from HTML and saves to the filesystem
+  Generates PDF from HTML and saves to the filesystem if PDF file does not
+  already exist in cache.
   """
-  def to_pdf(html, client, invoicenum) do
-    {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
+  def to_pdf(invoice, jobs, total, company) do
 
-    savefile = create_file_name(client, invoicenum)   
+    savefile = create_file_name(invoice.client.name, invoice.number)   
     newfile = Enum.join([pdf_path(), savefile])
-    File.rename(filename, newfile)
+
+    case File.exists?(newfile) do
+       true  -> IO.puts "File exists"
+       false -> html = Map.get(to_html(invoice, jobs, total, company), :html_body)
+                {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
+                File.rename(filename, newfile)
+    end
   end
 
   @doc """
