@@ -26,6 +26,8 @@ defmodule Soroban.Router do
       get "/send_email", InvoiceController, :generate_email
       get "/show", InvoiceController, :show_invoice
     end
+    get "/invoices/sendpdf/:id", InvoiceController, :send_pdf
+
     get "/invoice/batch", BatchController, :batch
     post "/invoice/generate_all", BatchController, :generate_all
     get "/invoice/delete/:id", BatchController, :delete
