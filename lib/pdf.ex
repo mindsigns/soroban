@@ -4,7 +4,11 @@ defmodule Soroban.Pdf do
   """
 
   use Bamboo.Phoenix, view: Soroban.EmailView
+
   import Plug.Conn
+
+  alias Soroban.{Repo, Invoice, InvoiceUtils}
+
 
   @doc """
   Generates HTML from the Email HTML template
@@ -35,16 +39,21 @@ defmodule Soroban.Pdf do
   end
 
   @doc """
-  Generate PDF from HTML and send the PDF to browser
+  Build the filename from Invoice info and send the PDF to the client
   """
-  def send_pdf(conn, html, client, invoicenum) do
-    {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
+  def send_pdf(conn, id) do
 
-    savefile = create_file_name(client, invoicenum)   
+    invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
+
+    savefile = create_file_name(invoice.client.name, invoice.number)   
     newfile = Enum.join([pdf_path(), savefile])
-    File.rename(filename, newfile)
-  
-    send_a_file(conn, newfile, savefile)
+
+    case File.exists?(newfile) do
+       true  -> IO.puts "File exists"
+       false -> InvoiceUtils.generate(id)
+    end
+
+    send_a_file(conn, newfile, savefile) 
   end
 
   @doc """
@@ -92,7 +101,7 @@ defmodule Soroban.Pdf do
       |> put_resp_content_type("application/pdf")
       |> put_resp_header("content-disposition", "attachment; filename=#{savefile}")
       |> send_file(200, filename)
-      |> clean_up(filename)
+      #|> clean_up(filename)
   end
 
   # Returns PDF path from config/config.exs
