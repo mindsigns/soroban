@@ -19,7 +19,8 @@
       <td><%= invoice.end %></td>
 
       <td class="text-right">
-        <%= link "Delete", to: batch_path(@conn, :delete, invoice.number), class: "btn btn-warning btn-xs" %>
+        <%= link "Zip file", to: batch_path(@conn, :send_zip, invoice.number), class: "btn btn-success btn-xs" %>
+        <%= link "Delete", to: batch_path(@conn, :delete, invoice.number), class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
