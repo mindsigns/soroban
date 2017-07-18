@@ -26,7 +26,9 @@ defmodule Soroban.JobController do
 
   def new(conn, _params) do
     changeset = Job.changeset(%Job{})
-    render(conn, "new.html", changeset: changeset) 
+    today = Date.utc_today()
+
+    render(conn, "new.html", changeset: changeset, today: today) 
   end
 
   def create(conn, %{"job" => job_params}) do
@@ -49,7 +51,8 @@ defmodule Soroban.JobController do
   def edit(conn, %{"id" => id}) do
     job = Repo.get!(Job, id) |> Repo.preload(:client)
     changeset = Job.changeset(job)
-    render(conn, "edit.html", job: job, changeset: changeset)
+    today = Date.utc_today()
+    render(conn, "edit.html", job: job, changeset: changeset, today: today)
   end
 
   def update(conn, %{"id" => id, "job" => job_params}) do

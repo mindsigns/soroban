@@ -47,7 +47,9 @@ defmodule Soroban.InvoiceController do
 
   def new(conn, _params) do
     changeset = Invoice.changeset(%Invoice{})
-    render(conn, "new.html", changeset: changeset)
+    today = Date.utc_today()
+
+    render(conn, "new.html", changeset: changeset, today: today)
   end
 
   def create(conn, %{"invoice" => invoice_params}) do
@@ -101,7 +103,9 @@ defmodule Soroban.InvoiceController do
   def edit(conn, %{"id" => id}) do
     invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
     changeset = Invoice.changeset(invoice)
-    render(conn, "edit.html", invoice: invoice, changeset: changeset)
+    today = Date.utc_today()
+
+    render(conn, "edit.html", invoice: invoice, changeset: changeset, today: today)
   end
 
   def update(conn, %{"id" => id, "invoice" => invoice_params}) do

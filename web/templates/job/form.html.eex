@@ -8,7 +8,7 @@
 
   <div class="form-group">
     <%= label f, :date, class: "control-label" %>
-    <%= date_select f, :date, default: {today.year, today.month, today.day}, class: "form-control" %>
+    <%= date_select f, :date, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
     <%= error_tag f, :date %>
   </div>
 

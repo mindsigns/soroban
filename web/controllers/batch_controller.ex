@@ -24,7 +24,6 @@ defmodule Soroban.BatchController do
 
   def generate(conn, %{"invoice_id" => id}) do
 
-    #{invoice, jobs, total, company} = InvoiceUtils.generate(id)
     InvoiceUtils.generate(id)
 
     conn
@@ -33,7 +32,9 @@ defmodule Soroban.BatchController do
   end
 
   def batch(conn, _params) do
-    render(conn, "batch.html")
+    today = Date.utc_today()
+
+    render(conn, "batch.html", today: today)
   end
 
   def generate_all(conn, params) do

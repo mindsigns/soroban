@@ -4,6 +4,7 @@
                         services: @services,
                         jobtypes: @jobtypes,
                         clients: @clients,
+                        today: @today,
                         action: job_path(@conn, :update, @job) %>
 
 <%= link "Back", to: job_path(@conn, :index) %>

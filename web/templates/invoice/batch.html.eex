@@ -11,21 +11,21 @@
   <div class="form-group">
     <%= label f, :name, "Invoice Date", class: "control-label" %>
     </br>
-    <%= date_select f, :date, default: {today.year, today.month, today.day}, class: "form-control" %>
+    <%= date_select f, :date, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
     <%= error_tag f, :date %>
   </div>
 
   <div class="form-group">
     <%= label f, :name, "Invoice Start Date", class: "control-label" %>
     </br>
-    <%= date_select f, :start, default: {today.year, today.month, today.day}, class: "form-control" %>
+    <%= date_select f, :start, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
     <%= error_tag f, :start %>
   </div>
 
   <div class="form-group">
     <%= label f, :name, "Invoice End Date", class: "control-label" %>
     </br>
-    <%= date_select f, :end, default: {today.year, today.month, today.day}, class: "form-control" %>
+    <%= date_select f, :end, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
     <%= error_tag f, :end %>
   </div>
 
