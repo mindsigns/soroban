@@ -59,7 +59,6 @@ defmodule Soroban.InvoiceController do
 
     newchangeset = Ecto.Changeset.put_change(changeset, :total, invtotal)
 
-    IO.inspect newchangeset
     case Repo.insert(newchangeset) do
       {:ok, _invoice} ->
         conn
