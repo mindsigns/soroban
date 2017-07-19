@@ -77,18 +77,12 @@ defmodule Soroban.Pdf do
     pdfpath = String.to_char_list(pdf_path())
     zipfile = Enum.join([pdf_path(), invoicenum, ".zip"])
     savefile = Enum.join([invoicenum, ".zip"])
-    #{:ok, filename} = :zip.create(zipfile, filenames, [cwd: pdfpath])
     {:ok, {"mem", zipbin}} = :zip.create("mem", filenames, [:memory, cwd: pdfpath])
     File.write(zipfile, zipbin)
 
     IO.inspect {zipfile, pdfpath}
     
-    #send_a_file(conn, filename, filename, "zip")
-    conn
-      |> put_resp_content_type("application/zip")
-      |> put_resp_header("content-disposition", "attachment; filename=#{savefile}")
-      |> send_file(200, zipfile)
-
+    send_a_file(conn, zipfile, savefile, "zip")
   end
 
 #
