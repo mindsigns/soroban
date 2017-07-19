@@ -17,8 +17,8 @@ defmodule Soroban.Pdf do
   """
   def to_html(invoice, jobs, total, company) do
     new_email()
-    |> put_html_layout({Soroban.LayoutView, "email.html"})
-    |> render("invoice.html", invoice: invoice, jobs: jobs, total: total, company: company)
+      |> put_html_layout({Soroban.LayoutView, "email.html"})
+      |> render("invoice.html", invoice: invoice, jobs: jobs, total: total, company: company)
   end
 
   @doc """
@@ -59,11 +59,20 @@ defmodule Soroban.Pdf do
   @doc """
   Generate and zip PDF files
   """
-  def batch_zip(html, invoicenum, client) do
-    {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
-    savefile = create_file_name(client, invoicenum)   
-    File.rename(filename, Enum.join([pdf_path(), savefile]))
-    Slingbag.add_filename(String.to_char_list(savefile))
+  def batch_zip(_conn, invoicenum, clients) do
+
+    IO.inspect {invoicenum, clients}
+    # Loop over invoices
+    #savefile = create_file_name(invoice.client.name, invoicenum)   
+    #newfile = Enum.join([pdf_path(), savefile])
+
+    #case File.exists?(newfile) do
+    #   true  -> IO.puts "File exists"
+    #   false -> InvoiceUtils.generate(invoice)
+    #end
+    ## End loop
+    
+    ## Send zip file
   end
 
   @doc """

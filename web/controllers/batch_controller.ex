@@ -3,8 +3,10 @@ defmodule Soroban.BatchController do
 
   import Soroban.Authorize
 
-  alias Soroban.{Invoice, Job, Client}
-  alias Soroban.InvoiceUtils
+  import Ecto.Query
+
+  alias Soroban.{Repo, Invoice, Job, Client}
+  alias Soroban.{InvoiceUtils, Pdf}
 
   plug :user_check 
 
@@ -44,6 +46,25 @@ defmodule Soroban.BatchController do
 
     conn
       |> put_flash(:info, "Generating all invoices, this will take a bit.")
+      |> redirect(to: invoice_path(conn, :index))
+  end
+
+  @doc """
+  Builds and sends a zip file of all PDF invoices with the same Invoice ID
+  """
+  def send_zip(conn, %{"invoice" => invoice}) do
+
+  query = (from i in Invoice,
+            where: i.number == ^invoice,
+            join: p in assoc(i, :client),
+            select: p.name)
+
+  client_list = Repo.all(query)
+
+  Pdf.batch_zip(conn, invoice, client_list)
+
+    conn
+      |> put_flash(:info, "Sending invoices.")
       |> redirect(to: invoice_path(conn, :index))
   end
 
