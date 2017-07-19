@@ -33,8 +33,8 @@ defmodule Soroban.Pdf do
     case File.exists?(newfile) do
        true  -> IO.puts "File exists"
        false -> html = Map.get(to_html(invoice, jobs, total, company), :html_body)
-                {:ok, filename} = PdfGenerator.generate(html, delete_temporary: true)
-                File.rename(filename, newfile)
+                pdf_binary = PdfGenerator.generate_binary!(html, delete_temporary: true)
+                File.write(newfile, pdf_binary)
     end
   end
 
