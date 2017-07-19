@@ -53,36 +53,42 @@ defmodule Soroban.Pdf do
        false -> InvoiceUtils.generate(id)
     end
 
-    send_a_file(conn, newfile, savefile) 
+    send_a_file(conn, newfile, savefile, "pdf")
   end
 
   @doc """
   Generate and zip PDF files
   """
-  def batch_zip(_conn, invoicenum, clients) do
+  def batch_zip(conn, invoicenum, clients) do
 
     IO.inspect {invoicenum, clients}
-    # Loop over invoices
-    #savefile = create_file_name(invoice.client.name, invoicenum)   
-    #newfile = Enum.join([pdf_path(), savefile])
 
-    #case File.exists?(newfile) do
-    #   true  -> IO.puts "File exists"
-    #   false -> InvoiceUtils.generate(invoice)
-    #end
-    ## End loop
-    
-    ## Send zip file
+    # Create a list of file names
+    filenames = for c <- clients, do: String.to_char_list(create_file_name(c, invoicenum))
+
+    send_zip(conn, invoicenum, filenames)
   end
 
   @doc """
   Sends the zipped PDFs to browser
   """
-  def send_zip(conn, invoicenum) do
-    zipfilename = Enum.join([invoicenum, ".zip"])
-    pdf_path = String.to_char_list(pdf_path())
-    {:ok, filename} = :zip.create(zipfilename, Slingbag.filenames, [cwd: pdf_path])
-    send_a_file(conn, filename, filename)
+  def send_zip(conn, invoicenum, filenames) do
+    zipfile = String.to_char_list(Enum.join([invoicenum, ".zip"]))
+    pdfpath = String.to_char_list(pdf_path())
+    zipfile = Enum.join([pdf_path(), invoicenum, ".zip"])
+    savefile = Enum.join([invoicenum, ".zip"])
+    #{:ok, filename} = :zip.create(zipfile, filenames, [cwd: pdfpath])
+    {:ok, {"mem", zipbin}} = :zip.create("mem", filenames, [:memory, cwd: pdfpath])
+    File.write(zipfile, zipbin)
+
+    IO.inspect {zipfile, pdfpath}
+    
+    #send_a_file(conn, filename, filename, "zip")
+    conn
+      |> put_resp_content_type("application/zip")
+      |> put_resp_header("content-disposition", "attachment; filename=#{savefile}")
+      |> send_file(200, zipfile)
+
   end
 
 #
@@ -105,12 +111,11 @@ defmodule Soroban.Pdf do
   end
 
   # Sends a file to the browser
-  defp send_a_file(conn, filename, savefile) do
+  defp send_a_file(conn, filename, savefile, type) do
     conn
-      |> put_resp_content_type("application/pdf")
+      |> put_resp_content_type("application/#{type}")
       |> put_resp_header("content-disposition", "attachment; filename=#{savefile}")
       |> send_file(200, filename)
-      #|> clean_up(filename)
   end
 
   # Returns PDF path from config/config.exs
