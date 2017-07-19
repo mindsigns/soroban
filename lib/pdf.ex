@@ -61,8 +61,6 @@ defmodule Soroban.Pdf do
   """
   def batch_zip(conn, invoicenum, clients) do
 
-    IO.inspect {invoicenum, clients}
-
     # Create a list of file names
     filenames = for c <- clients, do: String.to_char_list(create_file_name(c, invoicenum))
 
@@ -80,8 +78,6 @@ defmodule Soroban.Pdf do
     {:ok, {"mem", zipbin}} = :zip.create("mem", filenames, [:memory, cwd: pdfpath])
     File.write(zipfile, zipbin)
 
-    IO.inspect {zipfile, pdfpath}
-    
     send_a_file(conn, zipfile, savefile, "zip")
   end
 
