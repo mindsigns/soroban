@@ -4,7 +4,6 @@ defmodule Soroban.Client do
   """
 
   use Soroban.Web, :model
-  import Ecto.Query
 
   schema "clients" do
     field :name, :string
