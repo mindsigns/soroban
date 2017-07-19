@@ -5,40 +5,51 @@ defmodule Soroban.BatchController do
 
   import Ecto.Query
 
-  alias Soroban.{Repo, Invoice, Job, Client}
+  alias Soroban.{Repo, Invoice, Client}
   alias Soroban.{InvoiceUtils, Pdf}
 
   plug :user_check 
 
-  plug :load_clients when action in [:index, :new, :create, :edit, :show, :update, :generate] 
+  plug :load_clients when action in [:index, :generate] 
 
-  def index(conn, params) do
+  @doc"""
+  Index function
+  """
+  def index(conn, _params) do
+    today = Date.utc_today()
 
-    {query, rummage} = Invoice
-      |> Invoice.rummage(params["rummage"])
-
-    invoices = query
-               |> distinct(:number)
-               |> Repo.all
-
-    render(conn, "index.html", invoices: invoices, rummage: rummage)
+    render(conn, "index.html", today: today)
   end
 
-  def generate(conn, %{"invoice_id" => id}) do
+  @doc"""
+  Deletes invoices by the Invoice Number
+  """
+  def delete(conn, %{"id" => id}) do
+    query = (from i in Invoice,
+      where: i.number == ^id)
 
-    InvoiceUtils.generate(id)
+    Repo.delete_all(query)
 
     conn
-    |> put_flash(:info, "Invoice generated successfully.")
+    |> put_flash(:info, "Invoice deleted successfully.")
     |> redirect(to: invoice_path(conn, :index))
   end
 
-  def batch(conn, _params) do
-    today = Date.utc_today()
+  @doc"""
+  Generate an invoice
+  """
+  #  def generate(conn, %{"invoice_id" => id}) do
+  #
+  #  InvoiceUtils.generate(id)
+  #
+  #  conn
+  #  |> put_flash(:info, "Invoice generated successfully.")
+  #  |> redirect(to: invoice_path(conn, :index))
+  #end
 
-    render(conn, "batch.html", today: today)
-  end
-
+  @doc"""
+  Generate a batch of invoices
+  """
   def generate_all(conn, params) do
     clients = Repo.all from c in Client, select: c.id
 
@@ -49,7 +60,7 @@ defmodule Soroban.BatchController do
       |> redirect(to: invoice_path(conn, :index))
   end
 
-  @doc """
+  @doc"""
   Builds and sends a zip file of all PDF invoices with the same Invoice ID
   """
   def send_zip(conn, %{"invoice" => invoice}) do
@@ -62,92 +73,15 @@ defmodule Soroban.BatchController do
   client_list = Repo.all(query)
 
   Pdf.batch_zip(conn, invoice, client_list)
-
-    conn
-      |> put_flash(:info, "Sending invoices.")
-      |> redirect(to: invoice_path(conn, :index))
   end
 
-  def new(conn, _params) do
-    changeset = Invoice.changeset(%Invoice{})
-    render(conn, "new.html", changeset: changeset)
-  end
-
-  def create(conn, %{"invoice" => invoice_params}) do
-    changeset = Invoice.changeset(%Invoice{}, invoice_params)
-
-    case Repo.insert(changeset) do
-      {:ok, _invoice} ->
-        conn
-        |> put_flash(:info, "Invoice created successfully.")
-        |> redirect(to: invoice_path(conn, :index))
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
-  end
-
-
-  def update(conn, %{"id" => id, "invoice" => invoice_params}) do
-    invoice = Repo.get!(Invoice, id)
-    changeset = Invoice.changeset(invoice, invoice_params)
-
-    case Repo.update(changeset) do
-      {:ok, invoice} ->
-        conn
-        |> put_flash(:info, "Invoice updated successfully.")
-        |> redirect(to: invoice_path(conn, :show, invoice))
-      {:error, changeset} ->
-        render(conn, "edit.html", invoice: invoice, changeset: changeset)
-    end
-  end
-
-  def delete(conn, %{"id" => id}) do
-    query = (from i in Invoice,
-              where: i.number == ^id)
-
-    Repo.delete_all(query)
-
-    conn
-    |> put_flash(:info, "Invoice deleted successfully.")
-    |> redirect(to: invoice_path(conn, :index))
-  end
-
-  def total_all() do
-    ids = Repo.all from i in Invoice, select: i.id
-    for n <- ids, do: total(n)
-  end
-
-  def total(id) do
-    invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
-    query = (from j in Job,
-              where: j.date >= ^invoice.start,
-              where: j.date <= ^invoice.end,
-              where: j.client_id == ^invoice.client_id,
-              order_by: j.date,
-              select: j)
-
-    jobs = Repo.all(query) |> Repo.preload(:client)
-
-    jtotal = for n <- jobs, do: Map.get(n, :total)
-    ftotal = for n <- jtotal, do: Map.get(n, :amount)
-    total = Money.new(Enum.sum(ftotal))                  
-    changeset = Ecto.Changeset.change(invoice, %{total: total})
-    Repo.update!(changeset)
-end
+  #
+  # Private functions
+  #
 
   defp load_clients(conn, _) do
     clients = Repo.all from c in Client, select: {c.name, c.id}
     assign(conn, :clients, clients)
-  end
-
-  defp new_invoice(id, date, end_date, start_date, number) do
-    changeset = Invoice.changeset(%Invoice{}, %{"client_id" => id,
-                                                "number" => number,
-                                                "date" => date,
-                                                "end" => end_date,
-                                                "start" => start_date})
-   result =  Repo.insert_or_update!(changeset)
-   result.id
   end
 
 end

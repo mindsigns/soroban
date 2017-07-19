@@ -1,29 +1,36 @@
-<h2>Listing invoices</h2>
-<%= link "Generate All Invoices", class: "btn btn-primary btn-md", to: batch_path(@conn, :batch) %>
+<h2>Batch invoice generation</h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= sort_link @conn, @rummage, [field: :number] %></th>
-      <th>Invoice Date</th>
-      <th>From</th>
-      <th>To</th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for invoice <- @invoices do %>
-    <tr>
-      <td><%= link invoice.number, to: invoice_invoice_path(@conn, :show_invoice, invoice.number) %></td>
-      <td><%= invoice.date %></td>
-      <td><%= invoice.start %></td>
-      <td><%= invoice.end %></td>
+<%= form_for @conn, batch_path(@conn, :generate_all), [as: :invoice], fn f -> %>
 
-      <td class="text-right">
-        <%= link "Re-generate", to: invoice_invoice_path(@conn, :generate, invoice), class: "btn btn-primary btn-xs" %>
-      </td>
-    </tr>
+  <div class="form-group">
+    <%= label f, :name, "Invoice Number", class: "control-label" %>
+    <%= text_input f, :number, class: "form-control" %>
+    <%= error_tag f, :number %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :name, "Invoice Date", class: "control-label" %>
+    </br>
+    <%= date_select f, :date, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
+    <%= error_tag f, :date %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :name, "Invoice Start Date", class: "control-label" %>
+    </br>
+    <%= date_select f, :start, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
+    <%= error_tag f, :start %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :name, "Invoice End Date", class: "control-label" %>
+    </br>
+    <%= date_select f, :end, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
+    <%= error_tag f, :end %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
 <% end %>
-  </tbody>
-</table>
-
-<%= link "New invoice", to: invoice_path(@conn, :new) %>
+<%= link "Back", to: invoice_path(@conn, :index) %>
