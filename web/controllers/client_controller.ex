@@ -10,7 +10,7 @@ defmodule Soroban.ClientController do
   def index(conn, _params) do
 
     clients = Repo.all(Client)
-      
+
     render(conn, "index.html", clients: clients)
   end
 
