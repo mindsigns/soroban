@@ -1,5 +1,32 @@
 <div class="page-header">
     <h1>Soroban  <small>Admin</small></h1>
 </div>
-<p>Dashboard stuff goes here</p>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+<canvas id="myChart" width="400" height="200"></canvas>
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [<%= for month <- @months do %>"<%= month  %>", <%= end %>],
+        datasets: [{
+            label: '# of Jobs',
+            data: [<%= for total <- @jobs do %><%= total%>, <%= end %>],
+            backgroundColor: 'rgba(0, 100, 132)',
+            borderColor: 'rgba(255,99,132,1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
