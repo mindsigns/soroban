@@ -4,7 +4,7 @@ Soroban.Invoice model
 """
 
   use Soroban.Web, :model
-  use Rummage.Ecto
+
   alias Money
 
   schema "invoices" do

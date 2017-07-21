@@ -10,16 +10,13 @@ defmodule Soroban.InvoiceController do
 
   plug :load_clients when action in [:index, :new, :create, :edit, :show, :update, :generate] 
 
-  def index(conn, params) do
+  def index(conn, _params) do
 
-    {query, rummage} = Invoice
-      |> Invoice.rummage(params["rummage"])
-
-    invoices = query
+    invoices = Invoice
                |> distinct(:number)
                |> Repo.all
 
-    render(conn, "index.html", invoices: invoices, rummage: rummage)
+    render(conn, "index.html", invoices: invoices)
   end
 
   def generate_pdf(conn, %{"invoice_id" => id}) do
