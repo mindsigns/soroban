@@ -81,6 +81,13 @@ defmodule Soroban.Pdf do
     send_a_file(conn, zipfile, savefile, "zip")
   end
 
+  @doc """
+  # Returns PDF path from config/config.exs
+  """
+  def pdf_path do
+    Application.get_env(:soroban, :pdf_dir)
+  end
+
 #
 # Private functions
 #
@@ -106,11 +113,6 @@ defmodule Soroban.Pdf do
       |> put_resp_content_type("application/#{type}")
       |> put_resp_header("content-disposition", "attachment; filename=#{savefile}")
       |> send_file(200, filename)
-  end
-
-  # Returns PDF path from config/config.exs
-  defp pdf_path do
-    Application.get_env(:soroban, :pdf_dir)
   end
 
 end
