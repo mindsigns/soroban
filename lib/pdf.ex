@@ -71,7 +71,6 @@ defmodule Soroban.Pdf do
   Sends the zipped PDFs to browser
   """
   def send_zip(conn, invoicenum, filenames) do
-    zipfile = String.to_char_list(Enum.join([invoicenum, ".zip"]))
     pdfpath = String.to_char_list(pdf_path())
     zipfile = Enum.join([pdf_path(), invoicenum, ".zip"])
     savefile = Enum.join([invoicenum, ".zip"])
@@ -82,7 +81,7 @@ defmodule Soroban.Pdf do
   end
 
   @doc """
-  # Returns PDF path from config/config.exs
+  Returns PDF path from config/config.exs
   """
   def pdf_path do
     Application.get_env(:soroban, :pdf_dir)
