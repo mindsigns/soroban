@@ -8,6 +8,7 @@ Soroban module
   def start(_type, _args) do
     import Supervisor.Spec
 
+    check_pdf_path()
     repo = Soroban.Repo
     create_db(repo)
 
@@ -21,7 +22,6 @@ Soroban module
 
     run_migrations(repo)
     sup_ret
-
   end
 
   @doc """
@@ -61,5 +61,15 @@ Soroban module
   def config_change(changed, _new, removed) do
     Soroban.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  @doc """
+  Run migrations on start
+  """
+  def check_pdf_path() do
+    case File.dir?(Soroban.Pdf.pdf_path) do
+      false -> File.mkdir(Soroban.Pdf.pdf_path)
+      true  -> :ok
+    end
   end
 end
