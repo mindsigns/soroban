@@ -8,7 +8,7 @@
     <title>Soroban.Pdf – soroban v0.0.1</title>
     <link rel="stylesheet" href="dist/app-268c9dc719.css" />
     
-    <script src="dist/sidebar_items-09bddc105a.js"></script>
+    <script src="dist/sidebar_items-4cd90e8db3.js"></script>
   </head>
   <body data-type="modules">
     <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
@@ -93,10 +93,19 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#batch_zip/3">batch_zip(html, invoicenum, client)</a>
+    <a href="#batch_zip/3">batch_zip(conn, invoicenum, clients)</a>
   </div>
   
     <div class="summary-synopsis"><p>Generate and zip PDF files</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#pdf_path/0">pdf_path()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns PDF path from config/config.exs</p>
 </div>
   
 </div>
@@ -120,7 +129,7 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#send_zip/2">send_zip(conn, invoicenum)</a>
+    <a href="#send_zip/3">send_zip(conn, invoicenum, filenames)</a>
   </div>
   
     <div class="summary-synopsis"><p>Sends the zipped PDFs to browser</p>
@@ -173,13 +182,30 @@ already exist in cache</p>
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">batch_zip(html, invoicenum, client)</span>
+    <span class="signature">batch_zip(conn, invoicenum, clients)</span>
     
     
     
   </div>
   <section class="docstring">
     <p>Generate and zip PDF files</p>
+
+  </section>
+</div>
+<div class="detail" id="pdf_path/0">
+  
+  <div class="detail-header">
+    <a href="#pdf_path/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">pdf_path()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns PDF path from config/config.exs</p>
 
   </section>
 </div>
@@ -222,14 +248,14 @@ text emails. Use a string if you only want to render one type, e.g.
 
   </section>
 </div>
-<div class="detail" id="send_zip/2">
+<div class="detail" id="send_zip/3">
   
   <div class="detail-header">
-    <a href="#send_zip/2" class="detail-link" title="Link to this function">
+    <a href="#send_zip/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">send_zip(conn, invoicenum)</span>
+    <span class="signature">send_zip(conn, invoicenum, filenames)</span>
     
     
     

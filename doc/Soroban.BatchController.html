@@ -8,7 +8,7 @@
     <title>Soroban.BatchController – soroban v0.0.1</title>
     <link rel="stylesheet" href="dist/app-268c9dc719.css" />
     
-    <script src="dist/sidebar_items-09bddc105a.js"></script>
+    <script src="dist/sidebar_items-4cd90e8db3.js"></script>
   </head>
   <body data-type="modules">
     <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
@@ -88,26 +88,11 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#batch/2">batch(conn, params)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#create/2">create(conn, map)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="#delete/2">delete(conn, map)</a>
   </div>
   
+    <div class="summary-synopsis"><p>Deletes invoices by the Invoice Number</p>
 </div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#generate/2">generate(conn, map)</a>
-  </div>
   
 </div>
 <div class="summary-row">
@@ -115,35 +100,26 @@
     <a href="#generate_all/2">generate_all(conn, params)</a>
   </div>
   
+    <div class="summary-synopsis"><p>Generate a batch of invoices</p>
+</div>
+  
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#index/2">index(conn, params)</a>
   </div>
   
+    <div class="summary-synopsis"><p>Index function</p>
 </div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#new/2">new(conn, params)</a>
-  </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#total/1">total(id)</a>
+    <a href="#send_zip/2">send_zip(conn, map)</a>
   </div>
   
+    <div class="summary-synopsis"><p>Builds and sends a zip file of all PDF invoices with the same Invoice ID</p>
 </div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#total_all/0">total_all()</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#update/2">update(conn, map)</a>
-  </div>
   
 </div>
 
@@ -166,39 +142,7 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="batch/2">
-  
-  <div class="detail-header">
-    <a href="#batch/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">batch(conn, params)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="create/2">
-  
-  <div class="detail-header">
-    <a href="#create/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">create(conn, map)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="delete/2">
+          <div class="detail" id="delete/2">
   
   <div class="detail-header">
     <a href="#delete/2" class="detail-link" title="Link to this function">
@@ -211,23 +155,8 @@
     
   </div>
   <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="generate/2">
-  
-  <div class="detail-header">
-    <a href="#generate/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">generate(conn, map)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
+    <p>Deletes invoices by the Invoice Number</p>
+
   </section>
 </div>
 <div class="detail" id="generate_all/2">
@@ -243,7 +172,8 @@
     
   </div>
   <section class="docstring">
-    
+    <p>Generate a batch of invoices</p>
+
   </section>
 </div>
 <div class="detail" id="index/2">
@@ -259,71 +189,25 @@
     
   </div>
   <section class="docstring">
-    
+    <p>Index function</p>
+
   </section>
 </div>
-<div class="detail" id="new/2">
+<div class="detail" id="send_zip/2">
   
   <div class="detail-header">
-    <a href="#new/2" class="detail-link" title="Link to this function">
+    <a href="#send_zip/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">new(conn, params)</span>
+    <span class="signature">send_zip(conn, map)</span>
     
     
     
   </div>
   <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="total/1">
-  
-  <div class="detail-header">
-    <a href="#total/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">total(id)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="total_all/0">
-  
-  <div class="detail-header">
-    <a href="#total_all/0" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">total_all()</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="update/2">
-  
-  <div class="detail-header">
-    <a href="#update/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">update(conn, map)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
+    <p>Builds and sends a zip file of all PDF invoices with the same Invoice ID</p>
+
   </section>
 </div>
 
