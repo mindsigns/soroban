@@ -8,31 +8,28 @@
 <button type="button" class="btn btn-danger navbar-btn">Delete</button>
 </div>
 
-<b><%= @invoice.client.name %></b>
+<h2><%= @invoice.client.name %></h2>
 
-<ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 font-bold">Invoice Number:</div>
+    <div class="col-md-4"><%= @invoice.number %></div>
+  </div>
+<div class="row">
+    <div class="col-md-3 font-bold">Invoice Date:</div>
+    <div class="col-md-4"><%= @invoice.date%></div>
+  </div>
+<div class="row">
+    <div class="col-md-3 font-bold">Billing Period:</div>
+    <div class="col-md-4"><%= @invoice.start %> to <%= @invoice.end %></div>
+  </div>
+<div class="row">
+    <div class="col-md-3 font-bold">Total:</div>
+    <div class="col-md-4"><%= @invoice.total%></div>
+  </div>
 
-  <li>
-    <strong>Invoice Number:</strong>
-    <%= @invoice.number %>
-  </li>
+</div>
 
-  <li>
-    <strong>Invoice Date:</strong>
-    <%= @invoice.date %>
-  </li>
-
-  <li>
-    <strong>Billing Period:</strong>
-    <%= @invoice.start %> to <%= @invoice.end %>
-  </li>
-
-  <li>
-    <strong>Total:</strong>
-    <%= @invoice.total %>
-  </li>
-
-</ul>
 <table class="table">
   <thead>
     <tr>
