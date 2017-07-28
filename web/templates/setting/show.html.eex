@@ -1,28 +1,23 @@
-<h2>Show setting</h2>
+<div>
+  <h2>Settings</h2>
+</div>
 
-<ul>
+<div class="container pull-left">
+  <div class="row highlight">
+    <div class="col-md-3 font-bold">Company Name:</div>
+    <div class="col-md-4"><%= @setting.company_name %></div>
+  </div>
+<div class="row highlight">
+    <div class="col-md-3 font-bold">Company address:</div>
+    <div class="col-md-4"><%= @setting.company_address %></div>
+  </div>
+<div class="row highlight">
+    <div class="col-md-3 font-bold">Company Email:</div>
+    <div class="col-md-4"><%= @setting.company_email%></div>
+  </div>
+</div>
 
-  <li>
-    <strong>Company name:</strong>
-    <%= @setting.company_name %>
-  </li>
-
-  <li>
-    <strong>Company address:</strong>
-    <%= @setting.company_address %>
-  </li>
-
-  <li>
-    <strong>Company email:</strong>
-    <%= @setting.company_email %>
-  </li>
-
-  <li>
-    <strong>Invoice Note:</strong>
-    <%= @setting.note%>
-  </li>
-
-</ul>
-
-<%= link "Edit", to: setting_path(@conn, :edit, @setting) %>
-<%= link "Back", to: setting_path(@conn, :index) %>
+<div class="container top-buffer">
+  <div class="col-sm-2"><%= link "Edit", to: setting_path(@conn, :edit, @setting) %></div>
+  <div class="col-sm-2"><%= link "Back", to: setting_path(@conn, :index) %></div>
+</div>

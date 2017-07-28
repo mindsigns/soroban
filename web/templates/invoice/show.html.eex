@@ -10,7 +10,7 @@
 
 <div>
   Viewing invoice for :
-<h2><%= @invoice.client.name %></h2>
+  <h2><%= @invoice.client.name %></h2>
 </div>
 
 <div class="container pull-left">
