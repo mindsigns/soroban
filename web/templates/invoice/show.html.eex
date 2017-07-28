@@ -8,22 +8,25 @@
 <button type="button" class="btn btn-danger navbar-btn">Delete</button>
 </div>
 
+<div>
+  Viewing invoice for :
 <h2><%= @invoice.client.name %></h2>
+</div>
 
-<div class="container">
-  <div class="row">
+<div class="container pull-left">
+  <div class="row highlight">
     <div class="col-md-3 font-bold">Invoice Number:</div>
     <div class="col-md-4"><%= @invoice.number %></div>
   </div>
-<div class="row">
+<div class="row highlight">
     <div class="col-md-3 font-bold">Invoice Date:</div>
     <div class="col-md-4"><%= @invoice.date%></div>
   </div>
-<div class="row">
+<div class="row highlight">
     <div class="col-md-3 font-bold">Billing Period:</div>
     <div class="col-md-4"><%= @invoice.start %> to <%= @invoice.end %></div>
   </div>
-<div class="row">
+<div class="row highlight">
     <div class="col-md-3 font-bold">Total:</div>
     <div class="col-md-4 font-bold"><%= @invoice.total%></div>
   </div>

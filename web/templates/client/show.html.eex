@@ -1,31 +1,30 @@
 <h2> <%= @client.name %> </h2>
 
-<ul>
+<div class="container pull-left">
+  <div class="row highlight">
+    <div class="col-md-3 font-bold">Contact:</div>
+    <div class="col-md-4"><%= @client.contact%></div>
+  </div>
+  <div class="row highlight">
+    <div class="col-md-3 font-bold">Address:</div>
+    <div class="col-md-4"><%= @client.address%></div>
+  </div>
+  <div class="row highlight">
+    <div class="col-md-3 font-bold">Email:</div>
+    <div class="col-md-4"><%= @client.email%></div>
+  </div>
+</div>
 
-  <li>
-    <strong>Contact:</strong>
-    <%= @client.contact %>
-  </li>
+<div class="container pull-left">
+  <div class="row">
+    <div class="col-sm-2"><%= link "Back", to: client_path(@conn, :index), class: "btn btn-primary btn-xs" %> </div>
+    <div class="col-sm-2"><%= link "Edit", to: client_path(@conn, :edit, @client), class: "btn btn-warning btn-xs" %> </div>
+  </div>
+</div>
 
-  <li>
-    <strong>Address:</strong>
-    <%= @client.address %>
-  </li>
-
-  <li>
-    <strong>Email:</strong>
-    <%= @client.email %>
-  </li>
-
-</ul>
-
-
-<%= link "Edit", to: client_path(@conn, :edit, @client) %>
-&nbsp;
-<%= link "Back", to: client_path(@conn, :index) %>
-
-
-<hr/>
+<div class="container pull-left top-buffer">
+  <div class="row"><h3> Available invoices</h3> </div>
+</div>
 
 <table class="table">
   <thead>
