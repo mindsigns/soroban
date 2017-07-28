@@ -1,58 +1,48 @@
-<h2>Show job</h2>
+<h2><%= @job.client.name %></h2>
 
-<ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 font-bold">Date:</div>
+    <div class="col-md-4"><%= @job.date%></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 font-bold">Reference:</div>
+    <div class="col-md-4"><%= @job.reference%></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 font-bold">Caller:</div>
+    <div class="col-md-4"><%= @job.caller%></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 font-bold">Job Type:</div>
+    <div class="col-md-4"><%= @job.type%></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 font-bold">Description:</div>
+    <div class="col-md-4"><%= @job.description%></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 font-bold">Job Type:</div>
+    <div class="col-md-4"><%= @job.type%></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 font-bold">Zone:</div>
+    <div class="col-md-4"><%= @job.zone%></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 font-bold">Service Type:</div>
+    <div class="col-md-4"><%= @job.service%></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 font-bold">Details:</div>
+    <div class="col-md-4"><%= @job.details%></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 font-bold">Total:</div>
+    <div class="col-md-4 font-bold"><%= @job.total%></div>
+  </div>
+</div>
 
-  <li>
-    <strong>Client:</strong>
-    <%= @job.client.name %>
-  </li>
-
-  <li>
-    <strong>Date:</strong>
-    <%= @job.date %>
-  </li>
-
-  <li>
-    <strong>Reference:</strong>
-    <%= @job.reference %>
-  </li>
-
-  <li>
-    <strong>Caller:</strong>
-    <%= @job.caller %>
-  </li>
-
-  <li>
-    <strong>Type:</strong>
-    <%= @job.type %>
-  </li>
-
-  <li>
-    <strong>Description:</strong>
-    <%= @job.description %>
-  </li>
-
-  <li>
-    <strong>Zone:</strong>
-    <%= @job.zone %>
-  </li>
-
-  <li>
-    <strong>Service:</strong>
-    <%= @job.service %>
-  </li>
-
-  <li>
-    <strong>Details:</strong>
-    <%= @job.details %>
-  </li>
-
-  <li>
-    <strong>Total:</strong>
-    <%= @job.total %>
-  </li>
-
-</ul>
-
-<%= link "Edit", to: job_path(@conn, :edit, @job) %>
+<br/>
+<%= link "Edit", to: job_path(@conn, :edit, @job) %>&nbsp;
 <%= link "Back", to: job_path(@conn, :index) %>
