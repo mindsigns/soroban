@@ -26,6 +26,13 @@ defmodule Soroban.AdminController do
     render(conn, "index.html", months: months, jobs: jobs)
   end
 
+  @doc"""
+  Static Help page
+  """
+  def help(conn, _params) do
+    render(conn, "help.html")
+  end
+
    defp assign_month(x) do
       case round(x) do
         1  -> "Jan"

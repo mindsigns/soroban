@@ -47,7 +47,7 @@
               <li><a href="<%= user_path @conn, :new %>">New user</a></li>
               <li><a href="<%= session_path @conn, :new %>">Login</a></li>
               <% end %>
-            <li><a href="#">Help</a></li>
+            <li><a href="/help">Help</a></li>
           </ul>
 
             </ul>
