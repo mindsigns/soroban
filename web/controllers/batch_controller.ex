@@ -60,16 +60,20 @@ defmodule Soroban.BatchController do
       |> redirect(to: invoice_path(conn, :index))
   end
 
-@doc"""
-  Email all invoices
+  @doc"""
+  Email all invoices for a given invoice ID
   """
-  def email_all(conn, params) do
-    clients = Repo.all from c in Client, select: c.id
+  def email_all(conn, %{"invoice" => invoice}) do
+  query = (from i in Invoice,
+            where: i.number == ^invoice,
+            select: i.id)
 
-    Task.async(InvoiceUtils, :batch_job, [conn, clients, params])
+  invoice_ids = Repo.all(query)
+
+    InvoiceUtils.batch_email(invoice_ids)
 
     conn
-      |> put_flash(:info, "Generating all invoices, this will take a bit.")
+      |> put_flash(:info, "Emailing all invoices.")
       |> redirect(to: invoice_path(conn, :index))
   end
 
