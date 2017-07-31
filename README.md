@@ -1,4 +1,10 @@
 # Soroban
+This is my first go with the Phoenix framework.
+
+Soroban is a basic invoicing system for small courier companies.  Born out of my
+frustration of inefficient invoicing systems.
+
+Very much a work in progress.  Beware.
 
 Set up the Postgres Database:
 
