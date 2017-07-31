@@ -7,8 +7,9 @@ defmodule Soroban.InvoiceUtils do
 
   alias Soroban.{Job, Invoice, Setting, Repo}
   alias Soroban.Pdf
+  alias Soroban.{Email, Mailer}
 
-  def generate(invoice_id) do
+  def generate(invoice_id, pdf_tf) do
     invoice = Repo.get!(Invoice, invoice_id) |> Repo.preload(:client)
 
     company = Repo.one(from s in Setting, limit: 1)
@@ -27,7 +28,10 @@ defmodule Soroban.InvoiceUtils do
     changeset = Ecto.Changeset.change(invoice, %{total: total})
     Repo.update!(changeset)
 
-    Pdf.to_pdf(invoice, jobs, total, company)
+  case pdf_tf do
+    true -> Pdf.to_pdf(invoice, jobs, total, company)
+    false  -> "skipping pdf generation"
+  end
 
   {invoice, jobs, total, company}
   end
@@ -46,22 +50,22 @@ defmodule Soroban.InvoiceUtils do
       case Enum.count(Repo.all from c in Soroban.Client, join: j in Soroban.Job, where: j.client_id == ^c) do
         0 ->  "No Jobs"
         _ ->  invoice_id = new_invoice(c, date, end_date, start_date, number)
-              generate(invoice_id)
+              generate(invoice_id, true)
       end
     end
   end
 
-  def batch_email(_conn, clients, params) do
-    %{"invoice" => %{"date" => date, "end" => end_date, "start" => start_date, "number" => number}} =  params
+  def batch_email(invoice_id_list) do
 
-    for c <- clients do
-      case Enum.count(Repo.all from c in Soroban.Client, join: j in Soroban.Job, where: j.client_id == ^c) do
-        0 ->  "No Jobs"
-        _ ->  invoice_id = new_invoice(c, date, end_date, start_date, number)
-              generate(invoice_id)
+    for i <- invoice_id_list do
+      {invoice, jobs, total, company} = generate(i, false)
+      case is_nil(invoice.client.email) do
+        false -> Soroban.Email.invoice_html_email(invoice.client.email, invoice, jobs, total, company)
+                  |> Soroban.Mailer.deliver_later
+        true -> "no email"
       end
     end
-  end
+    end
 
   defp new_invoice(id, date, end_date, start_date, number) do
     changeset = Invoice.changeset(%Invoice{}, %{"client_id" => id,
