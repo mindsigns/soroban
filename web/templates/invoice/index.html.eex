@@ -20,6 +20,7 @@
 
       <td class="text-right">
         <%= link "Zip file", to: batch_path(@conn, :send_zip, invoice.number), class: "btn btn-success btn-xs" %>
+        <%= link "Send Emails", to: batch_path(@conn, :email_all, invoice.number), class: "btn btn-success btn-xs" %>
         <%= link "Delete", to: batch_path(@conn, :delete, invoice.number), class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
