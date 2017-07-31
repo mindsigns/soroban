@@ -50,7 +50,7 @@ defmodule Soroban.Pdf do
 
     case File.exists?(newfile) do
        true  -> IO.puts "File exists"
-       false -> InvoiceUtils.generate(id)
+       false -> InvoiceUtils.generate(id, true)
     end
 
     send_a_file(conn, newfile, savefile, "pdf")
