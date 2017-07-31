@@ -34,7 +34,7 @@ defmodule Soroban.InvoiceController do
 
     {invoice, jobs, total, company} = InvoiceUtils.generate(id)
 
-    Email.invoice_html_email("jon@deathray.tv", invoice, jobs, total, company)
+    Email.invoice_html_email(invoice.client.email, invoice, jobs, total, company)
       |> Mailer.deliver_later
   
     conn
