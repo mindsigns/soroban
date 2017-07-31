@@ -60,6 +60,19 @@ defmodule Soroban.BatchController do
       |> redirect(to: invoice_path(conn, :index))
   end
 
+@doc"""
+  Email all invoices
+  """
+  def email_all(conn, params) do
+    clients = Repo.all from c in Client, select: c.id
+
+    Task.async(InvoiceUtils, :batch_job, [conn, clients, params])
+
+    conn
+      |> put_flash(:info, "Generating all invoices, this will take a bit.")
+      |> redirect(to: invoice_path(conn, :index))
+  end
+
   @doc"""
   Builds and sends a zip file of all PDF invoices with the same Invoice ID
   """

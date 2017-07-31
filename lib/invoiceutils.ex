@@ -51,6 +51,18 @@ defmodule Soroban.InvoiceUtils do
     end
   end
 
+  def batch_email(_conn, clients, params) do
+    %{"invoice" => %{"date" => date, "end" => end_date, "start" => start_date, "number" => number}} =  params
+
+    for c <- clients do
+      case Enum.count(Repo.all from c in Soroban.Client, join: j in Soroban.Job, where: j.client_id == ^c) do
+        0 ->  "No Jobs"
+        _ ->  invoice_id = new_invoice(c, date, end_date, start_date, number)
+              generate(invoice_id)
+      end
+    end
+  end
+
   defp new_invoice(id, date, end_date, start_date, number) do
     changeset = Invoice.changeset(%Invoice{}, %{"client_id" => id,
                                     "number" => number,

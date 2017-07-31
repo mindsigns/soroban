@@ -31,6 +31,7 @@ defmodule Soroban.Router do
 
     get "/invoice/batch", BatchController, :index
     post "/invoice/generate_all", BatchController, :generate_all
+    post "/invoice/email_all", BatchController, :email_all
     get "/invoice/delete/:id", BatchController, :delete
     get "/invoice/sendzip/:invoice", BatchController, :send_zip
 
