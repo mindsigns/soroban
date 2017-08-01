@@ -65,7 +65,7 @@ defmodule Soroban.InvoiceUtils do
         true -> "no email"
       end
     end
-    end
+  end
 
   defp new_invoice(id, date, end_date, start_date, number) do
     changeset = Invoice.changeset(%Invoice{}, %{"client_id" => id,
