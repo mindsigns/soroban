@@ -51,7 +51,7 @@ defmodule Soroban.Email do
   def invoice_html_email(email_address, invoice, jobs, total, company) do
     new_email()
     |> to(email_address)
-    |> from("io@deathray.tv")
+    |> from("test@test.com")
     |> subject("Welcome!")
     |> put_html_layout({Soroban.LayoutView, "email.html"})
     |> render("invoice.html", email_address: email_address, 
