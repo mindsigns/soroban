@@ -1,7 +1,8 @@
 FROM elixir:1.4.4
 ENV MIX_ENV=dev
 RUN apt-get update && \
-    apt-get install -y libssl1.0.0 postgresql-client locales inotify-tools
+    apt-get install -y libssl1.0.0 postgresql-client locales \
+    inotify-tools wkhtmltopdf xvfb
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get install -y -q nodejs
 RUN apt-get autoclean \
