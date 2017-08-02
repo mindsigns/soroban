@@ -22,6 +22,8 @@ Soroban module
 
     run_migrations(repo)
     sup_ret
+
+    Slingbag.start_link
   end
 
   @doc """
