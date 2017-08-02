@@ -70,11 +70,15 @@ defmodule Soroban.BatchController do
 
   invoice_ids = Repo.all(query)
 
-    InvoiceUtils.batch_email(invoice_ids)
+  InvoiceUtils.batch_email(invoice_ids)
 
-    conn
-      |> put_flash(:info, "Emailing all invoices.")
-      |> redirect(to: invoice_path(conn, :index))
+  msg = Enum.join(["Warning : Emails for ", Slingbag.show, " not sent. No email addresses available for them."])
+    Slingbag.empty
+    
+  conn
+    |> put_flash(:info, "Emailing all invoices.")
+    |> put_flash(:error, msg)
+    |> redirect(to: invoice_path(conn, :index))
   end
 
   @doc"""
