@@ -21,7 +21,7 @@ defmodule Soroban.InvoiceController do
 
   def generate_pdf(conn, %{"invoice_id" => id}) do
 
-    {invoice, jobs, _, _} = InvoiceUtils.generate(id)
+    {invoice, jobs, _, _} = InvoiceUtils.generate(id, true)
 
     render(conn, "show.html", invoice: invoice, jobs: jobs)
   end
@@ -32,7 +32,7 @@ defmodule Soroban.InvoiceController do
 
   def generate_email(conn, %{"invoice_id" => id}) do
 
-    {invoice, jobs, total, company} = InvoiceUtils.generate(id)
+    {invoice, jobs, total, company} = InvoiceUtils.generate(id, true)
 
     Email.invoice_html_email(invoice.client.email, invoice, jobs, total, company)
       |> Mailer.deliver_later
