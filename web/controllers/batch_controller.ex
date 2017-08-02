@@ -72,14 +72,20 @@ defmodule Soroban.BatchController do
 
   InvoiceUtils.batch_email(invoice_ids)
 
-  msg = Enum.join(["Warning : Emails for ", Slingbag.show, " not sent. No email addresses available for them."])
-    Slingbag.empty
-    
-  conn
-    |> put_flash(:info, "Emailing all invoices.")
-    |> put_flash(:error, msg)
-    |> redirect(to: invoice_path(conn, :index))
+  case Enum.count(Slingbag.show) do
+    0 ->  Slingbag.empty
+          conn
+            |> put_flash(:info, "Emailing all invoices.")
+            |> redirect(to: invoice_path(conn, :index))
+    _ ->  
+          msg = Enum.join(["Warning : Emails for ", Slingbag.show, " not sent. No email addresses available for them."], " ")
+          Slingbag.empty
+          conn
+            |> put_flash(:info, "Emailing all invoices.")
+            |> put_flash(:error, msg)
+            |> redirect(to: invoice_path(conn, :index))
   end
+end
 
   @doc"""
   Builds and sends a zip file of all PDF invoices with the same Invoice ID
