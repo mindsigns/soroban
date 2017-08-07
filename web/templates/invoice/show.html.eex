@@ -7,7 +7,7 @@
 &nbsp;
 <%= link "Edit Invoice", to: invoice_path(@conn, :edit, @invoice), class: "btn btn-primary"%>
 &nbsp;
-<button type="button" class="btn btn-danger navbar-btn">Delete</button>
+<%= link "Delete Invoice", to: invoice_path(@conn, :delete, @invoice), method: :delete, class: "btn btn-danger"%>
 </div>
 
 <div>
