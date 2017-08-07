@@ -1,7 +1,7 @@
 <h2><%= @invoice_count %> invoices for <%= @invoice_id %></h2>
 <h2>Total for the billing period : <%= @total%></h2>
 
-<table class="table">
+<table id="sortable" class="table">
   <thead>
     <tr>
       <th>Client</th>
