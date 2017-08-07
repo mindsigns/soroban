@@ -43,9 +43,10 @@ defmodule Soroban.Mixfile do
      {:bamboo_smtp, "~> 1.3.0"},
      {:money, "~> 1.2.1"},
      {:rummage_phoenix, "~> 1.0.0"},
+     {:drab, "~> 0.5"},
      {:pdf_generator, ">=0.3.5"},
-     {:blacksmith, "~> 0.1"},
-     {:faker, "~> 0.8"},
+     {:blacksmith, "~> 0.1", only: :dev},
+     {:faker, "~> 0.8", only: :dev},
      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
      {:ex_doc, "~> 0.14", only: :dev, runtime: false},
      {:cowboy, "~> 1.0"}]
