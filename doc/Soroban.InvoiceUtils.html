@@ -8,7 +8,7 @@
     <title>Soroban.InvoiceUtils – soroban v0.0.1</title>
     <link rel="stylesheet" href="dist/app-268c9dc719.css" />
     
-    <script src="dist/sidebar_items-4cd90e8db3.js"></script>
+    <script src="dist/sidebar_items-e07e360520.js"></script>
   </head>
   <body data-type="modules">
     <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
@@ -93,14 +93,44 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#batch_job/3">batch_job(conn, clients, params)</a>
+    <a href="#batch_email/1">batch_email(invoice_id_list)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#generate/1">generate(invoice_id)</a>
+    <a href="#batch_job/3">batch_job(socket, clients, params)</a>
   </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#generate/2">generate(invoice_id, pdf_tf)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#new_invoice/5">new_invoice(id, date, end_date, start_date, number)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#render_to_string/2">render_to_string(template, assigns)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A shordhand for `Phoenix.View.render_to_string/3. Injects the corresponding view</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#render_to_string/3">render_to_string(view, template, assigns)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A shordhand for `Phoenix.View.render_to_string/3</p>
+</div>
   
 </div>
 <div class="summary-row">
@@ -129,14 +159,14 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="batch_job/3">
+          <div class="detail" id="batch_email/1">
   
   <div class="detail-header">
-    <a href="#batch_job/3" class="detail-link" title="Link to this function">
+    <a href="#batch_email/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">batch_job(conn, clients, params)</span>
+    <span class="signature">batch_email(invoice_id_list)</span>
     
     
     
@@ -145,20 +175,86 @@
     
   </section>
 </div>
-<div class="detail" id="generate/1">
+<div class="detail" id="batch_job/3">
   
   <div class="detail-header">
-    <a href="#generate/1" class="detail-link" title="Link to this function">
+    <a href="#batch_job/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">generate(invoice_id)</span>
+    <span class="signature">batch_job(socket, clients, params)</span>
     
     
     
   </div>
   <section class="docstring">
     
+  </section>
+</div>
+<div class="detail" id="generate/2">
+  
+  <div class="detail-header">
+    <a href="#generate/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">generate(invoice_id, pdf_tf)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="new_invoice/5">
+  
+  <div class="detail-header">
+    <a href="#new_invoice/5" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">new_invoice(id, date, end_date, start_date, number)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="render_to_string/2">
+  
+  <div class="detail-header">
+    <a href="#render_to_string/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">render_to_string(template, assigns)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>A shordhand for `Phoenix.View.render_to_string/3. Injects the corresponding view.</p>
+
+  </section>
+</div>
+<div class="detail" id="render_to_string/3">
+  
+  <div class="detail-header">
+    <a href="#render_to_string/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">render_to_string(view, template, assigns)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>A shordhand for `Phoenix.View.render_to_string/3. </p>
+
   </section>
 </div>
 <div class="detail" id="total/1">
