@@ -1,48 +1,20 @@
+   <!--Import jQuery before export.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+
+    <!--Data Table-->
+    <script type="text/javascript"  src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript"  src=" https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+
+<!--Export table button CSS-->
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
 <h2>Job Listing</h2>
 
 <%= link "New job", class: "btn btn-primary btn-md", to: job_path(@conn, :new) %>
-<!-- Modal -->
-<div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close"
-                   data-dismiss="modal">
-                       <span aria-hidden="true">&times;</span>
-                       <span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    Search
-                </h4>
-            </div>
 
-<!-- Modal Body -->
-<div class="modal-body">
-
-<%= search_form(@conn, @rummage, [fields:
-[
-  name: %{label: "Client Search", search_type: "ilike", assoc: ["client"]}
-], button_class: "btn",
-]) %>
-
-<%= search_form(@conn, @rummage, [fields:
-[
-  reference: %{label: "Search by Reference", search_type: "ilike"},
-  caller: %{label: "Search by Caller", search_type: "ilike"},
-  type: %{label: "Search by type", search_type: "ilike"},
-], button_class: "btn",
-]) %>
-            </div>
-        </div>
-    </div>
-</div>
-<button class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModalHorizontal">
-    Job Search
-</button>
-
-<table id="sortable" class="table">
+<table id="tbl" class="table">
   <thead>
     <tr>
       <th>Client</th>
@@ -55,7 +27,6 @@
       <th>Service Type</th>
       <th>Details</th>
       <th>Total</th>
-
       <th></th>
     </tr>
   </thead>
@@ -74,9 +45,15 @@
       <td><%= job.total %></td>
 
       <td class="text-right">
-        <%= link "Show", to: job_path(@conn, :show, job), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: job_path(@conn, :edit, job), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: job_path(@conn, :delete, job), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link to: job_path(@conn, :show, job), class: "btn btn-primary btn-xs" do %>
+          <span class="glyphicon glyphicon-info-sign"></span>
+          <%= end %>
+        <%= link to: job_path(@conn, :edit, job), class: "btn btn-info btn-xs" do %>
+          <span class="glyphicon glyphicon-edit"></span>
+          <%= end %>
+        <%= link to: job_path(@conn, :delete, job), method: :delete, data: [confirm: "Are you sure you want to delete?"], class: "btn btn-danger btn-xs" do %>
+          <span class="glyphicon glyphicon-remove-sign"></span>
+          <%= end %>
       </td>
     </tr>
 <% end %>
@@ -85,4 +62,11 @@
 
 <%= link "New job", to: job_path(@conn, :new) %>
 
-<%= pagination_link(@conn, @rummage) %>
+<script>
+  $('#tbl').DataTable({
+    "columnDefs": [ {
+	"targets": 10,
+	"orderable": false
+	} ]
+});
+</script>
