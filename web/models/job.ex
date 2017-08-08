@@ -4,7 +4,6 @@ Soroban.Job model
 """
 
   use Soroban.Web, :model
-  use Rummage.Ecto
 
   alias Money
 
