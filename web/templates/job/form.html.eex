@@ -1,4 +1,6 @@
-<div class="col-lg-6">
+<div class="row col-md-6">
+<div class="panel panel-default ">
+<div class="panel-body">
 <%= form_for @changeset, @action, fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
@@ -7,7 +9,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :date, class: "control-label" %>
+    <%= label f, "Job Date : ", class: "control-label" %>
     <%= date_select f, :date, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
     <%= error_tag f, :date %>
   </div>

@@ -1,15 +1,11 @@
-<h2>Listing jobtypes</h2>
+<div class="col-md-6">
+<h2 class="page-header">Job types</h2>
+<div class="panel panel-default">
+  <div class="panel-body">
 
 <table class="table">
-  <thead>
-    <tr>
-      <th>Type</th>
-
-      <th></th>
-    </tr>
-  </thead>
   <tbody>
-<%= for jobtype <- @jobtypes do %>
+  <%= for jobtype <- @jobtypes do %>
     <tr>
       <td><%= jobtype.type %></td>
 
@@ -21,5 +17,9 @@
 <% end %>
   </tbody>
 </table>
-
-<%= link "New jobtype", to: jobtype_path(@conn, :new) %>
+  </div>
+  <div class="panel-footer">
+  <%= link "New jobtype", to: jobtype_path(@conn, :new), class: "btn btn-primary" %>
+</div>
+</div>
+</div>

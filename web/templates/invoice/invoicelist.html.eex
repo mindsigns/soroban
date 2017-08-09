@@ -1,6 +1,10 @@
-<h2><%= @invoice_count %> invoices for <%= @invoice_id %></h2>
-<h2>Total for the billing period : <%= @total%></h2>
+<h2 class="page-header"><%= @invoice_count %> invoices for <%= @invoice_id %></h2>
 
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Total for the billing period : <b><%= @total%></b>
+  </div>
+  <div class="panel-body">
 <table id="sortable" class="table">
   <thead>
     <tr>
@@ -30,7 +34,8 @@
 <% end %>
   </tbody>
 </table>
-
-<%= link "Back", to: invoice_path(@conn, :index) %>
-<br>
-<%= link "New invoice", to: invoice_path(@conn, :new) %>
+</div>
+<div class="panel-footer">
+<%= link "Back", to: invoice_path(@conn, :index) , class: "btn btn-primary"%>
+</div>
+</div>

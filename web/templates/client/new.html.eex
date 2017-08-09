@@ -1,6 +1,10 @@
-<h2>New client</h2>
+<div class="col-md-6">
+<h2 class="page-header">New client</h2>
 
 <%= render "form.html", changeset: @changeset,
                         action: client_path(@conn, :create) %>
 
-<%= link "Back", to: client_path(@conn, :index) %>
+<div class="panel-footer">
+  <%= link "Back", to: client_path(@conn, :index) %>
+</div>
+</div>

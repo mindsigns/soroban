@@ -1,44 +1,40 @@
-<div class="navbar ">
-<%= link "Download PDF", to: invoice_path(@conn, :send_pdf, @invoice), class: "btn btn-primary"%>
-&nbsp;
-<%= if @invoice.client.email do %>
-  <%= link "Email to Client", to: invoice_invoice_path(@conn, :generate_email, @invoice), class: "btn btn-primary"%>
-<%= end %>
-&nbsp;
-<%= link "Edit Invoice", to: invoice_path(@conn, :edit, @invoice), class: "btn btn-primary"%>
-&nbsp;
-<%= link "Delete Invoice", to: invoice_path(@conn, :delete, @invoice), method: :delete, class: "btn btn-danger"%>
-</div>
+<h2 class="page-header"><%= @invoice.client.name %></h2>
 
-<div>
-  Viewing invoice for :
-  <h2><%= @invoice.client.name %></h2>
-</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+<div class="btn-group" role="group" aria-label="...">
+	<%= link "Download PDF", to: invoice_path(@conn, :send_pdf, @invoice), class: "btn btn-default"%>
+	<%= if @invoice.client.email do %>
+  		<%= link "Email to Client", to: invoice_invoice_path(@conn, :generate_email, @invoice), class: "btn btn-default"%>
+	<%= end %>
+	<%= link "Edit Invoice", to: invoice_path(@conn, :edit, @invoice), class: "btn btn-default"%>
+  </div>
+	<%= link "Delete Invoice", to: invoice_path(@conn, :delete, @invoice), method: :delete, data: [confirm: "Are you sure you want to delete?"],class: "btn btn-danger"%>
+  </div>
 
+<div class="panel-body">
 <div class="container pull-left">
   <div class="row highlight">
     <div class="col-md-3 font-bold">Invoice Number:</div>
     <div class="col-md-4"><%= @invoice.number %></div>
   </div>
-<div class="row highlight">
+  <div class="row highlight">
     <div class="col-md-3 font-bold">Invoice Date:</div>
     <div class="col-md-4"><%= @invoice.date%></div>
   </div>
-<div class="row highlight">
+  <div class="row highlight">
     <div class="col-md-3 font-bold">Billing Period:</div>
     <div class="col-md-4"><%= @invoice.start %> to <%= @invoice.end %></div>
   </div>
-<div class="row highlight">
+  <div class="row highlight">
     <div class="col-md-3 font-bold">Total:</div>
     <div class="col-md-4 font-bold"><%= @invoice.total%></div>
   </div>
-
 </div>
 
-<table class="table">
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>Client</th>
       <th>Date</th>
       <th>Ref</th>
       <th>Caller</th>
@@ -55,7 +51,6 @@
   <tbody>
 <%= for job <- @jobs do %>
     <tr>
-      <td><%= job.client.name %></td>
       <td><%= job.date %></td>
       <td><%= job.reference %></td>
       <td><%= job.caller %></td>
@@ -81,7 +76,9 @@
 <% end %>
   </tbody>
 </table>
-
-
+</div>
+<div class="panel-footer">
 <%= link "Edit", to: invoice_path(@conn, :edit, @invoice) %> &nbsp;
 <%= link "Back", to: invoice_invoice_path(@conn, :show_invoice, @invoice.number) %>
+</div>
+</div>

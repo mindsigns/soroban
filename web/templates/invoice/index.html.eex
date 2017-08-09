@@ -1,6 +1,13 @@
-<h2>Listing invoices</h2>
-<%= link "Generate All Invoices", class: "btn btn-primary btn-md", to: batch_path(@conn, :index) %>
+<h2 class="page-header">Listing invoices</h2>
 
+<div class="panel panel-default">
+  <div class="panel-heading">
+<div class="btn-group" role="group" aria-label="...">
+<%= link "Generate All Invoices", class: "btn btn-default", to: batch_path(@conn, :index) %>
+<%= link "Generate single invoice", class: "btn btn-default", to: invoice_path(@conn, :new) %>
+</div>
+</div>
+  <div class="panel-body">
 <table id="sortable" class="table">
   <thead>
     <tr>
@@ -27,5 +34,5 @@
 <% end %>
   </tbody>
 </table>
-
-<%= link "Create a single invoice", to: invoice_path(@conn, :new) %>
+</div>
+</div>

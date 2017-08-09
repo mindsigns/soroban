@@ -1,4 +1,8 @@
-<h2>New user</h2>
+<div class="col-md-6">
+<h2 class="page-header">New user</h2>
+
+<div class="panel panel-default">
+  <div class="panel-body">
 
 <%= form_for @changeset, user_path(@conn, :create), [as: :user], fn f -> %>
   <%= if f.errors != [] do %>
@@ -30,4 +34,8 @@
   </div>
 <% end %>
 
-<%= link "Back", to: page_path(@conn, :index) %>
+</div>
+<div class="panel-footer">
+  <%= link "Back", to: user_path(@conn, :index) %>
+</div>
+</div>

@@ -1,8 +1,13 @@
-<h2>Edit invoice</h2>
+<h2 class="page-header">Edit invoice</h2>
 
 <%= render "form.html", changeset: @changeset,
                         clients: @clients,
                         today: @today,
                         action: invoice_path(@conn, :update, @invoice) %>
 
-<%= link "Back", to: invoice_path(@conn, :index) %>
+<div class="panel-footer">
+  <%= link "Back", to: invoice_path(@conn, :show, @invoice) %>
+</div>
+</div>
+  
+

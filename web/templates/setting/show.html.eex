@@ -1,23 +1,29 @@
-<div>
-  <h2>Settings</h2>
-</div>
+<div class="col-md-6">
+<h2 class="page-header"> Settings</h2>
+
+<div class="panel panel-default">
+<div class="panel-body">
 
 <div class="container pull-left">
   <div class="row highlight">
     <div class="col-md-3 font-bold">Company Name:</div>
     <div class="col-md-4"><%= @setting.company_name %></div>
   </div>
-<div class="row highlight">
+  <div class="row highlight">
     <div class="col-md-3 font-bold">Company address:</div>
     <div class="col-md-4"><%= @setting.company_address %></div>
   </div>
-<div class="row highlight">
+  <div class="row highlight">
     <div class="col-md-3 font-bold">Company Email:</div>
     <div class="col-md-4"><%= @setting.company_email%></div>
   </div>
 </div>
+</div>
 
-<div class="container top-buffer">
-  <div class="col-sm-2"><%= link "Edit", to: setting_path(@conn, :edit, @setting) %></div>
-  <div class="col-sm-2"><%= link "Back", to: setting_path(@conn, :index) %></div>
+<div class="panel-footer">
+  <%= link "Edit", to: setting_path(@conn, :edit, @setting) %>
+  <%= link "Back", to: setting_path(@conn, :index) %>
+</div>
+
+</div>
 </div>
