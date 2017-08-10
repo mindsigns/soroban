@@ -19,7 +19,8 @@ defmodule Soroban.Mixfile do
   def application do
     [mod: {Soroban, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :bamboo, :bamboo_smtp, :pdf_generator, :faker, :blacksmith]]
+                    :phoenix_ecto, :postgrex, :bamboo, :bamboo_smtp, :pdf_generator, :drab,
+                    :faker, :blacksmith]]
   end
 
   # Specifies which paths to compile per environment.
@@ -42,7 +43,6 @@ defmodule Soroban.Mixfile do
      {:bamboo, "~> 0.8"},
      {:bamboo_smtp, "~> 1.3.0"},
      {:money, "~> 1.2.1"},
-     {:rummage_phoenix, "~> 1.0.0"},
      {:drab, "~> 0.5"},
      {:pdf_generator, ">=0.3.5"},
      {:blacksmith, "~> 0.1", only: :dev},
