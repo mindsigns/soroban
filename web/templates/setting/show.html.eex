@@ -21,8 +21,8 @@
 </div>
 
 <div class="panel-footer">
-  <%= link "Edit", to: setting_path(@conn, :edit, @setting) %>
-  <%= link "Back", to: setting_path(@conn, :index) %>
+  <%= link "Back", to: setting_path(@conn, :index), class: "btn btn-default" %>
+  <%= link "Edit", to: setting_path(@conn, :edit, @setting), class: "btn btn-warning" %>
 </div>
 
 </div>

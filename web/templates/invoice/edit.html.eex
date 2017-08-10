@@ -6,7 +6,7 @@
                         action: invoice_path(@conn, :update, @invoice) %>
 
 <div class="panel-footer">
-  <%= link "Back", to: invoice_path(@conn, :show, @invoice) %>
+  <%= link "Back", to: invoice_path(@conn, :show, @invoice), class: "btn btn-default" %>
 </div>
 </div>
   

@@ -9,5 +9,5 @@
 
 </ul>
 
-<%= link "Edit", to: service_path(@conn, :edit, @service) %>
-<%= link "Back", to: service_path(@conn, :index) %>
+<%= link "Back", to: service_path(@conn, :index), class: "btn btn-default" %>
+<%= link "Edit", to: service_path(@conn, :edit, @service), class: "btn btn-warning" %>

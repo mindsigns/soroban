@@ -5,6 +5,6 @@
                         action: user_path(@conn, :update, @user) %>
 
   <div class="panel-footer">
-    <%= link "Back", to: user_path(@conn, :show, @user) %>
+    <%= link "Back", to: user_path(@conn, :show, @user), class: "btn btn-default" %>
   </div>
 </div>

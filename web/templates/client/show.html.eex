@@ -53,8 +53,10 @@
 </table>
 </div>
 <div class="panel-footer">
-  <%= link "Back", to: client_path(@conn, :index), class: "btn btn-primary btn-xs" %>
-  <%= link "Edit", to: client_path(@conn, :edit, @client), class: "btn btn-warning btn-xs" %>
+  <p>
+  <%= link "Back ", to: client_path(@conn, :index), class: "btn btn-default" %>
+  <%= link "Edit", to: client_path(@conn, :edit, @client), class: "btn btn-warning " %>
+  </p>
 </div>
 </div>
 </div>

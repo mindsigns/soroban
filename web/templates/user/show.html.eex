@@ -1,5 +1,5 @@
 <div class="col-md-6">
-<h2 class="page-header">Show user</h2>
+<h2 class="page-header">Showing user</h2>
 <div class="panel panel-default">
   <div class="panel-body">
 
@@ -21,7 +21,7 @@
 </div>
 
   <div class="panel-footer">
-  <%= link "Edit", to: user_path(@conn, :edit, @user) %>
+  <%= link "Edit", to: user_path(@conn, :edit, @user), class: "btn btn-warning" %>
   </div>
 </div>
 </div>

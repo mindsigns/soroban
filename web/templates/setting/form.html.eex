@@ -27,8 +27,8 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :note, class: "control-label" %>
-    <%= text_input f, :note, class: "form-control" %>
+    <%= label f, :name, "Tagline for invoices", class: "control-label" %>
+    <%= text_input f, :note, class: "form-control", placeholder: "This will message will be printed on all outgoing invoices" %>
     <%= error_tag f, :note%>
   </div>
 

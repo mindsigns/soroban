@@ -13,9 +13,8 @@
 
 </ul>
 
-<%= link "Edit", to: jobtype_path(@conn, :edit, @jobtype) %>
-<%= link "Back", to: jobtype_path(@conn, :index) %>
-
+<%= link "Back", to: jobtype_path(@conn, :index), class: "btn btn-default" %>
+<%= link "Edit", to: jobtype_path(@conn, :edit, @jobtype), class: "btn btn-warning" %>
 </div>
 </div>
 </div>

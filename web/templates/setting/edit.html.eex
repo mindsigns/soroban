@@ -6,6 +6,6 @@
                         action: setting_path(@conn, :update, @setting) %>
 
   <div class="panel-footer">
-    <%= link "Back", to: setting_path(@conn, :index) %>
+    <%= link "Back", to: setting_path(@conn, :index), class: "btn btn-default" %>
   </div>
 </div>

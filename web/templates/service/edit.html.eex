@@ -5,7 +5,7 @@
                         action: service_path(@conn, :update, @service) %>
 
 <div class="panel-footer">
-  <%= link "Back", to: service_path(@conn, :index) %>
+  <%= link "Back", to: service_path(@conn, :index), class: "btn btn-default" %>
 </div>
 </div>
 </div>

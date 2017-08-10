@@ -78,7 +78,9 @@
 </table>
 </div>
 <div class="panel-footer">
-<%= link "Edit", to: invoice_path(@conn, :edit, @invoice) %> &nbsp;
-<%= link "Back", to: invoice_invoice_path(@conn, :show_invoice, @invoice.number) %>
+  <p>
+  <%= link "Back", to: invoice_invoice_path(@conn, :show_invoice, @invoice.number), class: "btn btn-default" %>
+  <%= link "Edit", to: invoice_path(@conn, :edit, @invoice), class: "btn btn-warning" %> 
+  </p>
 </div>
 </div>

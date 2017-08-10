@@ -47,7 +47,7 @@
 <a href="/sent_emails">View sent emails (for Testing)</a>
 <br/>        
 <br/>        
-<%= link "Back", to: page_path(@conn, :index) %>
+<%= link "Back", to: page_path(@conn, :index), class: "btn btn-default" %>
  </main>
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

@@ -5,6 +5,6 @@
                         action: client_path(@conn, :create) %>
 
 <div class="panel-footer">
-  <%= link "Back", to: client_path(@conn, :index) %>
+  <%= link "Back", to: client_path(@conn, :index), class: "btn btn-default" %>
 </div>
 </div>

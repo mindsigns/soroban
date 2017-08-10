@@ -1,7 +1,8 @@
-<div>
-  Viewing job for :
-  <h2><%= @job.client.name %></h2>
-</div>
+<div class="col-md-6">
+<h2 class="page-header"><%= @job.client.name %></h2>
+
+<div class="panel panel-default">
+<div class="panel-body">
 
 <div class="container pull-left">
   <div class="row highlight">
@@ -46,10 +47,13 @@
   </div>
 </div>
 
-<div class="container pull-left">
-  <div class="row">
-    <div class="col-sm-1"><%= link "Back", to: job_path(@conn, :index), class: "btn btn-primary btn-xs" %></div>
-    <div class="col-sm-1"><%= link "Edit", to: job_path(@conn, :edit, @job), class: "btn btn-primary btn-xs" %></div>
-    <div class="col-sm-1"><%= link "Delete", to: job_path(@conn, :delete, @job), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></div>
-  </div>
+</div>
+
+<div class="panel-footer">
+    <%= link "Back", to: job_path(@conn, :index), class: "btn btn-default" %>
+    <%= link "Edit", to: job_path(@conn, :edit, @job), class: "btn btn-warning" %>
+    <%= link "Delete", to: job_path(@conn, :delete, @job), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
+</div>
+
+</div>
 </div>

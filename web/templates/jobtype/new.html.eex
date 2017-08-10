@@ -5,7 +5,7 @@
                         action: jobtype_path(@conn, :create) %>
 
   <div class="panel-footer">
-  <%= link "Back", to: jobtype_path(@conn, :index) %>
+  <%= link "Back", to: jobtype_path(@conn, :index), class: "btn btn-default" %>
   </div>
 </div>
 </div>
