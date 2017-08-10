@@ -1,6 +1,5 @@
 defmodule Soroban.JobController do
   use Soroban.Web, :controller
-  use Rummage.Phoenix.Controller
 
   import Soroban.Authorize
   import Ecto.Query
@@ -14,14 +13,12 @@ defmodule Soroban.JobController do
   plug :load_clients when action in [:index, :new, :create, :edit, :update]
 
 
-  def index(conn, params) do
+  def index(conn, _params) do
 
-    {query, rummage} = Job
-      |> Job.rummage(params["rummage"])
+    query = from j in Job, order_by: [desc: :date], limit: 300
+    jobs = Repo.all(query) |> Repo.preload(:client)
 
-      jobs = Repo.all(query) |> Repo.preload(:client)
-
-    render(conn, "index.html", jobs: jobs, rummage: rummage)
+    render(conn, "index.html", jobs: jobs)
   end
 
   def new(conn, _params) do
