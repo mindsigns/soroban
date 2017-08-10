@@ -1,4 +1,3 @@
-<div class="row col-md-6">
 <div class="panel panel-default ">
 <div class="panel-body">
 <%= form_for @changeset, @action, fn f -> %>
@@ -73,4 +72,3 @@
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
-</div>
