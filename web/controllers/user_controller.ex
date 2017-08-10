@@ -53,9 +53,16 @@ defmodule Soroban.UserController do
     end
   end
 
-  def delete(%Plug.Conn{assigns: %{current_user: user}} = conn, _params) do
+  #def delete(%Plug.Conn{assigns: %{current_user: user}} = conn, _params) do
+  def delete(conn,  %{"id" => id}) do
+	user = Repo.get!(User, id)
     Repo.delete!(user)
-    configure_session(conn, drop: true)
-    |> auth_info("User deleted successfully", page_path(conn, :index))
+	if %{current_user: user} == user do
+    	configure_session(conn, drop: true)
+	else
+    conn
+    |> auth_info("User deleted successfully", user_path(conn, :index))
+  	end
   end
+
 end
