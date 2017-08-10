@@ -1,6 +1,6 @@
 defmodule Soroban.UserSocket do
   use Phoenix.Socket
-
+  use Drab.Socket
   ## Channels
   # channel "room:*", Soroban.RoomChannel
 

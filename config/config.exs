@@ -29,9 +29,8 @@ config :phoenix, :generators,
   migration: true,
   binary_id: false
 
-# Import environment specific config. This must remain at the bottom
-# of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+config :phoenix, :template_engines,
+  drab: Drab.Live.Engine
 
 config :soroban, Soroban.Mailer,
   adapter: Bamboo.LocalAdapter
@@ -42,3 +41,5 @@ config :money,
 config :pdf_generator,
   wkhtml_path:    "/usr/bin/wkhtmltopdf"
   #command_prefix: "/usr/bin/xvfb-run"
+
+import_config "#{Mix.env}.exs"

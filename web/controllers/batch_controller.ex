@@ -1,8 +1,8 @@
 defmodule Soroban.BatchController do
   use Soroban.Web, :controller
+  use Drab.Controller
 
   import Soroban.Authorize
-
   import Ecto.Query
 
   alias Soroban.{Repo, Invoice, Client}
@@ -18,7 +18,7 @@ defmodule Soroban.BatchController do
   def index(conn, _params) do
     today = Date.utc_today()
 
-    render(conn, "index.html", today: today)
+    render(conn, "index.html", today: today, text: "")
   end
 
   @doc"""
