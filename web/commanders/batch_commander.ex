@@ -1,11 +1,13 @@
 defmodule Soroban.BatchCommander do
+  @moduledoc """
+  Drab commander module
+  """
   use Drab.Commander
 
   import Ecto.Query
   alias Soroban.{Repo, Client, InvoiceUtils}
 
   def invoice(socket, params) do
-    IO.inspect params
     clients = Repo.all from c in Client, select: c.id
     Task.async(InvoiceUtils, :batch_job, [socket, clients, params.params])
   end
