@@ -29,6 +29,13 @@ defmodule Soroban.BatchController do
 
     Repo.delete_all(query)
 
+	path = Enum.join([Soroban.Pdf.pdf_path(), id, "*.pdf"])
+	files = Path.wildcard(path)
+
+	for f <- files do
+	File.rm(f)
+	end
+
     conn
     |> put_flash(:info, "Invoice deleted successfully.")
     |> redirect(to: invoice_path(conn, :index))
