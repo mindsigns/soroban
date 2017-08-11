@@ -1,6 +1,5 @@
 defmodule Soroban.BatchController do
   use Soroban.Web, :controller
-  use Drab.Controller
 
   import Soroban.Authorize
   import Ecto.Query
