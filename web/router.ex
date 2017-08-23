@@ -18,7 +18,6 @@ defmodule Soroban.Router do
     get "/help", AdminController, :help
 
     resources "/jobs", JobController
-    post "/jobs/search", JobController, :search
     resources "/service", ServiceController
     resources "/jobtypes", JobtypeController
     resources "/clients", ClientController
