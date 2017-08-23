@@ -72,6 +72,7 @@
                             <li><a href="/service"> Service Types</a></li>
                             <li><a href="/users"> Users</a></li>
                             <li><a href="/settings"> Settings</a></li>
+                            <li><a href="/clear_cache"> Clear PDF Cache</a></li>
                           </ul>
                     </ul>
                 </div>
