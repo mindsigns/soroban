@@ -7,9 +7,9 @@ defmodule Soroban.BatchController do
   alias Soroban.{Repo, Invoice, Client}
   alias Soroban.{InvoiceUtils, Pdf}
 
-  plug :user_check 
+  plug :user_check
 
-  plug :load_clients when action in [:index, :generate] 
+  plug :load_clients when action in [:index, :generate]
 
   @doc"""
   Index function
@@ -42,18 +42,6 @@ defmodule Soroban.BatchController do
   end
 
   @doc"""
-  Generate an invoice
-  """
-  #  def generate(conn, %{"invoice_id" => id}) do
-  #
-  #  InvoiceUtils.generate(id)
-  #
-  #  conn
-  #  |> put_flash(:info, "Invoice generated successfully.")
-  #  |> redirect(to: invoice_path(conn, :index))
-  #end
-
-  @doc"""
   Generate a batch of invoices
   """
   def generate_all(conn, params) do
@@ -84,7 +72,7 @@ defmodule Soroban.BatchController do
           conn
             |> put_flash(:info, "Emailing all invoices.")
             |> redirect(to: invoice_path(conn, :index))
-    _ ->  
+    _ ->
           msg = Enum.join(["Warning : Emails for ", Slingbag.show, " not sent. No email addresses available for them."], " ")
           Slingbag.empty
           conn
@@ -98,15 +86,14 @@ end
   Builds and sends a zip file of all PDF invoices with the same Invoice ID
   """
   def send_zip(conn, %{"invoice" => invoice}) do
+    query = (from i in Invoice,
+		          where: i.number == ^invoice,
+		          join: p in assoc(i, :client),
+		          select: %{client: p.name, inv_id: i.id})
 
-  query = (from i in Invoice,
-            where: i.number == ^invoice,
-            join: p in assoc(i, :client),
-            select: p.name)
+    client_list = Repo.all(query)
 
-  client_list = Repo.all(query)
-
-  Pdf.batch_zip(conn, invoice, client_list)
+    Pdf.batch_zip(conn, invoice, client_list)
   end
 
   #
