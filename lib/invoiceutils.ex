@@ -89,7 +89,7 @@ defmodule Soroban.InvoiceUtils do
         0 ->  "No Jobs"
         _ ->  invoice_id = new_invoice(c, date, end_date, start_date, number)
               generate(invoice_id, true)
-              client = Repo.get(Soroban.Client, c)
+              #client = Repo.get(Soroban.Client, c)
       end
     end
   end
