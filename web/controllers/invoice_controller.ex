@@ -6,9 +6,9 @@ defmodule Soroban.InvoiceController do
   alias Soroban.{Invoice, Job, Client, Email, Mailer, Pdf}
   alias Soroban.InvoiceUtils
 
-  plug :user_check 
+  plug :user_check
 
-  plug :load_clients when action in [:index, :new, :create, :edit, :show, :update, :generate] 
+  plug :load_clients when action in [:index, :new, :create, :edit, :show, :update, :generate]
 
   def index(conn, _params) do
 
@@ -36,7 +36,7 @@ defmodule Soroban.InvoiceController do
 
     Email.invoice_html_email(invoice.client.email, invoice, jobs, total, company)
       |> Mailer.deliver_later
-  
+
     msg = Enum.join(["Invoice mailed to : ", invoice.client.contact, " <", invoice.client.email, ">"])
     conn
       |> put_flash(:info, msg)
@@ -92,7 +92,7 @@ defmodule Soroban.InvoiceController do
 
     itotal = for n <- invoices, do: Map.get(n, :total)
     ftotal = for n <- itotal, do: Map.get(n, :amount)
-    total = Money.new(Enum.sum(ftotal))                  
+    total = Money.new(Enum.sum(ftotal))
 
     invoice_count = Enum.count(invoices)
     render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count, total: total)
@@ -132,6 +132,26 @@ defmodule Soroban.InvoiceController do
     |> redirect(to: invoice_path(conn, :index))
   end
 
+  def clear_cache(conn, %{"type" => type}) do
+
+    res = case type do
+            "zip" -> Enum.join([Soroban.Pdf.pdf_path, "*.zip"])
+            "pdf" -> Enum.join([Soroban.Pdf.pdf_path, "*.pdf"])
+            "all" -> Enum.join([Soroban.Pdf.pdf_path, "*"])
+            _     -> "error"
+          end
+
+    files = Path.wildcard(res)
+
+    for f <- files do
+      File.rm(f)
+    end
+
+    conn
+    |> put_flash(:info, "Cache deleted successfully.")
+    |> redirect(to: admin_path(conn, :index))
+  end
+
   defp total(client, startdate, enddate) do
     query = (from j in Job,
               where: j.date >= ^startdate,
@@ -144,7 +164,7 @@ defmodule Soroban.InvoiceController do
 
     jtotal = for n <- jobs, do: Map.get(n, :total)
     ftotal = for n <- jtotal, do: Map.get(n, :amount)
-    total = Money.new(Enum.sum(ftotal))                  
+    total = Money.new(Enum.sum(ftotal))
     total
 end
 
