@@ -92,15 +92,6 @@ defmodule Soroban.Pdf do
     Enum.join([invoicenum, "_", clientname, ".pdf"])
   end
 
-  # Cleans up after sending a file.  Need to work on this more, we want to cache
-  # large files instead of regenerating them
-  defp clean_up(_conn, filename) do
-    case File.exists?(filename) do
-      true -> File.rm(filename)
-      _ -> "no file to remove"
-    end
-  end
-
   # Sends a file to the browser
   defp send_a_file(conn, filename, savefile, type) do
     conn
