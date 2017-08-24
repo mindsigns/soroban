@@ -24,13 +24,13 @@
       <td>
       <%= link to: setting_path(@conn, :show, setting), class: "btn btn-primary btn-xs" do %>
         <span class="glyphicon glyphicon-info-sign"></span>
-        <%= end %>
+        <% end %>
       <%= link to: setting_path(@conn, :edit, setting), class: "btn btn-info btn-xs" do %> 
         <span class="glyphicon glyphicon-edit"></span> 
-        <%= end %>
+        <% end %>
       <%= link to: setting_path(@conn, :delete, setting), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" do %>
         <span class="glyphicon glyphicon-remove-sign"></span> 
-        <%= end %>
+        <% end %>
       </td>
     </tr>
 <% end %>
@@ -39,4 +39,4 @@
 
 <%= if Enum.empty?(@settings) do %>
 <%= link "New setting", to: setting_path(@conn, :new) %>
-<%= end %>
+<% end %>

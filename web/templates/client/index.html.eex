@@ -27,13 +27,13 @@
       <td class="text-right">
         <%= link to: client_path(@conn, :show, client), class: "btn btn-primary btn-xs" do %>
             <span class="glyphicon glyphicon-info-sign"></span>
-		<%= end %>
+		<% end %>
         <%= link to: client_path(@conn, :edit, client), class: "btn btn-info btn-xs" do %>
             <span class="glyphicon glyphicon-edit"></span>
-		<%= end %>
+		<% end %>
         <%= link to: client_path(@conn, :delete, client), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" do %>
             <span class="glyphicon glyphicon-edit"></span>
-		<%= end %>
+		<% end %>
       </td>
     </tr>
 <% end %>

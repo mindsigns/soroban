@@ -58,13 +58,13 @@
       <td class="text-right">
         <%= link to: job_path(@conn, :show, job), class: "btn btn-primary btn-xs" do %>
           <span class="glyphicon glyphicon-info-sign"></span>
-          <%= end %>
+          <% end %>
         <%= link to: job_path(@conn, :edit, job), class: "btn btn-info btn-xs" do %>
           <span class="glyphicon glyphicon-edit"></span>
-          <%= end %>
+          <% end %>
         <%= link to: job_path(@conn, :delete, job), method: :delete, data: [confirm: "Are you sure you want to delete?"], class: "btn btn-danger btn-xs" do %>
           <span class="glyphicon glyphicon-remove-sign"></span>
-          <%= end %>
+          <% end %>
       </td>
     </tr>
 <% end %>
