@@ -2,6 +2,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 
+<div class="row">
+<div class="col-md-6">
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Monthly job count</h3>
@@ -13,10 +15,10 @@ var ctx = document.getElementById("jobChart").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [<%= for month <- @months do %>"<%= month  %>", <%= end %>],
+        labels: [<%= for month <- @months do %>"<%= month  %>", <% end %>],
         datasets: [{
             label: '# of Jobs',
-            data: [<%= for total <- @jobs do %><%= total%>, <%= end %>],
+            data: [<%= for total <- @jobs do %><%= total%>, <% end %>],
             backgroundColor: 'rgba(0, 100, 132)',
             borderColor: 'rgba(255,99,132,1)',
             borderWidth: 1
@@ -34,4 +36,53 @@ var myChart = new Chart(ctx, {
 });
 </script>
   </div>
+</div>
+</div>
+</div>
+
+<div class="row">
+       <div class="col-md-3 col-xs-6">
+           <div class="panel panel-red">
+               <div class="panel-heading">
+                   <div class="row">
+                       <div class="col-xs-3">
+                           <i class="fa fa-file-archive-o fa-5x"></i>
+                       </div>
+                       <div class="col-xs-9 text-right">
+                           <div class="huge"><%= @zipcount %></div>
+                           <div>Zip files in cache</div>
+                       </div>
+                   </div>
+               </div>
+               <a href="/clear_cache/zip">
+                   <div class="panel-footer">
+                       <span class="pull-left">Clean up zip files</span>
+                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                       <div class="clearfix"></div>
+                   </div>
+               </a>
+           </div>
+       </div>
+       <div class="col-md-3 col-xs-6">
+           <div class="panel panel-red">
+               <div class="panel-heading">
+                   <div class="row">
+                       <div class="col-xs-3">
+                           <i class="fa fa-file-pdf-o fa-5x"></i>
+                       </div>
+                       <div class="col-xs-9 text-right">
+                           <div class="huge"><%= @pdfcount %></div>
+                           <div>PDF files in cache</div>
+                       </div>
+                   </div>
+               </div>
+               <a href="/clear_cache/pdf">
+                   <div class="panel-footer">
+                       <span class="pull-left">Clean up PDF files</span>
+                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                       <div class="clearfix"></div>
+                   </div>
+               </a>
+           </div>
+       </div>
 </div>
