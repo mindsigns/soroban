@@ -7,8 +7,11 @@ defmodule Soroban.InvoiceUtils do
 
   alias Soroban.{Job, Invoice, Setting, Repo}
   alias Soroban.Pdf
-  alias Soroban.{Email, Mailer}
 
+  @doc """
+  Generates invoice/PDF
+  Returns invoice/jobs/total/company for rendering templates
+  """
   def generate(invoice_id, pdf_tf) do
     invoice = Repo.get!(Invoice, invoice_id) |> Repo.preload(:client)
 
@@ -36,18 +39,53 @@ defmodule Soroban.InvoiceUtils do
   {invoice, jobs, total, company}
   end
 
+  @doc """
+  Generates invoice/PDF
+  No return for template rendering. Used for batch processing
+  """
+  def generate_batch(invoice_id, pdf_tf) do
+    invoice = Repo.get!(Invoice, invoice_id) |> Repo.preload(:client)
+
+    company = Repo.one(from s in Setting, limit: 1)
+
+    query = (from j in Job,
+              where: j.date >= ^invoice.start,
+              where: j.date <= ^invoice.end,
+              where: j.client_id == ^invoice.client_id,
+              order_by: j.date,
+              select: j)
+
+    jobs = Repo.all(query) |> Repo.preload(:client)
+
+    total = total(jobs)
+
+    changeset = Ecto.Changeset.change(invoice, %{total: total})
+    Repo.update!(changeset)
+
+  case pdf_tf do
+    true  -> Pdf.to_pdf(invoice, jobs, total, company)
+    false -> "skipping pdf generation"
+  end
+  end
+
+  @doc """
+	Return total dollar amount of jobs
+  """
   def total(jobs) do
     jtotal = for n <- jobs, do: Map.get(n, :total)
     ftotal = for n <- jtotal, do: Map.get(n, :amount)
-    total = Money.new(Enum.sum(ftotal))                  
+    total = Money.new(Enum.sum(ftotal))
     total
   end
 
   def batch_job(_conn, clients, params) do
-    %{"invoice" => %{"date" => date, "end" => end_date, "start" => start_date, "number" => number}} =  params
+    %{"invoice" => %{"date" => date, "end" => end_date,"start" => start_date,
+                     "number" => number}} =  params
 
     for c <- clients do
-    case Enum.count(Repo.all from c in Soroban.Client, join: j in Soroban.Job, where: j.client_id == ^c) do
+    case Enum.count(Repo.all from c in Soroban.Client,
+                      join: j in Soroban.Job,
+                      where: j.client_id == ^c) do
         0 ->  "No Jobs"
         _ ->  invoice_id = new_invoice(c, date, end_date, start_date, number)
               generate(invoice_id, true)
@@ -60,7 +98,9 @@ defmodule Soroban.InvoiceUtils do
     for i <- invoice_id_list do
       {invoice, jobs, total, company} = generate(i, false)
       case is_nil(invoice.client.email) do
-        false -> Soroban.Email.invoice_html_email(invoice.client.email, invoice, jobs, total, company)
+        false -> Soroban.Email.invoice_html_email(invoice.client.email,
+                                                  invoice, jobs, total,
+                                                  company)
                   |> Soroban.Mailer.deliver_later
         true  -> Slingbag.add(invoice.client.name)
       end
@@ -76,5 +116,11 @@ defmodule Soroban.InvoiceUtils do
     result =  Repo.insert_or_update!(changeset)
     result.id
  end
+
+#### Test
+  def htmlout(invoice, jobs, total, company) do
+	Phoenix.View.render_to_string(Soroban.EmailView, "invoice.html",
+		invoice: invoice, jobs: jobs, total: total, company: company)
+  end
 
 end
