@@ -18,12 +18,13 @@ defmodule Soroban.AdminController do
 
     dates = for {x, y} <- list, do:
               {assign_month(x), y}
-    
+
 
     months = for {x, _} <- dates, do: x
     jobs = for {_, y} <- dates, do: y
 
-    render(conn, "index.html", months: months, jobs: jobs)
+    {zipcount, pdfcount} = Soroban.Utils.cache_count
+    render(conn, "index.html", months: months, jobs: jobs, zipcount: zipcount, pdfcount: pdfcount)
   end
 
   @doc"""
