@@ -19,12 +19,11 @@ defmodule Soroban.Pdf do
     newfile = Enum.join([pdf_path(), savefile])
 
     case File.exists?(newfile) do
-       true  -> IO.puts "File exists"
+       true  -> "File exists"
        false -> html = Phoenix.View.render_to_string(Soroban.EmailView, "invoice.html",
 							invoice: invoice, jobs: jobs, total: total, company: company)
                 pdf_binary = PdfGenerator.generate_binary!(html, delete_temporary: true)
                 File.write(newfile, pdf_binary)
-				IO.puts "Here"
     end
   end
 
