@@ -35,8 +35,15 @@ defmodule Soroban.SettingController do
   Route: POST /settings
   """
   def create(conn, %{"setting" => setting_params}) do
-    changeset = Setting.changeset(%Setting{}, setting_params)
+    new_params = if upload = setting_params["invoice_image"] do
+      extension = Path.extname(upload.filename)
+      File.cp(upload.path, "/priv/static/images/#{extension}")
+      Map.put(setting_params, "invoice_image", upload.filename)
+    else
+      new_params = setting_params
+    end
 
+    changeset = Setting.changeset(%Setting{}, new_params)
     case Repo.insert(changeset) do
       {:ok, _setting} ->
         conn
@@ -72,7 +79,14 @@ defmodule Soroban.SettingController do
   """
   def update(conn, %{"id" => id, "setting" => setting_params}) do
     setting = Repo.get!(Setting, id)
-    changeset = Setting.changeset(setting, setting_params)
+    new_params = if upload = setting_params["invoice_image"] do
+    extension = Path.extname(upload.filename)
+    File.cp(upload.path, "priv/static/images/#{upload.filename}")
+    Map.put(setting_params, "invoice_image", upload.filename)
+  else
+    new_params = setting_params
+  end
+    changeset = Setting.changeset(setting, new_params)
 
     case Repo.update(changeset) do
       {:ok, setting} ->
@@ -80,7 +94,7 @@ defmodule Soroban.SettingController do
         |> put_flash(:info, "Setting updated successfully.")
         |> redirect(to: setting_path(conn, :show, setting))
       {:error, changeset} ->
-        render(conn, "edit.html", setting: setting, changeset: changeset)
+        render(conn, "show.html", setting: setting, changeset: changeset)
     end
   end
 
