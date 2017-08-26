@@ -7,11 +7,9 @@ defmodule Soroban.BatchController do
   import Soroban.Authorize
   import Ecto.Query
 
-  alias Soroban.{Repo, Invoice, Client}
-  alias Soroban.{InvoiceUtils, Pdf}
+  alias Soroban.{Repo, Invoice, Client, Invoiceutils, Pdf}
 
   plug :user_check
-
   plug :load_clients when action in [:index, :generate]
 
   @doc """
