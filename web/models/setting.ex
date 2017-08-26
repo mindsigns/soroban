@@ -10,6 +10,7 @@ Soroban.Setting model
     field :company_address, :string
     field :company_email, :string
     field :note, :string
+    field :invoice_image, :string
 
     timestamps()
   end
@@ -19,7 +20,7 @@ Soroban.Setting model
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:company_name, :company_address, :company_email, :note])
+    |> cast(params, [:company_name, :company_address, :company_email, :note, :invoice_image])
     |> validate_required([:company_name, :company_address, :company_email])
   end
 end
