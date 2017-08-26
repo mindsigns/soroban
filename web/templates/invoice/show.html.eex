@@ -7,6 +7,7 @@
 	<%= if @invoice.client.email do %>
   		<%= link "Email to Client", to: invoice_invoice_path(@conn, :send_email, @invoice), class: "btn btn-default"%>
 	<% end %>
+	<%= link "View HTML Invoice", to: invoice_path(@conn, :view, @invoice), class: "btn btn-default"%>
 	<%= link "Edit Invoice", to: invoice_path(@conn, :edit, @invoice), class: "btn btn-default"%>
   </div>
 	<%= link "Delete Invoice", to: invoice_path(@conn, :delete, @invoice), method: :delete, data: [confirm: "Are you sure you want to delete?"],class: "btn btn-danger"%>
