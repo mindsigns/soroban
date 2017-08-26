@@ -1,3 +1,4 @@
+<img src="/images/zoom.jpg">
 <%= @company.company_name %>
 <%= text_to_html(@company.company_address, [wrapper_tag: :div, attributes: [class: "p"]]) %>
 
@@ -13,7 +14,7 @@ Invoice #: <%= @invoice.number %> <br>
 Invoice Date : <%= @invoice.date %> <br>
 Billing Period : <%= @invoice.start %> to <%= @invoice.end %> <br>
 Invoice Total : <b><%= @total %></b> <br>
-<br/> 
+<br>
 <hr>
 <table class="table">
   <thead>
