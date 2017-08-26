@@ -22,12 +22,13 @@ defmodule Soroban.Router do
     resources "/jobtypes", JobtypeController
     resources "/clients", ClientController
     resources "/invoices", InvoiceController do
-      get "/generate_pdf", InvoiceController, :generate_pdf
+      #get "/generate_pdf", InvoiceController, :generate_pdf
       get "/send_email", InvoiceController, :generate_email
       get "/show", InvoiceController, :show_invoice
     end
     get "/invoices/sendpdf/:id", InvoiceController, :send_pdf
     get "/clear_cache/:type", InvoiceController, :clear_cache
+    get "/invoices/view/:id", InvoiceController, :view
 
     get "/invoice/batch", BatchController, :index
     post "/invoice/generate_all", BatchController, :generate_all
