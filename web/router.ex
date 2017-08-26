@@ -23,7 +23,7 @@ defmodule Soroban.Router do
     resources "/clients", ClientController
     resources "/invoices", InvoiceController do
       #get "/generate_pdf", InvoiceController, :generate_pdf
-      get "/send_email", InvoiceController, :generate_email
+      get "/send_email", InvoiceController, :send_email
       get "/show", InvoiceController, :show_invoice
     end
     get "/invoices/sendpdf/:id", InvoiceController, :send_pdf
