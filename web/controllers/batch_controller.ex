@@ -1,4 +1,7 @@
 defmodule Soroban.BatchController do
+  @moduledoc """
+  Batch controller used for batch operations
+  """
   use Soroban.Web, :controller
 
   import Soroban.Authorize
@@ -11,8 +14,9 @@ defmodule Soroban.BatchController do
 
   plug :load_clients when action in [:index, :generate]
 
-  @doc"""
+  @doc """
   Index function
+  Route: GET /invoice/batch
   """
   def index(conn, _params) do
     today = Date.utc_today()
@@ -20,8 +24,9 @@ defmodule Soroban.BatchController do
     render(conn, "index.html", today: today, text: "")
   end
 
-  @doc"""
+  @doc """
   Deletes invoices by the Invoice Number
+  Route: GET /invoice/delete/<id>
   """
   def delete(conn, %{"id" => id}) do
     query = (from i in Invoice,
@@ -41,8 +46,9 @@ defmodule Soroban.BatchController do
     |> redirect(to: invoice_path(conn, :index))
   end
 
-  @doc"""
-  Generate a batch of invoices
+  @doc """
+  Generate a batch of invoices based on date ranges
+  Route: POST /invoice/generate_all
   """
   def generate_all(conn, params) do
     clients = Repo.all from c in Client, select: c.id
@@ -55,8 +61,9 @@ defmodule Soroban.BatchController do
       |> redirect(to: invoice_path(conn, :index))
   end
 
-  @doc"""
+  @doc """
   Email all invoices for a given invoice ID
+  Route: GET /invoice/email_all/<invoice_id>
   """
   def email_all(conn, %{"invoice" => invoice}) do
   query = (from i in Invoice,
@@ -82,8 +89,9 @@ defmodule Soroban.BatchController do
   end
 end
 
-  @doc"""
+  @doc """
   Builds and sends a zip file of all PDF invoices with the same Invoice ID
+  Route: GET /invoice/sendzip/<invoice_id>
   """
   def send_zip(conn, %{"invoice" => invoice}) do
     query = (from i in Invoice,
