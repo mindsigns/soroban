@@ -17,6 +17,12 @@
     <div class="col-md-3 font-bold">Company Email:</div>
     <div class="col-md-4"><%= @setting.company_email%></div>
   </div>
+  <div>
+    <div class="col-md-3 font-bold">Invioce Image</div>
+    <div class="col-md-4"><%= @setting.invoice_image%></div>
+    <div class="col-md-4"><img style="height: 100px;"
+         src="/images/<%= @setting.invoice_image%>"></div>
+  </div>
 </div>
 </div>
 
