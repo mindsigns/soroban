@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="panel-body">
 
-<%= form_for @changeset, @action, fn f -> %>
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
@@ -30,6 +30,12 @@
     <%= label f, :name, "Tagline for invoices", class: "control-label" %>
     <%= text_input f, :note, class: "form-control", placeholder: "This will message will be printed on all outgoing invoices" %>
     <%= error_tag f, :note%>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :invoice_image, "Image file for invoices - Must be a small JPG image", class: "control-label" %>
+    <%= file_input f, :invoice_image, class: "form-control" %>
+    <%= error_tag f, :invoice_image %>
   </div>
 
   <div class="form-group">
