@@ -20,7 +20,7 @@ defmodule Soroban.Pdf do
 
     case File.exists?(newfile) do
        true  -> "File exists"
-       false -> html = Phoenix.View.render_to_string(Soroban.EmailView, "invoice.html",
+       false -> html = Phoenix.View.render_to_string(Soroban.LayoutView, "invoice.html",
 							invoice: invoice, jobs: jobs, total: total, company: company)
                 pdf_binary = PdfGenerator.generate_binary!(html, delete_temporary: true)
                 File.write(newfile, pdf_binary)
