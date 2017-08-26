@@ -8,7 +8,6 @@
            float: right;
             padding-right: 50px;}
       </style>
-
   </head>
   <body>
 <base href="http://localhost:4000/">
@@ -27,7 +26,7 @@ Invoice #: <%= @invoice.number %> <br>
 Invoice Date : <%= @invoice.date %> <br>
 Billing Period : <%= @invoice.start %> to <%= @invoice.end %> <br>
 Invoice Total : <b><%= @total %></b> <br>
-<br/>
+<br>
 <hr>
 <table class="table">
   <thead>
