@@ -1,4 +1,7 @@
 defmodule Soroban.JobController do
+  @moduledoc """
+  Job Controller
+  """
   use Soroban.Web, :controller
 
   import Soroban.Authorize
@@ -12,7 +15,10 @@ defmodule Soroban.JobController do
   plug :load_jobtypes when action in [:index, :new, :create, :edit, :update]
   plug :load_clients when action in [:index, :new, :create, :edit, :update]
 
-
+  @doc """
+  Index page
+  Route: GET /jobs
+  """
   def index(conn, _params) do
 
     query = from j in Job, order_by: [desc: :date], limit: 300
@@ -21,13 +27,20 @@ defmodule Soroban.JobController do
     render(conn, "index.html", jobs: jobs)
   end
 
+  @doc """
+  Create a new job
+  Route: GET /jobs/new
+  """
   def new(conn, _params) do
     changeset = Job.changeset(%Job{})
     today = Date.utc_today()
-
-    render(conn, "new.html", changeset: changeset, today: today) 
+    render(conn, "new.html", changeset: changeset, today: today)
   end
 
+  @doc """
+  Create a new job
+  Route: POST /jobs
+  """
   def create(conn, %{"job" => job_params}) do
     changeset = Job.changeset(%Job{}, job_params)
     case Repo.insert(changeset) do
@@ -40,11 +53,19 @@ defmodule Soroban.JobController do
     end
   end
 
+  @doc """
+  Show a single job
+  Route: GET /jobs/<id>
+  """
   def show(conn, %{"id" => id}) do
     job = Repo.get!(Job, id) |> Repo.preload(:client)
     render(conn, "show.html", job: job)
   end
 
+  @doc """
+  Edit a job
+  Route: GET /jobs/<id>/edit
+  """
   def edit(conn, %{"id" => id}) do
     job = Repo.get!(Job, id) |> Repo.preload(:client)
     changeset = Job.changeset(job)
@@ -52,6 +73,10 @@ defmodule Soroban.JobController do
     render(conn, "edit.html", job: job, changeset: changeset, today: today)
   end
 
+  @doc """
+  Update the job after an edit
+  Route: PATCH/PUT /jobs/<id>
+  """
   def update(conn, %{"id" => id, "job" => job_params}) do
     job = Repo.get!(Job, id)
     changeset = Job.changeset(job, job_params)
@@ -66,17 +91,22 @@ defmodule Soroban.JobController do
     end
   end
 
+  @doc """
+  Deletes a job
+  Route: DELETE /jobs/<id>
+  """
   def delete(conn, %{"id" => id}) do
     job = Repo.get!(Job, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
     Repo.delete!(job)
 
     conn
     |> put_flash(:info, "Job deleted successfully.")
     |> redirect(to: job_path(conn, :index))
   end
+
+  #
+  # Private Functions
+  #
 
    defp load_services(conn, _) do
       services = Repo.all from c in Soroban.Service, select: c.type

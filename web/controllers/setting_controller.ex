@@ -1,4 +1,9 @@
 defmodule Soroban.SettingController do
+  @moduledoc """
+  Setting controller
+  This is where you set up your company information.  There should only be
+  one company.
+  """
   use Soroban.Web, :controller
 
   import Soroban.Authorize
@@ -7,16 +12,28 @@ defmodule Soroban.SettingController do
 
   plug :user_check
 
+  @doc """
+  Index page
+  Route: GET /settings
+  """
   def index(conn, _params) do
     settings = Repo.all(Setting)
     render(conn, "index.html", settings: settings)
   end
 
+  @doc """
+  Enter the company settings
+  Route: GET /settings/new
+  """
   def new(conn, _params) do
     changeset = Setting.changeset(%Setting{})
     render(conn, "new.html", changeset: changeset)
   end
 
+  @doc """
+  Create the settings
+  Route: POST /settings
+  """
   def create(conn, %{"setting" => setting_params}) do
     changeset = Setting.changeset(%Setting{}, setting_params)
 
@@ -30,17 +47,29 @@ defmodule Soroban.SettingController do
     end
   end
 
+  @doc """
+  Show the settings
+  Route: GET /settings/<id>
+  """
   def show(conn, %{"id" => id}) do
     setting = Repo.get!(Setting, id)
     render(conn, "show.html", setting: setting)
   end
 
+  @doc """
+  Edit company settings
+  Route: GET /settings/<id>
+  """
   def edit(conn, %{"id" => id}) do
     setting = Repo.get!(Setting, id)
     changeset = Setting.changeset(setting)
     render(conn, "edit.html", setting: setting, changeset: changeset)
   end
 
+  @doc """
+  Update settings after an edit
+  Route: PATCH/PUT /settings/<id>
+  """
   def update(conn, %{"id" => id, "setting" => setting_params}) do
     setting = Repo.get!(Setting, id)
     changeset = Setting.changeset(setting, setting_params)
@@ -55,11 +84,13 @@ defmodule Soroban.SettingController do
     end
   end
 
+  @doc """
+  Delete settings
+  Route: DELETE /settings/<id>
+  """
   def delete(conn, %{"id" => id}) do
     setting = Repo.get!(Setting, id)
 
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
     Repo.delete!(setting)
 
     conn

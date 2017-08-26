@@ -1,23 +1,37 @@
 defmodule Soroban.ServiceController do
+  @moduledoc """
+  Service type controller
+  """
   use Soroban.Web, :controller
-  
+
   import Soroban.Authorize
 
   alias Soroban.Service
 
-
   plug :user_check
 
+  @doc """
+  Index page
+  Route: GET /service
+  """
   def index(conn, _params) do
     services = Repo.all(Service)
     render(conn, "index.html", services: services)
   end
 
+  @doc """
+  Create a new service type
+  Route GET /service/new
+  """
   def new(conn, _params) do
     changeset = Service.changeset(%Service{})
     render(conn, "new.html", changeset: changeset)
   end
 
+  @doc """
+  Create the service type
+  Route: POST /service
+  """
   def create(conn, %{"service" => service_params}) do
     changeset = Service.changeset(%Service{}, service_params)
 
@@ -31,17 +45,29 @@ defmodule Soroban.ServiceController do
     end
   end
 
+  @doc """
+  Show a service type
+  Route: GET /service/<id>
+  """
   def show(conn, %{"id" => id}) do
     service = Repo.get!(Service, id)
     render(conn, "show.html", service: service)
   end
 
+  @doc """
+  Edit a service type
+  Route: GET /service/<id>/edit
+  """
   def edit(conn, %{"id" => id}) do
     service = Repo.get!(Service, id)
     changeset = Service.changeset(service)
     render(conn, "edit.html", service: service, changeset: changeset)
   end
 
+  @doc """
+  Update the service type after editing
+  Route: PATCH/PUT /service/<id>
+  """
   def update(conn, %{"id" => id, "service" => service_params}) do
     service = Repo.get!(Service, id)
     changeset = Service.changeset(service, service_params)
@@ -56,11 +82,13 @@ defmodule Soroban.ServiceController do
     end
   end
 
+  @doc """
+  Delete a service type
+  Route: DELETE /service/<id>
+  """
   def delete(conn, %{"id" => id}) do
     service = Repo.get!(Service, id)
 
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
     Repo.delete!(service)
 
     conn
