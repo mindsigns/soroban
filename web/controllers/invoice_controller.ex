@@ -1,4 +1,7 @@
 defmodule Soroban.InvoiceController do
+  @moduledoc """
+  Invoice Controller Route: /invoices
+  """
   use Soroban.Web, :controller
 
   import Soroban.Authorize
