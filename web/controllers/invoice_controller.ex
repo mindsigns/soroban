@@ -10,6 +10,10 @@ defmodule Soroban.InvoiceController do
 
   plug :load_clients when action in [:index, :new, :create, :edit, :show, :update, :generate]
 
+  @doc """
+  Route: GET /invoices
+  Shows a list of Invoices by unique invoice IDs.
+  """
   def index(conn, _params) do
 
     invoices = Invoice
@@ -19,18 +23,19 @@ defmodule Soroban.InvoiceController do
     render(conn, "index.html", invoices: invoices)
   end
 
-  def generate_pdf(conn, %{"invoice_id" => id}) do
-
-    {invoice, jobs, _, _} = InvoiceUtils.generate(id, true)
-
-    render(conn, "show.html", invoice: invoice, jobs: jobs)
-  end
-
+  @doc """
+  Route: GET /invoices/sendpdf/<id>
+  Sends a pdf to the browser.
+  """
   def send_pdf(conn, %{"id" => id}) do
     Pdf.send_pdf(conn, id)
   end
 
-  def generate_email(conn, %{"invoice_id" => id}) do
+  @doc """
+  Route: GET /invoices/<id>/send_email
+  Sends an email to the client email address.
+  """
+  def send_email(conn, %{"id" => id}) do
 
     {invoice, jobs, total, company} = InvoiceUtils.generate(id, true)
 
@@ -43,6 +48,10 @@ defmodule Soroban.InvoiceController do
       |> render("show.html", invoice: invoice, jobs: jobs)
   end
 
+  @doc """
+  Route: GET /invoices/new
+  Creates a new invoice
+  """
   def new(conn, _params) do
     changeset = Invoice.changeset(%Invoice{})
     today = Date.utc_today()
@@ -50,6 +59,10 @@ defmodule Soroban.InvoiceController do
     render(conn, "new.html", changeset: changeset, today: today)
   end
 
+  @doc """
+  Route: POST /invoices/
+  Inserts data into the database
+  """
   def create(conn, %{"invoice" => invoice_params}) do
     changeset = Invoice.changeset(%Invoice{}, invoice_params)
 
@@ -69,6 +82,10 @@ defmodule Soroban.InvoiceController do
     end
   end
 
+  @doc """
+  Route: GET /invoices/<id>
+  Displays a single invoice
+  """
   def show(conn, %{"id" => id}) do
     invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
 
@@ -84,6 +101,10 @@ defmodule Soroban.InvoiceController do
     render(conn, "show.html", invoice: invoice, jobs: jobs)
   end
 
+  @doc """
+  Route: GET /invoices/<invoice_id>/show
+  Displays a list of invoices with the same Invoice ID
+  """
   def show_invoice(conn, %{"invoice_id" => id}) do
 
     query = (from i in Invoice,
@@ -98,6 +119,21 @@ defmodule Soroban.InvoiceController do
     render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count, total: total)
   end
 
+  @doc """
+  Route: GET /invoices/view/<invoice_id_number>
+  Shows the HTML version of the rendered invoice using the Email/PDF template.
+  """
+  def view(conn, %{"id" => id}) do
+
+    {invoice, jobs, total, company} = InvoiceUtils.generate(id, false)
+    render(conn, invoice: invoice, jobs: jobs, total: total,
+                  company: company, layout: {Soroban.LayoutView, "invoice.html"})
+  end
+
+  @doc """
+  Route: GET /invoices/<id>/edit
+  Edit an invoice
+  """
   def edit(conn, %{"id" => id}) do
     invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
     changeset = Invoice.changeset(invoice)
@@ -106,6 +142,10 @@ defmodule Soroban.InvoiceController do
     render(conn, "edit.html", invoice: invoice, changeset: changeset, today: today)
   end
 
+  @doc """
+  Route: PATCH/PUT /invoices/<id>
+  Updates an invoice after editing
+  """
   def update(conn, %{"id" => id, "invoice" => invoice_params}) do
     invoice = Repo.get!(Invoice, id)
     changeset = Invoice.changeset(invoice, invoice_params)
@@ -120,11 +160,13 @@ defmodule Soroban.InvoiceController do
     end
   end
 
+  @doc """
+  ROUTE: DELETE /invoices/<id>
+  Deletes an invoice
+  """
   def delete(conn, %{"id" => id}) do
     invoice = Repo.get!(Invoice, id)
 
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
     Repo.delete!(invoice)
 
     conn
@@ -132,6 +174,10 @@ defmodule Soroban.InvoiceController do
     |> redirect(to: invoice_path(conn, :index))
   end
 
+  @doc """
+  ROUTE: GET /clear_cache/<zip|pdf|all>
+  Deletes Zip and PDF files from the file system
+  """
   def clear_cache(conn, %{"type" => type}) do
 
     res = case type do
@@ -152,6 +198,13 @@ defmodule Soroban.InvoiceController do
     |> redirect(to: admin_path(conn, :index))
   end
 
+  #
+  # Private functions
+  #
+
+  @doc """
+  Totals dollar amount from jobs within a date range for a client
+  """
   defp total(client, startdate, enddate) do
     query = (from j in Job,
               where: j.date >= ^startdate,
