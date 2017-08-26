@@ -3,6 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <style>
+      img {height: 50px;
+           float: right;
+            padding-right: 50px;}
+      </style>
   </head>
   <body>
     <%= render @view_module, @view_template, assigns %>
