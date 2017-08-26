@@ -35,7 +35,7 @@ defmodule Soroban.InvoiceController do
   Route: GET /invoices/<id>/send_email
   Sends an email to the client email address.
   """
-  def send_email(conn, %{"id" => id}) do
+  def send_email(conn, %{"invoice_id" => id}) do
 
     {invoice, jobs, total, company} = InvoiceUtils.generate(id, true)
 
