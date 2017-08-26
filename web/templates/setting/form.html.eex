@@ -33,7 +33,7 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :invoice_image, "Image file for invoices - Must be a small JPG image", class: "control-label" %>
+    <%= label f, :invoice_image, "Image file for invoices - should be a small image", class: "control-label" %>
     <%= file_input f, :invoice_image, class: "form-control" %>
     <%= error_tag f, :invoice_image %>
   </div>
