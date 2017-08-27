@@ -1,31 +1,176 @@
+<style>
+p {
+    border-left: 2px solid grey;
+    padding-left: 10px;
+    /*display: list-item;
+    list-style-type: disc;
+    list-style-position: inside; */
+}
+
+.help {font-size: 16px;}
+
+</style>
+<div class="col-md-6 help">
 <h1 class="page-header">Soroban  <small>help</small></h1>
 
-<h3>Getting started</h3>
+<h3 name="top">Getting started</h3>
 
 <ul>
-  <li>Users</li>
-  <li>Settings</li>
-  <li>Adding jobs</li>
-  <li>Invoicing</li>
-  <li>Email and PDF</li>
+  <li><a href="#controls">Controls</a></li>
+  <li><a href="#users">Users</a></li>
+  <li><a href="#settings">Settings</a></li>
+  <li><a href="#clients">Clients</a></li>
+  <li><a href="#jobtypes">Job Types</a></li>
+  <li><a href="#servicetypes">Service Types</a></li>
+  <li><a href="#jobs">Adding Jobs</a></li>
+  <li><a href="#invoicing">Invoicing</a></li>
+  <li><a href="#emails">Emails and PDFs</a></li>
 </ul>
+<br /><br />
 
-<h4>
-  Users
-</h4>
+<h3><a name="controls">Icons and Controls</a></h3>
+<hr />
+  Throughout the site, you will see these icons next to entries. <br />
+  <span class="glyphicon glyphicon-info-sign btn btn-info"></span> This icon is used to <b>view</b> an item. <br />
+  <span class="glyphicon glyphicon-edit btn btn-warning"></span> This icon is used to <b>edit</b> an item. <br />
+  <span class="glyphicon glyphicon-remove-sign btn btn-danger"></span> This icon is used to <b>delete</b> an item. <br />
+  <a href="#top">Top</a>
+<br /><br />
 
-<h4>
-  Settings
-</h4>
+<h3><a name="users">Managing Users</a></h3>
+<hr />
+<p>
+  The system comes with a default username of <b>admin@admin.com</b> and
+  default password of <b>admin123</b>. You should <a style="color: red; font-weight: bold;" href="/users">
+ change the password </a> before you do anything else.
+  You can add as many users as you need under <b>Manage</b> > <b>Users</b> in the sidebar menu.
+</p>
+<p>
+  After creating a user, a confirmation email will be sent to the email address used to create the account.
+  You need to click the link in email to activiate the acount before you can use it.
+</p>
+<p>
+  If you delete all of the users, you will be locked out of the system.
+</p>
+  <a href="#top">Top</a>
+<br /><br />
 
-<h4>
-  Jobs
-</h4>
+<h3><a name="settings">Enter Settings</a></h3>
+<hr />
+<p>
+  After changing the default password, you will need to enter your company informaion under <b><a href="/settings">Settings</a>.</b>
+</p>
+<p>
+  The email will be used as the contact email address if you choose to email your invoices, so make sure it is valid.
+</p>
+<p>
+  You can optionally add an image that will be placed in the upper right hand corner of your invoices.  It should be fairly small.
+</p>
+  <a href="#top">Top</a>
+<br /><br />
 
-<h4>
-  Invoicing
-</h4>
+<h3><a name="clients">Adding Clients</a></h3>
+<hr />
+<p>
+  You can now start adding your clients under <b><a href="/clients/new">Manage > Clients > New</a></b> in the sidebar.
+  This information will be used to later when you start entering in jobs.
+  You'll need to enter the client name, a contact name or something like "Accounting Department", a mailing address, and optionally an email address
+  if you want to be able to email the client the invoice.
+</p>
+  <a href="#top">Top</a>
+<br /><br />
 
-<h4>
-  Email and PDF
-</h4>
+<h3><a name="jobtypes">Adding Job Types</a></h3>
+<hr />
+<p>
+  Next, you'll need to add job types under <b><a href="/jobtypes/new">Manage > Jobtypes > New</a></b> in the sidebar.
+  This might be something like "In-Town Bicycle", "Vehichle", "Service of Process", or what ever you classify your delivery types as.
+  You can add as many job types as you need.
+</p>
+  <a href="#top">Top</a>
+<br /><br />
+
+<h3><a name="servicetypes">Adding Service Types</a></h3>
+<hr />
+<p>
+  You can add service types under <b><a href="/service/new">Manage > Service Types > New</a></b>.
+  A service type might be "ASAP", "Rush", "Regular", ect.  Again, you can add as many service types as you need.
+</p>
+  <a href="#top">Top</a>
+<br /><br />
+
+<h3><a name="jobs">Adding Jobs</a></h3>
+<hr />
+<p>
+  You can now start adding jobs under <b><a href="/jobs/new">Jobs > New</a></b> in the sidebar.  Clients, Job Types, and Service Types
+  are all now available for fast data entry.
+</p>
+<p>
+  Start by selecting the <b>date</b> that the job was done.  The date picker defaults to todays date, but can be set to any date.
+</p>
+<p>
+  Select the <b>client</b> from the drop down menu.  You can use the keyboard to select clients quickly, as well.  If a client is not in the list, you can click
+  the <b><span class="glyphicon glyphicon-plus-sign"></span></b> icon to add a new client.
+</p>
+<p>
+  You can enter a <b>billing reference</b> for the job if you use them.
+</p>
+<p>
+  <b>Caller, Job Type, Description, Zone, Service Type, and Total</b> are all required to be filled in.  The
+  <b>Details</b> field is for any extra notes about the job.  You can add things like wait time, weight, or
+  anything else you like.  Any dollar amounts entered here <b>will not</b> be automatically added to the total.
+  You'll need add any extra charges into the final total of the job.
+</p>
+<p>
+  After you hit the <b>Submit</b> button, you can continue to add jobs, edit those jobs,
+  or delete them. You can see an example job below.
+</p>
+<table id="tbl" class="table table-striped table-bordered table-hover responsive">
+  <thead>
+    <tr>
+      <th>Client</th>
+      <th>Date</th>
+      <th>Reference</th>
+      <th>Caller</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Zone</th>
+      <th>Service Type</th>
+      <th>Details</th>
+      <th>Total</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Some Client Name, LLP</td>
+      <td>2017-08-27</td>
+      <td>123456</td>
+      <td>Jimmy John</td>
+      <td>Bicycle Delivery</td>
+      <td>Delivery to: Some Place <br /> 1234 Some Street <br />SF, CA 941111</td>
+      <td>2</td>
+      <td>Rush</td>
+      <td>Wait time: $10</td>
+      <td>$44.00</td>
+      <td class="text-right">
+<a class="btn btn-primary btn-xs" href="#"><span class="glyphicon glyphicon-info-sign"></span></a>
+<a class="btn btn-info btn-xs" href="#"><span class="glyphicon glyphicon-edit"></span></a>
+<a class="btn btn-danger btn-xs" href="#"><span class="glyphicon glyphicon-remove-sign"></span></a>
+</td>
+</tr>
+</table>
+<p>
+  You can view all of the jobs entered from the <b><a href="/jobs">Jobs > View Jobs</a></b> side
+  menu option.  From there, you can sort the jobs by any column.  You can select how many jobs show
+  up on the page at one time, export the job list to CSV or Excel, and search for anything related to specific jobs.
+</p>
+  <a href="#top">Top</a>
+<br /><br />
+
+<h3><a name="invoicing">Invoicing</a></h3>
+<hr />
+
+<h3><a name="emails">Emails and PDFs</a></h3>
+<hr />
+</div>
