@@ -127,6 +127,7 @@ defmodule Soroban.JobController do
     year = String.to_integer(string)
     jobs = Job
             |> where([e], fragment("date_part('year', ?)", e.date) == ^year)
+            |> order_by(asc: :date)
             |> Repo.all
             |> Repo.preload(:client)
 
@@ -143,7 +144,7 @@ def list_by_month(conn, %{"month" => month_str, "year" => year_str}) do
     jobs = Job
             |> where([e], fragment("date_part('year', ?)", e.date) == ^year)
             |> where([e], fragment("date_part('month', ?)", e.date) == ^month)
-            |> order_by(desc: :date)
+            |> order_by(asc: :date)
             |> Repo.all
             |> Repo.preload(:client)
 
