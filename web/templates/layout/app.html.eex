@@ -98,6 +98,7 @@
     <!-- /#wrapper -->
 
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <%= Drab.Client.js(@conn) %>
     <script>require("web/static/js/app").App.sortTable()</script>
 </body>
 

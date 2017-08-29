@@ -3,6 +3,7 @@ defmodule Soroban.BatchController do
   Batch controller used for batch operations
   """
   use Soroban.Web, :controller
+  use Drab.Controller
 
   import Soroban.Authorize
   import Ecto.Query
