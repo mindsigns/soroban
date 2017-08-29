@@ -18,6 +18,9 @@ defmodule Soroban.Router do
     get "/help", AdminController, :help
 
     resources "/jobs", JobController
+    get "/joblist", JobController, :archive
+    get "/joblist/:year", JobController, :list_by_year
+    get "/joblist/:year/:month", JobController, :list_by_month
     resources "/service", ServiceController
     resources "/jobtypes", JobtypeController
     resources "/clients", ClientController
