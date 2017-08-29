@@ -104,6 +104,52 @@ defmodule Soroban.JobController do
     |> redirect(to: job_path(conn, :index))
   end
 
+  @doc """
+  Render an Archive page of jobs by Month/Year
+  Route: GET /joblist
+  """
+  def archive(conn, _params) do
+    yearlist = get_year()
+    years = for y <- yearlist, do: round(y)
+
+    stuff = for year <- years do
+          get_month(year)
+    end
+
+    render(conn, "archive.html", stuff: stuff)
+  end
+
+  @doc """
+  Display jobs by Year
+  Route: GET /listjobs/<year>
+  """
+  def list_by_year(conn, %{"year" => string}) do
+    year = String.to_integer(string)
+    jobs = Job
+            |> where([e], fragment("date_part('year', ?)", e.date) == ^year)
+            |> Repo.all
+            |> Repo.preload(:client)
+
+    render(conn, "index.html", jobs: jobs)
+  end
+
+  @doc """
+  Display jobs by month for a given year
+  Route: GET /listjobs/<year>/<month>
+  """
+def list_by_month(conn, %{"month" => month_str, "year" => year_str}) do
+    year = String.to_integer(year_str)
+    month = assign_month_num(month_str)
+    jobs = Job
+            |> where([e], fragment("date_part('year', ?)", e.date) == ^year)
+            |> where([e], fragment("date_part('month', ?)", e.date) == ^month)
+            |> order_by(desc: :date)
+            |> Repo.all
+            |> Repo.preload(:client)
+
+    render(conn, "index.html", jobs: jobs, year: year_str, month: month_str)
+  end
+
   #
   # Private Functions
   #
@@ -121,6 +167,67 @@ defmodule Soroban.JobController do
    defp load_clients(conn, _) do
       clients = Repo.all from c in Client, order_by: c.name, select: {c.name, c.id}
       assign(conn, :clients, clients)
+   end
+
+  defp get_year() do
+    res = Job
+            |> group_by([e], fragment("date_part('year', ?)", e.date))
+            |> select([e], fragment("date_part('year', ?)", e.date))
+            |> distinct(true)
+            |> Repo.all
+
+    Enum.sort(res)
+  end
+
+  defp get_month(year) do
+    res = Job
+            |> group_by([e], fragment("date_part('month', ?)", e.date))
+            |> select([e], fragment("date_part('month', ?)", e.date))
+            |> where([e], fragment("date_part('year', ?)", e.date) == ^year)
+            |> distinct(true)
+            |> Repo.all
+
+
+    months = for y <- res, do:
+              assign_month(y)
+
+              %{year: year, months: months}
+  end
+
+   defp assign_month(x) do
+      case round(x) do
+        1  -> "Jan"
+        2  -> "Feb"
+        3  -> "Mar"
+        4  -> "Apr"
+        5  -> "May"
+        6  -> "Jun"
+        7  -> "Jul"
+        8  -> "Aug"
+        9  -> "Sep"
+        10 -> "Oct"
+        11 -> "Nov"
+        12 -> "Dec"
+        _  -> "uhhh"
+      end
+   end
+
+   defp assign_month_num(x) do
+      case x do
+        "Jan" -> 01
+        "Feb" -> 02
+        "Mar" -> 03
+        "Apr" -> 04
+        "May" -> 05
+        "Jun" -> 06
+        "Jul" -> 07
+        "Aug" -> 08
+        "Sep" -> 09
+        "Oct" -> 10
+        "Nov" -> 11
+        "Dec" -> 12
+        _  -> "uhhh"
+      end
    end
 
 end
