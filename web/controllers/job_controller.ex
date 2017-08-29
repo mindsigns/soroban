@@ -24,7 +24,7 @@ defmodule Soroban.JobController do
     query = from j in Job, order_by: [desc: :date], limit: 300
     jobs = Repo.all(query) |> Repo.preload(:client)
 
-    render(conn, "index.html", jobs: jobs)
+    render(conn, "index.html", jobs: jobs, year: nil, month: nil)
   end
 
   @doc """
