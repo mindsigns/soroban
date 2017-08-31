@@ -15,17 +15,5 @@ defmodule Soroban.BatchCommander do
   def textrepl(socket, _params) do
     poke socket, text: "sup"
   end
-  # place your event handlers here
-  #
-  # def button_clicked(socket, sender) do
-  #   set_prop socket, "#output_div", innerHTML: "Clicked the button!"
-  # end
-  #
-  # place you callbacks here
-  #
-  # onload :page_loaded 
-  #
-  # def page_loaded(socket) do
-  #   set_prop socket, "div.jumbotron h2", innerText: "This page has been drabbed"
-  # end
+
 end
