@@ -20,7 +20,7 @@
   <h2>Listing jobs for <%= @month%> <%= @year %></h2>
 <%= else %>
   <h2 class="page-header">Job Listing</h2>
-<%= end %>
+<% end %>
 <div class="panel panel-default">
 <div class="panel-heading">
 <%= link "New job", class: "btn btn-primary btn-md", to: job_path(@conn, :new) %>
