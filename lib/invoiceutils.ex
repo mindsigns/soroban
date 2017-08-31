@@ -120,10 +120,4 @@ defmodule Soroban.InvoiceUtils do
     result.id
  end
 
-#### Test
-  def htmlout(invoice, jobs, total, company) do
-	Phoenix.View.render_to_string(Soroban.EmailView, "invoice.html",
-		invoice: invoice, jobs: jobs, total: total, company: company)
-  end
-
 end
