@@ -1,4 +1,4 @@
-FROM elixir:1.4.4
+FROM elixir:1.5.1
 ENV MIX_ENV=dev
 RUN apt-get update && \
     apt-get install -y libssl1.0.0 postgresql-client locales \
@@ -25,3 +25,5 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 ENV PORT 4000
+EXPOSE 4000
+ENTRYPOINT ["./scripts/start-server.sh"]
