@@ -47,9 +47,7 @@ defmodule Soroban.AdminController do
   # Private functions
   #
 
-  @doc """
-  Convert dates for charting
-  """
+  # Convert dates for charting
    defp assign_month(x) do
       case round(x) do
         1  -> "Jan"
