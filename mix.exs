@@ -43,7 +43,7 @@ defmodule Soroban.Mixfile do
      {:bamboo, "~> 0.8"},
      {:bamboo_smtp, "~> 1.3.0"},
      {:money, "~> 1.2.1"},
-     {:pdf_generator, ">=0.3.5"},
+     {:pdf_generator, ">=0.3.6"},
      {:drab, "~> 0.5"},
      {:blacksmith, "~> 0.1", only: :dev},
      {:faker, "~> 0.8", only: :dev},
