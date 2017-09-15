@@ -170,6 +170,53 @@ p {
 
 <h3><a name="invoicing">Invoicing</a></h3>
 <hr />
+<p>
+  Once all jobs have been entered, you can start invoicing.  Invoicing can be done for a single client or 
+  all clients at once.  Start by going to <b><a href="/invoices">Invoices</a></b>.
+</p>
+<p>
+We'll start off with creating an invoice for a single client. Click the <b><a href="/invoices/new">Generate single invoice</a></b> button to get started. 
+<ol>
+  <li> Enter an Invoice Number</li>
+  <li> Select the client from the drop down list</li>
+  <li> Set the Invoice date - This is just the date that will be listed on the invoice</li>
+  <li> Set the Start Date and End Date.  All jobs between these two dates will comprise the invoice</li>
+  <li> Hit the "Submit" button.</li>
+  <li> If all goes well, you should be resdirected to a listing of invoices with a success message</li>
+</ol>
+</p>
+<p>
+  At this point you have a few options.  We'll start by looking at the invoice we just created.  Click on the <b>Invoice
+  Number</b> to view the new invoice.  You should see some basic information about the invoice, or invoices, with the same invoice number.
+From here, we can download a PDF file of the invoice or we can click on <b>"View"</b> for more options.  Click <b>"View"</b> next to the invoice.
+</p>
+<p>
+  This page shows all of the information that is contained in our invoice, but it is not the actual invoice that the client will see.  We have the option to
+  edit jobs, or even the invoice itself, from this page.  If a job is updated, the invoice will have to be regenerated to reflect the change.  To view the 
+  actual invoice, click the <b>"View HTML Invoice"</b> at the top of the page.  This will show you a fully formatted invoice.  You can print from here, but we have
+  other options as well.  We can download the PDF version or email the HTML version to the client if a contact email address exists for them.
+</p>
+<p>
+Next, we will generate a batch of invoices for a given billing period. Head back to the <b><a href="/invoices">Invoices</a></b> page. Click the <b>"Generate All Invoices"</b> button
+to get started.  This is just like generating a single invoice, but we don't select a client, all options we choose here will apply to all clients in a given billing period.
+<ol>
+  <li>Start by entering an Invoice Number. - This will be applied to all Client invoices in the selected period</li>
+  <li>Set the Invoice Date</li>
+  <li>Select the Start and End date for the billing period</li>
+  <li>Hit "Generate" - This will take a moment to create all the invoices</li>
+</ol>
+</p>
+<p>
+You should now see client names appearing at the top of the box as their invoices are generated.  Stay on the page until it has finished. A link should appear to the new invoices
+when it's done. Now we can click on the Invoice Number to see all of the invoices that we created for the given billing period. You can view each Client's individually like we did before.
+</p>
+<p>
+  From the main "Invoice" page, you can now work with groups of invoices belonging to the same invoice number.  You can download a Zip file of PDFs of all those invoices, or email HTML copies
+  to all the clients that have contact email addresses.  You can also delete a whole set of invoices if you need to.
+</p>
+  <a href="#top">Top</a>
+<br /><br />
+
 
 <h3><a name="emails">Emails and PDFs</a></h3>
 <hr />
