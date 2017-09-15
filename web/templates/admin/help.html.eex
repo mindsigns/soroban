@@ -211,7 +211,7 @@ You should now see client names appearing at the top of the box as their invoice
 when it's done. Now we can click on the Invoice Number to see all of the invoices that we created for the given billing period. You can view each Client's individually like we did before.
 </p>
 <p>
-  From the main "Invoice" page, you can now work with groups of invoices belonging to the same invoice number.  You can download a Zip file of PDFs of all those invoices, or email HTML copies
+From the main <b><a href="/invoices">Invoice</a></b> page, you can now work with groups of invoices belonging to the same invoice number.  You can download a Zip file of PDFs of all those invoices, or email HTML copies
   to all the clients that have contact email addresses.  You can also delete a whole set of invoices if you need to.
 </p>
   <a href="#top">Top</a>
