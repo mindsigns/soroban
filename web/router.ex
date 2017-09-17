@@ -23,7 +23,9 @@ defmodule Soroban.Router do
     get "/joblist/:year/:month", JobController, :list_by_month
     resources "/service", ServiceController
     resources "/jobtypes", JobtypeController
-    resources "/clients", ClientController
+    resources "/clients", ClientController do
+      get "/warning", ClientController, :client_delete
+    end
     resources "/invoices", InvoiceController do
       get "/send_email", InvoiceController, :send_email
       get "/show", InvoiceController, :show_invoice

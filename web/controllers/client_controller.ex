@@ -85,6 +85,15 @@ defmodule Soroban.ClientController do
   end
 
   @doc """
+  Warning page for client removal
+  Route: GET /clients/<client_id>/warning
+  """
+  def client_delete(conn, %{"client_id" => id}) do
+    client = Repo.get!(Client, id) 
+    render(conn, "warning.html", client: client)
+  end
+
+  @doc """
   Delete a client
   Route: DELETE /clients/<id>
   """
