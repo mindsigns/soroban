@@ -1,4 +1,5 @@
 <div class="col-md-6">
+  <h2 class="page-header">Delete : <%= @client.name %></h2>
 
 	<div class="panel panel-red">
 		<div class="panel-heading">
