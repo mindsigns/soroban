@@ -42,6 +42,52 @@ var myChart = new Chart(ctx, {
 
 <div class="row">
        <div class="col-md-3 col-xs-6">
+           <div class="panel panel-primary">
+               <div class="panel-heading">
+                   <div class="row">
+                       <div class="col-xs-3">
+                           <i class="fa fa-bicycle fa-5x"></i>
+                       </div>
+                       <div class="col-xs-9 text-right">
+                           <div class="huge"><%= @jobcount %></div>
+                           <div>Total Jobs logged</div>
+                       </div>
+                   </div>
+               </div>
+               <a href="/jobs">
+                   <div class="panel-footer">
+                       <span class="pull-left">View Jobs</span>
+                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                       <div class="clearfix"></div>
+                   </div>
+               </a>
+           </div>
+       </div>
+       <div class="col-md-3 col-xs-6">
+           <div class="panel panel-primary">
+               <div class="panel-heading">
+                   <div class="row">
+                       <div class="col-xs-3">
+                           <i class="fa fa-folder-open-o fa-5x"></i>
+                       </div>
+                       <div class="col-xs-9 text-right">
+                           <div class="huge"><%= @invoicecount %></div>
+                           <div>Number of Invoices</div>
+                       </div>
+                   </div>
+               </div>
+               <a href="/invoices">
+                   <div class="panel-footer">
+                       <span class="pull-left">View Invoices</span>
+                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                       <div class="clearfix"></div>
+                   </div>
+               </a>
+           </div>
+       </div>
+</div>
+<div class="row">
+       <div class="col-md-3 col-xs-6">
            <div class="panel panel-red">
                <div class="panel-heading">
                    <div class="row">

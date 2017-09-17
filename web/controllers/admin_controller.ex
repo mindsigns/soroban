@@ -8,7 +8,7 @@ defmodule Soroban.AdminController do
   import Soroban.Authorize
   import Ecto.Query
 
-  alias Soroban.{Repo, Job}
+  alias Soroban.{Repo, Job, Invoice}
 
   plug :user_check when action in [:index]
 
@@ -32,7 +32,11 @@ defmodule Soroban.AdminController do
     jobs = for {_, y} <- dates, do: y
 
     {zipcount, pdfcount} = Soroban.Utils.cache_count
-    render(conn, "index.html", months: months, jobs: jobs, zipcount: zipcount, pdfcount: pdfcount)
+    jobcount     = Enum.count(Repo.all(Job))
+    invoicecount = Enum.count(Repo.all(Invoice))
+
+    render(conn, "index.html", months: months, jobs: jobs, zipcount: zipcount,
+          pdfcount: pdfcount, jobcount: jobcount, invoicecount: invoicecount)
   end
 
   @doc """
