@@ -11,8 +11,8 @@ defmodule Soroban.Client do
     field :address, :string
     field :email, :string
 
-    has_many :jobs, Soroban.Job
-    has_many :invoices, Soroban.Invoice
+    has_many :jobs, Soroban.Job, on_delete: :delete_all
+    has_many :invoices, Soroban.Invoice, on_delete: :delete_all
 
     timestamps()
   end
