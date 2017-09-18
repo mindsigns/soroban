@@ -120,4 +120,19 @@ defmodule Soroban.InvoiceUtils do
     result.id
  end
 
+ @doc """
+  Remove any cached PDFs after modifying an invoice
+ """
+ def cleanup(client, invoice_number) do
+	filename = Soroban.Pdf.create_file_name(client, invoice_number)
+
+    file = Enum.join([Soroban.Pdf.pdf_path(), filename])
+
+    case File.exists?(file) do
+       true  -> File.rm(file)
+       false -> IO.puts "No File"
+    end
+
+ end
+
 end
