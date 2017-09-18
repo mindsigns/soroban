@@ -82,16 +82,17 @@ defmodule Soroban.Pdf do
     Application.get_env(:soroban, :pdf_dir)
   end
 
-#
-# Private functions
-#
-
-#Creates a filename from Invoice ID and Client name
-  defp create_file_name(client, invoicenum) do
+  @doc """
+  Creates a filename from Invoice ID and Client name
+  """
+  def create_file_name(client, invoicenum) do
     clientname = String.replace(client, ~r/[," "&']/, "")
     Enum.join([invoicenum, "_", clientname, ".pdf"])
   end
 
+#
+# Private functions
+#
   # Sends a file to the browser
   defp send_a_file(conn, filename, savefile, type) do
     conn
