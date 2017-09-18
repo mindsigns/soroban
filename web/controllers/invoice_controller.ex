@@ -155,8 +155,11 @@ defmodule Soroban.InvoiceController do
   Updates an invoice after editing
   """
   def update(conn, %{"id" => id, "invoice" => invoice_params}) do
-    invoice = Repo.get!(Invoice, id)
+    invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
     changeset = Invoice.changeset(invoice, invoice_params)
+
+    # Remove any PDF's that might be cached. Remove Zips
+    InvoiceUtils.cleanup(invoice.client.name, invoice.number)
 
     case Repo.update(changeset) do
       {:ok, invoice} ->
