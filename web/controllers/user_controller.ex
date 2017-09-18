@@ -11,6 +11,9 @@ defmodule Soroban.UserController do
 
   plug :user_check
 
+  plug :scrub_params, "id" when action in [:show, :edit, :update, :delete]
+  plug :scrub_params, "user" when action in [:create]
+
   @doc """
   User index page
   Route: GET /users

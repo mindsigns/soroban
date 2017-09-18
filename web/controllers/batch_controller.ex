@@ -12,7 +12,11 @@ defmodule Soroban.BatchController do
   alias Soroban.{InvoiceUtils, Pdf}
 
   plug :user_check
+
   plug :load_clients when action in [:index, :generate]
+
+  plug :scrub_params, "id" when action in [:delete]
+  plug :scrub_params, "invoice" when action in [:send_zip, :email_all]
 
   @doc """
   Index function

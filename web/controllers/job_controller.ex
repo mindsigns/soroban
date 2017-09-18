@@ -15,6 +15,11 @@ defmodule Soroban.JobController do
   plug :load_jobtypes when action in [:index, :new, :create, :edit, :update]
   plug :load_clients when action in [:index, :new, :create, :edit, :update]
 
+  plug :scrub_params, "id" when action in [:show, :edit, :update, :delete]
+  plug :scrub_params, "job" when action in [:create]
+  plug :scrub_params, "year" when action in [:list_by_year]
+  plug :scrub_params, "month" when action in [:list_by_month]
+
   @doc """
   Index page
   Route: GET /jobs

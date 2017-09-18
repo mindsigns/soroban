@@ -10,6 +10,10 @@ defmodule Soroban.ClientController do
 
   plug :user_check
 
+  plug :scrub_params, "id" when action in [:show, :edit, :update, :delete]
+  plug :scrub_params, "client" when action in [:create]
+  plug :scrub_params, "client_id" when action in [:client_delete]
+
   @doc """
   Index function
   Route: GET /clients

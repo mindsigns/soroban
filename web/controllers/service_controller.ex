@@ -10,6 +10,9 @@ defmodule Soroban.ServiceController do
 
   plug :user_check
 
+  plug :scrub_params, "id" when action in [:show, :edit, :update, :delete]
+  plug :scrub_params, "service" when action in [:create]
+
   @doc """
   Index page
   Route: GET /service
