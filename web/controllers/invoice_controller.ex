@@ -15,7 +15,7 @@ defmodule Soroban.InvoiceController do
 
   plug :scrub_params, "id" when action in [:send_pdf, :show, :edit, :update, :delete, :view]
   plug :scrub_params, "invoice_id" when action in [:send_email, :show_invoice]
-  plug :scrub_params, "invoice" when action in [:create]
+  plug :scrub_params, "invoice" when action in [:create, :update]
   plug :scrub_params, "type" when action in [:clear_cache]
 
   @doc """
