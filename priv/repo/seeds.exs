@@ -1,7 +1,6 @@
 alias Soroban.Repo
 alias Soroban.Service
 alias Soroban.Jobtype
-alias Soroban.Client
 alias Soroban.User
 alias Soroban.Setting
 
@@ -29,4 +28,6 @@ Repo.insert!(%Jobtype{type: "Research Addt'l Stop"})
 Repo.insert!(%Setting{company_name: "Kickass Couriers", 
                       company_address: "123 My Street\nSF, CA 94111",
                       company_email: "gofast@test.com",
-                      note: "Thanks For Using Kickass Couriers!"})
+                      note: "Thanks For Using Kickass Couriers!",
+                      invoice_image: "fakelogo.png"
+  })
