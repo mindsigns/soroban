@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Error : Page does not exist</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <span class="logo"></span>
+      </header>
+      <main role="main">
+
+<div class="jumbotron">
+  <h2>10-9?</h2>
+  <p class="lead">Sorry, that page does not exist.</p>
+  <p><a class="btn btn-primary btn" href="/admin" role="button">Go back</a></p>
+</div>
+
+<div class="row marketing">
+</div>
+
+<div class="row marketing">
+  <div class="col-lg-6">
+  </div>
+</div>
+ </main>
+    </div> <!-- /container -->
+  </body>
+</html>
