@@ -119,12 +119,18 @@ defmodule Soroban.InvoiceController do
               where: i.number == ^id)
     invoices = Repo.all(query) |> Repo.preload(:client)
 
-    itotal = for n <- invoices, do: Map.get(n, :total)
-    ftotal = for n <- itotal, do: Map.get(n, :amount)
-    total = Money.new(Enum.sum(ftotal))
+    case Enum.count(invoices) do
+      0 -> conn
+            |> put_status(:not_found)
+            |> render(Soroban.ErrorView, "error_msg.html")
+      _ -> 
+            itotal = for n <- invoices, do: Map.get(n, :total)
+            ftotal = for n <- itotal, do: Map.get(n, :amount)
+            total = Money.new(Enum.sum(ftotal))
 
-    invoice_count = Enum.count(invoices)
-    render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count, total: total)
+            invoice_count = Enum.count(invoices)
+            render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count, total: total)
+    end
   end
 
   @doc """

@@ -1,0 +1,10 @@
+<div class="col-md-6 help">
+<h1 class="page-header"></h1>
+
+<div class="jumbotron">
+  <h2>10-9?</h2>
+  <p class="lead">Sorry, that entry does not exist.</p>
+  <p><a class="btn btn-primary btn" href="/admin" role="button">Go back</a></p>
+</div>
+
+</div>
