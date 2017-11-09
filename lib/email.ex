@@ -18,9 +18,9 @@ defmodule Soroban.Email do
   def ask_confirm(email, link) do
     new_email()
     |> to(email)
-    |> from("welcome@example.com")
+    |> from("marcus@zoomsf.com")
     |> subject("Confirm your account - Welcome Soroban")
-    |> text_body("Confirm your Soroban email here http://localhost:4000/sessions/confirm_email?#{link}")
+    |> text_body("Confirm your Soroban email here http://zoomsf.soroban.sh/sessions/confirm_email?#{link}")
     |> Mailer.deliver_now
   end
 
@@ -30,9 +30,9 @@ defmodule Soroban.Email do
   def ask_reset(email, link) do
     new_email()
     |> to(email)
-    |> from("welcome@example.com")
+    |> from("marcus@zoomsf.com")
     |> subject("Reset your password - Soroban")
-    |> text_body("Reset your password at http://localhost:4000/password_resets/edit?#{link}")
+    |> text_body("Reset your password at http://zoomsf.soroban.sh/password_resets/edit?#{link}")
     |> Mailer.deliver_now
   end
 
@@ -42,7 +42,7 @@ defmodule Soroban.Email do
   def receipt_confirm(email) do
     new_email()
     |> to(email)
-    |> from("welcome@example.com")
+    |> from("marcus@zoomsf.com")
     |> subject("Confirmed account - Soroban")
     |> text_body("Your account has been confirmed!")
     |> Mailer.deliver_now
@@ -51,8 +51,8 @@ defmodule Soroban.Email do
   def invoice_html_email(email_address, invoice, jobs, total, company) do
     new_email()
     |> to(email_address)
-    |> from("test@test.com")
-    |> subject("Welcome!")
+    |> from("marcus@zoomsf.com")
+    |> subject("Invoice")
     |> put_html_layout({Soroban.LayoutView, "email.html"})
     |> render("invoice.html", email_address: email_address, 
               invoice: invoice, jobs: jobs, 
