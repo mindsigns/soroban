@@ -9,13 +9,13 @@ use Mix.Config
 # kept out of version control and might be hard to recover
 # or recreate for your teammates (or you later on).
 config :soroban, Soroban.Endpoint,
-  secret_key_base: "Yr1UMrN1HpQKuXPUP/5rTXsvxSO0KE8ySujvoK1fArwiL9rowOT1XvWWdlawRgDg"
+  secret_key_base: "Yr1UMrN1HpQKuXPUP/5rTXsvxS23423LKJ909usdfnEEvoK1fArwiL9rowOT1XvWWdlawRgDg"
 
 # Configure your database
 config :soroban, Soroban.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "postgres",
-  hostname: "postgres",
-  database: "soroban_prod",
+  password: "",
+  hostname: "localhost",
+  database: "zoomsf_soroban",
   pool_size: 20
