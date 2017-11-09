@@ -9,9 +9,9 @@ Soroban.Invoice model
 
   schema "invoices" do
     field :number, :string
-    field :date, Ecto.Date
-    field :start, Ecto.Date
-    field :end, Ecto.Date
+    field :date, :date
+    field :start, :date
+    field :end, :date
     field :total, Money.Ecto.Type
     belongs_to :client, Soroban.Client
 
