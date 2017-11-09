@@ -11,11 +11,11 @@ defmodule Soroban.User do
     field :username, :string
     field :password, :string, virtual: true
     field :password_hash, :string
-    field :confirmed_at, Ecto.DateTime
+    field :confirmed_at, :dateTime
     field :confirmation_token, :string
-    field :confirmation_sent_at, Ecto.DateTime
+    field :confirmation_sent_at, :dateTime
     field :reset_token, :string
-    field :reset_sent_at, Ecto.DateTime
+    field :reset_sent_at, :dateTime
 
     timestamps()
   end

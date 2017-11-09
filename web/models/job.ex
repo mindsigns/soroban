@@ -8,7 +8,7 @@ Soroban.Job model
   alias Money
 
   schema "jobs" do
-    field :date, Ecto.Date
+    field :date, :date
     field :reference, :string
     field :caller, :string
     field :type, :string
