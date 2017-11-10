@@ -1,7 +1,7 @@
-defmodule Soroban.Email do
-  use Bamboo.Phoenix, view: Soroban.EmailView
+defmodulesoroban.Email do
+  use Bamboo.Phoenix, view:soroban.EmailView
 
-  alias Soroban.Mailer
+  aliassoroban.Mailer
 
   @moduledoc """
   A module for sending emails
@@ -18,9 +18,9 @@ defmodule Soroban.Email do
   def ask_confirm(email, link) do
     new_email()
     |> to(email)
-    |> from("marcus@zoomsf.com")
-    |> subject("Confirm your account - Welcome Soroban")
-    |> text_body("Confirm your Soroban email here http://zoomsf.soroban.sh/sessions/confirm_email?#{link}")
+    |> from("test@test.com")
+    |> subject("Confirm your account - Welcome to Soroban")
+    |> text_body("Confirm yoursoroban email here http://soroban.sh/sessions/confirm_email?#{link}")
     |> Mailer.deliver_now
   end
 
@@ -30,9 +30,9 @@ defmodule Soroban.Email do
   def ask_reset(email, link) do
     new_email()
     |> to(email)
-    |> from("marcus@zoomsf.com")
+    |> from("test@test.com")
     |> subject("Reset your password - Soroban")
-    |> text_body("Reset your password at http://zoomsf.soroban.sh/password_resets/edit?#{link}")
+    |> text_body("Reset your password at http://soroban.sh/password_resets/edit?#{link}")
     |> Mailer.deliver_now
   end
 
@@ -42,7 +42,7 @@ defmodule Soroban.Email do
   def receipt_confirm(email) do
     new_email()
     |> to(email)
-    |> from("marcus@zoomsf.com")
+    |> from("test@test.com")
     |> subject("Confirmed account - Soroban")
     |> text_body("Your account has been confirmed!")
     |> Mailer.deliver_now
@@ -51,9 +51,9 @@ defmodule Soroban.Email do
   def invoice_html_email(email_address, invoice, jobs, total, company) do
     new_email()
     |> to(email_address)
-    |> from("marcus@zoomsf.com")
+    |> from("test@test.com")
     |> subject("Invoice")
-    |> put_html_layout({Soroban.LayoutView, "email.html"})
+    |> put_html_layout(soroban.LayoutView, "email.html"})
     |> render("invoice.html", email_address: email_address, 
               invoice: invoice, jobs: jobs, 
               total: total, company: company)
