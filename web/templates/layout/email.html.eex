@@ -7,9 +7,82 @@
       img {height: 50px;
            float: right;
             padding-right: 50px;}
-      </style>
+      #invoice {
+          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+      }
+
+      #invoice td, #invoice th {
+          border: 1px solid #ddd;
+          padding: 8px;
+      }
+
+      #invoice tr:nth-child(even){background-color: #f2f2f2;}
+
+      #invoice tr:hover {background-color: #ddd;}
+
+      #invoice th {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          text-align: left;
+          background-color: #4CAF50;
+          color: white;
+      }
+        </style>
   </head>
   <body>
-    <%= render @view_module, @view_template, assigns %>
-  </body>
+<img src="/images/<%= @company.invoice_image %>">
+<%= @company.company_name %>
+<%= text_to_html(@company.company_address, [wrapper_tag: :div, attributes: [class: "p"]]) %>
+<hr><center>Client Invoice</center><hr>
+
+<u>Bill to:</u><br/>
+<%= @invoice.client.name %> <br>
+Attn: <%= @invoice.client.contact%>
+<%= text_to_html(@invoice.client.address, [wrapper_tag: :div, attributes: [class: "p"]]) %> <br>
+
+<br><br>
+Invoice #: <%= @invoice.number %> <br>
+Invoice Date : <%= @invoice.date %> <br>
+Billing Period : <%= @invoice.start %> to <%= @invoice.end %> <br>
+Invoice Total : <b><%= @total %></b> <br>
+<br>
+<hr>
+<table class="table" id="invoice">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Reference</th>
+      <th>Caller</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Zone</th>
+      <th>Service</th>
+      <th>Details</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for job <- @jobs do %>
+    <tr>
+      <td><%= job.date %></td>
+      <td><%= job.reference %></td>
+      <td><%= job.caller %></td>
+      <td><%= job.type %></td>
+      <td><%= job.description %></td>
+      <td><%= job.zone %></td>
+      <td><%= job.service %></td>
+      <td><%= job.details %></td>
+      <td><%= job.total %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<hr>
+<h2>Total : <%= @total %></h2>
+<br>
+<center><h2><%= @company.note %></h2></center>
+</body>
 </html>
