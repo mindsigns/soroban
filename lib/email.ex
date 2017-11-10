@@ -1,7 +1,7 @@
-defmodulesoroban.Email do
-  use Bamboo.Phoenix, view:soroban.EmailView
+defmodule Soroban.Email do
+  use Bamboo.Phoenix, view: Soroban.EmailView
 
-  aliassoroban.Mailer
+  alias Soroban.Mailer
 
   @moduledoc """
   A module for sending emails
@@ -48,12 +48,12 @@ defmodulesoroban.Email do
     |> Mailer.deliver_now
   end
 
-  def invoice_html_email(email_address, invoice, jobs, total, company) do
+  def invoice_html_email(email_address, invoice, jobs, total, company, sender) do
     new_email()
     |> to(email_address)
-    |> from("test@test.com")
+    |> from(sender)
     |> subject("Invoice")
-    |> put_html_layout(soroban.LayoutView, "email.html"})
+    |> put_html_layout({Soroban.LayoutView, "email.html"})
     |> render("invoice.html", email_address: email_address, 
               invoice: invoice, jobs: jobs, 
               total: total, company: company)

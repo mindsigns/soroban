@@ -100,10 +100,11 @@ defmodule Soroban.InvoiceUtils do
   def batch_email(invoice_id_list) do
     for i <- invoice_id_list do
       {invoice, jobs, total, company} = generate(i, false)
+      sender = Map.get(company, :company_email)
       case is_nil(invoice.client.email) do
         false -> Soroban.Email.invoice_html_email(invoice.client.email,
                                                   invoice, jobs, total,
-                                                  company)
+                                                  company, sender)
                   |> Soroban.Mailer.deliver_later
         true  -> Slingbag.add(invoice.client.name)
       end
