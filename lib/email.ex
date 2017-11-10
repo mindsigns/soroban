@@ -16,9 +16,10 @@ defmodule Soroban.Email do
   An email with a confirmation link in it.
   """
   def ask_confirm(email, link) do
+    sender = Soroban.Utils.get_sender()
     new_email()
     |> to(email)
-    |> from("test@test.com")
+    |> from(sender)
     |> subject("Confirm your account - Welcome to Soroban")
     |> text_body("Confirm yoursoroban email here http://soroban.sh/sessions/confirm_email?#{link}")
     |> Mailer.deliver_now
@@ -28,9 +29,10 @@ defmodule Soroban.Email do
   An with a link to reset the password.
   """
   def ask_reset(email, link) do
+    sender = Soroban.Utils.get_sender()
     new_email()
     |> to(email)
-    |> from("test@test.com")
+    |> from(sender)
     |> subject("Reset your password - Soroban")
     |> text_body("Reset your password at http://soroban.sh/password_resets/edit?#{link}")
     |> Mailer.deliver_now
@@ -40,15 +42,17 @@ defmodule Soroban.Email do
   An email acknowledging that the account has been successfully confirmed.
   """
   def receipt_confirm(email) do
+    sender = Soroban.Utils.get_sender()
     new_email()
     |> to(email)
-    |> from("test@test.com")
+    |> from(sender)
     |> subject("Confirmed account - Soroban")
     |> text_body("Your account has been confirmed!")
     |> Mailer.deliver_now
   end
 
-  def invoice_html_email(email_address, invoice, jobs, total, company, sender) do
+  def invoice_html_email(email_address, invoice, jobs, total, company) do
+    sender = Soroban.Utils.get_sender()
     new_email()
     |> to(email_address)
     |> from(sender)

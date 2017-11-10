@@ -46,9 +46,8 @@ defmodule Soroban.InvoiceController do
   def send_email(conn, %{"invoice_id" => id}) do
 
     {invoice, jobs, total, company} = InvoiceUtils.generate(id, true)
-    sender = Map.get(company, :company_email)
 
-    Email.invoice_html_email(invoice.client.email, invoice, jobs, total, company, sender)
+    Email.invoice_html_email(invoice.client.email, invoice, jobs, total, company)
       |> Mailer.deliver_later
 
     msg = Enum.join(["Invoice mailed to : ", invoice.client.contact, " <", invoice.client.email, ">"])
