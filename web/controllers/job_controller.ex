@@ -11,9 +11,9 @@ defmodule Soroban.JobController do
 
   plug :user_check
 
-  plug :load_services when action in [:index, :new, :create, :edit, :update]
-  plug :load_jobtypes when action in [:index, :new, :create, :edit, :update]
-  plug :load_clients when action in [:index, :new, :create, :edit, :update]
+  plug :load_services when action in [:new, :edit]
+  plug :load_jobtypes when action in [:new, :edit]
+  plug :load_clients when action in [:new, :edit]
 
   plug :scrub_params, "id" when action in [:show, :edit, :update, :delete]
   plug :scrub_params, "job" when action in [:create]
@@ -161,12 +161,12 @@ def list_by_month(conn, %{"month" => month_str, "year" => year_str}) do
   #
 
    defp load_services(conn, _) do
-      services = Repo.all from c in Soroban.Service, select: c.type
+      services = Repo.all from c in Soroban.Service, order_by: c.type, select: c.type
       assign(conn, :services, services)
    end
 
    defp load_jobtypes(conn, _) do
-      jobtypes = Repo.all from c in Soroban.Jobtype, select: c.type
+      jobtypes = Repo.all from c in Soroban.Jobtype, order_by: c.type, select: c.type
       assign(conn, :jobtypes, jobtypes)
    end
 
