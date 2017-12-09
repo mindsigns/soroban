@@ -15,8 +15,8 @@
 
   <div class="form-group">
     <a href="/clients/new" class="glyphicon glyphicon-plus-sign" alt="Add client"></a>
-    <%= label f, "", class: "control-label" %>
-    <%= select f, :client_id, @clients, class: "form-control", prompt: "Select a client" %>
+    <%= label f, "",  class: "control-label" %>
+    <%= select f, :client_id, @clients, id: "job_clients", class: "form-control chosen_select", prompt: "Select a client" %>
     <%= error_tag f, :client_id %>
   </div>
 
@@ -34,7 +34,7 @@
 
   <div class="form-group">
     <%= label f, "", class: "control-label" %>
-    <%= select f, :type, @jobtypes, class: "form-control", prompt: "Delivery Type" %>
+    <%= select f, :type, @jobtypes, class: "form-control chosen_select", prompt: "Delivery Type" %>
     <%= error_tag f, :type %>
   </div>
 
@@ -52,7 +52,7 @@
 
   <div class="form-group">
     <%= label f, "", class: "control-label" %>
-    <%= select f, :service, @services, class: "form-control", prompt: "Service Type" %>
+    <%= select f, :service, @services, class: "form-control chosen_select", prompt: "Service Type" %>
     <%= error_tag f, :service %>
   </div>
 

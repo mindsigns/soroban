@@ -16,7 +16,7 @@
 
   <div class="form-group">
     <%= label f, :client_id, class: "control-label" %>
-    <%= select f, :client_id, @clients, class: "form-control", prompt: "Select a client" %>
+    <%= select f, :client_id, @clients, class: "form-control chosen_select", prompt: "Select a client" %>
     <%= error_tag f, :client_id %>
   </div>
 

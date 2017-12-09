@@ -99,8 +99,11 @@
     <!-- /#wrapper -->
 
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script src="/js/chosen.js"></script>
+    <script src="/js/selectize.min.js"></script>
     <%= Drab.Client.js(@conn) %>
     <script>require("web/static/js/app").App.sortTable()</script>
+    <script> $(".chosen_select").chosen() </script>
 </body>
 
 </html>
