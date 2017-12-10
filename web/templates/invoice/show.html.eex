@@ -31,6 +31,16 @@
     <div class="col-md-3 font-bold">Total:</div>
     <div class="col-md-4 font-bold"><%= @invoice.total%></div>
   </div>
+  <div class="row highlight">
+    <%= if @invoice.paid do %>
+      <div class="col-md-3 font-bold paid">Invoice Paid</div>
+      <%= if @invoice.paid_on do %>
+        <div class="col-md-4"><%= @invoice.paid_on %></div>
+      <% end %>
+    <% else %>
+      <div class="col-md-4 font-bold unpaid">Invoice Unpaid</div>
+    <% end %>
+  </div>
 </div>
 
 <table class="table table-hover responsive">

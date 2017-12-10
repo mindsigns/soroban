@@ -13,6 +13,7 @@
       <th>Start Date</th>
       <th>End Date</th>
       <th>Total</th>
+      <th>Paid</th>
 
       <th></th>
     </tr>
@@ -25,7 +26,10 @@
       <td><%= invoice.start %></td>
       <td><%= invoice.end %></td>
       <td><%= invoice.total %></td>
-
+      <td> <%= if invoice.paid do %>
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+           <% end %>
+      </td>
       <td class="text-right">
         <%= link "PDF", to: invoice_path(@conn, :send_pdf, invoice), class: "btn btn-primary btn-xs" %>
         <%= link "View", to: invoice_path(@conn, :show, invoice), class: "btn btn-success btn-xs" %>
