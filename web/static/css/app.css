@@ -10,3 +10,15 @@
 .indent {
   text-indent: 15px;
 }
+.font-bold {
+    font-weight: bold;
+}
+
+.highlight:hover {
+        background-color: #CCE5FF;
+}
+
+.top-buffer { margin-top:20px; }
+
+.paid { color: green; }
+.unpaid { color: red; }
