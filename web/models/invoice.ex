@@ -13,6 +13,8 @@ Soroban.Invoice model
     field :start, :date
     field :end, :date
     field :total, Money.Ecto.Type
+    field :paid, :boolean, default: false, null: false
+    field :paid_on, :date
     belongs_to :client, Soroban.Client
 
     timestamps()
@@ -23,7 +25,7 @@ Soroban.Invoice model
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:number, :date, :start, :end, :total, :client_id])
+    |> cast(params, [:number, :date, :start, :end, :total, :client_id, :paid, :paid_on])
     |> validate_required([:number, :date, :start, :end])
   end
 end
