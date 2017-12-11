@@ -73,7 +73,7 @@
   $('#tbl').DataTable({
   dom: 'lBfrtip', buttons: [ 'copy', 'csv', 'excel' ],
   responsive: true,
-iDisplayLength: 25,
+  iDisplayLength: 25,
   columnDefs: [{ "targets": 10, "orderable": false }]
   });
 </script>
