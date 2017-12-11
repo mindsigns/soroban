@@ -2,7 +2,7 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    Total for the billing period : <b><%= @total%></b>
+    Total for the billing period : <b><%= @total %></b>
   </div>
   <div class="panel-body">
 <table id="sortable" class="table">
@@ -40,6 +40,6 @@
 </table>
 </div>
 <div class="panel-footer">
-<%= link "Back", to: invoice_path(@conn, :index) , class: "btn btn-default"%>
+<%= link "Back", to: invoice_path(@conn, :index) , class: "btn btn-default" %>
 </div>
 </div>
