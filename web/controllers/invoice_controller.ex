@@ -79,7 +79,8 @@ defmodule Soroban.InvoiceController do
                      Ecto.Changeset.get_field(changeset, :end))
 
     newchangeset = Ecto.Changeset.put_change(changeset, :total, invtotal)
-
+    IO.inspect invoice_params
+    IO.inspect changeset
     case Repo.insert(newchangeset) do
       {:ok, _invoice} ->
         conn
@@ -106,7 +107,9 @@ defmodule Soroban.InvoiceController do
 
     jobs = Repo.all(query) |> Repo.preload(:client)
 
-    render(conn, "show.html", invoice: invoice, jobs: jobs)
+    today = Date.utc_today()
+
+    render(conn, "show.html", invoice: invoice, jobs: jobs, today: today)
   end
 
   @doc """
@@ -142,6 +145,33 @@ defmodule Soroban.InvoiceController do
     {invoice, jobs, total, company} = InvoiceUtils.generate(id, false)
     render(conn, invoice: invoice, jobs: jobs, total: total,
                   company: company, layout: {Soroban.LayoutView, "invoice.html"})
+  end
+
+  @doc """
+  Route: POST /invoices/paid/
+  Mark an Invoice 'Paid'
+  """
+  def paid(conn, %{"paid" => %{"date" => paid_on, "invoice_id" => invoice_id}}) do 
+    {:ok, date_paid} = Ecto.Date.cast({paid_on["year"], paid_on["month"], paid_on["day"]})
+    IO.inspect invoice_id
+    IO.inspect date_paid
+
+    invoice = Repo.get!(Invoice, invoice_id) |> Repo.preload(:client)
+    changeset = Invoice.changeset(invoice)
+
+    paidchangeset = Ecto.Changeset.put_change(changeset, :paid, true)
+    newchangeset = Ecto.Changeset.put_change(paidchangeset, :paid_on, date_paid)
+
+    case Repo.update(newchangeset) do
+      {:ok, invoice} ->
+        conn
+        |> put_flash(:info, "Invoice updated successfully.")
+        |> redirect(to: invoice_path(conn, :show, invoice_id))
+      {:error, paidchangeset} ->
+        conn
+        |> put_flash(:error, "Error.")
+        |> redirect(to: invoice_path(conn, :show, invoice_id))
+    end
   end
 
   @doc """

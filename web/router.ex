@@ -33,6 +33,7 @@ defmodule Soroban.Router do
     get "/invoices/sendpdf/:id", InvoiceController, :send_pdf
     get "/clear_cache/:type", InvoiceController, :clear_cache
     get "/invoices/view/:id", InvoiceController, :view
+    post "/invoices/paid", InvoiceController, :paid
 
     get "/invoice/batch", BatchController, :index
     post "/invoice/generate_all", BatchController, :generate_all
