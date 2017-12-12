@@ -11,10 +11,10 @@ defmodule Soroban.JobController do
 
   plug :user_check
 
-  plug :load_services when action in [:new, :edit]
-  plug :load_jobtypes when action in [:new, :edit]
-  plug :load_clients when action in [:new, :edit]
-  plug :load_today when action in [:new, :edit]
+  plug :load_services when action in [:new, :edit, :create]
+  plug :load_jobtypes when action in [:new, :edit, :create]
+  plug :load_clients when action in [:new, :edit, :create]
+  plug :load_today when action in [:new, :edit, :create]
 
   plug :scrub_params, "id" when action in [:show, :edit, :update, :delete]
   plug :scrub_params, "job" when action in [:create]
@@ -56,8 +56,7 @@ defmodule Soroban.JobController do
       {:error, changeset} ->
         conn
         |> put_flash(:error, "Missing info.")
-        |> redirect(to: job_path(conn, :new))
-        #|> render("new.html", changeset: changeset, today: Date.utc_today())
+        |> render("new.html", changeset: changeset)
     end
   end
 
