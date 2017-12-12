@@ -1,6 +1,6 @@
 <h1 class="page-header">Soroban  <small>Admin</small></h1>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<script src="/js/Chart.min.js"></script>
 
 <div class="row">
 <div class="col-md-6">
