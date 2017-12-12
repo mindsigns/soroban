@@ -271,7 +271,8 @@ end
   end
 
   defp load_today(conn, _) do
-    assign(conn, :clients, clients)
+    today = Date.utc_today()
+    assign(conn, :today, today)
   end
 
 end
