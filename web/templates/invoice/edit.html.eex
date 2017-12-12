@@ -4,6 +4,7 @@
 <%= render "form.html", changeset: @changeset,
                         clients: @clients,
                         today: @today,
+                        invoice: @invoice,
                         action: invoice_path(@conn, :update, @invoice) %>
 
 <div class="panel-footer">

@@ -41,6 +41,15 @@
     <%= error_tag f, :end %>
   </div>
 
+  <%= if @invoice.paid do %>
+  <div class="form-group">
+    <%= label f, :name, "Invoice Paid on", class: "control-label" %>
+    </br>
+    <%= date_select f, :paid_on, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
+  </div>
+<% end %>
+
+
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>

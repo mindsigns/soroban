@@ -27,7 +27,7 @@
       <td><%= invoice.end %></td>
       <td><%= invoice.total %></td>
       <td> <%= if invoice.paid do %>
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <%= invoice.paid_on %>
            <% end %>
       </td>
       <td class="text-right">
