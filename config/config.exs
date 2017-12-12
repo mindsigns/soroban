@@ -52,6 +52,6 @@ config :money,
 
 config :pdf_generator,
   wkhtml_path:    "/usr/bin/wkhtmltopdf",
-  command_prefix: ["/usr/bin/xvfb-run", "-a"]
+  command_prefix: "/usr/bin/xvfb-run"
 
 import_config "#{Mix.env}.exs"
