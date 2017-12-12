@@ -14,6 +14,7 @@ defmodule Soroban.JobController do
   plug :load_services when action in [:new, :edit]
   plug :load_jobtypes when action in [:new, :edit]
   plug :load_clients when action in [:new, :edit]
+  plug :load_today when action in [:new, :edit]
 
   plug :scrub_params, "id" when action in [:show, :edit, :update, :delete]
   plug :scrub_params, "job" when action in [:create]
@@ -38,8 +39,7 @@ defmodule Soroban.JobController do
   """
   def new(conn, _params) do
     changeset = Job.changeset(%Job{})
-    today = Date.utc_today()
-    render(conn, "new.html", changeset: changeset, today: today)
+    render(conn, "new.html", changeset: changeset)
   end
 
   @doc """
@@ -54,7 +54,10 @@ defmodule Soroban.JobController do
         |> put_flash(:info, "Job created successfully.")
         |> redirect(to: job_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_flash(:error, "Missing info.")
+        |> redirect(to: job_path(conn, :new))
+        #|> render("new.html", changeset: changeset, today: Date.utc_today())
     end
   end
 
@@ -74,8 +77,7 @@ defmodule Soroban.JobController do
   def edit(conn, %{"id" => id}) do
     job = Repo.get!(Job, id) |> Repo.preload(:client)
     changeset = Job.changeset(job)
-    today = Date.utc_today()
-    render(conn, "edit.html", job: job, changeset: changeset, today: today)
+    render(conn, "edit.html", job: job, changeset: changeset)
   end
 
   @doc """
@@ -173,6 +175,11 @@ def list_by_month(conn, %{"month" => month_str, "year" => year_str}) do
    defp load_clients(conn, _) do
       clients = Repo.all from c in Client, order_by: c.name, select: {c.name, c.id}
       assign(conn, :clients, clients)
+   end
+
+   defp load_today(conn, _) do
+      today = Date.utc_today()
+      assign(conn, :today, today)
    end
 
   defp get_year() do
