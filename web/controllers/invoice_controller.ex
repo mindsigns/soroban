@@ -12,6 +12,7 @@ defmodule Soroban.InvoiceController do
   plug :user_check
 
   plug :load_clients when action in [:new, :edit, :generate]
+  plug :load_today when action in [:new, :show, :edit]
 
   plug :scrub_params, "id" when action in [:send_pdf, :show, :edit, :update, :delete, :view]
   plug :scrub_params, "invoice_id" when action in [:send_email, :show_invoice]
@@ -62,9 +63,8 @@ defmodule Soroban.InvoiceController do
   """
   def new(conn, _params) do
     changeset = Invoice.changeset(%Invoice{})
-    today = Date.utc_today()
 
-    render(conn, "new.html", changeset: changeset, today: today)
+    render(conn, "new.html", changeset: changeset)
   end
 
   @doc """
@@ -107,9 +107,7 @@ defmodule Soroban.InvoiceController do
 
     jobs = Repo.all(query) |> Repo.preload(:client)
 
-    today = Date.utc_today()
-
-    render(conn, "show.html", invoice: invoice, jobs: jobs, today: today)
+    render(conn, "show.html", invoice: invoice, jobs: jobs)
   end
 
   @doc """
@@ -181,9 +179,8 @@ defmodule Soroban.InvoiceController do
   def edit(conn, %{"id" => id}) do
     invoice = Repo.get!(Invoice, id) |> Repo.preload(:client)
     changeset = Invoice.changeset(invoice)
-    today = Date.utc_today()
 
-    render(conn, "edit.html", invoice: invoice, changeset: changeset, today: today)
+    render(conn, "edit.html", invoice: invoice, changeset: changeset)
   end
 
   @doc """
@@ -270,6 +267,10 @@ end
 
   defp load_clients(conn, _) do
     clients = Repo.all from c in Client, order_by: c.name, select: {c.name, c.id}
+    assign(conn, :clients, clients)
+  end
+
+  defp load_today(conn, _) do
     assign(conn, :clients, clients)
   end
 
