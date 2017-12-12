@@ -3,7 +3,7 @@
 <script src="/js/Chart.min.js"></script>
 
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-8">
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Monthly job count</h3>
@@ -41,7 +41,7 @@ var myChart = new Chart(ctx, {
 </div>
 
 <div class="row">
-       <div class="col-md-3 col-xs-6">
+       <div class="col-md-4 col-xs-6">
            <div class="panel panel-primary">
                <div class="panel-heading">
                    <div class="row">
@@ -63,7 +63,7 @@ var myChart = new Chart(ctx, {
                </a>
            </div>
        </div>
-       <div class="col-md-3 col-xs-6">
+       <div class="col-md-4 col-xs-6">
            <div class="panel panel-primary">
                <div class="panel-heading">
                    <div class="row">
@@ -87,7 +87,7 @@ var myChart = new Chart(ctx, {
        </div>
 </div>
 <div class="row">
-       <div class="col-md-3 col-xs-6">
+       <div class="col-md-4 col-xs-6">
            <div class="panel panel-red">
                <div class="panel-heading">
                    <div class="row">
@@ -109,7 +109,7 @@ var myChart = new Chart(ctx, {
                </a>
            </div>
        </div>
-       <div class="col-md-3 col-xs-6">
+       <div class="col-md-4 col-xs-6">
            <div class="panel panel-red">
                <div class="panel-heading">
                    <div class="row">
