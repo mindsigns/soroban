@@ -22,3 +22,9 @@
 
 .paid { color: green; }
 .unpaid { color: red; }
+
+.glyphicon.glyphicon-one-fine-dot:before {
+    content: "\25cf";
+    color: red;
+    font-size:.35em;
+}

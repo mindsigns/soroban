@@ -29,6 +29,6 @@ Soroban.Job model
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:date, :reference, :caller, :type, :description, :zone, :service, :details, :total, :client_id])
-    |> validate_required([:date, :caller, :type, :description, :zone, :service, :total, :client_id])
+    |> validate_required([:date, :caller, :type, :description, :service, :total, :client_id])
   end
 end

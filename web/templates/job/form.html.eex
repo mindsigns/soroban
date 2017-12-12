@@ -8,6 +8,7 @@
   <% end %>
 
   <div class="form-group">
+    <span class="glyphicon glyphicon-one-fine-dot"></span> 
     <%= label f, "Job Date : ", class: "control-label" %>
     <%= date_select f, :date, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
     <%= error_tag f, :date %>
@@ -15,6 +16,7 @@
 
   <div class="form-group">
     <a href="/clients/new" class="glyphicon glyphicon-plus-sign" alt="Add client"></a>
+    <span class="glyphicon glyphicon-one-fine-dot"></span> 
     <%= label f, "",  class: "control-label" %>
     <%= select f, :client_id, @clients, id: "job_clients", class: "form-control chosen_select", prompt: "Select a client" %>
     <%= error_tag f, :client_id %>
@@ -27,18 +29,21 @@
   </div>
 
   <div class="form-group">
+    <span class="glyphicon glyphicon-one-fine-dot"></span> 
     <%= label f, "", class: "control-label" %>
     <%= text_input f, :caller, [class: "form-control", placeholder: "Caller"]%>
     <%= error_tag f, :caller %>
   </div>
 
   <div class="form-group">
+    <span class="glyphicon glyphicon-one-fine-dot"></span> 
     <%= label f, "", class: "control-label" %>
     <%= select f, :type, @jobtypes, class: "form-control chosen_select", prompt: "Delivery Type" %>
     <%= error_tag f, :type %>
   </div>
 
   <div class="form-group">
+    <span class="glyphicon glyphicon-one-fine-dot"></span> 
     <%= label f, "", class: "control-label" %>
     <%= textarea f, :description, class: "form-control", placeholder: "Job Description" %>
     <%= error_tag f, :description %>
@@ -51,6 +56,7 @@
   </div>
 
   <div class="form-group">
+    <span class="glyphicon glyphicon-one-fine-dot"></span> 
     <%= label f, "", class: "control-label" %>
     <%= select f, :service, @services, class: "form-control chosen_select", prompt: "Service Type" %>
     <%= error_tag f, :service %>
@@ -63,6 +69,7 @@
   </div>
 
   <div class="form-group">
+    <span class="glyphicon glyphicon-one-fine-dot"></span> 
     <%= label f, "", class: "control-label" %>
     <%= text_input f, :total,  class: "form-control", placeholder: "Job Total" %>
     <%= error_tag f, :total %>
