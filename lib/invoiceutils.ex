@@ -80,7 +80,7 @@ defmodule Soroban.InvoiceUtils do
   end
 
   def batch_job(socket, clients, params) do
-    IO.inspect params
+
     %{"invoice" => %{"date" => date, "end" => end_date,"start" => start_date, "number" => number}} =  params
 
     for c <- clients do
