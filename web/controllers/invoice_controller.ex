@@ -246,9 +246,7 @@ defmodule Soroban.InvoiceController do
   # Private functions
   #
 
-  @doc """
-  Totals dollar amount from jobs within a date range for a client
-  """
+  #Totals dollar amount from jobs within a date range for a client
   defp total(client, startdate, enddate) do
     query = (from j in Job,
               where: j.date >= ^startdate,
