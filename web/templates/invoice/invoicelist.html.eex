@@ -5,7 +5,7 @@
     Total for the billing period : <b><%= @total %></b>
   </div>
   <div class="panel-body">
-<table id="sortable" class="table">
+<table class="table">
   <thead>
     <tr>
       <th>Client</th>
@@ -19,6 +19,8 @@
     </tr>
   </thead>
   <tbody>
+    
+<%= form_for @conn, invoice_path(@conn, :multipay), [as: :paid], fn f -> %>
 <%= for invoice <- @invoices do %>
     <tr>
       <td><%= invoice.client.name %></td>
@@ -28,13 +30,21 @@
       <td><%= invoice.total %></td>
       <td> <%= if invoice.paid do %>
             <%= invoice.paid_on %>
-           <% end %>
+          <% else %>
+            <%= checkbox :paid, invoice.id, checked: false, class: "form-control" %> 
+          <% end %>
       </td>
       <td class="text-right">
         <%= link "PDF", to: invoice_path(@conn, :send_pdf, invoice), class: "btn btn-primary btn-xs" %>
         <%= link "View", to: invoice_path(@conn, :show, invoice), class: "btn btn-success btn-xs" %>
       </td>
     </tr>
+  <% end %>  
+  <%= hidden_input :invoice_id, :invoice_name, value: @invoice_id %> 
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+
 <% end %>
   </tbody>
 </table>

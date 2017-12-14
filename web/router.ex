@@ -34,6 +34,7 @@ defmodule Soroban.Router do
     get "/clear_cache/:type", InvoiceController, :clear_cache
     get "/invoices/view/:id", InvoiceController, :view
     post "/invoices/paid", InvoiceController, :paid
+    post "/invoices/multipay", InvoiceController, :multipay
 
     get "/invoice/batch", BatchController, :index
     post "/invoice/generate_all", BatchController, :generate_all

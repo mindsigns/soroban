@@ -116,9 +116,9 @@ defmodule Soroban.InvoiceController do
   def show_invoice(conn, %{"invoice_id" => id}) do
 
     query = (from i in Invoice,
-              where: i.number == ^id)
-    invoices = Repo.all(query) |> Repo.preload(:client)
-
+             where: i.number == ^id,
+             order_by: i.paid_on)
+    invoices = Repo.all(query) |> Repo.preload([client: (from c in Client, order_by: c.name)])
     case Enum.count(invoices) do
       0 -> conn
             |> put_status(:not_found)
@@ -167,6 +167,31 @@ defmodule Soroban.InvoiceController do
         |> put_flash(:error, "Error.")
         |> redirect(to: invoice_path(conn, :show, invoice_id))
     end
+  end
+
+  @doc """
+  Route: POST /invoices/multipay/
+  Mark an Invoice 'Paid'
+  """
+  def multipay(conn, %{"paid" => ids, "invoice_id" => %{"invoice_name" => invoice_id}}) do 
+    IO.inspect ids
+
+    idlist = for {id, "true"} <- ids, do: id
+    paid_on = DateTime.utc_now()
+    {:ok, date_paid} = Ecto.Date.cast({paid_on.year, paid_on.month, paid_on.day})
+
+    for invoiceid <- idlist do
+      invoice = Repo.get!(Invoice, invoiceid) |> Repo.preload(:client)
+      changeset = Invoice.changeset(invoice)
+
+      paidchangeset = Ecto.Changeset.put_change(changeset, :paid, true)
+      newchangeset = Ecto.Changeset.put_change(paidchangeset, :paid_on, date_paid)
+      Repo.update(newchangeset)
+    end
+
+        conn
+        |> put_flash(:info, "Invoices marked 'Paid'.")
+        |> redirect(to: invoice_invoice_path(conn, :show_invoice, invoice_id))
   end
 
   @doc """
