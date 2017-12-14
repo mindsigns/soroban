@@ -36,15 +36,10 @@ Populate the database with test data:
 ```
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-**Links to know :**
+
+## Links to know
 
 http://localhost:4000/sent_emails to see emails in dev mode.
-
-
-To shut it down:
-
-    * Hit Ctrl-C twice
-    * sudo mix compose down
 
 
 ## Learn more
