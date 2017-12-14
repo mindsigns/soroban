@@ -12,7 +12,7 @@ defmodule Soroban.InvoiceController do
   plug :user_check
 
   plug :load_clients when action in [:new, :edit, :generate]
-  plug :load_today when action in [:new, :show, :edit]
+  plug :load_today when action in [:new, :show, :edit, :send_email]
 
   plug :scrub_params, "id" when action in [:send_pdf, :show, :edit, :update, :delete, :view]
   plug :scrub_params, "invoice_id" when action in [:send_email, :show_invoice]
