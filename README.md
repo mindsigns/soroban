@@ -14,8 +14,10 @@ Set up the Postgres Database:
 
 To start your Phoenix app in Dev mode:
 
-  * ./build.sh
-  * iex -S mix phoenix.server
+```
+  ./build.sh
+  iex -S mix phoenix.server
+```
 
 Or to do it by hand:
 
