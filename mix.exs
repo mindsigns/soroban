@@ -45,6 +45,7 @@ defmodule Soroban.Mixfile do
      {:money, "~> 1.2.1"},
      {:pdf_generator, ">=0.3.6"},
      {:drab, "~> 0.6"},
+     {:porcelain, "~> 2.0"},
      {:blacksmith, "~> 0.1"},
      {:faker, "~> 0.8"},
      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
