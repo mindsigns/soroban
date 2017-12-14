@@ -8,7 +8,7 @@ use Mix.Config
 # General application configuration
 config :soroban,
   ecto_repos: [Soroban.Repo],
-  pdf_dir: "/priv/static/pdf/"
+  pdf_dir: "./priv/static/pdf/"
 
 # Configures the endpoint
 config :soroban, Soroban.Endpoint,
@@ -50,6 +50,7 @@ config :soroban, Soroban.Mailer,
 config :money,
   default_currency: :USD
 
+config :porcelain, :goon_driver_path, "/usr/local/bin/goon"
 config :pdf_generator,
   wkhtml_path:    "/usr/bin/wkhtmltopdf",
   command_prefix: "/usr/bin/xvfb-run"

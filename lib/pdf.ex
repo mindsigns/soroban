@@ -53,7 +53,7 @@ defmodule Soroban.Pdf do
     Slingbag.empty
 
     pdfpath = String.to_charlist(pdf_path())
-    zipfile = Enum.join([pdf_path(), invoicenum, ".zip"])
+    zipfile = Enum.join([pdf_path(), "/", invoicenum, ".zip"])
     savefile = Enum.join([invoicenum, ".zip"])
 
     # Create a list of file names
@@ -62,7 +62,8 @@ defmodule Soroban.Pdf do
       Slingbag.add(file)
       case File.exists?(Enum.join([pdfpath, file])) do
         true -> "File exists"
-        false -> InvoiceUtils.generate_batch(c[:inv_id], true)
+        false -> :timer.sleep(700)
+                 InvoiceUtils.generate_batch(c[:inv_id], true)
       end
     end
 
@@ -79,7 +80,7 @@ defmodule Soroban.Pdf do
   Returns PDF path from config/config.exs
   """
   def pdf_path do
-    Application.app_dir(:soroban, Application.get_env(:soroban, :pdf_dir))
+    Application.get_env(:soroban, :pdf_dir)
   end
 
   @doc """
