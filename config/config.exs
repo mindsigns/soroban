@@ -8,7 +8,7 @@ use Mix.Config
 # General application configuration
 config :soroban,
   ecto_repos: [Soroban.Repo],
-  pdf_dir: "./priv/static/pdf/"
+  pdf_dir: "/priv/static/pdf/"
 
 # Configures the endpoint
 config :soroban, Soroban.Endpoint,
