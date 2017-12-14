@@ -38,7 +38,7 @@ defmodule Soroban.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
-     {:exrm, "~> 1.0.3"},
+     {:distillery, "~> 1.5", runtime: false},
      {:openmaize, "~> 3.0"},
      {:bamboo, "~> 0.8"},
      {:bamboo_smtp, "~> 1.3.0"},
