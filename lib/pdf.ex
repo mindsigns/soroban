@@ -62,8 +62,7 @@ defmodule Soroban.Pdf do
       Slingbag.add(file)
       case File.exists?(Enum.join([pdfpath, file])) do
         true -> "File exists"
-        false -> :timer.sleep(700)
-                 InvoiceUtils.generate_batch(c[:inv_id], true)
+        false -> InvoiceUtils.generate_batch(c[:inv_id], true)
       end
     end
 
