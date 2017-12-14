@@ -79,7 +79,7 @@ defmodule Soroban.Pdf do
   Returns PDF path from config/config.exs
   """
   def pdf_path do
-    Application.get_env(:soroban, :pdf_dir)
+    Application.app_dir(:soroban, Application.get_env(:soroban, :pdf_dir))
   end
 
   @doc """
