@@ -17,5 +17,5 @@ config :soroban, Soroban.Repo,
   username: "postgres",
   password: "",
   hostname: "localhost",
-  database: "zoomsf_soroban",
+  database: "soroban_prod",
   pool_size: 20
