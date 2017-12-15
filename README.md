@@ -7,10 +7,15 @@ frustration of inefficient invoicing systems.
 Very much a work in progress.  Beware.
 
 ## Getting Started
-Set up the Postgres Database:
 
-    Install Postgresql server and client
-    Edit config/dev.exs to set the postgres user password.
+### Prerequisites
+
+You will need Elixir and Postgres installed.
+
+PDF generation requires wkhtmltopdf and xvfb-run.
+
+
+### Installation
 
 To start your Phoenix app in Dev mode:
 
@@ -22,20 +27,25 @@ To start your Phoenix app in Dev mode:
 Or to do it by hand:
 
      Install dependencies with `mix deps.get`
-     Install Node.js dependencies with `npm install`
+     Install npm dependencies with `npm install`
      Create the priv/static directory `mkdir priv/static`
      Run `mix phoenix.digest` to build assests
+     Create and migrate the database with `mix ecto.setup && mix ecto.migrate`
+     Seed the database with `mix run priv/repo/seeds.exs`
      Start Phoenix endpoint with `iex -S mix phoenix.server`
 
 Populate the database with test data:
 
 ```
-    Forge.gen_all(num_of_clients, num_of_jobs)
+Forge.gen_all(num_of_clients, num_of_jobs)
 ```
-    An good starting point is :
+
+An good starting point is :
+
 ```
-    Forge.gen_all(15, 500) , which gives you 15 clients and 500 jobs.
+Forge.gen_all(15, 500) , which gives you 15 clients and 500 jobs.
 ```
+
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 
@@ -51,3 +61,6 @@ http://localhost:4000/sent_emails to see emails in dev mode.
   * Docs: https://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
+
+## License
+See [LICENSE](LICENSE).
