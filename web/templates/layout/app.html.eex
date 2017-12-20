@@ -41,13 +41,15 @@
 
             <ul class="nav navbar-top-links navbar-right">
            <%= if @current_user do %>
-              <li><a href="<%= user_path(@conn, :show, @current_user.id) %>"><%= @current_user.username %></a></li>
+             <li><a href="<%= user_path(@conn, :show, @current_user.id) %>">
+                 <span class="glyphicon glyphicon-user"> <%= @current_user.username %></span></a></li>
               <li><%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete %></li>
               <% else %>
               <li><a href="<%= user_path @conn, :new %>">New user</a></li>
               <li><a href="<%= session_path @conn, :new %>">Login</a></li>
               <% end %>
             <li><a href="/help">Help</a></li>
+            <li><a href="/settings"> <span class="glyphicon glyphicon-cog"></span></a></li>
           </ul>
 
             </ul>
