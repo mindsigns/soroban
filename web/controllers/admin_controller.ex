@@ -17,9 +17,13 @@ defmodule Soroban.AdminController do
   Main index page for admin
   """
   def index(conn, _params) do
+    date = Date.utc_today()
+    {:ok, this} = Ecto.Date.cast(date)
+
     res = Job
             |> group_by([e], fragment("date_part('month', ?)", e.date))
             |> select([e], {fragment("date_part('month', ?)", e.date), count(e.id)})
+            |> where([e], fragment("date_part('year', ?)", e.date) == ^this.year)
             |> Repo.all
 
     list = Enum.sort(res)
@@ -36,7 +40,7 @@ defmodule Soroban.AdminController do
     invoicecount = Enum.count(Repo.all(Invoice))
 
     render(conn, "index.html", months: months, jobs: jobs, zipcount: zipcount,
-          pdfcount: pdfcount, jobcount: jobcount, invoicecount: invoicecount)
+          pdfcount: pdfcount, jobcount: jobcount, invoicecount: invoicecount, year: this.year)
   end
 
   @doc """
