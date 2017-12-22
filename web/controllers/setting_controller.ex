@@ -39,8 +39,8 @@ defmodule Soroban.SettingController do
   """
   def create(conn, %{"setting" => setting_params}) do
     new_params = if upload = setting_params["invoice_image"] do
-      extension = Path.extname(upload.filename)
-      File.cp(upload.path, "/priv/static/images/#{extension}")
+      #extension = Path.extname(upload.filename)
+      File.cp(upload.path, "priv/static/images/#{upload.filename}")
       Map.put(setting_params, "invoice_image", upload.filename)
     else
       new_params = setting_params
@@ -83,7 +83,7 @@ defmodule Soroban.SettingController do
   def update(conn, %{"id" => id, "setting" => setting_params}) do
     setting = Repo.get!(Setting, id)
     new_params = if upload = setting_params["invoice_image"] do
-    extension = Path.extname(upload.filename)
+      #extension = Path.extname(upload.filename)
     File.cp(upload.path, "priv/static/images/#{upload.filename}")
     Map.put(setting_params, "invoice_image", upload.filename)
   else
