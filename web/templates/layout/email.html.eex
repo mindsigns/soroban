@@ -29,18 +29,25 @@
           background-color: #4CAF50;
           color: white;
       }
+      .address { 
+          margin-top: 30px;
+          font-size: 20px;
+      }
         </style>
   </head>
   <body>
+<base href="http://localhost:4000">
 <img src="/images/<%= @company.invoice_image %>">
 <%= @company.company_name %>
 <%= text_to_html(@company.company_address, [wrapper_tag: :div, attributes: [class: "p"]]) %>
 <hr><center>Client Invoice</center><hr>
 
+<div class="address">
 <u>Bill to:</u><br/>
 <%= @invoice.client.name %> <br>
 Attn: <%= @invoice.client.contact%>
 <%= text_to_html(@invoice.client.address, [wrapper_tag: :div, attributes: [class: "p"]]) %> <br>
+</div>
 
 <br><br>
 Invoice #: <%= @invoice.number %> <br>
