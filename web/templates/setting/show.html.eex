@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-10 col-mod-6">
 <h2 class="page-header"> Settings</h2>
 
 <div class="panel panel-default">
@@ -15,13 +15,19 @@
   </div>
   <div class="row highlight">
     <div class="col-md-3 font-bold">Company Email:</div>
-    <div class="col-md-4"><%= @setting.company_email%></div>
+    <div class="col-md-4"><%= @setting.company_email %></div>
+  </div>
+  <div class="row highlight">
+    <div class="col-md-3 font-bold">Invoice Note:</div>
+    <div class="col-md-4"><%= @setting.note %></div>
+  </div>
+  <div class="row highlight">
+    <div class="col-md-3 font-bold">Invioce Image</div>
+    <div class="col-md-4"><%= @setting.invoice_image %></div>
   </div>
   <div>
-    <div class="col-md-3 font-bold">Invioce Image</div>
-    <div class="col-md-4"><%= @setting.invoice_image%></div>
-    <div class="col-md-4"><img style="height: 100px;"
-         src="/images/<%= @setting.invoice_image%>"></div>
+    <div class="col-md-3"><img style="height: 100px;"
+         src="/images/<%= @setting.invoice_image %>"></div>
   </div>
 </div>
 </div>
