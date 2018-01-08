@@ -70,7 +70,7 @@ defmodule Soroban.InvoiceUtils do
   end
 
   @doc """
-	Return total dollar amount of jobs
+  Return total dollar amount of jobs
   """
   def total(jobs) do
     jtotal = for n <- jobs, do: Map.get(n, :total)
@@ -81,7 +81,7 @@ defmodule Soroban.InvoiceUtils do
 
   def batch_job(socket, clients, params) do
 
-    %{"invoice" => %{"date" => date, "end" => end_date,"start" => start_date, "number" => number}} =  params
+    %{"invoice" => %{"date" => date, "end" => end_date, "start" => start_date, "number" => number}} =  params
 
     for c <- clients do
     case Enum.count(Repo.all from c in Soroban.Client,
