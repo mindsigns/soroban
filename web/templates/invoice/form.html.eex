@@ -10,7 +10,7 @@
 
   <div class="form-group">
     <%= label f, :name, "Invoice Number", class: "control-label" %>
-    <%= text_input f, :number, class: "form-control" %>
+    <%= text_input f, :number, class: "form-control", required: true %>
     <%= error_tag f, :number %>
   </div>
 

@@ -26,6 +26,6 @@ Soroban.Invoice model
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:number, :date, :start, :end, :total, :client_id, :paid, :paid_on])
-    |> validate_required([:number, :date, :start, :end])
+    |> validate_required([:number, :client_id, :date, :start, :end])
   end
 end

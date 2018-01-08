@@ -11,8 +11,8 @@ defmodule Soroban.InvoiceController do
 
   plug :user_check
 
-  plug :load_clients when action in [:new, :edit, :generate]
-  plug :load_today when action in [:new, :show, :edit, :send_email]
+  plug :load_clients when action in [:new, :edit, :create, :generate]
+  plug :load_today when action in [:new, :show, :edit, :create, :send_email]
 
   plug :scrub_params, "id" when action in [:send_pdf, :show, :edit, :update, :delete, :view]
   plug :scrub_params, "invoice_id" when action in [:send_email, :show_invoice]
@@ -74,6 +74,11 @@ defmodule Soroban.InvoiceController do
   def create(conn, %{"invoice" => invoice_params}) do
     changeset = Invoice.changeset(%Invoice{}, invoice_params)
 
+    case changeset.valid? do
+      false -> conn
+                |> put_flash(:error, "Missing info")
+                |> render("new.html", changeset: changeset)
+      true ->
     invtotal = total(Ecto.Changeset.get_field(changeset, :client_id),
                      Ecto.Changeset.get_field(changeset, :start),
                      Ecto.Changeset.get_field(changeset, :end))
@@ -88,6 +93,7 @@ defmodule Soroban.InvoiceController do
       {:error, newchangeset} ->
         render(conn, "new.html", changeset: changeset)
     end
+  end
   end
 
   @doc """
