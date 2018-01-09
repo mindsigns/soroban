@@ -5,7 +5,7 @@
     Total for the billing period : <b><%= @total %></b>
   </div>
   <div class="panel-body">
-<table class="table">
+<table id="sortable" class="table">
   <thead>
     <tr>
       <th>Client</th>
