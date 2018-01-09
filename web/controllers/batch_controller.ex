@@ -59,7 +59,6 @@ defmodule Soroban.BatchController do
 
     Task.async(InvoiceUtils, :batch_job, [conn, clients, params])
 
-    #:timer.sleep(700)
     conn
       |> put_flash(:info, "Generating all invoices, this will take a bit.")
       |> redirect(to: invoice_path(conn, :index))
