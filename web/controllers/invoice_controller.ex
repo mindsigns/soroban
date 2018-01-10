@@ -79,11 +79,17 @@ defmodule Soroban.InvoiceController do
                 |> put_flash(:error, "Missing info")
                 |> render("new.html", changeset: changeset)
       true ->
-    invtotal = total(Ecto.Changeset.get_field(changeset, :client_id),
+                invtotal = total(Ecto.Changeset.get_field(changeset, :client_id),
                      Ecto.Changeset.get_field(changeset, :start),
                      Ecto.Changeset.get_field(changeset, :end))
 
-    newchangeset = Ecto.Changeset.put_change(changeset, :total, invtotal)
+      if to_string(invtotal) == "$0.00" do
+        conn
+          |> put_flash(:error, "There are no jobs in that range.")
+          |> render("new.html", changeset: changeset)
+
+      else
+                newchangeset = Ecto.Changeset.put_change(changeset, :total, invtotal)
 
     case Repo.insert(newchangeset) do
       {:ok, _invoice} ->
@@ -93,6 +99,7 @@ defmodule Soroban.InvoiceController do
       {:error, newchangeset} ->
         render(conn, "new.html", changeset: changeset)
     end
+  end
   end
   end
 
