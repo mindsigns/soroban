@@ -16,28 +16,24 @@ defmodule Soroban.InvoiceUtils do
   def generate(invoice_id, pdf_tf) do
     invoice = Repo.get!(Invoice, invoice_id) |> Repo.preload(:client)
 
+    jobs = get_jobs(invoice)
+
     company = Repo.one(from s in Setting, limit: 1)
 
-    query = (from j in Job,
-              where: j.date >= ^invoice.start,
-              where: j.date <= ^invoice.end,
-              where: j.client_id == ^invoice.client_id,
-              order_by: j.date,
-              select: j)
+    if length(jobs) > 0 do
+      total = total(jobs)
+      changeset = Ecto.Changeset.change(invoice, %{total: total})
+      Repo.update!(changeset)
 
-    jobs = Repo.all(query) |> Repo.preload(:client)
+      case pdf_tf do
+        true  -> Pdf.to_pdf(invoice, jobs, total, company)
+        false -> "skipping pdf generation"
+      end
 
-    total = total(jobs)
-
-    changeset = Ecto.Changeset.change(invoice, %{total: total})
-    Repo.update!(changeset)
-
-  case pdf_tf do
-    true  -> Pdf.to_pdf(invoice, jobs, total, company)
-    false -> "skipping pdf generation"
-  end
-
-  {invoice, jobs, total, company}
+      {invoice, jobs, total, company}
+    else
+      {invoice, jobs, 0, company}
+    end
   end
 
   @doc """
@@ -47,26 +43,19 @@ defmodule Soroban.InvoiceUtils do
   def generate_batch(invoice_id, pdf_tf) do
     invoice = Repo.get!(Invoice, invoice_id) |> Repo.preload(:client)
 
+    jobs =  get_jobs(invoice)
+
     company = Repo.one(from s in Setting, limit: 1)
-
-    query = (from j in Job,
-              where: j.date >= ^invoice.start,
-              where: j.date <= ^invoice.end,
-              where: j.client_id == ^invoice.client_id,
-              order_by: j.date,
-              select: j)
-
-    jobs = Repo.all(query) |> Repo.preload(:client)
 
     total = total(jobs)
 
     changeset = Ecto.Changeset.change(invoice, %{total: total})
     Repo.update!(changeset)
 
-  case pdf_tf do
-    true  -> Pdf.to_pdf(invoice, jobs, total, company)
-    false -> "skipping pdf generation"
-  end
+    case pdf_tf do
+      true  -> Pdf.to_pdf(invoice, jobs, total, company)
+      false -> "skipping pdf generation"
+    end
   end
 
   @doc """
@@ -75,8 +64,7 @@ defmodule Soroban.InvoiceUtils do
   def total(jobs) do
     jtotal = for n <- jobs, do: Map.get(n, :total)
     ftotal = for n <- jtotal, do: Map.get(n, :amount)
-    total = Money.new(Enum.sum(ftotal))
-    total
+    Money.new(Enum.sum(ftotal))
   end
 
   def batch_job(socket, clients, params) do
@@ -84,10 +72,8 @@ defmodule Soroban.InvoiceUtils do
     %{"invoice" => %{"date" => date, "end" => end_date, "start" => start_date, "number" => number}} =  params
 
     for c <- clients do
-    case Enum.count(Repo.all from c in Soroban.Client,
-                      join: j in Soroban.Job,
-                      where: j.client_id == ^c) do
-        0 ->  "No Jobs"
+      case jobcount(c, params) do
+        0 ->  poke socket, text: "No jobs for the client"
         _ ->  invoice_id = new_invoice(c, date, end_date, start_date, number)
               generate(invoice_id, true)
               client = Repo.get(Soroban.Client, c)
@@ -121,11 +107,11 @@ defmodule Soroban.InvoiceUtils do
     result.id
  end
 
- @doc """
+  @doc """
   Remove any cached PDFs after modifying an invoice
- """
- def cleanup(client, invoice_number) do
-	filename = Soroban.Pdf.create_file_name(client, invoice_number)
+  """
+  def cleanup(client, invoice_number) do
+    filename = Soroban.Pdf.create_file_name(client, invoice_number)
 
     file = Enum.join([Soroban.Pdf.pdf_path(), filename])
 
@@ -135,5 +121,29 @@ defmodule Soroban.InvoiceUtils do
     end
 
  end
+
+  def jobcount(client_id, params) do
+    %{"invoice" => %{"date" => _, "end" => end_date, "start" => start_date, "number" => _}} =  params
+    query = (from j in Job,
+              where: j.date >= ^start_date,
+              where: j.date <= ^end_date,
+              where: j.client_id == ^client_id,
+              order_by: j.date,
+              select: j)
+
+    jobs = Repo.all(query) |> Repo.preload(:client)
+    length(jobs)
+  end
+
+  def get_jobs(invoice) do
+    query = (from j in Job,
+              where: j.date >= ^invoice.start,
+              where: j.date <= ^invoice.end,
+              where: j.client_id == ^invoice.client_id,
+              order_by: j.date,
+              select: j)
+
+    Repo.all(query) |> Repo.preload(:client)
+  end
 
 end
