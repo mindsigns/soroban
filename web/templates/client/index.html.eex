@@ -32,7 +32,7 @@
             <span class="glyphicon glyphicon-edit"></span>
 		<% end %>
         <%= link to: client_client_path(@conn, :client_delete, client), class: "btn btn-danger btn-xs" do %>
-            <span class="glyphicon glyphicon-edit"></span>
+            <span class="glyphicon glyphicon-remove-sign"></span>
 		<% end %>
       </td>
     </tr>
