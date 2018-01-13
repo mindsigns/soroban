@@ -70,8 +70,8 @@
 
   <div class="form-group">
     <%= label f, "", class: "control-label" %>
-    <%= text_input f, :fee_advances, class: "form-control", placeholder: "Fees Advanced "%>
-    <%= error_tag f, :fee_advances %>
+    <%= text_input f, :fees_advanced, class: "form-control", placeholder: "Fees Advanced "%>
+    <%= error_tag f, :fees_advanced %>
   </div>
 
   <div class="form-group">
