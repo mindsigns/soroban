@@ -29,6 +29,7 @@
       <th>Zone</th>
       <th>Service Type</th>
       <th>Details</th>
+      <th>Fee Adv.</th>
       <th>Total</th>
       <th></th>
     </tr>
@@ -45,6 +46,7 @@
       <td><%= job.zone %></td>
       <td><%= job.service %></td>
       <td><%= job.details %></td>
+      <td><%= job.fees_advanced %></td>
       <td><%= job.total %></td>
 
       <td class="text-right">

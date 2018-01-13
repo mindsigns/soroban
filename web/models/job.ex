@@ -17,6 +17,8 @@ Soroban.Job model
     field :service, :string
     field :details, :string
     field :total, Money.Ecto.Type
+    field :fees_advanced, Money.Ecto.Type
+
 
     belongs_to :client, Soroban.Client
 
@@ -28,7 +30,7 @@ Soroban.Job model
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:date, :reference, :caller, :type, :description, :zone, :service, :details, :total, :client_id])
+    |> cast(params, [:date, :reference, :caller, :type, :description, :zone, :service, :details, :fees_advanced, :total, :client_id])
     |> validate_required([:date, :caller, :type, :description, :service, :total, :client_id])
   end
 end

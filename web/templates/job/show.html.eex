@@ -42,6 +42,10 @@
     <div class="col-md-4"><%= @job.details%></div>
   </div>
   <div class="row highlight">
+    <div class="col-md-3 font-bold">Fees Adv:</div>
+    <div class="col-md-4"><%= @job.fees_advanced%></div>
+  </div>
+  <div class="row highlight">
     <div class="col-md-3 font-bold">Total:</div>
     <div class="col-md-4 font-bold"><%= @job.total%></div>
   </div>
