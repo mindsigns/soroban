@@ -76,6 +76,7 @@
   dom: 'lBfrtip', buttons: [ 'copy', 'csv', 'excel' ],
   responsive: true,
   iDisplayLength: 25,
-  columnDefs: [{ "targets": 10, "orderable": false }]
+    columnDefs: [{ "targets": 9, "orderable": false },
+                 { "targets": 11, "orderable": false }]
   });
 </script>
