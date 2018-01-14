@@ -67,6 +67,7 @@ Invoice Total : <b><%= @total %></b> <br>
       <th>Zone</th>
       <th>Service</th>
       <th>Details</th>
+      <th>Fees Adv.<th>
       <th>Total</th>
     </tr>
   </thead>
@@ -81,6 +82,7 @@ Invoice Total : <b><%= @total %></b> <br>
       <td><%= job.zone %></td>
       <td><%= job.service %></td>
       <td><%= job.details %></td>
+      <td><%= job.fees_advanced %></td>
       <td><%= job.total %></td>
     </tr>
 <% end %>
