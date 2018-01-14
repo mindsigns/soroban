@@ -29,6 +29,7 @@
       <th>Zone</th>
       <th>Service Type</th>
       <th>Details</th>
+      <th>Fee Adv.</th>
       <th>Total</th>
       <th></th>
     </tr>
@@ -45,6 +46,7 @@
       <td><%= job.zone %></td>
       <td><%= job.service %></td>
       <td><%= job.details %></td>
+      <td><%= job.fees_advanced %></td>
       <td><%= job.total %></td>
 
       <td class="text-right">
@@ -74,6 +76,7 @@
   dom: 'lBfrtip', buttons: [ 'copy', 'csv', 'excel' ],
   responsive: true,
   iDisplayLength: 25,
-  columnDefs: [{ "targets": 10, "orderable": false }]
+    columnDefs: [{ "targets": 9, "orderable": false },
+                 { "targets": 11, "orderable": false }]
   });
 </script>
