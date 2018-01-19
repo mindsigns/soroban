@@ -3,7 +3,11 @@ defmodule Soroban.SettingTest do
 
   alias Soroban.Setting
 
-  @valid_attrs %{company_address: "some content", company_email: "some content", company_name: "some content"}
+  @valid_attrs %{
+    company_address: "some content",
+    company_email: "some content",
+    company_name: "some content"
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

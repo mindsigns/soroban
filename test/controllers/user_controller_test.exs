@@ -23,71 +23,71 @@ defmodule Soroban.UserControllerTest do
 
   @tag login: "reg"
   test "GET /users for authorized user", %{conn: conn} do
-    conn = get conn, user_path(conn, :index)
+    conn = get(conn, user_path(conn, :index))
     assert html_response(conn, 200)
   end
 
-  test "GET /users redirect for unauthorized user", %{conn: conn}  do
+  test "GET /users redirect for unauthorized user", %{conn: conn} do
     conn = conn |> get(user_path(conn, :index))
     assert redirected_to(conn) == session_path(conn, :new)
   end
 
   test "renders form for new resources", %{conn: conn} do
-    conn = get conn, user_path(conn, :new)
+    conn = get(conn, user_path(conn, :new))
     assert html_response(conn, 200) =~ "New user"
   end
 
   test "creates resource and redirects when data is valid", %{conn: conn} do
-    conn = post conn, user_path(conn, :create), user: @valid_attrs
+    conn = post(conn, user_path(conn, :create), user: @valid_attrs)
     assert redirected_to(conn) == user_path(conn, :index)
     assert Repo.get_by(User, %{email: "bill@mail.com"})
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
-    conn = post conn, user_path(conn, :create), user: @invalid_attrs
+    conn = post(conn, user_path(conn, :create), user: @invalid_attrs)
     assert html_response(conn, 200) =~ "New user"
   end
 
   @tag login: "reg"
   test "GET /users/:id", %{conn: conn, user: user} do
-    conn = get conn, user_path(conn, :show, user)
+    conn = get(conn, user_path(conn, :show, user))
     assert html_response(conn, 200)
   end
 
   @tag login: "reg"
   test "GET /users/:id/edit", %{conn: conn, user: user} do
-    conn = get conn, user_path(conn, :edit, user)
+    conn = get(conn, user_path(conn, :edit, user))
     assert html_response(conn, 200)
   end
 
   @tag login: "reg"
   test "GET /users/:id/edit redirect for other user", %{conn: conn, other: other} do
-    conn = get conn, user_path(conn, :edit, other)
+    conn = get(conn, user_path(conn, :edit, other))
     assert redirected_to(conn) == user_path(conn, :index)
   end
 
   @tag login: "reg"
   test "PUT /users/:id with valid data", %{conn: conn, user: user} do
-    conn = put conn, user_path(conn, :update, user), user: @valid_attrs
+    conn = put(conn, user_path(conn, :update, user), user: @valid_attrs)
     assert redirected_to(conn) == user_path(conn, :show, user)
   end
 
   @tag login: "reg"
   test "PUT /users/:id with invalid data", %{conn: conn, user: user} do
-    conn = put conn, user_path(conn, :update, user), user: @invalid_attrs
+    conn = put(conn, user_path(conn, :update, user), user: @invalid_attrs)
     assert html_response(conn, 200)
   end
 
   @tag login: "reg"
   test "deletes current user", %{conn: conn, user: user} do
-    conn = delete conn, user_path(conn, :delete, user)
+    conn = delete(conn, user_path(conn, :delete, user))
     assert redirected_to(conn) == page_path(conn, :index)
     refute Repo.get(User, user.id)
   end
 
   @tag login: "reg"
   test "cannot delete other user", %{conn: conn, other: other} do
-    conn = delete conn, user_path(conn, :delete, other)
+    conn = delete(conn, user_path(conn, :delete, other))
     assert redirected_to(conn) == user_path(conn, :index)
     assert Repo.get(User, other.id)
   end

@@ -18,7 +18,7 @@ defmodule Soroban.InvoiceUtils do
 
     jobs = get_jobs(invoice)
 
-    company = Repo.one(from s in Setting, limit: 1)
+    company = Repo.one(from(s in Setting, limit: 1))
 
     if length(jobs) > 0 do
       total = total(jobs)
@@ -26,7 +26,7 @@ defmodule Soroban.InvoiceUtils do
       Repo.update!(changeset)
 
       case pdf_tf do
-        true  -> Pdf.to_pdf(invoice, jobs, total, company)
+        true -> Pdf.to_pdf(invoice, jobs, total, company)
         false -> "skipping pdf generation"
       end
 
@@ -43,9 +43,9 @@ defmodule Soroban.InvoiceUtils do
   def generate_batch(invoice_id, pdf_tf) do
     invoice = Repo.get!(Invoice, invoice_id) |> Repo.preload(:client)
 
-    jobs =  get_jobs(invoice)
+    jobs = get_jobs(invoice)
 
-    company = Repo.one(from s in Setting, limit: 1)
+    company = Repo.one(from(s in Setting, limit: 1))
 
     total = total(jobs)
 
@@ -53,7 +53,7 @@ defmodule Soroban.InvoiceUtils do
     Repo.update!(changeset)
 
     case pdf_tf do
-      true  -> Pdf.to_pdf(invoice, jobs, total, company)
+      true -> Pdf.to_pdf(invoice, jobs, total, company)
       false -> "skipping pdf generation"
     end
   end
@@ -68,19 +68,24 @@ defmodule Soroban.InvoiceUtils do
   end
 
   def batch_job(socket, clients, params) do
-
-    %{"invoice" => %{"date" => date, "end" => end_date, "start" => start_date, "number" => number}} =  params
+    %{
+      "invoice" => %{"date" => date, "end" => end_date, "start" => start_date, "number" => number}
+    } = params
 
     for c <- clients do
       case jobcount(c, params) do
-        0 ->  poke socket, text: "No jobs for the client"
-        _ ->  invoice_id = new_invoice(c, date, end_date, start_date, number)
-              generate(invoice_id, true)
-              client = Repo.get(Soroban.Client, c)
-              poke socket, text: Enum.join(["Invoicing for : ", client.name])
+        0 ->
+          poke(socket, text: "No jobs for the client")
+
+        _ ->
+          invoice_id = new_invoice(c, date, end_date, start_date, number)
+          generate(invoice_id, true)
+          client = Repo.get(Soroban.Client, c)
+          poke(socket, text: Enum.join(["Invoicing for : ", client.name]))
       end
     end
-    poke socket, text: "Done generating invoices! <a href='/invoices'>View</a>"
+
+    poke(socket, text: "Done generating invoices! <a href='/invoices'>View</a>")
   end
 
   def batch_email(invoice_id_list) do
@@ -88,24 +93,29 @@ defmodule Soroban.InvoiceUtils do
       {invoice, jobs, total, company} = generate(i, false)
 
       case is_nil(invoice.client.email) do
-        false -> Soroban.Email.invoice_html_email(invoice.client.email,
-                                                  invoice, jobs, total,
-                                                  company)
-                  |> Soroban.Mailer.deliver_later
-        true  -> Slingbag.add(invoice.client.name)
+        false ->
+          Soroban.Email.invoice_html_email(invoice.client.email, invoice, jobs, total, company)
+          |> Soroban.Mailer.deliver_later()
+
+        true ->
+          Slingbag.add(invoice.client.name)
       end
     end
   end
 
   def new_invoice(id, date, end_date, start_date, number) do
-    changeset = Invoice.changeset(%Invoice{}, %{"client_id" => id,
-                                    "number" => number,
-                                    "date" => date,
-                                    "end" => end_date,
-                                    "start" => start_date})
-    result =  Repo.insert_or_update!(changeset)
+    changeset =
+      Invoice.changeset(%Invoice{}, %{
+        "client_id" => id,
+        "number" => number,
+        "date" => date,
+        "end" => end_date,
+        "start" => start_date
+      })
+
+    result = Repo.insert_or_update!(changeset)
     result.id
- end
+  end
 
   @doc """
   Remove any cached PDFs after modifying an invoice
@@ -116,34 +126,40 @@ defmodule Soroban.InvoiceUtils do
     file = Enum.join([Soroban.Pdf.pdf_path(), filename])
 
     case File.exists?(file) do
-       true  -> File.rm(file)
-       false -> IO.puts "No File"
+      true -> File.rm(file)
+      false -> IO.puts("No File")
     end
-
- end
+  end
 
   def jobcount(client_id, params) do
-    %{"invoice" => %{"date" => _, "end" => end_date, "start" => start_date, "number" => _}} =  params
-    query = (from j in Job,
-              where: j.date >= ^start_date,
-              where: j.date <= ^end_date,
-              where: j.client_id == ^client_id,
-              order_by: j.date,
-              select: j)
+    %{"invoice" => %{"date" => _, "end" => end_date, "start" => start_date, "number" => _}} =
+      params
+
+    query =
+      from(
+        j in Job,
+        where: j.date >= ^start_date,
+        where: j.date <= ^end_date,
+        where: j.client_id == ^client_id,
+        order_by: j.date,
+        select: j
+      )
 
     jobs = Repo.all(query) |> Repo.preload(:client)
     length(jobs)
   end
 
   def get_jobs(invoice) do
-    query = (from j in Job,
-              where: j.date >= ^invoice.start,
-              where: j.date <= ^invoice.end,
-              where: j.client_id == ^invoice.client_id,
-              order_by: j.date,
-              select: j)
+    query =
+      from(
+        j in Job,
+        where: j.date >= ^invoice.start,
+        where: j.date <= ^invoice.end,
+        where: j.client_id == ^invoice.client_id,
+        order_by: j.date,
+        select: j
+      )
 
     Repo.all(query) |> Repo.preload(:client)
   end
-
 end

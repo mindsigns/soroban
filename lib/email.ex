@@ -17,12 +17,15 @@ defmodule Soroban.Email do
   """
   def ask_confirm(email, link) do
     sender = Soroban.Utils.get_sender()
+
     new_email()
     |> to(email)
     |> from(sender)
     |> subject("Confirm your account - Welcome to Soroban")
-    |> text_body("Confirm yoursoroban email here http://soroban.sh/sessions/confirm_email?#{link}")
-    |> Mailer.deliver_now
+    |> text_body(
+      "Confirm yoursoroban email here http://soroban.sh/sessions/confirm_email?#{link}"
+    )
+    |> Mailer.deliver_now()
   end
 
   @doc """
@@ -30,12 +33,13 @@ defmodule Soroban.Email do
   """
   def ask_reset(email, link) do
     sender = Soroban.Utils.get_sender()
+
     new_email()
     |> to(email)
     |> from(sender)
     |> subject("Reset your password - Soroban")
     |> text_body("Reset your password at http://soroban.sh/password_resets/edit?#{link}")
-    |> Mailer.deliver_now
+    |> Mailer.deliver_now()
   end
 
   @doc """
@@ -43,24 +47,30 @@ defmodule Soroban.Email do
   """
   def receipt_confirm(email) do
     sender = Soroban.Utils.get_sender()
+
     new_email()
     |> to(email)
     |> from(sender)
     |> subject("Confirmed account - Soroban")
     |> text_body("Your account has been confirmed!")
-    |> Mailer.deliver_now
+    |> Mailer.deliver_now()
   end
 
   def invoice_html_email(email_address, invoice, jobs, total, company) do
     sender = Soroban.Utils.get_sender()
+
     new_email()
     |> to(email_address)
     |> from(sender)
     |> subject("Invoice")
     |> put_html_layout({Soroban.LayoutView, "email.html"})
-    |> render("invoice.html", email_address: email_address, 
-              invoice: invoice, jobs: jobs, 
-              total: total, company: company)
+    |> render(
+      "invoice.html",
+      email_address: email_address,
+      invoice: invoice,
+      jobs: jobs,
+      total: total,
+      company: company
+    )
   end
-
 end

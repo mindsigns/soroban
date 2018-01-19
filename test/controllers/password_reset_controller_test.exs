@@ -3,14 +3,26 @@ defmodule Soroban.PasswordResetControllerTest do
 
   import Soroban.TestHelpers
 
-  @valid_attrs %{email: "gladys@mail.com", password: "^hEsdg*F899",
-    key: "pu9-VNdgE8V9qZo19rlcg3KUNjpxuixg"}
-  @invalid_email %{email: "fred@mail.com", password: "^hEsdg*F899",
-    key: "pu9-VNdgE8V9qZo19rlcg3KUNjpxuixg"}
-  @invalid_attrs %{email: "gladys@mail.com",  password: "^hEsdg*F899",
-    key: "pu9-VNDGe8v9QzO19RLCg3KUNjpxuixg"}
-  @invalid_pass %{email: "gladys@mail.com", password: "qwerty",
-    key: "pu9-VNdgE8V9qZo19rlcg3KUNjpxuixg"}
+  @valid_attrs %{
+    email: "gladys@mail.com",
+    password: "^hEsdg*F899",
+    key: "pu9-VNdgE8V9qZo19rlcg3KUNjpxuixg"
+  }
+  @invalid_email %{
+    email: "fred@mail.com",
+    password: "^hEsdg*F899",
+    key: "pu9-VNdgE8V9qZo19rlcg3KUNjpxuixg"
+  }
+  @invalid_attrs %{
+    email: "gladys@mail.com",
+    password: "^hEsdg*F899",
+    key: "pu9-VNDGe8v9QzO19RLCg3KUNjpxuixg"
+  }
+  @invalid_pass %{
+    email: "gladys@mail.com",
+    password: "qwerty",
+    key: "pu9-VNdgE8V9qZo19rlcg3KUNjpxuixg"
+  }
 
   setup %{conn: conn} do
     conn = conn |> bypass_through(Soroban.Router, :browser) |> get("/")

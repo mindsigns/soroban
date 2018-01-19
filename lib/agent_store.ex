@@ -1,18 +1,17 @@
 defmodule Slingbag do
-@moduledoc """
-Soroban.Slingbag module
-Global temporary value storage
-"""
+  @moduledoc """
+  Soroban.Slingbag module
+  Global temporary value storage
+  """
 
   def start_link do
     Agent.start_link(fn -> [] end, name: __MODULE__)
   end
 
   def add(item) do
-    Agent.update(__MODULE__,
-                 fn list ->
-                   [item|list]
-                 end)
+    Agent.update(__MODULE__, fn list ->
+      [item | list]
+    end)
   end
 
   def show do
@@ -20,10 +19,8 @@ Global temporary value storage
   end
 
   def empty do
-    Agent.update(__MODULE__,
-                 fn list ->
-                   []
-                 end)
+    Agent.update(__MODULE__, fn list ->
+      []
+    end)
   end
-
 end

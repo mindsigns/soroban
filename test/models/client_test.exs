@@ -3,7 +3,12 @@ defmodule Soroban.ClientTest do
 
   alias Soroban.Client
 
-  @valid_attrs %{address: "some content", contact: "some content", email: "some content", name: "some content"}
+  @valid_attrs %{
+    address: "some content",
+    contact: "some content",
+    email: "some content",
+    name: "some content"
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

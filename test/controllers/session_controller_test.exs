@@ -15,18 +15,18 @@ defmodule Soroban.SessionControllerTest do
   end
 
   test "login succeeds", %{conn: conn} do
-    conn = post conn, session_path(conn, :create), session: @valid_attrs
+    conn = post(conn, session_path(conn, :create), session: @valid_attrs)
     assert redirected_to(conn) == user_path(conn, :index)
   end
 
   test "login fails", %{conn: conn} do
-    conn = post conn, session_path(conn, :create), session: @invalid_attrs
+    conn = post(conn, session_path(conn, :create), session: @invalid_attrs)
     assert redirected_to(conn) == session_path(conn, :new)
   end
 
   test "logout succeeds", %{conn: conn, confirmed: confirmed} do
     conn = conn |> put_session(:user_id, confirmed.id) |> send_resp(:ok, "/")
-    conn = delete conn, session_path(conn, :delete, confirmed)
+    conn = delete(conn, session_path(conn, :delete, confirmed))
     assert redirected_to(conn) == page_path(conn, :index)
   end
 

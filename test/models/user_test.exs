@@ -3,7 +3,12 @@ defmodule Soroban.UserTest do
 
   alias Soroban.User
 
-  @valid_attrs %{bio: "some content", email: "some content", name: "some content", number_of_pets: 42}
+  @valid_attrs %{
+    bio: "some content",
+    email: "some content",
+    name: "some content",
+    number_of_pets: 42
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

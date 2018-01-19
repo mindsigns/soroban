@@ -3,7 +3,17 @@ defmodule Soroban.JobTest do
 
   alias Soroban.Job
 
-  @valid_attrs %{caller: "some content", date: %{day: 17, month: 4, year: 2010}, description: "some content", details: "some content", reference: "some content", service: "some content", total: "120.5", type: "some content", zone: "some content"}
+  @valid_attrs %{
+    caller: "some content",
+    date: %{day: 17, month: 4, year: 2010},
+    description: "some content",
+    details: "some content",
+    reference: "some content",
+    service: "some content",
+    total: "120.5",
+    type: "some content",
+    zone: "some content"
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
