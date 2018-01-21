@@ -94,7 +94,8 @@ defmodule Soroban.Pdf do
   Creates a filename from Invoice ID and Client name
   """
   def create_file_name(client, invoicenum) do
-    clientname = String.replace(client, ~r/[," "&']/, "")
+    trimmed = String.trim(client)
+    clientname = String.replace(trimmed, ~r/[," "&'.]/, "")
     Enum.join([invoicenum, "_", clientname, ".pdf"])
   end
 
