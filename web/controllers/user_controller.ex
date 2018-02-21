@@ -88,11 +88,11 @@ defmodule Soroban.UserController do
   Route: DELETE /users/<id>
   """
   def delete(conn,  %{"id" => id}) do
-	   user = Repo.get!(User, id)
+    user = Repo.get!(User, id)
      Repo.delete!(user)
-	    if %{current_user: user} == user do
+      if %{current_user: user} == user do
     	   configure_session(conn, drop: true)
-	    else
+      else
         conn
           |> auth_info("User deleted successfully", user_path(conn, :index))
   	  end
