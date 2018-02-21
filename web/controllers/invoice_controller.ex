@@ -187,7 +187,6 @@ defmodule Soroban.InvoiceController do
   Mark an Invoice 'Paid'
   """
   def multipay(conn, %{"paid" => ids, "invoice_id" => %{"invoice_name" => invoice_id}}) do 
-    IO.inspect ids
 
     idlist = for {id, "true"} <- ids, do: id
     paid_on = DateTime.utc_now()
