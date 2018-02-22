@@ -12,6 +12,7 @@
       <th>Contact</th>
       <th>Address</th>
       <th>Email</th>
+      <th>CC Email</th>
 
       <th></th>
     </tr>
@@ -23,6 +24,7 @@
       <td><%= client.contact %></td>
       <td><%= client.address %></td>
       <td><%= client.email %></td>
+      <td><%= client.cc_email %></td>
 
       <td class="text-right">
         <%= link to: client_path(@conn, :show, client), class: "btn btn-primary btn-xs" do %>

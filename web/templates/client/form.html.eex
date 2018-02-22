@@ -9,13 +9,13 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :name, class: "control-label" %>
+    <%= label f, "Client Name", class: "control-label" %>
     <%= text_input f, :name, class: "form-control" %>
     <%= error_tag f, :name %>
   </div>
 
   <div class="form-group">
-    <%= label f, :contact, class: "control-label" %>
+    <%= label f, "Contact Name", class: "control-label" %>
     <%= text_input f, :contact, class: "form-control" %>
     <%= error_tag f, :contact %>
   </div>
@@ -30,6 +30,12 @@
     <%= label f, :email, class: "control-label" %>
     <%= text_input f, :email, class: "form-control" %>
     <%= error_tag f, :email %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, "CC Email Addresses", class: "control-label" %>
+    <%= text_input f, :cc_email, class: "form-control", placeholder: "an optional list of email addresses separated by commas" %>
+    <%= error_tag f, :cc_email %>
   </div>
 
   <div class="form-group">

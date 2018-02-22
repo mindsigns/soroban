@@ -59,18 +59,35 @@ defmodule Soroban.Email do
   def invoice_html_email(email_address, invoice, jobs, total, company) do
     sender = Soroban.Utils.get_sender()
 
-    new_email()
-    |> to(email_address)
-    |> from(sender)
-    |> subject("Invoice")
-    |> put_html_layout({Soroban.LayoutView, "email.html"})
-    |> render(
-      "invoice.html",
-      email_address: email_address,
-      invoice: invoice,
-      jobs: jobs,
-      total: total,
-      company: company
-    )
+    if invoice.client.cc_email do
+      new_email()
+       |> to(email_address)
+       |> cc([invoice.client.cc_email])
+       |> from(sender)
+       |> subject("Invoice")
+       |> put_html_layout({Soroban.LayoutView, "email.html"})
+       |> render(
+                "invoice.html",
+                 email_address: email_address,
+                 invoice: invoice,
+                 jobs: jobs,
+                 total: total,
+                 company: company
+                 )
+    else
+      new_email()
+       |> to(email_address)
+       |> from(sender)
+       |> subject("Invoice")
+       |> put_html_layout({Soroban.LayoutView, "email.html"})
+       |> render(
+                "invoice.html",
+                 email_address: email_address,
+                 invoice: invoice,
+                 jobs: jobs,
+                 total: total,
+                 company: company
+                 )
+    end
   end
 end
