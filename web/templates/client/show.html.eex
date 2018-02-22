@@ -17,6 +17,10 @@
     <div class="col-md-3 font-bold">Email:</div>
     <div class="col-md-4"><%= @client.email%></div>
   </div>
+   <div class="row highlight">
+    <div class="col-md-3 font-bold">CC Email:</div>
+    <div class="col-md-4"><%= @client.cc_email%></div>
+  </div>
 </div>
 
 <div class="container pull-left top-buffer">
