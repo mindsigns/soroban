@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="/css/auto-complete.css">
+<script src="/js/auto-complete.min.js"></script>
+
 <div class="col-md-6">
 <h2 class="page-header">Add a new job</h2>
 
@@ -14,3 +17,33 @@
 </div>
 </div>
 </div>
+<script>
+    var callers = new autoComplete({
+      selector: '#job_caller',
+      minChars: 1,
+      source: function(term, suggest){
+        term = term.toLowerCase();
+        var choices = [<%= for caller <- @callers do %> '<%= caller %>', <% end %>];
+        var suggestions = [];
+        for (i=0;i<choices.length;i++)
+          if (~choices[i].toLowerCase().indexOf(term)) suggestions.push(choices[i]);
+        suggest(suggestions);
+        }
+      });
+</script>
+
+<script>
+    var addresses = new autoComplete({
+      selector: '#job_description',
+      minChars: 1,
+      source: function(term, suggest){
+        term = term.toLowerCase();
+        var choices = [<%= for a <- @addresses do %> `<%= a %>`, <% end %>];
+        var suggestions = [];
+        for (i=0;i<choices.length;i++)
+          if (~choices[i].toLowerCase().indexOf(term)) suggestions.push(choices[i]);
+        suggest(suggestions);
+        }
+      });
+</script>
+
