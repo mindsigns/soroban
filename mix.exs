@@ -60,7 +60,7 @@ defmodule Soroban.Mixfile do
       {:money, "~> 1.2.1"},
       # {:pdf_generator, ">=0.3.6"},
       {:pdf_generator, git: "https://github.com/gutschilla/elixir-pdf-generator"},
-      {:drab, "~> 0.6"},
+      {:drab, "== 0.6.1"},
       {:porcelain, "~> 2.0"},
       {:blacksmith, "~> 0.1"},
       {:faker, "~> 0.8"},

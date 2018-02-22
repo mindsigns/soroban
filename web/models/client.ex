@@ -10,6 +10,7 @@ defmodule Soroban.Client do
     field :contact, :string
     field :address, :string
     field :email, :string
+    field :cc_email, :string
 
     has_many :jobs, Soroban.Job, on_delete: :delete_all
     has_many :invoices, Soroban.Invoice, on_delete: :delete_all
@@ -22,7 +23,7 @@ defmodule Soroban.Client do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :contact, :address, :email])
+    |> cast(params, [:name, :contact, :address, :email, :cc_email])
     |> cast_assoc(:jobs)
     |> cast_assoc(:invoices)
     |> validate_required([:name, :contact, :address])
