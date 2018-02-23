@@ -51,11 +51,12 @@ defmodule Soroban.InvoiceController do
     Email.invoice_html_email(invoice.client.email, invoice, jobs, total, company)
       |> Mailer.deliver_later
 
-    if invoice.client.cc_email do
-      msg = Enum.join(["Invoice mailed to : ", invoice.client.contact, " <", invoice.client.email, ", ", invoice.client.cc_email, ">"])
-    else
-      msg = Enum.join(["Invoice mailed to : ", invoice.client.contact, " <", invoice.client.email, ">"])
-    end
+    msg = 
+      if invoice.client.cc_email do
+        Enum.join(["Invoice mailed to : ", invoice.client.contact, " <", invoice.client.email, "> and CC'd ", invoice.client.cc_email])
+      else
+        Enum.join(["Invoice mailed to : ", invoice.client.contact, " <", invoice.client.email, ">"])
+      end
 
     conn
       |> put_flash(:info, msg)
