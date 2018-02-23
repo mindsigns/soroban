@@ -38,12 +38,12 @@ defmodule Soroban.BatchController do
 
     Repo.delete_all(query)
 
-	path = Enum.join([Soroban.Pdf.pdf_path(), id, "*.pdf"])
-	files = Path.wildcard(path)
+    path = Enum.join([Soroban.Pdf.pdf_path(), id, "*.pdf"])
+    files = Path.wildcard(path)
 
-	for f <- files do
-	File.rm(f)
-	end
+    for f <- files do
+    File.rm(f)
+    end
 
     conn
     |> put_flash(:info, "Invoice deleted successfully.")
@@ -98,9 +98,9 @@ end
   """
   def send_zip(conn, %{"invoice" => invoice}) do
     query = (from i in Invoice,
-		          where: i.number == ^invoice,
-		          join: p in assoc(i, :client),
-		          select: %{client: p.name, inv_id: i.id})
+                  where: i.number == ^invoice,
+                  join: p in assoc(i, :client),
+                  select: %{client: p.name, inv_id: i.id})
 
     client_list = Repo.all(query)
 
