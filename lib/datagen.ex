@@ -1,6 +1,6 @@
 defmodule Blacksmith.Config do
   @moduledoc """
-  Blacksmith and Forge Config used for dev/testing
+  Blacksmith Config used for dev/testing
   """
 
   def save(map) do
@@ -13,6 +13,9 @@ defmodule Blacksmith.Config do
 end
 
 defmodule Forge do
+  @moduledoc """
+  Forge Config used for dev/testing
+  """
   use Blacksmith
 
   import Ecto.Query
