@@ -73,15 +73,14 @@ defmodule Soroban.InvoiceUtils do
     } = params
 
     for c <- clients do
+      client = Repo.get(Soroban.Client, c)
       case jobcount(c, params) do
         0 ->
-          poke(socket, text: "No jobs for the client")
-
+            poke(socket, text: "No jobs for the client #{client.name}")
         _ ->
-          invoice_id = new_invoice(c, date, end_date, start_date, number)
-          generate(invoice_id, true)
-          client = Repo.get(Soroban.Client, c)
-          poke(socket, text: Enum.join(["Invoicing for : ", client.name]))
+            invoice_id = new_invoice(c, date, end_date, start_date, number)
+            generate(invoice_id, true)
+            poke(socket, text: "Invoicing for : #{client.name}")
       end
     end
 
