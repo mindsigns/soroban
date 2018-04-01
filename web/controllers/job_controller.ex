@@ -17,6 +17,7 @@ defmodule Soroban.JobController do
   plug :load_today when action in [:new, :edit, :create]
   plug :load_addresses when action in [:new, :edit, :create]
   plug :load_callers when action in [:new, :edit, :create]
+  plug :load_details when action in [:new, :edit, :create]
 
   plug :scrub_params, "id" when action in [:show, :edit, :update, :delete]
   plug :scrub_params, "job" when action in [:create]
@@ -186,6 +187,11 @@ def list_by_month(conn, %{"month" => month_str, "year" => year_str}) do
   defp load_addresses(conn, _) do
       addresses = Repo.all from j in Job, select: j.description, distinct: true
       assign(conn, :addresses, addresses)
+   end
+
+  defp load_details(conn, _) do
+      details = Repo.all from j in Job, select: j.details, distinct: true
+      assign(conn, :details, details)
    end
 
   defp load_callers(conn, _) do
