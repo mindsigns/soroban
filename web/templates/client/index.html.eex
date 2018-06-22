@@ -1,3 +1,6 @@
+<script type="text/javascript" src="/js/datatables.min.js"></script>
+<link rel="stylesheet" href="/css/datatables.min.css">
+
 <h2 class="page-header">Client List</h2>
 
 <div class="panel panel-default">
@@ -5,7 +8,7 @@
 <%= link "New client", to: client_path(@conn, :new), class: "btn btn-primary"%>
 </div>
   <div class="panel-body">
-<table id="sortable" class="table table-hover">
+<table id="tbl" class="table table-striped table-bordered table-hover responsive">
   <thead>
     <tr>
       <th>Client</th>
@@ -46,3 +49,11 @@
 <%= link "New client", to: client_path(@conn, :new), class: "btn btn-primary"%>
 </div>
 </div>
+
+<script>
+  $('#tbl').DataTable({
+  dom: 'lBfrtip', buttons: [ 'copy', 'csv', 'excel' ],
+  responsive: true,
+  iDisplayLength: 25,
+  });
+</script>
