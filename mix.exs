@@ -34,6 +34,7 @@ defmodule Soroban.Mixfile do
         :bamboo_smtp,
         :pdf_generator,
         :drab,
+        :timex,
         :faker,
         :blacksmith
       ]
@@ -62,6 +63,7 @@ defmodule Soroban.Mixfile do
       {:pdf_generator, git: "https://github.com/gutschilla/elixir-pdf-generator"},
       {:drab, "~> 0.7.1"},
       {:porcelain, "~> 2.0"},
+      {:timex, "~> 3.1"},
       {:blacksmith, "~> 0.1"},
       {:faker, "~> 0.8"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},

@@ -85,10 +85,33 @@ var myChart = new Chart(ctx, {
                </a>
            </div>
        </div>
+       <div class="col-md-4 col-xs-6">
+           <div class="panel panel-red">
+               <div class="panel-heading">
+                   <div class="row">
+                       <div class="col-xs-3">
+                           <i class="fa fa-credit-card fa-5x"></i>
+                       </div>
+                       <div class="col-xs-9 text-right">
+                           <div class="huge"><%= @outstandingcount %></div>
+                           <div>Outstanding Invoices</div>
+                       </div>
+                   </div>
+               </div>
+               <a href="/outstanding">
+                   <div class="panel-footer">
+                       <span class="pull-left">View Outstanding</span>
+                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                       <div class="clearfix"></div>
+                   </div>
+               </a>
+           </div>
+       </div>
+
 </div>
 <div class="row">
        <div class="col-md-4 col-xs-6">
-           <div class="panel panel-red">
+           <div class="panel panel-info">
                <div class="panel-heading">
                    <div class="row">
                        <div class="col-xs-3">
@@ -110,7 +133,7 @@ var myChart = new Chart(ctx, {
            </div>
        </div>
        <div class="col-md-4 col-xs-6">
-           <div class="panel panel-red">
+           <div class="panel panel-info">
                <div class="panel-heading">
                    <div class="row">
                        <div class="col-xs-3">

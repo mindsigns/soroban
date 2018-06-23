@@ -39,8 +39,17 @@ defmodule Soroban.AdminController do
     jobcount     = Enum.count(Repo.all(Job))
     invoicecount = Enum.count(Repo.all(Invoice))
 
+    pastdue = Timex.shift(Timex.now, days: -60)
+      query = (from i in Invoice,
+                where: i.paid == false,
+                where: i.date < ^pastdue,
+                order_by: i.date,
+                select: i)
+    outstandingcount = Enum.count(Repo.all(query))
+
     render(conn, "index.html", months: months, jobs: jobs, zipcount: zipcount,
-          pdfcount: pdfcount, jobcount: jobcount, invoicecount: invoicecount, year: this.year)
+           pdfcount: pdfcount, jobcount: jobcount, invoicecount: invoicecount, 
+           outstandingcount: outstandingcount, year: this.year)
   end
 
   @doc """

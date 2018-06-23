@@ -36,6 +36,8 @@ defmodule Soroban.Router do
     post "/invoices/paid", InvoiceController, :paid
     post "/invoices/multipay", InvoiceController, :multipay
 
+    get "/outstanding", OutstandingController, :index
+
     get "/invoice/batch", BatchController, :index
     post "/invoice/generate_all", BatchController, :generate_all
     get "/invoice/delete/:id", BatchController, :delete

@@ -259,6 +259,21 @@ defmodule Soroban.InvoiceController do
   end
 
   @doc """
+  ROUTE: GET /invoices/outstanding
+  display outstanding invoices
+  """
+  def index(conn, _params) do
+
+  query = (from i in Invoice,
+              where: i.paid == false,
+              order_by: i.date,
+              select: i)
+
+    invoices = Repo.all(query)
+    render(conn, "index.html", invoices: invoices)
+  end
+
+  @doc """
   ROUTE: GET /clear_cache/<zip|pdf|all>
   Deletes Zip and PDF files from the file system
   """
