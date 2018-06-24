@@ -33,6 +33,19 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :name, "Number of Days to consider and invoice Past Due", class: "control-label" %>
+    <%= text_input f, :days_pastdue, class: "form-control", placeholder: "Example: 45" %>
+    <%= error_tag f, :days_pastdue%>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :name, "Tagline for outstanding invoices", class: "control-label" %>
+    <%= text_input f, :outstanding_note, class: "form-control", placeholder: "This will replace the Tagline on all outstanding invoices." %>
+    <%= error_tag f, :outstanding_note%>
+  </div>
+
+
+  <div class="form-group">
     <%= label f, :invoice_image, "Image file for invoices - should be a small image", class: "control-label" %>
     <%= file_input f, :invoice_image, class: "form-control" %>
     <%= error_tag f, :invoice_image %>

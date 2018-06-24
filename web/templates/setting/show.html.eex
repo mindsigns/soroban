@@ -22,6 +22,14 @@
     <div class="col-md-4"><%= @setting.note %></div>
   </div>
   <div class="row highlight">
+    <div class="col-md-3 font-bold">Outstanding Note:</div>
+    <div class="col-md-4"><%= @setting.outstanding_note %></div>
+  </div>
+  <div class="row highlight">
+    <div class="col-md-3 font-bold">Days Inv. Past Due:</div>
+    <div class="col-md-4"><%= @setting.days_pastdue %></div>
+  </div>
+  <div class="row highlight">
     <div class="col-md-3 font-bold">Invioce Image</div>
     <div class="col-md-4"><%= @setting.invoice_image %></div>
   </div>

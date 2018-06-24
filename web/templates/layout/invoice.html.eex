@@ -92,6 +92,10 @@ Invoice Total : <b><%= @total %></b> <br>
 <hr>
 <h2>Total : <%= @total %></h2>
 <br>
-<center><h2><%= @company.note %></h2></center>
+<%= if Soroban.Outstanding.is_past_due(@invoice.date) do %>
+  <center><h2> <%= @company.outstanding_note %></h2></center>
+<% else %>
+  <center><h2><%= @company.note %></h2></center>
+<% end %>
 </body>
 </html>

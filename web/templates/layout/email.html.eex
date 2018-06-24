@@ -36,7 +36,7 @@
         </style>
   </head>
   <body>
-<base href="http://localhost:4000">
+    <base href="http://localhost:4000">
 <img src="/images/<%= @company.invoice_image %>">
 <%= @company.company_name %>
 <%= text_to_html(@company.company_address, [wrapper_tag: :div, attributes: [class: "p"]]) %>
@@ -67,7 +67,7 @@ Invoice Total : <b><%= @total %></b> <br>
       <th>Zone</th>
       <th>Service</th>
       <th>Details</th>
-      <th>Fees Adv.<th>
+      <th>Fee Adv.</th>
       <th>Total</th>
     </tr>
   </thead>
@@ -92,6 +92,10 @@ Invoice Total : <b><%= @total %></b> <br>
 <hr>
 <h2>Total : <%= @total %></h2>
 <br>
-<center><h2><%= @company.note %></h2></center>
+<%= if Soroban.Outstanding.is_past_due(@invoice.date) do %>
+  <center><h2> <%= @company.outstanding_note %></h2></center>
+<% else %>
+  <center><h2><%= @company.note %></h2></center>
+<% end %>
 </body>
 </html>

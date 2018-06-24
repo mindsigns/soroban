@@ -1,11 +1,9 @@
-<h2 class="page-header"><%= @count %> Invoices past due</h2>
+<h2 class="page-header">Outstanding Invoices</h2>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-<div class="btn-group" role="group" aria-label="...">
-<%= link "Show Outstanding", class: "btn btn-default", to: outstanding_path(@conn, :index) %>
-</div>
-</div>
+    <%= @count %> Invoices past due
+  </div>
   <div class="panel-body">
 <table id="sortable" class="table">
   <thead>
@@ -13,18 +11,16 @@
       <th>Client</th>
       <th>Invoice Number</th>
       <th>Invoice Date</th>
-      <th>From</th>
-      <th>To</th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody>
 <%= for invoice <- @invoices do %>
     <tr>
-      <td><%= link invoice.client.name, to: invoice_path(@conn, :show, invoice.id) %></td>
+      <td><%= link invoice.client.name, to: client_path(@conn, :show, invoice.client.id) %></td>
       <td><%= link invoice.number , to: invoice_invoice_path(@conn, :show_invoice, invoice.number) %></td>
       <td><%= invoice.date %></td>
-      <td><%= invoice.start %></td>
-      <td><%= invoice.end %></td>
+      <td><%= Soroban.Outstanding.days_past_due(invoice.date) %> days past due</td>
 
       <td class="text-right">
       <%= link "View", to: invoice_path(@conn, :show, invoice), class: "btn btn-success btn-xs" %>

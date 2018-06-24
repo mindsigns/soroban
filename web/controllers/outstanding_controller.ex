@@ -20,15 +20,9 @@ defmodule Soroban.OutstandingController do
   """
   def index(conn, _params) do
 
-    pastdue = Timex.shift(Timex.now, days: -60)
-    query = (from i in Invoice,
-            where: i.paid == false,
-            where: i.date < ^pastdue,
-            order_by: i.date,
-            select: i)
-    invoices = Repo.all(query) |> Repo.preload(:client)
-
-    count = Enum.count invoices
+    invoices = Soroban.Outstanding.outstanding
+    count = Soroban.Outstanding.total_count
     render(conn, "index.html", invoices: invoices, count: count)
   end
+
 end

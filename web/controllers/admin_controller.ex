@@ -36,16 +36,9 @@ defmodule Soroban.AdminController do
     jobs = for {_, y} <- dates, do: y
 
     {zipcount, pdfcount} = Soroban.Utils.cache_count
-    jobcount     = Enum.count(Repo.all(Job))
-    invoicecount = Enum.count(Repo.all(Invoice))
-
-    pastdue = Timex.shift(Timex.now, days: -60)
-      query = (from i in Invoice,
-                where: i.paid == false,
-                where: i.date < ^pastdue,
-                order_by: i.date,
-                select: i)
-    outstandingcount = Enum.count(Repo.all(query))
+    jobcount          = Enum.count(Repo.all(Job))
+    invoicecount      = Enum.count(Repo.all(Invoice))
+    outstandingcount  = Soroban.Outstanding.total_count
 
     render(conn, "index.html", months: months, jobs: jobs, zipcount: zipcount,
            pdfcount: pdfcount, jobcount: jobcount, invoicecount: invoicecount, 

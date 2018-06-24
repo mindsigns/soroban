@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-12">
 <h2 class="page-header"> <%= @client.name %></h2>
 
 <div class="panel panel-default">
@@ -27,13 +27,14 @@
   <div class="row"><h3> Available invoices</h3> </div>
 </div>
 
-<table class="table">
+<table id="sortable" class="table">
   <thead>
     <tr>
       <th>Invoice Name</th>
       <th>Invoice Date</th>
-      <th>Start Date</th>
-      <th>End Date</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Status</th>
       <th>Total</th>
       <th></th>
     </tr>
@@ -45,6 +46,15 @@
       <td><%= invoice.date %></td>
       <td><%= invoice.start %></td>
       <td><%= invoice.end %></td>
+        <%= if invoice.paid do %>
+      <td>
+          Paid
+      </td>
+        <% else %>
+          <td style="color: red">
+        <%= Soroban.Outstanding.days_past_due(invoice.date) %> days past due
+          </td>
+        <% end %>
       <td><%= invoice.total %></td>
 
       <td class="text-right">

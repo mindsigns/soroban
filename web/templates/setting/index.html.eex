@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-8">
 <h2 class="page-header">Settings</h2>
 
 <div class="panel panel-default">
@@ -11,6 +11,7 @@
       <th>Company address</th>
       <th>Company email</th>
       <th>Invoice Note</th>
+      <th># Days Pastdue</th>
       <th></th>
     </tr>
   </thead>
@@ -21,6 +22,7 @@
       <td><%= setting.company_address %></td>
       <td><%= setting.company_email %></td>
       <td><%= setting.note%></td>
+      <td><%= setting.days_pastdue%></td>
       <td>
       <%= link to: setting_path(@conn, :show, setting), class: "btn btn-primary btn-xs" do %>
         <span class="glyphicon glyphicon-info-sign"></span>
