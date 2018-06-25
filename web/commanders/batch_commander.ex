@@ -7,15 +7,14 @@ defmodule Soroban.BatchCommander do
   import Ecto.Query
   alias Soroban.{Repo, Client, InvoiceUtils}
 
-  def invoice(socket, params) do
+  defhandler invoice(socket, params) do
     number = socket |> Drab.Query.select(:val, from: "input[id=invoice_number]")
 
     if number == "" do
       poke socket, text: "Enter an Invoice Number"
     else
-      newparams =  repack(params.params)
       clients = Repo.all from c in Client, select: c.id
-      Task.async(InvoiceUtils, :batch_job, [socket, clients, newparams])
+      Task.async(InvoiceUtils, :batch_job, [socket, clients, params.params])
     end
   end
 
@@ -23,6 +22,7 @@ defmodule Soroban.BatchCommander do
     poke socket, text: "sup"
   end
 
+  # unused since Drab update
   def repack(params) do
     repacked = %{
 				"invoice" => %{
