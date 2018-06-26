@@ -22,4 +22,8 @@ defmodule Soroban.Utils do
   def get_sender() do
     Repo.one(from(s in Setting, select: s.company_email, limit: 1))
   end
+
+  def to_atom(id) do
+    String.to_atom("#{id}")
+  end
 end

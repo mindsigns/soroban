@@ -31,7 +31,7 @@
       <td> <%= if invoice.paid do %>
             <%= invoice.paid_on %>
           <% else %>
-            <%= checkbox :paid, invoice.id, checked: false, class: "form-control" %> 
+            <%= checkbox :paid, String.to_atom("#{invoice.id}"), checked: false, class: "form-control" %> 
           <% end %>
       </td>
       <td class="text-right">
