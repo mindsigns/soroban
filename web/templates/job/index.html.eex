@@ -1,6 +1,7 @@
  <!--Import jQuery before export.js-->
-<script type="text/javascript" src="/js/datatables.min.js"></script>
-<link rel="stylesheet" href="/css/datatables.min.css">
+<script type="text/javascript" src="/js/dataTables.bootstrap4.js"></script>
+<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/css/dataTables.bootstrap4.css">
 
 <div class="row">
 <div class="col-lg-12">
