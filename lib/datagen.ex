@@ -40,7 +40,7 @@ defmodule Forge do
   Job Forge
   """
   register(:job, %Job{
-    date: Ecto.Date.cast!(Faker.Date.between(~D[2017-01-01], ~D[2017-08-04])),
+    date: Ecto.Date.cast!(Faker.Date.between(~D[2018-01-01], ~D[2018-08-22])),
     reference: Faker.Lorem.word(),
     caller: Faker.Name.En.name(),
     type: Enum.random(Soroban.Repo.all(from(c in Soroban.Jobtype, select: c.type))),
@@ -52,6 +52,7 @@ defmodule Forge do
     zone: Integer.to_string(Enum.random(1..5)),
     service: Enum.random(["Regular", "Rush", "Zoom"]),
     details: "",
+    fees_advanced: Enum.random(00..50000),
     total: Enum.random(900..16900),
     client_id: Enum.random(Soroban.Repo.all(from(c in Client, select: c.id)))
   })

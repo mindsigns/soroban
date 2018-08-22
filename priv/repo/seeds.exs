@@ -28,6 +28,8 @@ Repo.insert!(%Jobtype{type: "Research Addt'l Stop"})
 Repo.insert!(%Setting{company_name: "Kickass Couriers", 
                       company_address: "123 My Street\nSF, CA 94111",
                       company_email: "gofast@test.com",
+                      days_pastdue: 35,
+                      outstanding_note: "Invoice is Overdue",
                       note: "Thanks For Using Kickass Couriers!",
                       invoice_image: "fakelogo.png"
   })
