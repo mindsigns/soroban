@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="/css/dataTables.bootstrap4.css">
 -->
 <link rel="stylesheet" href="/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" href="/css/datatables.min.css">
 <div class="row">
 <div class="col-lg-12">
 <%= if @year do %>
@@ -71,4 +72,3 @@
 	<!-- /.panel -->
 </div>
 
-<script type="text/javascript" src="/js/sb-admin-datatables.min.js"></script>

@@ -9,6 +9,8 @@
   <meta name="author" content="jon trembley">
   <title>Soroban : Courier Invoicing</title>
   <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+<link rel="stylesheet" href="/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" href="/css/datatables.min.css">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
@@ -163,14 +165,8 @@
     <script>require("web/static/js/app").App.sortTable()</script>
     <script> $(".chosen_select").chosen() </script>
 
-    <!-- 
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="js/sb-admin.min.js"></script> -->
-
-<script type="text/javascript" src="/js/dataTables.bootstrap4.js"></script>
-<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/js/datatables.min.js"></script>
+<script type="text/javascript" src="/js/sb-admin-datatables.min.js"></script>
   </div>
 </body>
 
