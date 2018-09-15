@@ -32,6 +32,11 @@
   </div>
 
   <div class="form-group">
+    <%= label :invoice, :name, "Generate PDFs?", class: "control-label" %>
+    <%= checkbox :invoice, :pdf, class: "form-control-sm" %>
+  </div>
+
+  <div class="form-group">
 		<button class="btn btn-primary" drab-click="invoice" drab-event="click" drab-handler="invoice">Generate</button>
 	</div>
 </form>

@@ -22,8 +22,12 @@ defmodule Soroban.InvoiceUtils do
 
     if length(jobs) > 0 do
       total = total(jobs)
+      adv_tot = total_advanced(jobs)
+
       changeset = Ecto.Changeset.change(invoice, %{total: total})
       Repo.update!(changeset)
+      changeset2 = Ecto.Changeset.change(invoice, %{fees_advanced: adv_tot})
+      Repo.update!(changeset2)
 
       case pdf_tf do
         true -> Pdf.to_pdf(invoice, jobs, total, company)
@@ -48,8 +52,9 @@ defmodule Soroban.InvoiceUtils do
     company = Repo.one(from(s in Setting, limit: 1))
 
     total = total(jobs)
+    adv_tot = total_advanced(jobs)
 
-    changeset = Ecto.Changeset.change(invoice, %{total: total})
+    changeset = Ecto.Changeset.change(invoice, %{total: total, fees_advances: adv_tot})
     Repo.update!(changeset)
 
     case pdf_tf do
@@ -67,9 +72,15 @@ defmodule Soroban.InvoiceUtils do
     Money.new(Enum.sum(ftotal))
   end
 
+  def total_advanced(jobs) do
+    jtotal = for n <- jobs, do: Map.get(n, :fees_advanced)
+    ftotal = for n <- jtotal, do: Map.get(n, :amount)
+    Money.new(Enum.sum(ftotal))
+  end
+
   def batch_job(socket, clients, params) do
     %{
-      "invoice" => %{"date" => date, "end" => end_date, "start" => start_date, "number" => number}
+      "invoice" => %{"date" => date, "end" => end_date, "start" => start_date, "number" => number, "pdf" => pdf}
     } = params
 
     for c <- clients do
@@ -79,7 +90,7 @@ defmodule Soroban.InvoiceUtils do
             poke(socket, text: "No jobs for the client #{client.name}")
         _ ->
             invoice_id = new_invoice(c, date, end_date, start_date, number)
-            generate(invoice_id, true)
+            generate(invoice_id, String.to_atom(pdf))
             poke(socket, text: "Invoicing for : #{client.name}")
       end
     end
