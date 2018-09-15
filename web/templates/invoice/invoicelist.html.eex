@@ -2,12 +2,18 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    Total billed: <b><%= @total %></b>
-    Total Advanced: <b><%= @total_adv %></b>
-    Total net: <b><%= @total_net %></b>
+    <button class="btn btn-primary" type="button">
+      Total Billed <span class="badge"><%= @total %></span>
+    </button>
+    <button class="btn btn-info" type="button">
+      Total Advanced <span class="badge"><%= @total_adv %></span>
+    </button>
+    <button class="btn btn-success" type="button">
+      Total Net <span class="badge"><%= @total_net %></span>
+    </button>
   </div>
   <div class="panel-body">
-<table id="sortable" class="table">
+  <table id="sortable" class="table">
   <thead>
     <tr>
       <th>Client</th>
