@@ -98,8 +98,8 @@ defmodule Soroban.InvoiceController do
           |> render("new.html", changeset: changeset)
 
       else
-                newchangeset = Ecto.Changeset.put_change(changeset, :total, invtotal)
-                newchangeset2 = Ecto.Changeset.put_change(newchangeset, :fees_advanced, advtotal)
+        newchangeset = Ecto.Changeset.put_change(changeset, :total, invtotal)
+        newchangeset2 = Ecto.Changeset.put_change(newchangeset, :fees_advanced, advtotal)
 
     case Repo.insert(newchangeset2) do
       {:ok, _invoice} ->
@@ -147,23 +147,19 @@ defmodule Soroban.InvoiceController do
             |> put_status(:not_found)
             |> render(Soroban.ErrorView, "error_msg.html")
       _ -> 
-            itotal = for n <- invoices, do: Map.get(n, :total)
-            ftotal = for n <- itotal, do: Map.get(n, :amount)
-            total = Money.new(Enum.sum(ftotal))
+            total = InvoiceUtils.total(invoices)
+            total_adv = InvoiceUtils.total_advanced(invoices)
 
-            xtotal = for p <- invoices, do: Map.get(p, :fees_advanced)
-            ytotal = for p <- xtotal, do: Map.get(p, :amount)
-            total_adv = Money.new(Enum.sum(ytotal))
+     total_net = 
+        if total > total_adv do
+          Money.subtract(total, total_adv)
+        else
+          Money.subtract(total_adv, total)
+        end 
 
-        total_net = 
-            if total > total_adv do
-              Money.subtract(total, total_adv)
-            else
-              Money.subtract(total_adv, total)
-            end 
+      invoice_count = Enum.count(invoices)
 
-            invoice_count = Enum.count(invoices)
-            render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count, total: total, total_adv: total_adv, total_net: total_net)
+      render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count, total: total, total_adv: total_adv, total_net: total_net)
     end
   end
 
