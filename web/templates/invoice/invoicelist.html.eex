@@ -2,7 +2,9 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    Total for the billing period : <b><%= @total %></b>
+    Total billed: <b><%= @total %></b>
+    Total Advanced: <b><%= @total_adv %></b>
+    Total net: <b><%= @total_net %></b>
   </div>
   <div class="panel-body">
 <table id="sortable" class="table">
@@ -31,7 +33,7 @@
       <td> <%= if invoice.paid do %>
             <%= invoice.paid_on %>
           <% else %>
-            <%= checkbox :paid, String.to_atom("#{invoice.id}"), checked: false, class: "form-control" %> 
+            <%= checkbox :paid, String.to_atom("#{invoice.id}"), checked: false, class: "form-control-sm" %> 
           <% end %>
       </td>
       <td class="text-right">

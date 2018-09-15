@@ -85,9 +85,12 @@ defmodule Soroban.InvoiceController do
                 |> put_flash(:error, "Missing info")
                 |> render("new.html", changeset: changeset)
       true ->
-                invtotal = total(Ecto.Changeset.get_field(changeset, :client_id),
-                     Ecto.Changeset.get_field(changeset, :start),
-                     Ecto.Changeset.get_field(changeset, :end))
+                client_id = Ecto.Changeset.get_field(changeset, :client_id)
+                start_date = Ecto.Changeset.get_field(changeset, :start)
+                end_date = Ecto.Changeset.get_field(changeset, :end)
+
+      invtotal = total(client_id, start_date, end_date)
+      advtotal = total_adv(client_id, start_date, end_date)
 
       if to_string(invtotal) == "$0.00" do
         conn
@@ -96,13 +99,14 @@ defmodule Soroban.InvoiceController do
 
       else
                 newchangeset = Ecto.Changeset.put_change(changeset, :total, invtotal)
+                newchangeset2 = Ecto.Changeset.put_change(newchangeset, :fees_advanced, advtotal)
 
-    case Repo.insert(newchangeset) do
+    case Repo.insert(newchangeset2) do
       {:ok, _invoice} ->
         conn
         |> put_flash(:info, "Invoice created successfully.")
         |> redirect(to: invoice_path(conn, :index))
-      {:error, newchangeset} ->
+      {:error, newchangeset2} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
@@ -147,8 +151,19 @@ defmodule Soroban.InvoiceController do
             ftotal = for n <- itotal, do: Map.get(n, :amount)
             total = Money.new(Enum.sum(ftotal))
 
+            xtotal = for p <- invoices, do: Map.get(p, :fees_advanced)
+            ytotal = for p <- xtotal, do: Map.get(p, :amount)
+            total_adv = Money.new(Enum.sum(ytotal))
+
+        total_net = 
+            if total > total_adv do
+              Money.subtract(total, total_adv)
+            else
+              Money.subtract(total_adv, total)
+            end 
+
             invoice_count = Enum.count(invoices)
-            render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count, total: total)
+            render(conn, "invoicelist.html", invoices: invoices, invoice_id: id, invoice_count: invoice_count, total: total, total_adv: total_adv, total_net: total_net)
     end
   end
 
@@ -302,7 +317,7 @@ defmodule Soroban.InvoiceController do
   #
 
   #Totals dollar amount from jobs within a date range for a client
-  defp total(client, startdate, enddate) do
+  def total(client, startdate, enddate) do
     query = (from j in Job,
               where: j.date >= ^startdate,
               where: j.date <= ^enddate,
@@ -313,6 +328,22 @@ defmodule Soroban.InvoiceController do
     jobs = Repo.all(query) |> Repo.preload(:client)
 
     jtotal = for n <- jobs, do: Map.get(n, :total)
+    ftotal = for n <- jtotal, do: Map.get(n, :amount)
+    total = Money.new(Enum.sum(ftotal))
+    total
+end
+
+def total_adv(client, startdate, enddate) do
+    query = (from j in Job,
+              where: j.date >= ^startdate,
+              where: j.date <= ^enddate,
+              where: j.client_id == ^client,
+              order_by: j.date,
+              select: j)
+
+    jobs = Repo.all(query) |> Repo.preload(:client)
+
+    jtotal = for n <- jobs, do: Map.get(n, :fees_advanced)
     ftotal = for n <- jtotal, do: Map.get(n, :amount)
     total = Money.new(Enum.sum(ftotal))
     total

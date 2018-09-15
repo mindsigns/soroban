@@ -17,7 +17,7 @@ Soroban.Job model
     field :service, :string
     field :details, :string
     field :total, Money.Ecto.Type
-    field :fees_advanced, Money.Ecto.Type
+    field :fees_advanced, Money.Ecto.Type, default: 0
 
 
     belongs_to :client, Soroban.Client

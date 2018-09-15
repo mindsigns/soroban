@@ -22,8 +22,12 @@ defmodule Soroban.InvoiceUtils do
 
     if length(jobs) > 0 do
       total = total(jobs)
+      adv_tot = total_advanced(jobs)
+
       changeset = Ecto.Changeset.change(invoice, %{total: total})
       Repo.update!(changeset)
+      changeset2 = Ecto.Changeset.change(invoice, %{fees_advanced: adv_tot})
+      Repo.update!(changeset2)
 
       case pdf_tf do
         true -> Pdf.to_pdf(invoice, jobs, total, company)
@@ -48,9 +52,12 @@ defmodule Soroban.InvoiceUtils do
     company = Repo.one(from(s in Setting, limit: 1))
 
     total = total(jobs)
+    adv_tot = total_advanced(jobs)
 
     changeset = Ecto.Changeset.change(invoice, %{total: total})
     Repo.update!(changeset)
+    changeset2 = Ecto.Changeset.change(invoice, %{fees_advanced: adv_tot})
+    Repo.update!(changeset2)
 
     case pdf_tf do
       true -> Pdf.to_pdf(invoice, jobs, total, company)
@@ -63,6 +70,12 @@ defmodule Soroban.InvoiceUtils do
   """
   def total(jobs) do
     jtotal = for n <- jobs, do: Map.get(n, :total)
+    ftotal = for n <- jtotal, do: Map.get(n, :amount)
+    Money.new(Enum.sum(ftotal))
+  end
+
+  def total_advanced(jobs) do
+    jtotal = for n <- jobs, do: Map.get(n, :fees_advanced)
     ftotal = for n <- jtotal, do: Map.get(n, :amount)
     Money.new(Enum.sum(ftotal))
   end
