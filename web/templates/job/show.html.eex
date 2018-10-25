@@ -18,10 +18,6 @@
     <div class="col-md-4"><%= @job.caller%></div>
   </div>
   <div class="row highlight">
-    <div class="col-md-3 font-bold">Job Type:</div>
-    <div class="col-md-4"><%= @job.type%></div>
-  </div>
-  <div class="row highlight">
     <div class="col-md-3 font-bold">Description:</div>
     <div class="col-md-4"><%= @job.description%></div>
   </div>
