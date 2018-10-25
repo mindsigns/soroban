@@ -40,3 +40,7 @@ body {
 html {
     font-size: 14px;
 }
+
+i.fa-cogs, i.fa-credit-card-alt, i.fa-car, i.fa-home {
+    font-size: 26px !important;
+}
