@@ -1,4 +1,6 @@
 <div class="col-md-6">
+<h2 class="page-header">Add a job</h2>
+
 <link rel="stylesheet" href="/css/awesomplete.css">
 <script src="/js/awesomplete.min.js"></script>
 
@@ -12,7 +14,9 @@
   <div class="panel-footer">
   <%= link "Back", class: "btn btn-default", to: job_path(@conn, :index)%>
   </div>
+
 </div>
+
 <script>    
   var input = document.getElementById("job_caller");
   new Awesomplete(input, {

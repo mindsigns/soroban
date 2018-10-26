@@ -44,3 +44,13 @@ html {
 i.fa-cogs, i.fa-credit-card-alt, i.fa-car, i.fa-home {
     font-size: 26px !important;
 }
+
+.help-block {
+    font-weight: bold;
+    color: red;
+}
+
+.max-size {
+        max-width: 100%;
+    }
+
