@@ -1,6 +1,3 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-        
 <%= form_for @changeset, @action, fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
@@ -9,33 +6,33 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :name, "Invoice Number", class: "control-label" %>
-    <%= text_input f, :number, class: "form-control" %>
+    <%= label f, :name, "Invoice Number", class: "control-label font-weight-bold" %>
+    <%= text_input f, :number, class: "form-control", required: true %>
     <%= error_tag f, :number %>
   </div>
 
   <div class="form-group">
-    <%= label f, :client_id, class: "control-label" %>
-    <%= select f, :client_id, @clients, class: "form-control chosen_select", prompt: "Select a client" %>
+    <%= label f, :client_id, class: "control-label font-weight-bold" %>
+    <%= select f, :client_id, @clients, class: "form-control chosen_select", prompt: "Select a client", required: true %>
     <%= error_tag f, :client_id %>
   </div>
 
   <div class="form-group">
-    <%= label f, :name, "Invoice Date", class: "control-label" %>
+    <%= label f, :name, "Invoice Date", class: "control-label font-weight-bold" %>
     </br>
     <%= date_select f, :date, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
     <%= error_tag f, :date %>
   </div>
 
   <div class="form-group">
-    <%= label f, :name, "Invoice Start Date", class: "control-label" %>
+    <%= label f, :name, "Invoice Start Date", class: "control-label font-weight-bold" %>
     </br>
     <%= date_select f, :start, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
     <%= error_tag f, :start %>
   </div>
 
   <div class="form-group">
-    <%= label f, :name, "Invoice End Date", class: "control-label" %>
+    <%= label f, :name, "Invoice End Date", class: "control-label font-weight-bold" %>
     </br>
     <%= date_select f, :end, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
     <%= error_tag f, :end %>
@@ -44,7 +41,7 @@
   <%= if @invoice.paid do %>
   <div class="form-group">
     <hr />
-    <%= label f, :name, "Invoice Paid on", class: "control-label" %>
+    <%= label f, :name, "Invoice Paid on", class: "control-label font-weight-bold" %>
     </br>
     <%= date_select f, :paid_on, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
   </div>
@@ -52,7 +49,6 @@
 
 
   <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+    <%= submit "Update", class: "btn btn-primary" %>
   </div>
 <% end %>
-</div>

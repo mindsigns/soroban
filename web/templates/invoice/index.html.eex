@@ -13,14 +13,14 @@
 
     <div class="card mb-6">
 
-  <div class="card-heading">
+<div class="card-body">
+
 <div class="btn-group" role="group" aria-label="Invoice Generators">
-<%= link "Generate All Invoices", class: "btn btn-secondary", to: batch_path(@conn, :index) %>
-<%= link "Generate single invoice", class: "btn btn-secondary", to: invoice_path(@conn, :new) %>
-<%= link "Show Outstanding", class: "btn btn-secondary", to: outstanding_path(@conn, :index) %>
+  <%= link "Generate All Invoices", class: "btn btn-outline-dark", to: batch_path(@conn, :index) %>
+  <%= link "Generate single invoice", class: "btn btn-outline-dark", to: invoice_path(@conn, :new) %>
+  <%= link "Show Outstanding", class: "btn btn-outline-dark", to: outstanding_path(@conn, :index) %>
 </div>
-</div>
-  <div class="card-body">
+
 <table id="sortable" class="table">
   <thead>
     <tr>

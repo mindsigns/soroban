@@ -1,38 +1,53 @@
-<div class="col-md-6">
-<h2 class="page-header">Batch invoice generation</h2>
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/admin">Dashboard</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/invoices">Invoices</a>
+  </li>
+   <li class="breadcrumb-item active">
+     Batch Invoice Generation
+  </li>
+</ol>
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-		  <%= @text %>
-    </div>
-    <div class="panel-body">
+<div class="row">
+  <div class="col-md-6">
 
+    <div class="card mb-3">
+        <div class="card-title">
+            <div class="alert alert-info" role="alert">
+                <b> <%= @text %> </b>
+            </div>
+        </div>
+
+<div class="card-body">
 <form>
   <div class="form-group">
-    <%= label :invoice, :name, "Invoice Number", class: "control-label" %>
+    <%= label :invoice, :name, "Invoice Number", class: "control-label font-weight-bold" %>
     <%= text_input :invoice, :number, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= label :invoice, :name, "Invoice Date", class: "control-label" %>
+    <%= label :invoice, :name, "Invoice Date", class: "control-label font-weight-bold" %>
     </br>
     <%= date_select :invoice, :date, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= label :invoice, :name, "Invoice Start Date", class: "control-label" %>
+    <%= label :invoice, :name, "Invoice Start Date", class: "control-label font-weight-bold" %>
     </br>
     <%= date_select :invoice, :start, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= label :invoice, :name, "Invoice End Date", class: "control-label" %>
+    <%= label :invoice, :name, "Invoice End Date", class: "control-label font-weight-bold" %>
     </br>
     <%= date_select :invoice, :end, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= label :invoice, :name, "Generate PDFs?", class: "control-label" %>
+    <%= label :invoice, :name, "Generate PDFs?", class: "control-label font-weight-bold" %>
     <%= checkbox :invoice, :pdf, class: "form-control-sm" %>
   </div>
 
@@ -40,9 +55,16 @@
 		<button class="btn btn-primary" drab-click="invoice" drab-event="click" drab-handler="invoice">Generate</button>
 	</div>
 </form>
+</div>
 
-</div>
-<div class="panel-footer">
-    <%= link "Back", to: invoice_path(@conn, :index), class: "btn btn-default" %>
-</div>
-</div>
+  <div class="card-footer">
+    <a href="/invoices">
+      <button type="button" class="btn btn-secondary">
+        <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
+      </button>
+    </a>
+  </div>
+
+      </div>
+    </div>
+  </div>

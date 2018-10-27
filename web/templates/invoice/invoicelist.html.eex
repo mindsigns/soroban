@@ -1,18 +1,37 @@
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/admin">Dashboard</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/invoices">Invoices</a>
+  </li>
+   <li class="breadcrumb-item active">
+     view
+  </li>
+</ol>
+
+<div class="row">
+  <div class="col-md-12">
+
 <h2 class="page-header"><%= @invoice_count %> invoices for <%= @invoice_id %></h2>
 
-<div class="panel panel-default">
+    <div class="card mb-6">
+
   <div class="panel-heading">
+
     <button class="btn btn-primary" type="button">
-      Total Billed <span class="badge"><%= @total %></span>
+      Total Billed <span class="badge badge-light"><%= @total %></span>
     </button>
     <button class="btn btn-info" type="button">
-      Total Advanced <span class="badge"><%= @total_adv %></span>
+      Total Advanced <span class="badge badge-light"><%= @total_adv %></span>
     </button>
     <button class="btn btn-success" type="button">
-      Total Net <span class="badge"><%= @total_net %></span>
+      Total Net <span class="badge badge-light"><%= @total_net %></span>
     </button>
   </div>
-  <div class="panel-body">
+
+<div class="card-body">
   <table id="sortable" class="table">
   <thead>
     <tr>
@@ -53,10 +72,19 @@
   </tbody>
 </table>
 </div>
-<div class="panel-footer">
-<%= link "Back", to: invoice_path(@conn, :index) , class: "btn btn-default" %>
-<%= submit "Mark 'Paid'", class: "btn btn-success pull-right" %>
+
 <% end %>
 
-</div>
+  <div class="card-footer">
+    <a href="/invoices">
+      <button type="button" class="btn btn-secondary">
+        <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
+      </button>
+    </a>
+<%= submit "Mark 'Paid'", class: "btn btn-success pull-right" %>
+  </div>
+
+      </div>
+    </div>
+  </div>
 </div>
