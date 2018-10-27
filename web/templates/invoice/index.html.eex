@@ -1,14 +1,26 @@
-<h2 class="page-header">Invoices</h2>
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/admin">Dashboard</a>
+  </li>
+   <li class="breadcrumb-item active">
+     Invoices
+  </li>
+</ol>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-<div class="btn-group" role="group" aria-label="...">
-<%= link "Generate All Invoices", class: "btn btn-default", to: batch_path(@conn, :index) %>
-<%= link "Generate single invoice", class: "btn btn-default", to: invoice_path(@conn, :new) %>
-<%= link "Show Outstanding", class: "btn btn-default", to: outstanding_path(@conn, :index) %>
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="card mb-6">
+
+  <div class="card-heading">
+<div class="btn-group" role="group" aria-label="Invoice Generators">
+<%= link "Generate All Invoices", class: "btn btn-secondary", to: batch_path(@conn, :index) %>
+<%= link "Generate single invoice", class: "btn btn-secondary", to: invoice_path(@conn, :new) %>
+<%= link "Show Outstanding", class: "btn btn-secondary", to: outstanding_path(@conn, :index) %>
 </div>
 </div>
-  <div class="panel-body">
+  <div class="card-body">
 <table id="sortable" class="table">
   <thead>
     <tr>
@@ -36,4 +48,6 @@
   </tbody>
 </table>
 </div>
+</div>
+
 </div>

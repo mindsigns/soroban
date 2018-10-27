@@ -1,5 +1,8 @@
 <script src="/js/Chart.min.js"></script>
 
+<div class="row">
+  <div class="col-12">
+
       <!-- Icon Cards-->
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-3">
@@ -129,4 +132,5 @@ var myChart = new Chart(ctx, {
             </a>
           </div>
         </div>
+  </div>
 </div>
