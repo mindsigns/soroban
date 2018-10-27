@@ -1,8 +1,23 @@
-<div class="col-md-6">
-<h2 class="page-header"><%= @job.client.name %></h2>
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/admin">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="/jobs">Jobs</a>
+        </li>
+        <li class="breadcrumb-item active">view</li>
+      </ol>
+      <div class="row">
+        <div class="col-12">
 
-<div class="panel panel-default">
-<div class="panel-body">
+<div class="col-md-6">
+          <div class="card mb-3">
+            <div class="card-header">
+              <h2 class="page-header"><%= @job.client.name %></h2>
+            </div>
+        
+		    <div class="card-body">
 
 <div class="container pull-left">
   <div class="row highlight">
@@ -49,11 +64,16 @@
 
 </div>
 
-<div class="panel-footer">
-    <%= link "Back", to: job_path(@conn, :index), class: "btn btn-default" %>
-    <%= link "Edit", to: job_path(@conn, :edit, @job), class: "btn btn-warning" %>
+<div class="card-footer">
+    <%= link "Back", to: job_path(@conn, :index), class: "btn btn-secondary" %>
+    <%= link "Edit", to: job_path(@conn, :edit, @job), class: "btn btn-info" %>
     <%= link "Delete", to: job_path(@conn, :delete, @job), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
 </div>
 
+</div>
+	<!-- /.panel-body -->
+	</div>
+	</div>
+	<!-- /.panel -->
 </div>
 </div>

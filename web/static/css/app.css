@@ -52,5 +52,12 @@ i.fa-cogs, i.fa-credit-card-alt, i.fa-car, i.fa-home {
 
 .max-size {
         max-width: 100%;
-    }
+}
 
+.back {
+    color: black;
+}
+
+.back:hover {
+    color: white;
+}

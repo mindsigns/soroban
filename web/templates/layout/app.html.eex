@@ -114,27 +114,17 @@
       </ul>
     </div>
   </nav>
+
   <div class="content-wrapper">
     <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="index.html">Dashboard</a>
-        </li>
-        <li class="breadcrumb-item active">Blank Page</li>
-      </ol>
-      <div class="row">
-        <div class="col-12">
-             <%= render @view_module, @view_template, assigns %>
-        </div>
-      </div>
-    </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
+      <%= render @view_module, @view_template, assigns %>
+    </div> <!-- /.container-fluid-->
+  </div> <!-- /.content-wrapper-->
+
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+          <small>Copyright © Jon Trembley 2018</small>
         </div>
       </div>
     </footer>
