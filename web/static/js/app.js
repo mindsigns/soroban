@@ -23,4 +23,9 @@ import { Sort } from "./sort"
 export const App = {
   sortTable: Sort.makeSortable
 }
+
+$(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+})
 // import socket from "./socket"
+
