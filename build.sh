@@ -9,5 +9,5 @@ fi
 
 npm install
 node node_modules/brunch/bin/brunch build
-mix phoenix.digest
+mix phx.digest
 #mix run priv/repo/seeds.exs
