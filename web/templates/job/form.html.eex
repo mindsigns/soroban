@@ -6,7 +6,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, "Job Date : ", class: "control-label" %>
+    <%= label f, "Job Date : ", class: "control-label font-weight-bold" %>
     <%= date_select f, :date, default: {@today.year, @today.month, @today.day}, class: "form-control" %>
     <%= error_tag f, :date %>
   </div>
@@ -62,8 +62,8 @@
   </div>
 
   <div class="form-group">
-    <%= label f, "", class: "control-label" %>
-    <%= text_input f, :fees_advanced, class: "form-control", placeholder: "Fees Advanced "%>
+    <%= label f, "Fees Advanced", class: "control-label font-weight-bold" %>
+    <%= text_input f, :fees_advanced, class: "form-control" %>
     <%= error_tag f, :fees_advanced %>
   </div>
 

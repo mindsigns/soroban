@@ -100,7 +100,7 @@
         </li>
         <%= if @current_user do %>
           <li class="nav-item data-toggle="tooltip" data-placement="right" title="Current User"><a class="nav-link" href="<%= user_path(@conn, :show, @current_user.id) %>">
-            <span class="glyphicon glyphicon-user"> <%= @current_user.username %></span></a></li>
+            <span class="fa fa-user"> <%= @current_user.username %></span></a></li>
         <% else %>
           <li class="nav-item"><a class="nav-link" href="<%= user_path @conn, :new %>">New user</a></li>
           <li class="nav-item"><a class="nav-link" href="<%= session_path @conn, :new %>">Login</a></li>
