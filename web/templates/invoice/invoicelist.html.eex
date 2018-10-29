@@ -14,22 +14,21 @@
 <div class="row">
   <div class="col-md-12">
 
-<h2 class="page-header"><%= @invoice_count %> invoices for <%= @invoice_id %></h2>
+  <h2 class="page-header"><%= @invoice_count %> invoices for <%= @invoice_id %></h2>
 
-    <div class="card mb-6">
+    <div class="card">
 
-  <div class="panel-heading">
-
-    <button class="btn btn-primary" type="button">
-      Total Billed <span class="badge badge-light"><%= @total %></span>
-    </button>
-    <button class="btn btn-info" type="button">
-      Total Advanced <span class="badge badge-light"><%= @total_adv %></span>
-    </button>
-    <button class="btn btn-success" type="button">
-      Total Net <span class="badge badge-light"><%= @total_net %></span>
-    </button>
-  </div>
+      <div class="card-header">
+        <button class="btn btn-primary" type="button">
+          Total Billed <span class="badge badge-light"><%= @total %></span>
+        </button>
+        <button class="btn btn-info" type="button">
+          Total Advanced <span class="badge badge-light"><%= @total_adv %></span>
+        </button>
+        <button class="btn btn-success" type="button">
+          Total Net <span class="badge badge-light"><%= @total_net %></span>
+        </button>
+      </div>
 
 <div class="card-body">
   <table id="sortable" class="table">
