@@ -21,12 +21,12 @@
   <div class="card-header">
         
 <div class="btn-group" role="group" aria-label="...">
-	<%= link "Download PDF", to: invoice_path(@conn, :send_pdf, @invoice), class: "btn btn-primary" %>
+	<%= link "Download PDF", to: invoice_path(@conn, :send_pdf, @invoice), class: "btn btn-outline-dark" %>
 	<%= if @invoice.client.email do %>
-  		<%= link "Email to Client", to: invoice_invoice_path(@conn, :send_email, @invoice), class: "btn btn-primary" %>
+  		<%= link "Email to Client", to: invoice_invoice_path(@conn, :send_email, @invoice), class: "btn btn-outline-dark" %>
 	<% end %>
-	<%= link "View HTML Invoice", to: invoice_path(@conn, :view, @invoice), class: "btn btn-primary" %>
-	<%= link "Edit Invoice", to: invoice_path(@conn, :edit, @invoice), class: "btn btn-primary" %>
+	<%= link "View HTML Invoice", to: invoice_path(@conn, :view, @invoice), class: "btn btn-outline-dark" %>
+	<%= link "Edit Invoice", to: invoice_path(@conn, :edit, @invoice), class: "btn btn-outline-dark" %>
   </div>
 	<%= link "Delete Invoice", to: invoice_path(@conn, :delete, @invoice), method: :delete, data: [confirm: "Are you sure you want to delete?"],class: "btn btn-danger" %>
     <%= if @invoice.paid do %>
@@ -141,12 +141,10 @@
 </div>
 
   <div class="card-footer">
-    <a href="/invoices">
-      <button type="button" class="btn btn-secondary">
+    <a href="/invoices" class="btn btn-secondary" role="button">
         <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
-      </button>
-      <%= link "Edit", to: invoice_path(@conn, :edit, @invoice), class: "btn btn-warning" %>
     </a>
+      <%= link "Edit", to: invoice_path(@conn, :edit, @invoice), class: "btn btn-info" %>
   </div>
 
       </div>

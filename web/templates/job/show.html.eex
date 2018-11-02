@@ -6,7 +6,7 @@
         <li class="breadcrumb-item">
           <a href="/jobs">Jobs</a>
         </li>
-        <li class="breadcrumb-item active">view</li>
+        <li class="breadcrumb-item active">View</li>
       </ol>
       <div class="row">
         <div class="col-12">
@@ -65,7 +65,11 @@
 </div>
 
 <div class="card-footer">
-    <%= link "Back", to: job_path(@conn, :index), class: "btn btn-secondary" %>
+    <a href="/jobs">
+      <button type="button" class="btn btn-secondary">
+        <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
+      </button>
+    </a>
     <%= link "Edit", to: job_path(@conn, :edit, @job), class: "btn btn-info" %>
     <%= link "Delete", to: job_path(@conn, :delete, @job), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
 </div>
