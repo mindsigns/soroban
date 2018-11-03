@@ -39,7 +39,6 @@
   <div class="form-group">
     <%= label f, "", class: "control-label" %>
     <%= textarea f, :description, class: "form-control", placeholder: "Job Description" %>
-    
     <%= error_tag f, :description %>
   </div>
 
