@@ -75,7 +75,6 @@
 
       <td class="text-right">
         <%= link "View", to: invoice_path(@conn, :show, invoice), class: "btn btn-success btn-xs" %>
-        <%= link "Edit", to: invoice_path(@conn, :edit, invoice), class: "btn btn-warning btn-xs" %>
       </td>
     </tr>
 <% end %>
@@ -87,7 +86,7 @@
     <a href="/clients" class="btn btn-secondary" role="button">
         <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
     </a>
-    <%= link "Edit", to: client_path(@conn, :edit, @client), class: "btn btn-warning " %>
+    <%= link "Edit", to: client_path(@conn, :edit, @client), class: "btn btn-info " %>
   </div>
 
       </div>

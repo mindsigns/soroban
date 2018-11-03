@@ -31,17 +31,19 @@
 	<%= link "Delete Invoice", to: invoice_path(@conn, :delete, @invoice), method: :delete, data: [confirm: "Are you sure you want to delete?"],class: "btn btn-danger" %>
     <%= if @invoice.paid do %>
       <a class="btn btn-success pull-right disabled" href="#">Paid</a>
-  <% else %>
+    <% else %>
     <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#paidModal">
       Mark Paid
     </button>
 <!-- Modal -->
-<div class="modal" id="paidModal" tabindex="-1" role="dialog" aria-labelledby="paidModalLabel">
+<div class="modal fade" id="paidModal" tabindex="-1" role="dialog" aria-labelledby="paidModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="paidModalLabel">Mark Invoice Paid</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
 		<%= form_for @conn, invoice_path(@conn, :paid), [as: :paid], fn f -> %>

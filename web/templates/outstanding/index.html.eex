@@ -45,9 +45,18 @@
 <% end %>
   </tbody>
 </table>
-</div>
-</div>
 
+  <div class="card-footer">
+    <a href="/invoices">
+      <button type="button" class="btn btn-secondary">
+        <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
+      </button>
+    </a>
+  </div>
+
+      </div>
+    </div>
+  </div>
 </div>
 
   <script>

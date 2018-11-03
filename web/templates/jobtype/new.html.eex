@@ -1,12 +1,34 @@
-<div class="col-md-6">
-<h2 class="page-header">Add a new job type</h2>
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/admin">Dashboard</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/jobtypes">Job Types</a>
+  </li>
+   <li class="breadcrumb-item active">
+    New  
+  </li>
+</ol>
+
+<div class="row">
+  <div class="col-md-6">
+
+    <div class="card mb-3">
+      <div class="card-body">
 
 <%= render "form.html", changeset: @changeset,
                         action: jobtype_path(@conn, :create) %>
 
-  <div class="panel-footer">
-  <%= link "Back", to: jobtype_path(@conn, :index), class: "btn btn-default" %>
+  <div class="card-footer">
+  
+    <a href="/jobtypes" class="btn btn-secondary" role="button">
+        <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
+    </a>
+
   </div>
-</div>
-</div>
+
+      </div>
+    </div>
+  </div>
 </div>

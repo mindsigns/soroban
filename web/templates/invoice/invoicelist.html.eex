@@ -66,22 +66,20 @@
       </td>
     </tr>
   <% end %>  
+
   <%= hidden_input :invoice_id, :invoice_name, value: @invoice_id %> 
 
   </tbody>
 </table>
 </div>
 
-<% end %>
-
   <div class="card-footer">
-    <a href="/invoices">
-      <button type="button" class="btn btn-secondary">
+    <a href="/invoices" class="btn btn-secondary" role="button">
         <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
-      </button>
     </a>
-<%= submit "Mark 'Paid'", class: "btn btn-success pull-right" %>
+    <%= submit "Mark 'Paid'", class: "btn btn-success pull-right" %>
   </div>
+<% end %>
 
       </div>
     </div>

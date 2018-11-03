@@ -25,9 +25,14 @@
                         action: service_path(@conn, :update, @service) %>
 
   <div class="card-footer">
-    <%= link "Back", to: service_path(@conn, :index), class: "btn btn-default" %>
+  
+    <a href="/service" class="btn btn-secondary" role="button">
+        <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
+    </a>
+
   </div>
 
+      </div>
     </div>
   </div>
 </div>
