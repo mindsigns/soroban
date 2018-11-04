@@ -28,6 +28,14 @@ $(function () {
       $('[data-toggle="tooltip"]').tooltip()
 })
 
+//require( 'jquery' );
+require( 'jszip' );
+//require( 'datatables.net-bs4' )();
+require( 'datatables.net-buttons-bs4' )();
+require( 'datatables.net-buttons/js/buttons.html5.js' )();
+require( 'datatables.net-buttons/js/buttons.print.js' )();
+require( 'datatables.net-responsive-bs4' )();
+
 window.$ = window.jquery = require('jquery');
 window.dt = require('datatables.net')();
 window.dtbs4 = require('datatables.net-bs4')();
