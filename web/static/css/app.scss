@@ -1,0 +1,66 @@
+/* This file is for your main application css. */
+$fa-font-path: "../webfonts";
+@import "bootstrap";
+
+.logo {
+  width: 519px;
+  height: 1px;
+  display: inline-block;
+  margin-bottom: 1em;
+  background-size: 519px 1px;
+}
+
+.indent {
+  text-indent: 15px;
+}
+.font-bold {
+    font-weight: bold;
+}
+
+.highlight:hover {
+        background-color: #CCE5FF;
+}
+
+.top-buffer { margin-top:20px; }
+
+.paid { color: green; }
+.unpaid { color: red; }
+
+.glyphicon.glyphicon-one-fine-dot:before {
+    content: "\25cf";
+    color: red;
+    font-size:.35em;
+}
+
+.huge {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+body {
+}
+
+html {
+    font-size: 14px;
+}
+
+i.fa-cogs, i.fa-credit-card-alt, i.fa-car, i.fa-home {
+    font-size: 26px !important;
+}
+
+.help-block {
+    font-weight: bold;
+    color: red;
+}
+
+.max-size {
+        max-width: 100%;
+}
+
+.back {
+    color: black;
+}
+
+.back:hover {
+    color: white;
+}

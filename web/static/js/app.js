@@ -27,5 +27,11 @@ export const App = {
 $(function () {
       $('[data-toggle="tooltip"]').tooltip()
 })
+
+window.$ = window.jquery = require('jquery');
+window.dt = require('datatables.net')();
+window.dtbs4 = require('datatables.net-bs4')();
+//window.$('#dataTable').DataTable();
+
 // import socket from "./socket"
 

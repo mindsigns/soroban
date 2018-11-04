@@ -20,9 +20,9 @@ exports.config = {
       // }
         order: {
         before: [
-            "web/static/vendor/jquery/jquery.min.js",
-            "web/static/vendor/bootstrap/js/bootstrap.bundle.min.js",
-            "web/static/vendor/js/sb-admin.min.js"
+      //      "web/static/vendor/jquery/jquery.min.js",
+       //     "web/static/vendor/bootstrap/js/bootstrap.bundle.min.js",
+        //    "web/static/vendor/js/sb-admin.min.js"
         ]
         }
     },
@@ -32,7 +32,7 @@ exports.config = {
         before: [
             "web/static/css/phoenix.css"
         ],
-        after: ["web/static/css/app.css"] // concat app.css last
+        after: ["web/static/css/app.scss"] // concat app.css last
       }
     },
     templates: {
@@ -52,7 +52,8 @@ exports.config = {
     // Dependencies and current project directories to watch
     watched: [
       "web/static",
-      "test/static"
+      "test/static",
+        "scss"
     ],
 
     // Where to compile files to
@@ -64,7 +65,16 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/web\/static\/vendor/]
+    },
+      copycat: {
+    "fonts": ["node_modules/font-awesome/fonts"]
+  },
+  sass: {
+    options: {
+      includePaths: ["node_modules/bootstrap/scss", "node_modules/font-awesome/scss"], // for sass-brunch to @import files
+      precision: 8 // minimum precision required by bootstrap
     }
+  }
   },
 
   modules: {
@@ -74,6 +84,12 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+globals: {
+      // Bootstrap JavaScript requires both '$', 'jQuery'
+      $: 'jquery',
+      jQuery: 'jquery',
+      bootstrap: 'bootstrap' // require Bootstrap JavaScript globally too
+    }
   }
 };
