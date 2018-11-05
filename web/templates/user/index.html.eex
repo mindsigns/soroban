@@ -34,8 +34,8 @@
       <td><%= user.email %></td>
 
       <td class="text-right">
-        <%= link "View", to: user_path(@conn, :show, user), class: "btn btn-primary btn-xs" %>
-        <%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-info" %>
+        <%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
       </td>
     </tr>
 <% end %>
@@ -44,7 +44,7 @@
   <div class="card-footer">
   
     <a href="/invoices" class="btn btn-secondary" role="button">
-        <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
+        <i class="far fa-chevron-circle-left" aria-hidden="true"> Back </i>
     </a>
 
   </div>
