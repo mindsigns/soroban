@@ -3,37 +3,28 @@ exports.config = {
   files: {
     javascripts: {
       joinTo: "js/app.js",
-
-      // To use a separate vendor.js bundle, specify two files path
-      // http://brunch.io/docs/config#-files-
-      // joinTo: {
-      //  "js/app.js": /^(web\/static\/js)/,
-      //  "js/vendor.js": /^(web\/static\/vendor)|(deps)/
-      // }
-      //
-      // To change the order of concatenation of files, explicitly mention here
-      // order: {
-      //   before: [
-      //     "web/static/vendor/js/jquery-2.1.1.js",
-      //     "web/static/vendor/js/bootstrap.min.js"
-      //   ]
-      // }
         order: {
-        before: [
-      //      "web/static/vendor/jquery/jquery.min.js",
-       //     "web/static/vendor/bootstrap/js/bootstrap.bundle.min.js",
-            "web/static/vendor/js/sb-admin.min.js"
-        ]
+            before: [
+                "web/static/vendor/js/sb-admin.min.js"
+            ]
         }
     },
     stylesheets: {
-      joinTo: "css/app.css",
-      order: {
-        before: [
-            "web/static/css/phoenix.css"
-        ],
-        after: ["web/static/css/app.scss"] // concat app.css last
-      }
+        joinTo: {"css/app.css": [
+            'web/static/css/*',
+            'web/static/vendor/css/*',
+            "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css",
+            "node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.css",
+            "node_modules/datatables.net-buttons-bs4/css/buttons.bootstrap4.css"
+        ]}
+//      order: {
+//        before: [
+//            "web/static/css/phoenix.css"
+//        ],
+//        after: [
+//            "web/static/css/app.scss"
+//        ]
+//      }
     },
     templates: {
       joinTo: "js/app.js"
@@ -53,7 +44,7 @@ exports.config = {
     watched: [
       "web/static",
       "test/static",
-        "scss"
+      "scss"
     ],
 
     // Where to compile files to
@@ -67,15 +58,17 @@ exports.config = {
       ignore: [/web\/static\/vendor/]
     },
     copycat: {
-    //"fonts": ["node_modules/font-awesome/fonts"]
+        // file copied into priv/static/
+        "webfonts": ["node_modules/@fortawesome/fontawesome-free/webfonts/"],
+        verbose : true
     },
     sass: {
-    options: {
-      //includePaths: ["node_modules/bootstrap/scss", "node_modules/font-awesome/scss"], // for sass-brunch to @import files
-      includePaths: ["node_modules/bootstrap/scss"], // for sass-brunch to @import files
-      precision: 8 // minimum precision required by bootstrap
+        options: {
+            // for sass-brunch to @import files
+            includePaths: ["node_modules/bootstrap/scss"], 
+            precision: 8 // minimum precision required by bootstrap
+        }
     }
-  }
   },
 
   modules: {

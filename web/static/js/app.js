@@ -29,17 +29,21 @@ $(function () {
 })
 
 //require( 'jquery' );
+require( 'datatables.net-bs4' )(window, $ );
+require( 'datatables.net-buttons-bs4' )(window, $);
 require( 'jszip' );
-//require( 'datatables.net-bs4' )();
-require( 'datatables.net-buttons-bs4' )();
-require( 'datatables.net-buttons/js/buttons.html5.js' )();
-require( 'datatables.net-buttons/js/buttons.print.js' )();
-require( 'datatables.net-responsive-bs4' )();
+//require( 'datatables.net-buttons/js/buttons.html5.js' )(window, $);
+//require( 'datatables.net-buttons/js/buttons.print.js' )(window, $);
+//require( 'datatables.net-responsive-bs4' )(window, $);
 
-window.$ = window.jquery = require('jquery');
-window.dt = require('datatables.net')();
-window.dtbs4 = require('datatables.net-bs4')();
-//window.$('#dataTable').DataTable();
+//window.$ = window.jquery = require('jquery');
+//window.dt = require('datatables.net')();
+//window.dtbs4 = require('datatables.net-bs4')();
+
+////window.$('#dataTable').DataTable();
+//
+//import 'node_modules/datatables.net-bs/css/dataTables.bootstrap4.min.css';
+
 
 // import socket from "./socket"
 

@@ -6,6 +6,7 @@
     "watch": "brunch watch --stdin"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.5.0",
     "datatables.net-buttons-bs4": "^1.5.4",
     "datatables.net-responsive-bs4": "^2.2.3",
     "jszip": "^3.1.5",
@@ -13,6 +14,7 @@
     "phoenix": "file:deps/phoenix",
     "phoenix_html": "file:deps/phoenix_html",
     "popper.js": "^1.12.9",
+    "postinstall": "^0.4.2",
     "startbootstrap-sb-admin": "^5.0.1",
     "tablesort": "^5.0.1"
   },
