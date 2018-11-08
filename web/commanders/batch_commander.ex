@@ -10,13 +10,15 @@ defmodule Soroban.BatchCommander do
   defhandler invoice(socket, params) do
     number = socket |> Drab.Query.select(:val, from: "input[id=invoice_number]")
 
+IO.inspect number
     if number == "" do
       poke socket, text: "Enter an Invoice Number"
     else
       clients = Repo.all from c in Client, select: c.id
       Task.async(InvoiceUtils, :batch_job, [socket, clients, params.params])
+      #InvoiceUtils.batch_job(socket, clients, params.params)
     end
-  end
+end
 
   def textrepl(socket, _params) do
     poke socket, text: "sup"
@@ -40,4 +42,5 @@ defmodule Soroban.BatchCommander do
   }
 	repacked
   end
+
 end
