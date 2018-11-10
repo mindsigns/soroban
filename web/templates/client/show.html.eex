@@ -43,7 +43,7 @@
   <div class="row"><h3> Available invoices</h3> </div>
 </div>
 
-<table id="sortable" class="table">
+<table id="dataTableSort" class="table">
   <thead>
     <tr>
       <th>Invoice Name</th>
