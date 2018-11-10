@@ -31,10 +31,8 @@ $(function () {
 //require( 'jquery' );
 require( 'datatables.net-bs4' )(window, $ );
 require( 'datatables.net-buttons-bs4' )(window, $);
-require( 'jszip' );
-//require( 'datatables.net-buttons/js/buttons.html5.js' )(window, $);
-//require( 'datatables.net-buttons/js/buttons.print.js' )(window, $);
-//require( 'datatables.net-responsive-bs4' )(window, $);
+require( 'datatables.net-responsive-bs4' )(window, $);
+//require( 'datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' )(window, $);
 
 //window.$ = window.jquery = require('jquery');
 //window.dt = require('datatables.net')();
@@ -46,4 +44,3 @@ require( 'jszip' );
 
 
 // import socket from "./socket"
-
