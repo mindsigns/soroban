@@ -12,8 +12,7 @@
     "phoenix_html": "file:deps/phoenix_html",
     "popper.js": "^1.12.9",
     "postinstall": "^0.4.2",
-    "startbootstrap-sb-admin": "^5.0.1",
-    "tablesort": "^5.0.1"
+    "startbootstrap-sb-admin": "^5.0.1"
   },
   "devDependencies": {
     "babel-brunch": "~6.0.0",

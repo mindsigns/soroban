@@ -12,9 +12,6 @@
     <title>Soroban : Courier Invoicing</title>
 
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-<!--
-<link rel="stylesheet" href="/css/dataTables.bootstrap4.min.css"> 
-<link rel="stylesheet" href="/css/datatables.min.css"> -->
 
   </head>
 
@@ -153,24 +150,8 @@
     <%= Drab.Client.run(@conn) %>
     <script>require("web/static/js/app").App.sortTable()</script>
     <script> $(".chosen_select").chosen() </script>
+    <script src="<%= static_path(@conn, "/js/sb-admin-datatables.js") %>"></script>
 
-    <script>
-    $(document).ready(function() {
-        $('#dataTable').DataTable( {
-                    dom: 'Bfrltip',
-                    lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],
-                    initComplete: function () {
-                                        var api = this.api();
-                                        api.$('td').click( function () {
-                                        api.search( this.innerHTML ).draw();
-                                } ); },
-		    deferRender: true,
-                    buttons: [
-                                'csv', 'excel', 'print'
-                            ]
-                    } );
-                    } );
-    </script>
   </body>
 
 </html>

@@ -18,12 +18,6 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-import { Sort } from "./sort"
-
-export const App = {
-  sortTable: Sort.makeSortable
-}
-
 $(function () {
       $('[data-toggle="tooltip"]').tooltip()
 })
@@ -32,15 +26,5 @@ $(function () {
 require( 'datatables.net-bs4' )(window, $ );
 require( 'datatables.net-buttons-bs4' )(window, $);
 require( 'datatables.net-responsive-bs4' )(window, $);
-//require( 'datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' )(window, $);
-
-//window.$ = window.jquery = require('jquery');
-//window.dt = require('datatables.net')();
-//window.dtbs4 = require('datatables.net-bs4')();
-
-////window.$('#dataTable').DataTable();
-//
-//import 'node_modules/datatables.net-bs/css/dataTables.bootstrap4.min.css';
-
 
 // import socket from "./socket"
