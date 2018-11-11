@@ -10,7 +10,6 @@ defmodule Soroban.BatchCommander do
   defhandler invoice(socket, params) do
     number = socket |> Drab.Query.select(:val, from: "input[id=invoice_number]")
 
-IO.inspect number
     if number == "" do
       poke socket, text: "Enter an Invoice Number"
     else
