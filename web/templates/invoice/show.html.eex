@@ -21,20 +21,21 @@
   <div class="card-header">
         
 <div class="btn-group" role="group" aria-label="...">
-	<%= link "Download PDF", to: invoice_path(@conn, :send_pdf, @invoice), class: "btn btn-outline-dark" %>
-	<%= if @invoice.client.email do %>
-  		<%= link "Email to Client", to: invoice_invoice_path(@conn, :send_email, @invoice), class: "btn btn-outline-dark" %>
-	<% end %>
-	<%= link "View HTML Invoice", to: invoice_path(@conn, :view, @invoice), class: "btn btn-outline-dark" %>
-	<%= link "Edit Invoice", to: invoice_path(@conn, :edit, @invoice), class: "btn btn-outline-dark" %>
-  </div>
-	<%= link "Delete Invoice", to: invoice_path(@conn, :delete, @invoice), method: :delete, data: [confirm: "Are you sure you want to delete?"],class: "btn btn-danger" %>
+  <%= link class: "btn btn-outline-dark", to: invoice_path(@conn, :send_pdf, @invoice), title: "Download PDF", data: [toggle: "tooltip", placement: "top", html: "true"] do %> <i class="fas fa-fw fa-file-pdf fa-lg"></i> <% end %>
+
+  <%= link class: "btn btn-outline-dark", to: invoice_path(@conn, :view, @invoice), title: "View HTML Invoice", data: [toggle: "tooltip", placement: "top", html: "true"] do %> <i class="fas fa-fw fa-file-invoice-dollar fa-lg"></i> <% end %>
+
+  <%= link class: "btn btn-outline-dark", to: invoice_path(@conn, :edit, @invoice), title: "Edit Invoice", data: [toggle: "tooltip", placement: "top", html: "true"] do %> <i class="fas fa-fw fa-pen fa-lg"></i> <% end %>
+
+  <%= link to: invoice_path(@conn, :delete, @invoice), method: :delete, title: "Delete Invoice", data: [confirm: "Are you sure you want to delete?"],class: "btn btn-danger btn-outline-dark" do %><i class="fas fa-fw fa-trash fa-lg"></i> <% end %>
+
     <%= if @invoice.paid do %>
       <a class="btn btn-success pull-right disabled" href="#">Paid</a>
     <% else %>
     <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#paidModal">
       Mark Paid
     </button>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="paidModal" tabindex="-1" role="dialog" aria-labelledby="paidModalLabel">
   <div class="modal-dialog modal-sm" role="document">
@@ -127,13 +128,10 @@
 
       <td class="text-right">
         <%= link to: job_path(@conn, :show, job), class: "btn btn-primary btn-sm" do %>
-			<span class="fa fa-fw fa-info"></span>
+			<span class="fas fa-fw fa-info"></span>
         <% end %>
         <%= link to: job_path(@conn, :edit, job), class: "btn btn-info btn-sm" do %>
-			<span class="fa fa-fw fa-edit"></span>
-        <% end %>
-        <% link to: job_path(@conn, :delete, job), method: :delete, data: [confirm: "Are you sure you want to delete this invoice?"], class: "btn btn-danger btn-sm" do %>
-			<span class="fa fa-fw fa-trash"></span>
+			<span class="fas fa-fw fa-edit"></span>
         <% end %>
       </td>
     </tr>
@@ -144,7 +142,7 @@
 
   <div class="card-footer">
     <a href="/invoices" class="btn btn-secondary" role="button">
-        <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
+        <i class="fas fa-chevron-circle-left" aria-hidden="true"> Back </i>
     </a>
       <%= link "Edit", to: invoice_path(@conn, :edit, @invoice), class: "btn btn-info" %>
   </div>

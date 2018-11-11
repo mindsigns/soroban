@@ -148,7 +148,6 @@
     <!-- JavaScript-->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <%= Drab.Client.run(@conn) %>
-    <script>require("web/static/js/app").App.sortTable()</script>
     <script> $(".chosen_select").chosen() </script>
     <script src="<%= static_path(@conn, "/js/sb-admin-datatables.js") %>"></script>
 
