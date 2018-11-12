@@ -44,7 +44,7 @@
   <div class="card-footer">
   
     <a href="/invoices" class="btn btn-secondary" role="button">
-        <i class="far fa-chevron-circle-left" aria-hidden="true"> Back </i>
+        <i class="fas fa-chevron-circle-left" aria-hidden="true"> Back </i>
     </a>
 
   </div>
