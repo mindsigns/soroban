@@ -59,12 +59,13 @@
     </div>
         
 <div class="row">
-<div class="col-md-10">
+<div class="col-md-9">
   <div class="card mb-3">
   	<div class="card-header">
     	<i class="fa fa-bar-chart"></i> Monthly job count for <%= @year %></div>
 			<div class="card-body">
-				<canvas id="jobChart" width="400" height="100"></canvas>
+              <!--<canvas id="jobChart" width="400" height="100"></canvas>-->
+              <canvas id="jobChart" height="100"></canvas>
             </div>
     </div>
  </div>
@@ -77,8 +78,8 @@ var myChart = new Chart(ctx, {
         datasets: [{
             label: '# of Jobs',
             data: [<%= for total <- @jobs do %><%= total%>, <% end %>],
-            backgroundColor: 'rgba(0, 100, 132)',
-            borderColor: 'rgba(255,99,132,1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(0, 100, 132)',
             borderWidth: 1
         }]
     },

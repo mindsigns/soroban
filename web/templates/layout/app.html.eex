@@ -25,20 +25,9 @@
         <i class="fas fa-bars"></i>
       </button>
 
-      <!-- Navbar Search -->
-      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-
       <!-- Navbar -->
-      <ul class="navbar-nav ml-auto ml-md-0">
+      <div class="float-right ml-auto mr-0">
+        <ul class="navbar-nav ml-auto ml-md-0"> 
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Logged in as <%=@current_user.username %>"><a class="nav-link" href="<%= user_path(@conn, :show, @current_user.id) %>">
               <span class="fa fa-fw fa-user-circle"></span></a></li>
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Help"><a class="nav-link" href="/help"> <span class="fa fa-fw fa-question"></span></a></li>
@@ -46,6 +35,7 @@
           <li class="nav-item"> <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
             <span class="fas fa-sign-out-alt"> Logout</span></a></li>
       </ul>
+    </div>
     </nav>
 
     <div id="wrapper">
