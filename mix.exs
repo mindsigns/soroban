@@ -50,15 +50,16 @@ defmodule Soroban.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.3"},
+      {:phoenix, "~> 1.4"},
       {:phoenix_ecto, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_live_reload, "~> 1.2.0", only: :dev},
+      {:plug_cowboy, "~> 1.0"},
       {:distillery, "~> 1.5", runtime: false},
       {:openmaize, "~> 3.0"},
       {:bamboo, "~> 0.8"},
       {:bamboo_smtp, "~> 1.3.0"},
-      {:money, "~> 1.2.1"},
+      {:money, "~> 1.3"},
       # {:pdf_generator, ">=0.3.6"},
       {:pdf_generator, git: "https://github.com/gutschilla/elixir-pdf-generator"},
       {:drab, "~> 0.8.3"},
