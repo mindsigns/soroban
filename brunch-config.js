@@ -2,20 +2,17 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: "js/app.js",
-        order: {
-            before: [
-                "web/static/vendor/js/sb-admin.min.js"
-            ]
-        }
+      joinTo: "js/app.js"
+        //order: {
+        //    before: [
+        //        "web/static/vendor/js/sb-admin.min.js"
+        //    ]
+       // }
     },
     stylesheets: {
         joinTo: {"css/app.css": [
             'web/static/css/*',
-            'web/static/vendor/css/*',
-            "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css",
-            "node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.css",
-            "node_modules/datatables.net-buttons-bs4/css/buttons.bootstrap4.css"
+            'web/static/vendor/css/*'
         ]}
 //      order: {
 //        before: [
@@ -79,6 +76,7 @@ exports.config = {
 
   npm: {
     enabled: true,
+    whitelist: ["phoenix", "phoenix_html", "jquery"], 
         globals: {
             // Bootstrap JavaScript requires both '$', 'jQuery'
             $: 'jquery',
