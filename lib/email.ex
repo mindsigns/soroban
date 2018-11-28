@@ -62,7 +62,7 @@ defmodule Soroban.Email do
     if invoice.client.cc_email do
       new_email()
        |> to(email_address)
-       |> cc([invoice.client.cc_email])
+       |> cc(String.split(invoice.client.cc_email, ","))
        |> from(sender)
        |> subject("Invoice")
        |> put_html_layout({Soroban.LayoutView, "email.html"})
