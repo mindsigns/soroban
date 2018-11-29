@@ -2,12 +2,14 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: "js/app.js"
-        //order: {
-        //    before: [
-        //        "web/static/vendor/js/sb-admin.min.js"
-        //    ]
-       // }
+      joinTo: "js/app.js",
+        order: {
+            before: [
+                "web/static/vendor/js/sb-admin.min.js",
+                "deps/phoenix/assets/js/phoenix.js",
+                "deps/phoenix_html/priv/static/phoenix_html.js"
+            ]
+        }
     },
     stylesheets: {
         joinTo: {"css/app.css": [
@@ -76,7 +78,7 @@ exports.config = {
 
   npm: {
     enabled: true,
-    whitelist: ["phoenix", "phoenix_html", "jquery"], 
+    //whitelist: ["phoenix", "phoenix_html", "jquery"], 
         globals: {
             // Bootstrap JavaScript requires both '$', 'jQuery'
             $: 'jquery',
