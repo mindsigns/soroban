@@ -23,7 +23,11 @@
 <div class="btn-group" role="group" aria-label="...">
   <%= link class: "btn btn-outline-dark", to: invoice_path(@conn, :send_pdf, @invoice), title: "Download PDF", data: [toggle: "tooltip", placement: "top", html: "true"] do %> <i class="fas fa-fw fa-file-pdf fa-lg"></i> <% end %>
 
-  <%= link class: "btn btn-outline-dark", to: invoice_path(@conn, :view, @invoice), title: "View HTML Invoice", data: [toggle: "tooltip", placement: "top", html: "true"] do %> <i class="fas fa-fw fa-file-invoice-dollar fa-lg"></i> <% end %>
+  <%= if @invoice.client.email do %>
+  <%= link class: "btn btn-outline-dark", to: invoice_invoice_path(@conn, :send_email, @invoice), title: "Email Invoice", data: [toggle: "tooltip", placement: "top", html: "true"] do %> <i class="fas fa-fw fa-envelope fa-lg"></i> <% end %>
+  <% end %>
+
+<%= link class: "btn btn-outline-dark", to: invoice_path(@conn, :view, @invoice), title: "View HTML Invoice", data: [toggle: "tooltip", placement: "top", html: "true"] do %> <i class="fas fa-fw fa-file-invoice-dollar fa-lg"></i> <% end %>
 
   <%= link class: "btn btn-outline-dark", to: invoice_path(@conn, :edit, @invoice), title: "Edit Invoice", data: [toggle: "tooltip", placement: "top", html: "true"] do %> <i class="fas fa-fw fa-pen fa-lg"></i> <% end %>
 
