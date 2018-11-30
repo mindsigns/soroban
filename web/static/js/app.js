@@ -18,10 +18,6 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-$(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-})
-
 //require( 'jquery' );
 //require( 'datatables.net-bs4' )(window, $ );
 //require( 'datatables.net-buttons-bs4' )(window, $);

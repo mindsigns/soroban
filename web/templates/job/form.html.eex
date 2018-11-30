@@ -12,7 +12,7 @@
   </div>
 
   <div class="form-group">
-    <a href="/clients/new" class="fa fa-plus" title="Add a new client", data: [toggle: "tooltip", placement: "right", html: "true"], alt="Add client"></a>
+    <a href="/clients/new" class="fa fa-plus" title="Add a new client" data-toggle="tooltip" data-placement="right"></a>
     <%= label f, "",  class: "control-label" %>
     <%= select f, :client_id, @clients, id: "job_clients", class: "form-control chosen_select", prompt: "Select a client" %>
     <%= error_tag f, :client_id %>
