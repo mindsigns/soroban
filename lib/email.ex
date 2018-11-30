@@ -21,10 +21,8 @@ defmodule Soroban.Email do
     new_email()
     |> to(email)
     |> from(sender)
-    |> subject("Confirm your account - Welcome to Soroban")
-    |> text_body(
-      "Confirm yoursoroban email here http://soroban.sh/sessions/confirm_email?#{link}"
-    )
+    |> subject("Welcome to Soroban - Confirm your account")
+    |> text_body("Confirm your Soroban email here http://soroban.sh/sessions/confirm_email?#{link}")
     |> Mailer.deliver_now()
   end
 
