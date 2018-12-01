@@ -6,7 +6,7 @@
   <li class="breadcrumb-item">
     <a href="/invoices">Invoices</a>
    <li class="breadcrumb-item active">
-    New
+    New Invoice
   </li>
 </ol>
 

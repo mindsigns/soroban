@@ -16,14 +16,16 @@
 
     <div class="card mb-3">
         <div class="card-header">
-<div class="progress">
-  <div class="progress-bar <%= @progress_bar_class %>" role="progressbar" @style.width=<%= "#{@bar_width}%" %>>
-    <%= "#{@bar_width}%" %>
-  </div>
-</div>
-            <div class="alert alert-info" role="alert">
-                <b> <%= @text %> </b>
+
+        <div class="progress">
+            <div class="progress-bar <%= @progress_bar_class %>" role="progressbar" @style.width=<%= "#{@bar_width}%" %>>
+                <%= "#{@bar_width}%" %>
             </div>
+        </div>
+
+        <div class="alert alert-info" role="alert">
+            <b> <%= @text %> </b>
+        </div>
         </div>
 
 <div class="card-body">
