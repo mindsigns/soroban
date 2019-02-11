@@ -83,6 +83,9 @@ defmodule Soroban.InvoiceUtils do
       "invoice" => %{"date" => date, "end" => end_date, "start" => start_date, "number" => number, "pdf" => pdf}
     } = params
 
+    Soroban.Trans.update_job_adv_fees
+    Soroban.Trans.update_inv_adv_fees
+
     for c <- clients do
       client = Repo.get(Soroban.Client, c)
       case jobcount(c, params) do
