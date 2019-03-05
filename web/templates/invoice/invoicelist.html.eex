@@ -56,8 +56,6 @@
       <td><%= invoice.total %></td>
       <td> <%= if invoice.paid do %>
             <%= invoice.paid_on %>
-          <% else %>
-            <%= checkbox :paid, String.to_atom("#{invoice.id}"), checked: false, class: "form-control-sm" %> 
           <% end %>
       </td>
       <td class="text-right">
@@ -77,7 +75,6 @@
     <a href="/invoices" class="btn btn-secondary" role="button">
         <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
     </a>
-    <%= submit "Mark 'Paid'", class: "btn btn-success pull-right" %>
   </div>
 <% end %>
 
