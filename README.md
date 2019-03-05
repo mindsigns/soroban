@@ -24,16 +24,6 @@ To start your Phoenix app in Dev mode:
   iex -S mix phoenix.server
 ```
 
-Or to do it by hand:
-
-     Install dependencies with `mix deps.get`
-     Install npm dependencies with `npm install`
-     Create the priv/static directory `mkdir priv/static`
-     Run `mix phoenix.digest` to build assests
-     Create and migrate the database with `mix ecto.setup && mix ecto.migrate`
-     Seed the database with `mix run priv/repo/seeds.exs`
-     Start Phoenix endpoint with `iex -S mix phoenix.server`
-
 Populate the database with test data:
 
 ```
