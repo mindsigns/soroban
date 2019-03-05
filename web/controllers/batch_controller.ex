@@ -24,7 +24,9 @@ defmodule Soroban.BatchController do
   def index(conn, _params) do
     today = Date.utc_today()
 
-    render(conn, "index.html", today: today, text: "")
+    #render(conn, "index.html", today: today, text: "")
+    render(conn, "index.html", today: today, text: "", bar_width: 0, progress_bar_class: "",
+      long_process_button_text: "Click me to start processing ...")
   end
 
   @doc """

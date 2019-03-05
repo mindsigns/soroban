@@ -52,5 +52,5 @@ defmodule Soroban.Router do
     get "/password_resets/edit", PasswordResetController, :edit
     put "/password_resets/update", PasswordResetController, :update
   end
-    forward "/sent_emails", Bamboo.EmailPreviewPlug
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
 end

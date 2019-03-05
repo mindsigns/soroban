@@ -15,8 +15,9 @@ defmodule Soroban.BatchCommander do
     else
       clients = Repo.all from c in Client, select: c.id
       Task.async(InvoiceUtils, :batch_job, [socket, clients, params.params])
+      #InvoiceUtils.batch_job(socket, clients, params.params)
     end
-  end
+end
 
   def textrepl(socket, _params) do
     poke socket, text: "sup"
@@ -40,4 +41,5 @@ defmodule Soroban.BatchCommander do
   }
 	repacked
   end
+
 end

@@ -3,37 +3,28 @@ exports.config = {
   files: {
     javascripts: {
       joinTo: "js/app.js",
-
-      // To use a separate vendor.js bundle, specify two files path
-      // http://brunch.io/docs/config#-files-
-      // joinTo: {
-      //  "js/app.js": /^(web\/static\/js)/,
-      //  "js/vendor.js": /^(web\/static\/vendor)|(deps)/
-      // }
-      //
-      // To change the order of concatenation of files, explicitly mention here
-      // order: {
-      //   before: [
-      //     "web/static/vendor/js/jquery-2.1.1.js",
-      //     "web/static/vendor/js/bootstrap.min.js"
-      //   ]
-      // }
         order: {
-        before: [
-            "web/static/vendor/js/jquery.min.js",
-            "web/static/vendor/js/sb-admin-2.min.js",
-            "web/static/vendor/js/bootstrap.min.js"
-        ]
+            before: [
+                "web/static/vendor/js/jquery.min.js",
+                "web/static/vendor/js/sb-admin.min.js",
+                "deps/phoenix/assets/js/phoenix.js",
+                "deps/phoenix_html/priv/static/phoenix_html.js"
+            ]
         }
     },
     stylesheets: {
-      joinTo: "css/app.css",
-      order: {
-        before: [
-            "web/static/css/phoenix.css"
-        ],
-        after: ["web/static/css/app.css"] // concat app.css last
-      }
+        joinTo: {"css/app.css": [
+            'web/static/css/*',
+            'web/static/vendor/css/*'
+        ]}
+//      order: {
+//        before: [
+//            "web/static/css/phoenix.css"
+//        ],
+//        after: [
+//            "web/static/css/app.scss"
+//        ]
+//      }
     },
     templates: {
       joinTo: "js/app.js"
@@ -52,7 +43,8 @@ exports.config = {
     // Dependencies and current project directories to watch
     watched: [
       "web/static",
-      "test/static"
+      "test/static",
+      "scss"
     ],
 
     // Where to compile files to
@@ -64,6 +56,18 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/web\/static\/vendor/]
+    },
+    copycat: {
+        // file copied into priv/static/
+        "webfonts": ["node_modules/@fortawesome/fontawesome-free/webfonts/"],
+        verbose : true
+    },
+    sass: {
+        options: {
+            // for sass-brunch to @import files
+            includePaths: ["node_modules/bootstrap/scss"], 
+            precision: 8 // minimum precision required by bootstrap
+        }
     }
   },
 
@@ -74,6 +78,13 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    //whitelist: ["phoenix", "phoenix_html", "jquery"], 
+        globals: {
+            // Bootstrap JavaScript requires both '$', 'jQuery'
+        //    $: 'jquery',
+        //    jQuery: 'jquery',
+        //    bootstrap: 'bootstrap' // require Bootstrap JavaScript globally too
+    }
   }
 };

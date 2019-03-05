@@ -1,18 +1,15 @@
 <div class="col-md-6">
   <h2 class="page-header">Delete : <%= @client.name %></h2>
 
-	<div class="panel panel-red">
-		<div class="panel-heading">
+	<div class="card bg-danger text-white">
+		<div class="card-header text-center">
 			!! WARNING !! WARNING !! WARNING !! WARNING !! WARNING !!
 		</div>
-		<div class="panel-body">
-			<p>
-			By deleting the client <b><%= @client.name %></b>, you will also be deleting all the <b>jobs</b> and <b>invoices</b> as well. There is no going back after hitting <b>Delete</b>.
-			</p>
+		<div class="card-body">
+			By deleting the client <b><%= @client.name %></b>, you will also be deleting all of their <b>jobs</b> and <b>invoices</b> as well. There is no going back after hitting <b>Delete</b>.
 		</div>
-		<div class="panel-footer">
-			<%= link "Delete Client", to: client_path(@conn, :delete, @client), method: :delete, data: [confirm: "Are you sure you want to delete this client and all associated jobs and invoices?"], class: "btn btn-danger" %>
+		<div class="card-footer text-center">
+			<%= link "Delete Client", to: client_path(@conn, :delete, @client), method: :delete, data: [confirm: "Are you sure you want to delete this client and all associated jobs and invoices?"], class: "btn btn-warning" %>
 		</div>
 	</div>
-
 </div>

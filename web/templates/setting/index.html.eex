@@ -1,8 +1,18 @@
-<div class="col-md-8">
-<h2 class="page-header">Settings</h2>
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/admin">Dashboard</a>
+  </li>
+   <li class="breadcrumb-item active">
+    Settings
+  </li>
+</ol>
 
-<div class="panel panel-default">
-  <div class="panel-body">
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="card mb-3">
+      <div class="card-body">
 
 <table class="table">
   <thead>
@@ -24,14 +34,14 @@
       <td><%= setting.note%></td>
       <td><%= setting.days_pastdue%></td>
       <td>
-      <%= link to: setting_path(@conn, :show, setting), class: "btn btn-primary btn-xs" do %>
-        <span class="glyphicon glyphicon-info-sign"></span>
+      <%= link to: setting_path(@conn, :show, setting), class: "btn btn-primary btn-sm" do %>
+        <span class="fa fa-fw fa-info fa-xs"></span>
         <% end %>
-      <%= link to: setting_path(@conn, :edit, setting), class: "btn btn-info btn-xs" do %> 
-        <span class="glyphicon glyphicon-edit"></span> 
+      <%= link to: setting_path(@conn, :edit, setting), class: "btn btn-info btn-sm" do %> 
+        <span class="fa fa-fw fa-edit fa-xs"></span> 
         <% end %>
-      <%= link to: setting_path(@conn, :delete, setting), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" do %>
-        <span class="glyphicon glyphicon-remove-sign"></span> 
+      <%= link to: setting_path(@conn, :delete, setting), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-sm" do %>
+        <span class="fa fa-fw fa-trash fa-xs"></span> 
         <% end %>
       </td>
     </tr>
@@ -42,3 +52,8 @@
 <%= if Enum.empty?(@settings) do %>
 <%= link "New setting", to: setting_path(@conn, :new) %>
 <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

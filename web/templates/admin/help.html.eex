@@ -125,7 +125,7 @@ p {
   After you hit the <b>Submit</b> button, you can continue to add jobs, edit those jobs,
   or delete them. You can see an example job below.
 </p>
-<table id="tbl" class="table table-striped table-bordered table-hover responsive">
+<table id="table" class="table table-striped table-bordered table-hover responsive">
   <thead>
     <tr>
       <th>Client</th>

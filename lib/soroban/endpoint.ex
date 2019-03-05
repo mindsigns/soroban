@@ -12,7 +12,7 @@ defmodule Soroban.Endpoint do
     at: "/",
     from: :soroban,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt dist)
+    only: ~w(css fonts webfonts images js favicon.ico robots.txt dist)
   )
 
   # Code reloading can be explicitly enabled under the

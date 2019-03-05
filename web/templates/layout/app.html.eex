@@ -1,109 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Soroban : Courier invoicing">
     <meta name="author" content="jon trembley">
 
-    <title>Soroban</title>
+    <title>Soroban : Courier Invoicing</title>
 
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  </head>
 
-</head>
+  <body id="page-top">
 
-<body>
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="/admin">Soroban Invoicing</a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Navbar -->
+      <div class="float-right ml-auto mr-0">
+        <ul class="navbar-nav ml-auto ml-md-0"> 
+        <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Logged in as <%=@current_user.username %>"><a class="nav-link" href="<%= user_path(@conn, :show, @current_user.id) %>">
+              <span class="fa fa-fw fa-user-circle"></span></a></li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Help"><a class="nav-link" href="/help"> <span class="fa fa-fw fa-question"></span></a></li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Settings"><a class="nav-link" href="/settings"> <span class="fa fa-fw fa-cog"></span></a></li>
+          <li class="nav-item"> <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
+            <span class="fas fa-sign-out-alt"> Logout</span></a></li>
+      </ul>
+    </div>
+    </nav>
 
     <div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/admin">Soroban</a>
-            </div>
-            <!-- /.navbar-header -->
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav toggled">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">
+            <i class="fas fa-fw fa-home fa-lg"></i>
+            <span> Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="jobsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-truck-pickup fa-lg"></i>
+            <span> Jobs</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="jobsDropdown">
+            <a class="dropdown-item" href="/jobs/new"> Add</a>
+            <a class="dropdown-item" href="/jobs"> List</a>
+            <a class="dropdown-item" href="/joblist"> Archives</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/invoices">
+            <i class="fas fa-fw fa-file-invoice-dollar fa-lg"></i>
+            <span> Invoices</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="manageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-cogs fa-lg"></i>
+            <span> Manage</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="manageDropdown">
+            <a class="dropdown-item" href="/clients"> Clients</a>
+            <a class="dropdown-item" href="/jobtypes"> Job Types</a>
+            <a class="dropdown-item" href="/service"> Service Types</a>
+            <a class="dropdown-item" href="/users"> Users</a>
+            <a class="dropdown-item" href="/settings"> Settings</a>
+            <div class="dropdown-divider"></div>                                                                             
+            <a class="dropdown-item bg-danger text-white" href="/clear_cache/all"> Clear PDF Cache</a>
+          </div>
+        </li>
 
-            <ul class="nav navbar-top-links navbar-right">
-           <%= if @current_user do %>
-             <li><a href="<%= user_path(@conn, :show, @current_user.id) %>">
-                 <span class="glyphicon glyphicon-user"> <%= @current_user.username %></span></a></li>
-              <li><%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete %></li>
-              <% else %>
-              <li><a href="<%= user_path @conn, :new %>">New user</a></li>
-              <li><a href="<%= session_path @conn, :new %>">Login</a></li>
-              <% end %>
-            <li><a href="/help">Help</a></li>
-            <li><a href="/settings"> <span class="glyphicon glyphicon-cog"></span></a></li>
-          </ul>
+      </ul>
 
-            </ul>
-            <!-- /.navbar-top-links -->
+      <div id="content-wrapper">
 
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li><a href="/admin">Home</a></li>
-                        <li class="dropdown">
-                          <a href="#"  class="dropdown-toggle" data-toggle="dropdown">Jobs<span class="caret"></span></a>
-                          <ul class="nav indent" role="menu">
-                            <li><a href="/jobs/new"> Add Job</a></li>
-                            <li><a href="/jobs"> View Jobs</a></li>
-                            <li><a href="/joblist"> Job Archives</a></li>
-                          </ul>
-                        <li><a href="/invoices">Invoices</a></li>
-                        <li class="dropdown">
-                          <a href="#"  class="dropdown-toggle" data-toggle="dropdown">Manage<span class="caret"></span></a>
-                          <ul class="nav indent" role="menu">
-                            <li><a href="/clients"> Clients</a></li>
-                            <li><a href="/jobtypes"> Job Types</a></li>
-                            <li><a href="/service"> Service Types</a></li>
-                            <li><a href="/users"> Users</a></li>
-                            <li><a href="/settings"> Settings</a></li>
-                            <li class="bg-danger"><a href="/clear_cache/all"> Clear PDF Cache</a></li>
-                          </ul>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+        <div class="container-fluid">
 
-        <!-- Page Content -->
-        <div id="page-wrapper">
-                <div class="row">
-                    <div class="col-lg-12">
-                      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-                      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-                    </div>
-                </div>
-                <!-- /.row -->
-             <%= render @view_module, @view_template, assigns %>
+        <%= if info = get_flash(@conn, :info) do %>
+          <p class="alert alert-info" role="alert"><%= info %></p>
+        <% end %>
+        <%= if error = get_flash(@conn, :error) do %>
+          <p class="alert alert-danger" role="alert"><%= error %></p>
+        <% end %>
+
+          <!-- Content -->
+          <%= render @view_module, @view_template, assigns %>
+
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Soroban.sh 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
 
     </div>
     <!-- /#wrapper -->
 
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="logoutModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-footer mx-auto">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: :delete , class: "btn btn-primary"%>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript-->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <%= Drab.Client.run(@conn) %>
-    <script>require("web/static/js/app").App.sortTable()</script>
     <script> $(".chosen_select").chosen() </script>
-</body>
+    <script src="<%= static_path(@conn, "/js/sb-admin-datatables.js") %>"></script>
+
+  </body>
 
 </html>

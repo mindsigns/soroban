@@ -1,15 +1,74 @@
-<h1 class="page-header">Soroban  <small>Admin</small></h1>
-
 <script src="/js/Chart.min.js"></script>
 
 <div class="row">
-<div class="col-md-8">
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Monthly job count for <%= @year %></h3>
-  </div>
-  <div class="panel-body">
-<canvas id="jobChart" width="400" height="200"></canvas>
+  <div class="col-12">
+
+      <!-- Icon Cards-->
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-3">
+          <div class="card text-white bg-primary o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fa fa-fw fa-bicycle"></i>
+              </div>
+              <div class="mr-5">Total Jobs</div>
+              <div class="huge"><%= @jobcount %></div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="/jobs">
+              <span class="float-left">View Jobs</span>
+              <span class="float-right">
+                <i class="fa fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+          <div class="card text-white bg-primary o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fa fa-fw fa-folder-open"></i>
+              </div>
+              <div class="mr-5">Number of Invoices</div>
+              <div class="huge"><%= @invoicecount %></div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="/invoices">
+              <span class="float-left">View Invoices</span>
+              <span class="float-right">
+                <i class="fa fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+          <div class="card text-white bg-danger o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fa fa-fw fa-credit-card"></i>
+              </div>
+              <div class="mr-5">Outstanding Invoices</div>
+              <div class="huge"><%= @outstandingcount %></div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="/outstanding">
+              <span class="float-left">View Outstanding</span>
+              <span class="float-right">
+                <i class="fa fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+    </div>
+        
+<div class="row">
+<div class="col-md-9">
+  <div class="card mb-3">
+  	<div class="card-header">
+    	<i class="fa fa-bar-chart"></i> Monthly job count for <%= @year %></div>
+			<div class="card-body">
+              <!--<canvas id="jobChart" width="400" height="100"></canvas>-->
+              <canvas id="jobChart" height="100"></canvas>
+            </div>
+    </div>
+ </div>
 <script>
 var ctx = document.getElementById("jobChart").getContext('2d');
 var myChart = new Chart(ctx, {
@@ -19,8 +78,8 @@ var myChart = new Chart(ctx, {
         datasets: [{
             label: '# of Jobs',
             data: [<%= for total <- @jobs do %><%= total%>, <% end %>],
-            backgroundColor: 'rgba(0, 100, 132)',
-            borderColor: 'rgba(255,99,132,1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(0, 100, 132)',
             borderWidth: 1
         }]
     },
@@ -35,123 +94,44 @@ var myChart = new Chart(ctx, {
     }
 });
 </script>
+</div>
+</div>
+</div>
+
+<div class="row">
+        <div class="col-md-3 col-sm-6 mb-3">
+          <div class="card text-white bg-danger o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fas fa-fw fa-file-archive"></i>
+              </div>
+              <div class="mr-5">Zip files in cache</div>
+              <div class="huge"><%= @zipcount %></div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="/clear_cache/zip">
+              <span class="float-left">Clean up cache</span>
+              <span class="float-right">
+                <i class="fa fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+          <div class="card text-white bg-danger o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fas fa-fw fa-file-pdf"></i>
+              </div>
+              <div class="mr-5">PDF files in cache</div>
+              <div class="huge"><%= @pdfcount %></div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="/clear_cache/pdf">
+              <span class="float-left">Clean up cache</span>
+              <span class="float-right">
+                <i class="fa fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
   </div>
-</div>
-</div>
-</div>
-
-<div class="row">
-       <div class="col-md-4 col-xs-6">
-           <div class="panel panel-primary">
-               <div class="panel-heading">
-                   <div class="row">
-                       <div class="col-xs-3">
-                           <i class="fa fa-bicycle fa-5x"></i>
-                       </div>
-                       <div class="col-xs-9 text-right">
-                           <div class="huge"><%= @jobcount %></div>
-                           <div>Total Jobs logged</div>
-                       </div>
-                   </div>
-               </div>
-               <a href="/jobs">
-                   <div class="panel-footer">
-                       <span class="pull-left">View Jobs</span>
-                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                       <div class="clearfix"></div>
-                   </div>
-               </a>
-           </div>
-       </div>
-       <div class="col-md-4 col-xs-6">
-           <div class="panel panel-primary">
-               <div class="panel-heading">
-                   <div class="row">
-                       <div class="col-xs-3">
-                           <i class="fa fa-folder-open-o fa-5x"></i>
-                       </div>
-                       <div class="col-xs-9 text-right">
-                           <div class="huge"><%= @invoicecount %></div>
-                           <div>Number of Invoices</div>
-                       </div>
-                   </div>
-               </div>
-               <a href="/invoices">
-                   <div class="panel-footer">
-                       <span class="pull-left">View Invoices</span>
-                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                       <div class="clearfix"></div>
-                   </div>
-               </a>
-           </div>
-       </div>
-       <div class="col-md-4 col-xs-6">
-           <div class="panel panel-red">
-               <div class="panel-heading">
-                   <div class="row">
-                       <div class="col-xs-3">
-                           <i class="fa fa-credit-card fa-5x"></i>
-                       </div>
-                       <div class="col-xs-9 text-right">
-                           <div class="huge"><%= @outstandingcount %></div>
-                           <div>Outstanding Invoices</div>
-                       </div>
-                   </div>
-               </div>
-               <a href="/outstanding">
-                   <div class="panel-footer">
-                       <span class="pull-left">View Outstanding</span>
-                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                       <div class="clearfix"></div>
-                   </div>
-               </a>
-           </div>
-       </div>
-
-</div>
-<div class="row">
-       <div class="col-md-4 col-xs-6">
-           <div class="panel panel-info">
-               <div class="panel-heading">
-                   <div class="row">
-                       <div class="col-xs-3">
-                           <i class="fa fa-file-archive-o fa-5x"></i>
-                       </div>
-                       <div class="col-xs-9 text-right">
-                           <div class="huge"><%= @zipcount %></div>
-                           <div>Zip files in cache</div>
-                       </div>
-                   </div>
-               </div>
-               <a href="/clear_cache/zip">
-                   <div class="panel-footer">
-                       <span class="pull-left">Clean up zip files</span>
-                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                       <div class="clearfix"></div>
-                   </div>
-               </a>
-           </div>
-       </div>
-       <div class="col-md-4 col-xs-6">
-           <div class="panel panel-info">
-               <div class="panel-heading">
-                   <div class="row">
-                       <div class="col-xs-3">
-                           <i class="fa fa-file-pdf-o fa-5x"></i>
-                       </div>
-                       <div class="col-xs-9 text-right">
-                           <div class="huge"><%= @pdfcount %></div>
-                           <div>PDF files in cache</div>
-                       </div>
-                   </div>
-               </div>
-               <a href="/clear_cache/pdf">
-                   <div class="panel-footer">
-                       <span class="pull-left">Clean up PDF files</span>
-                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                       <div class="clearfix"></div>
-                   </div>
-               </a>
-           </div>
-       </div>
 </div>

@@ -1,32 +1,41 @@
-<div class="col-md-6">
-<h2 class="page-header">Services</h2>
-<div class="panel panel-default">
-  <div class="panel-body">
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/admin">Dashboard</a>
+  </li>
+   <li class="breadcrumb-item active">
+     Service Types
+  </li>
+</ol>
+
+<div class="row">
+  <div class="col-md-6">
+
+    <div class="card mb-6">
+
+  <div class="card-body">
 
 <table class="table">
-  <thead>
-    <tr>
-      <th>Type</th>
-
-      <th></th>
-    </tr>
-  </thead>
   <tbody>
 <%= for service <- @services do %>
     <tr>
       <td><%= service.type %></td>
 
       <td class="text-right">
-        <%= link "Edit", to: service_path(@conn, :edit, service), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: service_path(@conn, :edit, service), class: "btn btn-info btn-xs" %>
         <%= link "Delete", to: service_path(@conn, :delete, service), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
+</div>
+
+  <div class="card-footer">
+    <%= link "New service", to: service_path(@conn, :new), class: "btn btn-primary" %>
   </div>
-  <div class="panel-footer">
-  <%= link "New service", to: service_path(@conn, :new), class: "btn btn-primary" %>
+
+    </div>
+  </div>
 </div>
-</div>
-</div>
+

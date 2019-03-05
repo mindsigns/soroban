@@ -21,10 +21,8 @@ defmodule Soroban.Email do
     new_email()
     |> to(email)
     |> from(sender)
-    |> subject("Confirm your account - Welcome to Soroban")
-    |> text_body(
-      "Confirm yoursoroban email here http://soroban.sh/sessions/confirm_email?#{link}"
-    )
+    |> subject("Welcome to Soroban - Confirm your account")
+    |> text_body("Confirm your Soroban email here http://soroban.sh/sessions/confirm_email?#{link}")
     |> Mailer.deliver_now()
   end
 
@@ -62,7 +60,7 @@ defmodule Soroban.Email do
     if invoice.client.cc_email do
       new_email()
        |> to(email_address)
-       |> cc([invoice.client.cc_email])
+       |> cc(String.split(invoice.client.cc_email, ","))
        |> from(sender)
        |> subject("Invoice")
        |> put_html_layout({Soroban.LayoutView, "email.html"})

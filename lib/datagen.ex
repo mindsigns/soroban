@@ -40,7 +40,7 @@ defmodule Forge do
   Job Forge
   """
   register(:job, %Job{
-    date: Ecto.Date.cast!(Faker.Date.between(~D[2018-01-01], ~D[2018-08-22])),
+    date: Ecto.Date.cast!(Faker.Date.between(~D[2019-01-01], ~D[2019-03-22])),
     reference: Faker.Lorem.word(),
     caller: Faker.Name.En.name(),
     type: Enum.random(Soroban.Repo.all(from(c in Soroban.Jobtype, select: c.type))),

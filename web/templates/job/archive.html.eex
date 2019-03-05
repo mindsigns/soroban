@@ -1,14 +1,24 @@
-<h1 class="page-header">Job <small>archive</small></h1>
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/admin">Dashboard</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/jobs">Jobs</a>
+  </li>
+   <li class="breadcrumb-item active">
+     Archives
+  </li>
+</ol>
 
 <div class="row">
-<div class="col-md-6">
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">job list</h3>
-  </div>
-  <div class="panel-body">
+  <div class="col-md-6">
+    <div class="card mb-3">
+      <div class="card-header"> <h2> Archives </h2> </div>
+      <div class="card-body">
+
         <%= for year <- @stuff do %>
-          <a href="/joblist/<%= year.year %>"><%= year.year %></a> :
+          <a href="/joblist/<%= year.year %>"><b><%= year.year %></b></a> :
             <%= for s <- year.months do %>
               <a href="/joblist/<%= year.year %>/<%= s %>"><%= s %></a>
             <% end %>
@@ -19,4 +29,3 @@
 </div>
 </div>
 
-</div>

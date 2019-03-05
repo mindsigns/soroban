@@ -14,9 +14,8 @@
       <header class="header">
         <span class="logo"></span>
       </header>
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <main role="main">
+        
+      <main role="main" class="col-md-6 mx-auto text-center">
 
 <div class="jumbotron">
   <h2>Welcome to Soroban</h2>

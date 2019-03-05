@@ -1,9 +1,25 @@
-<div class="col-md-12">
-<h2 class="page-header"> <%= @client.name %></h2>
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/admin">Dashboard</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/clients">Clients</a>
+  </li>
+   <li class="breadcrumb-item active">
+     View
+  </li>
+</ol>
 
-<div class="panel panel-default">
-<div class="panel-body">
+<div class="row">
+  <div class="col-md-12">
 
+    <h2 class="page-header"><%= @client.name %></h2>
+
+    <div class="card mb-3">
+
+  <div class="card-header">
+ 
 <div class="container pull-left">
   <div class="row highlight">
     <div class="col-md-3 font-bold">Contact:</div>
@@ -27,7 +43,7 @@
   <div class="row"><h3> Available invoices</h3> </div>
 </div>
 
-<table id="sortable" class="table">
+<table id="dataTableSort" class="table">
   <thead>
     <tr>
       <th>Invoice Name</th>
@@ -59,18 +75,21 @@
 
       <td class="text-right">
         <%= link "View", to: invoice_path(@conn, :show, invoice), class: "btn btn-success btn-xs" %>
-        <%= link "Edit", to: invoice_path(@conn, :edit, invoice), class: "btn btn-warning btn-xs" %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 </div>
-<div class="panel-footer">
-  <p>
-  <%= link "Back ", to: client_path(@conn, :index), class: "btn btn-default" %>
-  <%= link "Edit", to: client_path(@conn, :edit, @client), class: "btn btn-warning " %>
-  </p>
-</div>
-</div>
+
+  <div class="card-footer">
+    <a href="/clients" class="btn btn-secondary" role="button">
+        <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
+    </a>
+    <%= link "Edit", to: client_path(@conn, :edit, @client), class: "btn btn-info " %>
+  </div>
+
+      </div>
+    </div>
+  </div>
 </div>

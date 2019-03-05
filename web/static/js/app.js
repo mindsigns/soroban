@@ -18,9 +18,9 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-import { Sort } from "./sort"
+//require( 'jquery' );
+//require( 'datatables.net-bs4' )(window, $ );
+//require( 'datatables.net-buttons-bs4' )(window, $);
+//require( 'datatables.net-responsive-bs4' )(window, $);
 
-export const App = {
-  sortTable: Sort.makeSortable
-}
 // import socket from "./socket"

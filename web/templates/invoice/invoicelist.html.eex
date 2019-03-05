@@ -1,19 +1,37 @@
-<h2 class="page-header"><%= @invoice_count %> invoices for <%= @invoice_id %></h2>
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/admin">Dashboard</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/invoices">Invoices</a>
+  </li>
+   <li class="breadcrumb-item active">
+     view
+  </li>
+</ol>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <button class="btn btn-primary" type="button">
-      Total Billed <span class="badge"><%= @total %></span>
-    </button>
-    <button class="btn btn-info" type="button">
-      Total Advanced <span class="badge"><%= @total_adv %></span>
-    </button>
-    <button class="btn btn-success" type="button">
-      Total Net <span class="badge"><%= @total_net %></span>
-    </button>
-  </div>
-  <div class="panel-body">
-  <table id="sortable" class="table">
+<div class="row">
+  <div class="col-md-12">
+
+  <h2 class="page-header"><%= @invoice_count %> invoices for <%= @invoice_id %></h2>
+
+    <div class="card">
+
+      <div class="card-header">
+        <button class="btn btn-primary" type="button">
+          Total Billed <span class="badge badge-light"><%= @total %></span>
+        </button>
+        <button class="btn btn-info" type="button">
+          Total Advanced <span class="badge badge-light"><%= @total_adv %></span>
+        </button>
+        <button class="btn btn-success" type="button">
+          Total Net <span class="badge badge-light"><%= @total_net %></span>
+        </button>
+      </div>
+
+<div class="card-body">
+  <table id="dataTableSort" class="table">
   <thead>
     <tr>
       <th>Client</th>
@@ -48,15 +66,22 @@
       </td>
     </tr>
   <% end %>  
+
   <%= hidden_input :invoice_id, :invoice_name, value: @invoice_id %> 
 
   </tbody>
 </table>
 </div>
-<div class="panel-footer">
-<%= link "Back", to: invoice_path(@conn, :index) , class: "btn btn-default" %>
-<%= submit "Mark 'Paid'", class: "btn btn-success pull-right" %>
+
+  <div class="card-footer">
+    <a href="/invoices" class="btn btn-secondary" role="button">
+        <i class="fa fa-chevron-circle-left" aria-hidden="true"> Back </i>
+    </a>
+    <%= submit "Mark 'Paid'", class: "btn btn-success pull-right" %>
+  </div>
 <% end %>
 
-</div>
+      </div>
+    </div>
+  </div>
 </div>
