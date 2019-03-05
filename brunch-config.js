@@ -5,7 +5,6 @@ exports.config = {
       joinTo: "js/app.js",
         order: {
             before: [
-                "web/static/vendor/js/jquery.min.js",
                 "web/static/vendor/js/sb-admin.min.js",
                 "deps/phoenix/assets/js/phoenix.js",
                 "deps/phoenix_html/priv/static/phoenix_html.js"
@@ -82,9 +81,9 @@ exports.config = {
     //whitelist: ["phoenix", "phoenix_html", "jquery"], 
         globals: {
             // Bootstrap JavaScript requires both '$', 'jQuery'
-        //    $: 'jquery',
-        //    jQuery: 'jquery',
-        //    bootstrap: 'bootstrap' // require Bootstrap JavaScript globally too
+            $: 'jquery',
+            jQuery: 'jquery',
+            bootstrap: 'bootstrap' // require Bootstrap JavaScript globally too
     }
   }
 };
